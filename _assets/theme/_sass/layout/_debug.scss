@@ -1,0 +1,42 @@
+// ******************************************************************************
+// *                                                                            *
+// *                              VISUAL DEBUGGING                              *
+// *                                                                            *
+// ******************************************************************************
+// Used for testing vertical rythm and grids.
+// For development only! Comment out in release ...
+
+
+p {
+  background-color: rgba(200,200,200,0.25);
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  background-color: rgba(200,200,200,0.25);
+}
+
+// ==============================================================================
+//                                   DEBUG GRID                                  
+// ==============================================================================
+
+#container {
+	// background-color: rgba(0,255,0,0.1);
+}
+
+#siteheader {
+	background: rgba(150,150,200,0.1);
+}
+
+#breadcrumbs {
+	background-color: rgba(255,0,0,0.1);
+}
+
+#document {
+	background: rgba(150,150,200,0.1);
+}
+
+#sidebar {
+	background-color: rgba(255,0,0,0.1);
+}
+

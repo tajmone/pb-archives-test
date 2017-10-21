@@ -1,0 +1,2 @@
+# Enforce Linux-style EOL normalization ofr shell scripts:
+2bbcode_phpbb       text eol=lf

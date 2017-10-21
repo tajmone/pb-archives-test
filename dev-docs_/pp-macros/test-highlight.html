@@ -1,0 +1,268 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Highlight Tests</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>pp-macros</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Highlight Tests</h1>
+
+<h1 id="highlight-macros">Highlight Macros</h1>
+<h2 id="highlight-macro"><code>!Highlight</code> Macro</h2>
+<p>Using the <code>!Highlight</code> macro:</p>
+<pre><code>!Highlight(purebasic)()()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a &quot;_butler.yaml&quot; settings file... 
+  argsPP$ + &quot; _butler.yaml&quot; ; &lt;= add it to PP&#39;s command line args.
+EndIf
+
+If #False ; Don&#39;t show. (might keep it for verbose option)
+  PrintN(&quot;argsPP$: &quot;+ argsPP$) ; DBG PP Args
+EndIf
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
+<pre class="purebasic" title="; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a "_butler.yaml" settings file... 
+  argsPP$ + " _butler.yaml" ; <= add it to PP's command line args.
+EndIf
+
+If #False ; Don't show. (might keep it for verbose option)
+  PrintN("argsPP$: "+ argsPP$) ; DBG PP Args
+EndIf"><code class="purebasic" title="; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a "_butler.yaml" settings file... 
+  argsPP$ + " _butler.yaml" ; <= add it to PP's command line args.
+EndIf
+
+If #False ; Don't show. (might keep it for verbose option)
+  PrintN("argsPP$: "+ argsPP$) ; DBG PP Args
+EndIf"></code></pre>
+<h2 id="highlightsmall-macro"><code>!HighlightSmall</code> Macro</h2>
+<p>Using the <code>!HighlightSmall</code> macro:</p>
+<pre><code>!HighlightSmall(purebasic)()()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a &quot;_butler.yaml&quot; settings file... 
+  argsPP$ + &quot; _butler.yaml&quot; ; &lt;= add it to PP&#39;s command line args.
+EndIf
+
+If #False ; Don&#39;t show. (might keep it for verbose option)
+  PrintN(&quot;argsPP$: &quot;+ argsPP$) ; DBG PP Args
+EndIf
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
+<pre class="purebasic small" title="; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a "_butler.yaml" settings file... 
+  argsPP$ + " _butler.yaml" ; <= add it to PP's command line args.
+EndIf
+
+If #False ; Don't show. (might keep it for verbose option)
+  PrintN("argsPP$: "+ argsPP$) ; DBG PP Args
+EndIf"><code class="purebasic small" title="; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a "_butler.yaml" settings file... 
+  argsPP$ + " _butler.yaml" ; <= add it to PP's command line args.
+EndIf
+
+If #False ; Don't show. (might keep it for verbose option)
+  PrintN("argsPP$: "+ argsPP$) ; DBG PP Args
+EndIf"></code></pre>
+<h2 id="highlightfile-macro"><code>!HighlightFile</code> Macro</h2>
+<p>Using the <code>!HighlightFile</code> macro:</p>
+<pre><code>!HighlightFile(example.py)(python)()()</code></pre>
+<pre class="python"><code class="python"><span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl str">Python code taken from Evennia.</span>
+<span class="hl str"></span>
+<span class="hl str">https://github.com/evennia/evennia/blob/master/evennia/commands/cmdset.py</span>
+<span class="hl str"></span>
+<span class="hl str">Evennia MU* creation system </span>
+<span class="hl str">Copyright (c) 2012-, Griatch (griatch &lt;AT&gt; gmail &lt;DOT&gt; com), Gregory Taylor </span>
+<span class="hl str">All rights reserved.</span>
+<span class="hl str"></span>
+<span class="hl str">BSD 3-clause &quot;New&quot; or &quot;Revised&quot; License</span>
+<span class="hl str"></span>
+<span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl kwa">from</span> future<span class="hl opt">.</span>utils <span class="hl kwa">import</span> listvalues<span class="hl opt">,</span> with_metaclass
+
+<span class="hl kwa">from</span> weakref <span class="hl kwa">import</span> WeakKeyDictionary
+<span class="hl kwa">from</span> django<span class="hl opt">.</span>utils<span class="hl opt">.</span>translation <span class="hl kwa">import</span> ugettext <span class="hl kwa">as</span> _
+<span class="hl kwa">from</span> evennia<span class="hl opt">.</span>utils<span class="hl opt">.</span>utils <span class="hl kwa">import</span> inherits_from<span class="hl opt">,</span> is_iter
+__all__ <span class="hl opt">= (</span><span class="hl str">&quot;CmdSet&quot;</span><span class="hl opt">,)</span>
+
+
+<span class="hl kwa">class</span> <span class="hl kwd">_CmdSetMeta</span><span class="hl opt">(</span><span class="hl kwb">type</span><span class="hl opt">):</span>
+    <span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl str">    This metaclass makes some minor on-the-fly convenience fixes to</span>
+<span class="hl str">    the cmdset class.</span>
+<span class="hl str">    &quot;&quot;&quot;</span>
+    <span class="hl kwa">def</span> <span class="hl kwd">__init__</span><span class="hl opt">(</span>cls<span class="hl opt">, *</span>args<span class="hl opt">, **</span>kwargs<span class="hl opt">):</span>
+        <span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl str">        Fixes some things in the cmdclass</span>
+<span class="hl str">        &quot;&quot;&quot;</span>
+        <span class="hl slc"># by default we key the cmdset the same as the</span>
+        <span class="hl slc"># name of its class.</span>
+        <span class="hl kwa">if not</span> <span class="hl kwb">hasattr</span><span class="hl opt">(</span>cls<span class="hl opt">,</span> <span class="hl str">&apos;key&apos;</span><span class="hl opt">)</span> <span class="hl kwa">or not</span> cls<span class="hl opt">.</span>key<span class="hl opt">:</span>
+            cls<span class="hl opt">.</span>key <span class="hl opt">=</span> cls<span class="hl num">.__</span>name<span class="hl num">__</span>
+        cls<span class="hl opt">.</span>path <span class="hl opt">=</span> <span class="hl str">&quot;</span><span class="hl ipl">%s</span><span class="hl str">.</span><span class="hl ipl">%s</span><span class="hl str">&quot;</span> <span class="hl opt">% (</span>cls<span class="hl num">.__</span>module<span class="hl num">__</span><span class="hl opt">,</span> cls<span class="hl num">.__</span>name<span class="hl num">__</span><span class="hl opt">)</span>
+
+        <span class="hl kwa">if not</span> <span class="hl kwb">type</span><span class="hl opt">(</span>cls<span class="hl opt">.</span>key_mergetypes<span class="hl opt">) ==</span> <span class="hl kwb">dict</span><span class="hl opt">:</span>
+            cls<span class="hl opt">.</span>key_mergetypes <span class="hl opt">= {}</span>
+
+        <span class="hl kwb">super</span><span class="hl opt">(</span>_CmdSetMeta<span class="hl opt">,</span> cls<span class="hl opt">)</span><span class="hl num">.__</span>init<span class="hl num">__</span><span class="hl opt">(*</span>args<span class="hl opt">, **</span>kwargs<span class="hl opt">)</span></code></pre>
+<h2 id="highlightfilesmall-macro"><code>!HighlightFileSmall</code> Macro</h2>
+<p>Using the <code>!HighlightFileSmall</code> macro:</p>
+<pre><code>!HighlightFileSmall(example.py)(python)()()</code></pre>
+<pre class="python small" title=""><code class="python small" title=""><span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl str">Python code taken from Evennia.</span>
+<span class="hl str"></span>
+<span class="hl str">https://github.com/evennia/evennia/blob/master/evennia/commands/cmdset.py</span>
+<span class="hl str"></span>
+<span class="hl str">Evennia MU* creation system </span>
+<span class="hl str">Copyright (c) 2012-, Griatch (griatch &lt;AT&gt; gmail &lt;DOT&gt; com), Gregory Taylor </span>
+<span class="hl str">All rights reserved.</span>
+<span class="hl str"></span>
+<span class="hl str">BSD 3-clause &quot;New&quot; or &quot;Revised&quot; License</span>
+<span class="hl str"></span>
+<span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl kwa">from</span> future<span class="hl opt">.</span>utils <span class="hl kwa">import</span> listvalues<span class="hl opt">,</span> with_metaclass
+
+<span class="hl kwa">from</span> weakref <span class="hl kwa">import</span> WeakKeyDictionary
+<span class="hl kwa">from</span> django<span class="hl opt">.</span>utils<span class="hl opt">.</span>translation <span class="hl kwa">import</span> ugettext <span class="hl kwa">as</span> _
+<span class="hl kwa">from</span> evennia<span class="hl opt">.</span>utils<span class="hl opt">.</span>utils <span class="hl kwa">import</span> inherits_from<span class="hl opt">,</span> is_iter
+__all__ <span class="hl opt">= (</span><span class="hl str">&quot;CmdSet&quot;</span><span class="hl opt">,)</span>
+
+
+<span class="hl kwa">class</span> <span class="hl kwd">_CmdSetMeta</span><span class="hl opt">(</span><span class="hl kwb">type</span><span class="hl opt">):</span>
+    <span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl str">    This metaclass makes some minor on-the-fly convenience fixes to</span>
+<span class="hl str">    the cmdset class.</span>
+<span class="hl str">    &quot;&quot;&quot;</span>
+    <span class="hl kwa">def</span> <span class="hl kwd">__init__</span><span class="hl opt">(</span>cls<span class="hl opt">, *</span>args<span class="hl opt">, **</span>kwargs<span class="hl opt">):</span>
+        <span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl str">        Fixes some things in the cmdclass</span>
+<span class="hl str">        &quot;&quot;&quot;</span>
+        <span class="hl slc"># by default we key the cmdset the same as the</span>
+        <span class="hl slc"># name of its class.</span>
+        <span class="hl kwa">if not</span> <span class="hl kwb">hasattr</span><span class="hl opt">(</span>cls<span class="hl opt">,</span> <span class="hl str">&apos;key&apos;</span><span class="hl opt">)</span> <span class="hl kwa">or not</span> cls<span class="hl opt">.</span>key<span class="hl opt">:</span>
+            cls<span class="hl opt">.</span>key <span class="hl opt">=</span> cls<span class="hl num">.__</span>name<span class="hl num">__</span>
+        cls<span class="hl opt">.</span>path <span class="hl opt">=</span> <span class="hl str">&quot;</span><span class="hl ipl">%s</span><span class="hl str">.</span><span class="hl ipl">%s</span><span class="hl str">&quot;</span> <span class="hl opt">% (</span>cls<span class="hl num">.__</span>module<span class="hl num">__</span><span class="hl opt">,</span> cls<span class="hl num">.__</span>name<span class="hl num">__</span><span class="hl opt">)</span>
+
+        <span class="hl kwa">if not</span> <span class="hl kwb">type</span><span class="hl opt">(</span>cls<span class="hl opt">.</span>key_mergetypes<span class="hl opt">) ==</span> <span class="hl kwb">dict</span><span class="hl opt">:</span>
+            cls<span class="hl opt">.</span>key_mergetypes <span class="hl opt">= {}</span>
+
+        <span class="hl kwb">super</span><span class="hl opt">(</span>_CmdSetMeta<span class="hl opt">,</span> cls<span class="hl opt">)</span><span class="hl num">.__</span>init<span class="hl num">__</span><span class="hl opt">(*</span>args<span class="hl opt">, **</span>kwargs<span class="hl opt">)</span></code></pre>
+<h1 id="pb-macros">PB Macros</h1>
+<h2 id="purebasic-macro"><code>!PureBasic</code> Macro</h2>
+<p>Using the <code>!PureBasic</code> macro:</p>
+<pre><code>!PureBasic
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a &quot;_butler.yaml&quot; settings file... 
+  argsPP$ + &quot; _butler.yaml&quot; ; &lt;= add it to PP&#39;s command line args.
+EndIf
+
+If #False ; Don&#39;t show. (might keep it for verbose option)
+  PrintN(&quot;argsPP$: &quot;+ argsPP$) ; DBG PP Args
+EndIf
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl slc">; PureBASIC Example</span>
+argsPP$ <span class="hl opt">=</span> PP_MACROS_IMPORT$ <span class="hl opt">+</span> MDsourceFile$
+
+<span class="hl kwa">If</span> folderYAML <span class="hl slc">; Current folder contains a &quot;_butler.yaml&quot; settings file... </span>
+  argsPP$ <span class="hl opt">+</span> <span class="hl str">&quot; _butler.yaml&quot;</span> <span class="hl slc">; &lt;= add it to PP&apos;s command line args.</span>
+<span class="hl kwa">EndIf</span>
+
+<span class="hl kwa">If</span> <span class="hl kwb">#False</span> <span class="hl slc">; Don&apos;t show. (might keep it for verbose option)</span>
+  <span class="hl kwc">PrintN</span>(<span class="hl str">&quot;argsPP$: &quot;</span><span class="hl opt">+</span> argsPP$) <span class="hl slc">; DBG PP Args</span>
+<span class="hl kwa">EndIf</span></code></pre>
+<h2 id="purebasicsmall-macro"><code>!PureBasicSmall</code> Macro</h2>
+<p>Using the <code>!PureBasicSmall</code> macro:</p>
+<pre><code>!PureBasicSmall
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; PureBASIC Example
+argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
+
+If folderYAML ; Current folder contains a &quot;_butler.yaml&quot; settings file... 
+  argsPP$ + &quot; _butler.yaml&quot; ; &lt;= add it to PP&#39;s command line args.
+EndIf
+
+If #False ; Don&#39;t show. (might keep it for verbose option)
+  PrintN(&quot;argsPP$: &quot;+ argsPP$) ; DBG PP Args
+EndIf
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
+<pre class="purebasic small" title="PureBASIC source code"><code class="purebasic small" title="PureBASIC source code"><span class="hl slc">; PureBASIC Example</span>
+argsPP$ <span class="hl opt">=</span> PP_MACROS_IMPORT$ <span class="hl opt">+</span> MDsourceFile$
+
+<span class="hl kwa">If</span> folderYAML <span class="hl slc">; Current folder contains a &quot;_butler.yaml&quot; settings file... </span>
+  argsPP$ <span class="hl opt">+</span> <span class="hl str">&quot; _butler.yaml&quot;</span> <span class="hl slc">; &lt;= add it to PP&apos;s command line args.</span>
+<span class="hl kwa">EndIf</span>
+
+<span class="hl kwa">If</span> <span class="hl kwb">#False</span> <span class="hl slc">; Don&apos;t show. (might keep it for verbose option)</span>
+  <span class="hl kwc">PrintN</span>(<span class="hl str">&quot;argsPP$: &quot;</span><span class="hl opt">+</span> argsPP$) <span class="hl slc">; DBG PP Args</span>
+<span class="hl kwa">EndIf</span></code></pre>
+<hr />
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#highlight-macros">Highlight Macros</a><ul>
+<li><a href="#highlight-macro"><code>!Highlight</code> Macro</a></li>
+<li><a href="#highlightsmall-macro"><code>!HighlightSmall</code> Macro</a></li>
+<li><a href="#highlightfile-macro"><code>!HighlightFile</code> Macro</a></li>
+<li><a href="#highlightfilesmall-macro"><code>!HighlightFileSmall</code> Macro</a></li>
+</ul></li>
+<li><a href="#pb-macros">PB Macros</a><ul>
+<li><a href="#purebasic-macro"><code>!PureBasic</code> Macro</a></li>
+<li><a href="#purebasicsmall-macro"><code>!PureBasicSmall</code> Macro</a></li>
+</ul></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

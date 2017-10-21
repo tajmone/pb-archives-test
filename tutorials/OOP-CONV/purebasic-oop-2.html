@@ -1,0 +1,162 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureBasic OOP: Object Concepts</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Dräc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tutorials</a></li>
+	<li><a href='index.html'>OOP-CONV</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
+					<p class="subtitle">2. Object Concepts</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<h2 id="status-wip">STATUS: WIP</h2>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_ConceptObjet_en.htm">WWW ORIGINAL</a></li>
+</ul>
+<p><strong>TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix subtitle casing
+</li>
+</ul>
+</div>
+</div>
+<p>The Object-Oriented Programming paradigm introduces concepts like: objects, inheritance and polymorphism. Before jumping into how these concepts can be implemented in PureBasic, we must first define them.</p>
+<h1 id="the-notion-of-object">The Notion of Object</h1>
+<p>An object has an internal state:</p>
+<ul>
+<li>The state is represented by the value of each inner component at a given moment,</li>
+<li>A component is either a value or another object.</li>
+</ul>
+<p>It uses and provides services:</p>
+<ul>
+<li>It interacts with the outside through functions called «methods».</li>
+</ul>
+<p>It is unique (notion of identity).</p>
+<p>An object can be seen at two levels:</p>
+<ul>
+<li>By the services which it provides: external view (specification). This is the User side,</li>
+<li>By the way these services are implemented within it: internal view (implementation). This is the Developer side.</li>
+</ul>
+<p>From the developer’s point of view, an object is a contiguous memory area containing information: variables called <em>attributes</em> and functions called <strong>methods</strong>.</p>
+<p>The fact that we refer to an object’s functions as «its methods» is because they belong to it and allow manipulation of its attributes.</p>
+<h1 id="the-notion-of-class">The Notion of Class</h1>
+<p>This is an extension of the concept of «<em>type</em>» found in PureBasic.</p>
+<p>In a given context, multiple objects can have the same structure and behavior. They can therefore be grouped together in the same «<strong>Class</strong>».</p>
+<p>From a developer’s point of view, a Class defines the type of contents that will be held by objects belonging to it: the nature of their attributes (type of each variable) and their methods (names, implementation).</p>
+<p>Just as integer is the type of a variable, the type of an object is its Class.</p>
+<h1 id="the-notion-of-instance">The Notion of Instance</h1>
+<p>An instance is an object defined from a Class.</p>
+<p>This process is called «<strong>instanciation</strong>».</p>
+<p>It corresponds to the assignement of variables in PureBasic.</p>
+<p>Normally, an object is <em>initialized</em> at the time of its instanciation.</p>
+<h1 id="encapsulation">Encapsulation</h1>
+<p>In theory, the manipulation of an object’s attributes should be possible only through its methods. This technique, which allows making visible to the user only a part of the object, is called «<strong>encapsulation</strong>».</p>
+<p>The advantage of encapsulation is that it guarantees the integrity of attributes. Indeed, the developer is the only one who, through the methods provided to the user, manages the modifications allowed on an object.</p>
+<p>At our level, this is the least that should be retained of the encapsulation concept.</p>
+<h1 id="inheritance">Inheritance</h1>
+<p>Inheritance allows defining new Classes by using already existing ones.</p>
+<p>From the developer’s point of view, it means being able to add/modify attributes and methods to/of an existing Class in order to define a new Class.</p>
+<p>There are two kinds of inheritances:</p>
+<ul>
+<li><strong>Simple inheritance</strong>: the new Class is defined from a single existing Class.</li>
+<li><strong>Multiple inheritance</strong>: the new Class is defined from several existing Classes.</li>
+</ul>
+<p>Multiple inheritance is complex to implement, and it will not be covered here. Thus, this papers deals only with simple inheritance.</p>
+<p class="FakeH3">
+Terminology:
+</p>
+<ul>
+<li>The Class which inherits from another Class, is usually called <strong>Child Class</strong>.</li>
+<li>The Class which gives its inheritance to a Child Class is usually called <strong>Parent Class</strong>.</li>
+</ul>
+<h1 id="overloading">Overloading</h1>
+<p>A method is overloaded if it carries out different actions according to the nature of the target objects.</p>
+<p>Let us take an example:</p>
+<p>The following objects: circle, rectangle and triangle are all geometrical shapes. We can define for these objects the same Class with the given name: <code>Shape</code>. Thus, these objects are all instances of the <code>Shape</code> Class.</p>
+<p>If we want to display the objects, the <code>Shape</code> Class needs to have a <code>Draw</code> method.</p>
+<p>So endowed, every object has a <code>Draw</code> method to display itself. Now, this method could not possibly be the same for each object, since we want to display a circle, in one case, a rectangle, in another, etc.</p>
+<p>Objects of the same Class employ the same <code>Draw</code> method, but the object’s nature (Circle, Rectangle, or Triangle) dictates the actual implementation of the method. The <code>Draw</code> method is overloaded: for the user, displaying a circle or a rectangle is achieved in the same way. From the developer’s point of view, the methods implementations needs to be different.</p>
+<p>Instead of overloaded methods, we can also speak of polymorphic methods (having several forms).</p>
+<h1 id="the-notion-of-abstract-class">The Notion of Abstract Class</h1>
+<p>As we’ve seen, a Class includes the definition of both attributes and methods of an object. Let us suppose that we can’t provide the implementation of one of the Class methods. This method is just a name without code. We’re then speaking of an «<strong>abstract method</strong>». A Class containing at least one abstract method qualifies as an «<strong>abstract Class</strong>».</p>
+<p>You might wonder why an abstract class should exist at all, since objects of such a Class can’t be created. Abstract Classes allow defining &lt;<The Notion of Class,Object Classes>&gt;, which are considered — by opposition — as being «concrete». The transition from the former to the latter occurs through inheritance, where the concrete Class takes care of providing the missing implementations to the abstract methods inherited.</p>
+<p>Thus, abstract Classes are a kind of interface, because they describe the generic specification of all the Classes which inherit from them.</p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#the-notion-of-object">The Notion of Object</a></li>
+<li><a href="#the-notion-of-class">The Notion of Class</a></li>
+<li><a href="#the-notion-of-instance">The Notion of Instance</a></li>
+<li><a href="#encapsulation">Encapsulation</a></li>
+<li><a href="#inheritance">Inheritance</a></li>
+<li><a href="#overloading">Overloading</a></li>
+<li><a href="#the-notion-of-abstract-class">The Notion of Abstract Class</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

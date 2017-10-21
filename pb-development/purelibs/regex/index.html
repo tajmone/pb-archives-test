@@ -1,0 +1,216 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>RegularExpression (PCRE)</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../../index.html'>Home</a></li>
+	<li><a href='../../index.html'>pb-development</a></li>
+	<li><a href='../index.html'>purelibs</a></li>
+	<li><a href='index.html'>regex</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">RegularExpression (PCRE)</h1>
+
+<pre><code>PureBASIC 5.61
+PCRE version 8.30 (2012-02-04)
+License: New BSD</code></pre>
+<p>PureBASIC’s «<strong>RegularExpression</strong>» PureLibrary uses the <strong>PCRE</strong> (Perl Compatible Regular Expressions) library component.</p>
+<hr />
+<!-- #toc -->
+<ul>
+<li><a href="#external-refrence-links">External Refrence Links</a></li>
+<li><a href="#about-pcre">About PCRE</a></li>
+<li><a href="#pcre-license">PCRE License</a>
+<ul>
+<li><a href="#using-pcreregex-in-your-apps">Using PCRE/RegEx in Your Apps</a></li>
+</ul></li>
+<li><a href="#info-about-pbs-pcre-lib">Info About PB’s PCRE Lib</a>
+<ul>
+<li><a href="#pcre-version">PCRE Version</a></li>
+<li><a href="#pcre-build-time-options">PCRE Build-Time Options</a></li>
+</ul></li>
+<li><a href="#documents">Documents</a></li>
+</ul>
+<!-- /toc -->
+<hr />
+<h1 id="external-refrence-links">External Refrence Links</h1>
+<ul>
+<li><a href="http://www.pcre.org/">PCRE Homepage</a></li>
+<li><a href="http://www.purebasic.com/documentation/regularexpression/index.html">RegularExpression – PureBASIC Documentation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions">PCRE – WikiPedia</a></li>
+</ul>
+<h1 id="about-pcre">About PCRE</h1>
+<p>PureBASIC’s «<strong>RegularExpression</strong>» PureLibrary uses the <strong>PCRE</strong> (Perl Compatible Regular Expressions) library component, an open source implementation of Perl regular expressions. Any PCRE supported RegEx (regular expression) is also supported in PureBASIC.</p>
+<h1 id="pcre-license">PCRE License</h1>
+<p>PCRE is released under the <a href="PCRE_License"><strong>New BSD License</strong></a> license (aka: “BSD-new”, “New BSD”, “revised BSD”, “BSD-3”, and “3-clause BSD”).</p>
+<h2 id="using-pcreregex-in-your-apps">Using PCRE/RegEx in Your Apps</h2>
+<blockquote>
+<p><strong>IMPORTANT</strong>: The PCRE license requires that a copyright notice and the license text itself be included in any software that uses the library.</p>
+</blockquote>
+<p>If your PureBASIC software uses the <strong>RegularExpression</strong> library, and you want to distribute it publicly, you must include the <a href="PCRE_License">PCRE license file</a> with the software – ie: <em>in addition</em> to the <a href="../../licenses/PureBASIC_Applications_Licenses.txt"><code>PureBASIC_Applications_Licenses.txt</code></a> file, which doesn’t contain the <em>full</em> copyright notice for PCRE.</p>
+<h1 id="info-about-pbs-pcre-lib">Info About PB’s PCRE Lib</h1>
+<p>PureBASIC documentation doesn’t offer any information about the version of the built-in PCRE library, nor the compiler settings used for building it. Most users can do well without these extra info, but advanced users might be interested in these details.</p>
+<p>Knowing the exact library version in use is important for knowing which PCRE package we should look for in order to get the documentation for the right version. Through PCRE API documentation is possible to access advanced fucntionality. For example, the <a href="Get_PCRE_Info.pb"><code>Get_PCRE_Info.pb</code></a> tool uses advanced PCRE API functions to get info about the library’s build-time options – functions which are not mentioned in PureBASIC’s documentation.</p>
+<h2 id="pcre-version">PCRE Version</h2>
+<p>In the <a href="Get_PCRE_Version.pb"><code>Get_PCRE_Version.pb</code></a> file (inside this folder) you’ll find this code hack to extract the version number and release date of the PCRE lib used by PureBASIC.</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl slc">; ******************************************************************************</span>
+<span class="hl slc">; *                                                                            *</span>
+<span class="hl slc">; *                         GET PB&apos;S PCRE LIB VERSION                          *</span>
+<span class="hl slc">; *                                                                            *</span>
+<span class="hl slc">; ******************************************************************************</span>
+<span class="hl slc">; PureBASIC 5.50</span>
+<span class="hl slc">; Code provided by Fred (Oct 05, 2016): </span>
+<span class="hl slc">; http://www.purebasic.fr/english/viewtopic.php?f=13&amp;t=66707</span>
+
+<span class="hl kwa">ImportC</span> <span class="hl str">&quot;&quot;</span>
+  <span class="hl kwc">pb_pcre_version</span>(void)<span class="hl slc">;</span>
+<span class="hl kwa">EndImport</span>
+
+regex <span class="hl opt">=</span> <span class="hl kwc">CreateRegularExpression</span>(<span class="hl kwb">#PB_Any</span>, <span class="hl str">&quot;&quot;</span>)
+pcre_version <span class="hl opt">=</span> <span class="hl kwc">pb_pcre_version</span>(<span class="hl num">0</span>)
+<span class="hl kwa">Debug</span> <span class="hl kwc">PeekS</span>(pcre_version, <span class="hl opt">-</span><span class="hl num">1</span>, <span class="hl kwb">#PB_Ascii</span>)</code></pre>
+<p>Running it produces the following output in the Debugger:</p>
+<pre><code>8.30 2012-02-04</code></pre>
+<p>Which means that PureBASIC 5.10 is using PCRE libary version 8.30, released on February 4th, 2012.</p>
+<h2 id="pcre-build-time-options">PCRE Build-Time Options</h2>
+<p>The following Table resumes the technical details of the compiler-options used for building PureBASIC’s built-in PCRE component. It was automatically generated with the <a href="Get_PCRE_Info.pb"><code>Get_PCRE_Info.pb</code></a> tool found in this folder (by <span class="citation" data-cites="tajmone">@tajmone</span>).</p>
+<p>This is info was obtained under MS <strong>Windows 10</strong> x64:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Feature Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PCRE Version</td>
+<td>8.30</td>
+<td>PCRE lib used by PureBASIC 5.61.</td>
+</tr>
+<tr class="even">
+<td><code>PCRE_CONFIG_UTF8</code></td>
+<td>True</td>
+<td>UTF-8 support.</td>
+</tr>
+<tr class="odd">
+<td><code>PCRE_CONFIG_UNICODE_PROPERTIES</code></td>
+<td>True</td>
+<td>Unicode property support.</td>
+</tr>
+<tr class="even">
+<td><code>PCRE_CONFIG_NEWLINE</code></td>
+<td><code>LF</code></td>
+<td>Default “newline” sequence.</td>
+</tr>
+<tr class="odd">
+<td><code>PCRE_CONFIG_BSR</code></td>
+<td>All Unicode EOLs</td>
+<td>Default EOLs matched by <code>\R</code>.</td>
+</tr>
+<tr class="even">
+<td><code>PCRE_CONFIG_STACKRECURSE</code></td>
+<td>heap</td>
+<td>Heap-based recursion (data-blocks).</td>
+</tr>
+<tr class="odd">
+<td><code>PCRE_CONFIG_LINK_SIZE</code></td>
+<td>2 bytes</td>
+<td>RegExs internal link size.</td>
+</tr>
+<tr class="even">
+<td><code>PCRE_CONFIG_POSIX_MALLOC_THRESHOLD</code></td>
+<td>10</td>
+<td>POSIX API threshold for <code>malloc()</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>PCRE_CONFIG_MATCH_LIMIT</code></td>
+<td>38528</td>
+<td>Default internal resource limit.</td>
+</tr>
+<tr class="even">
+<td><code>PCRE_CONFIG_MATCH_LIMIT_RECURSION</code></td>
+<td>38528</td>
+<td>Internal recursion depth limit.</td>
+</tr>
+<tr class="odd">
+<td><code>PCRE_CONFIG_JIT</code></td>
+<td>False</td>
+<td>Availability of JIT compiler support.</td>
+</tr>
+<tr class="even">
+<td><code>PCRE_CONFIG_JITTARGET</code></td>
+<td>NULL</td>
+<td>Target architecture for JIT compiler.</td>
+</tr>
+</tbody>
+</table>
+<p>For an in-depth explanation of these features and their values, refer to PCRE’s documentation:</p>
+<ul>
+<li><a href="pcre_config.html"><code>pcre_config.html</code></a> (brief description)</li>
+<li><a href="pcreapi.html#SEC10"><code>pcreapi.html</code></a> (longer explanation)</li>
+</ul>
+<h1 id="documents">Documents</h1>
+<p>The following documents were taken from the <strong>PCRE 8.30 package</strong>; they were selected with a criteria of usefulness in PureBASIC software developement (PCRE compiling, C and C++ usage, and other documents with no immediate relevance for PB users were left out). They are licensed under the <a href="PCRE_License">New BSD license</a>:</p>
+<ul>
+<li><a href="pcre.html"><code>pcre.html</code></a> – Introductory page.</li>
+<li><a href="pcre_config.html"><code>pcre_config.html</code></a> – Information about the installation configuration.</li>
+<li><a href="pcreapi.html"><code>pcreapi.html</code></a> – PCRE’s native API.</li>
+<li><a href="pcrecompat.html"><code>pcrecompat.html</code></a> – Compability with Perl.</li>
+<li><a href="pcrepattern.html"><code>pcrepattern.html</code></a> – Specification of the regular expressions supported by PCRE.</li>
+<li><a href="pcreperform.html"><code>pcreperform.html</code></a> – Some comments on performance.</li>
+<li><a href="pcresyntax.html"><code>pcresyntax.html</code></a> – Syntax quick-reference summary.</li>
+<li><a href="pcreunicode.html"><code>pcreunicode.html</code></a> – Discussion of Unicode and UTF-8 support.</li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#external-refrence-links">External Refrence Links</a></li>
+<li><a href="#about-pcre">About PCRE</a></li>
+<li><a href="#pcre-license">PCRE License</a><ul>
+<li><a href="#using-pcreregex-in-your-apps">Using PCRE/RegEx in Your Apps</a></li>
+</ul></li>
+<li><a href="#info-about-pbs-pcre-lib">Info About PB’s PCRE Lib</a><ul>
+<li><a href="#pcre-version">PCRE Version</a></li>
+<li><a href="#pcre-build-time-options">PCRE Build-Time Options</a></li>
+</ul></li>
+<li><a href="#documents">Documents</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

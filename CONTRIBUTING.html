@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>The PureBASIC Archives</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='index.html'>Home</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+
+<h1 id="contributing-to-purebasic-archives">Contributing to PureBASIC Archives</h1>
+<p>Before contributing to this project you should read these guidelines, especially the <a href="#licenses">Licenses section</a>.</p>
+<!-- #toc -->
+<ul>
+<li><a href="#licenses">Licenses</a>
+<ul>
+<li><a href="#no-license--no-reuse-rights">No License = No Reuse-Rights</a>
+<ul>
+<li><a href="#your-work-need-a-license-too">Your work need a license too…</a></li>
+<li><a href="#assume-others-work-is-always-copyrighted">Assume others’ work is always copyrighted…</a></li>
+<li><a href="#if-in-doubt-provide-links-instead-of-code">If in doubt, provide links instead of code…</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#using-developement-branches">Using Developement Branches</a></li>
+<li><a href="#markdown-consistency-and-automation">Markdown Consistency And Automation</a></li>
+<li><a href="#readme-files">README Files</a></li>
+</ul>
+<!-- /toc -->
+<h1 id="licenses">Licenses</h1>
+<p>Before submitting resources to this repo, you must check carefully their license terms, and include each resource’s license along with it.</p>
+<h2 id="no-license-no-reuse-rights">No License = No Reuse-Rights</h2>
+<h3 id="your-work-need-a-license-too">Your work need a license too…</h3>
+<p>If you are contributing resources which are your creation, then you should decide under which license terms to release them. Unless you provide a license for your contributed work, people won’t be able to legally benefit from it:</p>
+<blockquote>
+<p>When you make a creative work (which includes code), the work is under exclusive copyright by default. Unless you include a license that specifies otherwise, nobody else can use, copy, distribute, or modify your work without being at risk of take-downs, shake-downs, or litigation. Once the work has other contributors (each a copyright holder), “nobody” starts including you.</p>
+<p><a href="http://choosealicense.com/no-license" class="uri">http://choosealicense.com/no-license</a></p>
+</blockquote>
+<p>If you’re not sure how licenses work, and which license would better serve your intentions, try visiting these links:</p>
+<ul>
+<li><a href="http://choosealicense.com" class="uri">http://choosealicense.com</a></li>
+<li><a href="https://opensource.org/licenses" class="uri">https://opensource.org/licenses</a></li>
+</ul>
+<p>If you wish to waive all claims on you work, and release it under the public domain, consider using the Unlicense:</p>
+<ul>
+<li><a href="http://unlicense.org" class="uri">http://unlicense.org</a></li>
+</ul>
+<p>Stating that your work is public domain might not suffice, because “public domain” is not legally binding in all countries. A proper license, like the Unlicense document, will ensure that your work will be treated as public domain world-wide.</p>
+<h3 id="assume-others-work-is-always-copyrighted">Assume others’ work is always copyrighted…</h3>
+<p>If you want to contribute resources found around the web — code examples found on forums, code and resources found on other repositories —, then you must check that the code/resources in question come with a statement regarding their license terms:</p>
+<blockquote>
+<p>If you find software that doesn’t have a license, that generally means you have no permission from the creators of the software to use, modify, or share the software. Although a code host such as GitHub may allow you to view and fork the code, this does not imply that you are permitted to use, modify, or share the software for any purpose.</p>
+<p><a href="http://choosealicense.com/no-license/#for-users" class="uri">http://choosealicense.com/no-license/#for-users</a></p>
+</blockquote>
+<p>Just because someone posted some code on a forum — maybe to exemplify an answer during a discussion — it doesn’t mean that that code is in the public domain — it only means the author allowed others to <em>read</em> it, not to use it.</p>
+<p>As a general rule: lacking evidence to the contrary, always assume the work of others is protected by copyright — simply because some source code is out there in the open it doesn’t mean it’s free and open source. When unsure, always contact the author and ask.</p>
+<h3 id="if-in-doubt-provide-links-instead-of-code">If in doubt, provide links instead of code…</h3>
+<p>Whenever you are unable to ascertain the license terms of any resource, stay on the safe path and contribute a link to it with a review, instead of the actual resource.</p>
+<p>The goal of PureBASIC Archives is to provide a place where resources can be <em>legitimately</em> and <em>legaly</em> accessed and shared. If a resource can be included in the repository, so much the better; otherwise, a link to follow will still be a precious resource in itself — sparing users time-consuming searches around the web.</p>
+<h1 id="using-developement-branches">Using Developement Branches</h1>
+<p>For resources requiring long-term work before being ready for inclusion in <code>master</code> branch of the repo, some developement branches have been created to host different kind of works-in-progress:</p>
+<ul>
+<li><a href="https://github.com/tajmone/purebasic-archives/tree/dev-tutorials"><code>dev-tutorials</code></a> – WIP relating to tutorials text and code examples.</li>
+</ul>
+<p>The idea is to keep separate the developement of different types of resources, and at the same time join efforts in the developement of resources belonging to the same kind.</p>
+<blockquote>
+<p>NOTE: dev-branches are created as needs arise. Need a new dev-branch with a different name and scope? Just <a href="https://github.com/tajmone/purebasic-archives/issues/new">open an issue</a>!</p>
+</blockquote>
+<p>Dev-branches encourage sharing WIP with others and collaboration. No need to wait that a resource if production-ready before making a pull request for it: work on dev-branches and make PRs whenever you feel like sharing with others your current WIP.</p>
+<p>Sometimes updating old resources needs quite some work: porting old PB code to run with latest PB version, updating tutorials and documentation text, translating, polishing text, ecc., are all time-consuming tasks which might benefit from others’ collaboration. This is what dev-branches are for!</p>
+<h1 id="markdown-consistency-and-automation">Markdown Consistency And Automation</h1>
+<p>To preserve consistency across markdown files in the repo — especially for the README files — you’ll find some useful scripts in the <a href="./repo-maintainance-tools/"><code>/repo-maintainance-tools/</code></a> folder.</p>
+<p>These scripts will handle auto-generation of a Table Of Content, to be placed somewhere at the beginning of a MD document. If you peek into the markdown sources, you’ll notice two HTML comment tags enclosing the TOC:</p>
+<pre><code>&lt;!-- #toc --&gt;
+      ...
+&lt;!-- /toc --&gt;</code></pre>
+<p>… these hidden tags (invisible in HTML previews) are needed for the autogeneration of the TOC (which is handled by a Node.js tool called <strong>gfmtoc</strong>).</p>
+<p>Also, these scripts will reformat and cleanup markdown sources (via <strong>Pandoc</strong>), enforcing the GitHub flavored Markdown (GFM) standard over markdown syntax variants — apart from providing consistency, this prevents markdown diffing nightmares when resolving merge conflicts.</p>
+<p>So make sure that:</p>
+<ol type="1">
+<li>You don’t accidentally remove the TOC-tags;</li>
+<li>You don’t use a markdown editor which removes these tags (for example, current version of the <a href="http://www.texts.io/"><strong>Texts</strong></a> editor removes them, but the issue should be soon fixed);</li>
+<li>Before making a pull request, you run these scripts on any edited MD document, to ensure its TOC is up to date with the contents, and it source well formatted.</li>
+</ol>
+<p>More info on how the scripts work is found in the <a href="./repo-maintainance-tools/"><code>/repo-maintainance-tools/</code></a> folder’s README file.</p>
+<blockquote>
+<p><strong>NOTE</strong>: The current automation-script setting for Pandoc reformatting are: from <code>markdown_github-hard_line_breaks</code> to <code>markdown_github-hard_line_breaks</code> — ie: GitHub-Flavored Markdown minus hard line breaks extension/behaviour. GFM hard line breaks is a feature intended for comments, issues and pull request description, not for README files; so I’ve disabled it here.</p>
+</blockquote>
+<h1 id="readme-files">README Files</h1>
+<p>Each resource main folder should contain a <code>README.md</code> document. This improves preview-navigation of the repo on GitHub.</p>
+<p>For consistency, all READMEs should be markdown files named <code>README.md</code> — documents other than READMEs can be in any other GitHub supported format (Asciidoc, textile, ecc.).</p>
+<p>Markdown syntax of READMEs should follow GitHub’s markdown rules — so, it’s ok to take advantage of GFM features like task-lists, strikethrough, fenced code syntax highlighting, emoji, ecc.</p>
+<blockquote>
+<p><strong>REMEMBER</strong>: You can always use Pandoc to convert from a markdown flavor to another.</p>
+</blockquote>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#contributing-to-purebasic-archives">Contributing to PureBASIC Archives</a></li>
+<li><a href="#licenses">Licenses</a><ul>
+<li><a href="#no-license-no-reuse-rights">No License = No Reuse-Rights</a></li>
+</ul></li>
+<li><a href="#using-developement-branches">Using Developement Branches</a></li>
+<li><a href="#markdown-consistency-and-automation">Markdown Consistency And Automation</a></li>
+<li><a href="#readme-files">README Files</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

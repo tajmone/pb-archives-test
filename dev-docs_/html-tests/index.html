@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>HTML Test Pages</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>html-tests</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">HTML Test Pages</h1>
+
+<p>This folder (only available in PB Archives Source branch) is for testing the template’s HTML elements and their CSS styling.</p>
+<p>A special baseline grid is provided (via <a href="https://keyes.ie/things/baseliner/">Baseliner.js</a>) to check Vertical Rythm.</p>
+<h1 id="basic-test-pages">Basic Test Pages</h1>
+<p>The “<strong>basic test</strong>” pages cover the common usage of HTML elements. They are intended to check the look and feel of CSS styling in usual contexts.</p>
+<ul>
+<li><a href="./basic-typography.html">basic-typography.html</a> — basic typography test.</li>
+</ul>
+<h1 id="extended-test-pages">Extended Test Pages</h1>
+<p>The “<strong>extended test</strong>” pages try to cover all possible tag combinations as well as edge-cases. They are intended to prevent unexpected styling results in complex combination.</p>
+<ul>
+<li><a href="./extended-headings.html">extended-headings.html</a> — <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> headings</li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#basic-test-pages">Basic Test Pages</a></li>
+<li><a href="#extended-test-pages">Extended Test Pages</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

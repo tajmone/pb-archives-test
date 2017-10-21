@@ -1,0 +1,25 @@
+Some fixes to be done on Asciidoc tutorial:
+
+---------------------------
+In new PB-Arch version, I'll need to check the Adoc tutorial dependencies files
+(eg: highlight.js, etc.) since project structure and files might have changed!
+---------------------------
+Example 6.2-5 >> Object Instanciation and Object Constructor 5
+The code was fixed!
+---------------------------
+<<Init_Mbers : EndInit_Mbers private block, Show me now!>>
+
+Check if the space after "," (block, Show me) creates a gap!
+---------------------------
+Fix cross-ref link <<Optimisation: Get() and Set() methods,Appendix>> in:
+
+	This design puts into practice the optimizations for Get() and Set() methods presented in the Appendix. The benefit of this choice is twofold:
+
+Adoc:
+
+	This design puts into practice the optimizations for `Get()` and `Set()` methods presented in the <<Optimisation: Get() and Set() methods,Appendix>>. The benefit of this choice is twofold:
+---------------------------
+SPELLING ERRORS:
+
+	itsattributes	=> its attributes
+---------------------------

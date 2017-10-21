@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureLibraries</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>pb-development</a></li>
+	<li><a href='index.html'>purelibs</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureLibraries</h1>
+
+<h1 id="rd-party-components">3rd Party Components</h1>
+<p>Many (most? all?) PureLibraries are built on top of third party libaries (aka “components”). PureBASIC transparently binds/wraps these components into the language, providing the user with native PureBASIC commands to access their functionality. The presence of these components is the reason why you have to include a licenses file (or 2 if you used the 3D engine) when you distribute applications built with PureBASIC.</p>
+<p>The full list of libraries used by PureBASIC can be found in these licenses files:</p>
+<ul>
+<li><a href="../licenses/PureBASIC_Applications_Licenses.txt"><code>PureBASIC_Applications_Licenses.txt</code></a></li>
+<li><a href="../licenses/PureBASIC_Applications_Licenses_3D-engine.txt"><code>PureBASIC_Applications_Licenses_3D-engine.txt</code></a></li>
+</ul>
+<p>For most PureLibs, PureBASIC’s help contains all the information needed for using them. For some PureLibs, PB’s help provides inks to the library’s online documentation, which is required for taking full advantage of the component.</p>
+<p>In some cases – like the <strong>WinAPI</strong> – the list of functions and constants is huge, and the user only needs to know the interfacing scheme adopted by PureBASIC, and then learn more about that component’s API from its official documentation.</p>
+<p>In other cases, like Regular Expressions, merely knowing a component’s set of commands is not sufficient to master its use: the user needs introductiory documents and tutorials which are beyond the scope of PureBASIC’s reference documentation.</p>
+<p>This folder gathers reference documents for using/learning PureLibraries and the libraries/components they are built from. They are selected documents taken from the components’ official websites, or from their release packages, or relevant documents found around the web. Efforts are made to select the documentation for the same version of the component used by PureBASIC, but this is not always an easy task since PureBASIC is opaque about the release version of the third party libraries it embodies.</p>
+<h2 id="scintilla">Scintilla</h2>
+<ul>
+<li><a href="./scintilla/index.html"><code>/scintilla/</code></a></li>
+</ul>
+<p>Scintilla is a free source code editing component.</p>
+<h2 id="regularexpression-pcre">RegularExpression (PCRE)</h2>
+<ul>
+<li><a href="./regex/index.html"><code>/regex/</code></a></li>
+</ul>
+<p>From <a href="http://www.purebasic.com/documentation/regularexpression/index.html">PureBASIC documentation</a>:</p>
+<blockquote>
+<p>Regular expressions allow to do advanced pattern matching to quickly match, extract or replace an arbitrary information in a string. These kind of expressions are often difficult to read an write, but once you master them it makes a lot of things easier.</p>
+</blockquote>
+<p>«<strong>RegularExpression</strong>» PureLib uses the <strong>PCRE</strong> (Perl Compatible Regular Expressions) library component, an open source implementation of the Perl regular expressions.</p>
+<h1 id="folders-organization">Folders Organization</h1>
+<p>PureLibraries are organized according to their names as they appear in PB’s documentation – eg: «<strong>Scintilla</strong>» will be in the <code>/scintilla/</code> folder.</p>
+<p>This approach should make it easier to locate PureLibs resources, and can handle neatly those cases in which a PureLib has more than one third party component. For example, the «<strong>Database</strong>» PureLib relies on <strong>SQLite</strong> and <strong>PostgreSQL</strong> (<strong>libpq</strong>); so it will have a <code>/database/</code> folder with two subfolders: <code>/sqlite/</code> and <code>/libpq/</code>.</p>
+<p>Wherever feasible, shorter folder names will be adopted – eg: <code>/regex/</code> instead of <code>/regularexpression/</code>. It’s intuitive, easier to read, type and manage.</p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#rd-party-components">3rd Party Components</a><ul>
+<li><a href="#scintilla">Scintilla</a></li>
+<li><a href="#regularexpression-pcre">RegularExpression (PCRE)</a></li>
+</ul></li>
+<li><a href="#folders-organization">Folders Organization</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

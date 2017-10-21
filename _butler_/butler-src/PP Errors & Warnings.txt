@@ -1,0 +1,16 @@
+; ==============================================================================
+;                              PP Errors & Warnings                             
+; ==============================================================================
+
+https://github.com/CDSoft/pp/issues/35#issuecomment-325121599
+
+The error management is very basic...
+
+-- 1 warning when deprecated macros are used => the process continues, the output is
+   generated and the exit code is 0.
+
+-- All other errors are fatal => the process immediately stops, the output is empty
+   (except from the potential side effects produced before the error) and the exit 
+   code is 1.
+
+I mainly use pp with make. Make knows when pp fails thanks to its exit code.

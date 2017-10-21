@@ -1,0 +1,548 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureBasic and Object-Oriented Programming</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Dräc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tutorials</a></li>
+	<li><a href='index.html'>OOP-CONV</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
+					<p class="subtitle">5. Second Implementation</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<h2 id="status-wip">STATUS: WIP</h2>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Implementation2_en.htm">WWW ORIGINAL</a></li>
+</ul>
+<p><strong>TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix subtitle casing
+</li>
+</ul>
+</div>
+</div>
+<p>In our first implementation, object concepts were adapted in a more or less extended way. Now, it’s time to improve this first implementation thanks to the use of the <code>Interface</code> instruction.</p>
+<h1 id="notion-of-object-interface">Notion of Object Interface</h1>
+<p>The main purpose of encapsulation is to make visible, to the user, only part of an object contents. The visible part of an object’s contents is called its <strong>interface</strong>, the hidden part is called it <strong>implementation</strong>.</p>
+<p>Therefore, an object’s interface is the only input/output access available to the user for interacting with it.</p>
+<p>This is the aim that we are going to achieve through the use of the <code>Interface</code> instruction.</p>
+<p>The <code>Interface</code> instruction allows to group, under the same name, all or part of an object’s methods which the user will have the right to access.</p>
+<h1 id="object-instanciation-and-object-constructor">Object Instanciation and Object Constructor</h1>
+<p>Implementing an Interface involves three steps:</p>
+<ol type="1">
+<li>An <code>Interface</code> describing the required methods,</li>
+<li>A <code>Structure</code> describing the pointers of the corresponding functions,</li>
+<li>A <strong>method table</strong>: a structured variable initialized with the required functions adresses.</li>
+</ol>
+<p>Step 1, consists in specifying the object’s <code>Interface</code>; this is not difficult. Just name the methods.</p>
+<p>Steps 2 and 3 are linked. In our object approach, we already have the adapted <code>Structure</code>: it’s the one that describes the Class of an object. Moreover, the Interface and the Class of an object are similar: both contain functions pointers. Simply, the <code>Interface</code> instruction doesn’t contain the Class attributes but only all or part of its methods.</p>
+<p>Therefore it’s possible to use an object’s Class to initialize its Interface. This approach is the most natural one. Let’s not forget that an interface is the visible part of an object’s Class, so it is natural that the Class determines the Interface.</p>
+<p>To see how this can be achieved, let’s carry on with the example of the <code>Rectangle2</code> class, which provided the <code>Draw()</code> and <code>Erase()</code> methods.</p>
+<p>The corresponding Class is:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle2
+  <span class="hl opt">*</span>Draw
+  <span class="hl opt">*</span>Erase
+  x1.l
+  x2.l
+  y1.l
+  y2.l
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Draw_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle2)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Erase_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle2)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>The associated Interface is:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> Rectangle
+  <span class="hl kwc">Draw</span>()
+  <span class="hl kwc">Erase</span>()
+<span class="hl kwa">EndInterface</span></code></pre>
+<p>Since the user can handle an object only through its Interface, the object must be created directly from the <code>Rectangle</code> Interface, rather than from the <code>Rectangle2</code> Class.</p>
+<p>The object will thus be created by writing:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect.Rectangle</code></pre>
+<p>instead of <code>Rect.Rectangle2</code>.</p>
+<p>However, you should not forget to connect the Interface to the Class. For this, it is necessary to initialize the <code>Rect</code> object during its declaration. Correction made, the proper instruction to declare the object is the following one:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect.Rectangle <span class="hl opt">=</span> <span class="hl kwc">New_Rect</span>(<span class="hl num">0</span>, <span class="hl num">10</span>, <span class="hl num">0</span>, <span class="hl num">20</span>)</code></pre>
+<p><code>New_Rect()</code> is a function which performs the initialization operation. We already know that its returned value is the memory address containing the functions addresses to be processed by the interface.</p>
+<p>Here is the body of the <code>New_Rect()</code> function:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect.Rectangle2 <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle2))
+
+  <span class="hl opt">*</span>Rect\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+  <span class="hl opt">*</span>Rect\Erase <span class="hl opt">=</span> &#64;<span class="hl kwc">Erase_Rectangle</span>()
+
+  <span class="hl opt">*</span>Rect\x1 <span class="hl opt">=</span> x1
+  <span class="hl opt">*</span>Rect\x2 <span class="hl opt">=</span> x2
+  <span class="hl opt">*</span>Rect\y1 <span class="hl opt">=</span> y1
+  <span class="hl opt">*</span>Rect\y2 <span class="hl opt">=</span> y2
+
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>This function allocates a memory area with the same size as the object’ Class size. Then it initializes the methods and attributes of the object. Finally, it ends by returning the memory area’s address. Because the addresses of the <code>Draw()</code> and <code>Erase()</code> functions are positioned at the beginning of this memory area, the Interface is effectively initialized.</p>
+<p>To access the methods of the <code>Rect</code> object, just write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect\<span class="hl kwc">Draw</span>()
+Rect\<span class="hl kwc">Erase</span>()</code></pre>
+<p>Therefore, we have ascertained that:</p>
+<ul>
+<li>Class <code>Rectangle2</code> allows initialization of the object’s Interface .</li>
+<li><code>Rect</code> — declared via <code>Interface</code> — is an object of the <code>Rectangle2</code> Class, and can use the <code>Draw()</code> and the <code>Erase()</code> methods.</li>
+</ul>
+<p>Thus the <code>Interface</code> instruction and the <code>New_Rect()</code> function perform the instanciation of a <code>Rect</code> object from the <code>Rectangle2</code> Class. The <code>New_Rect()</code> function is the <em>Constructor</em> for objects of the <code>Rectangle2</code> Class.</p>
+<div class="alert-messages">
+<div class="alert">
+<p>All the Methods implementations (<code>Procedure : EndProcedure</code> blocks) must contain, as first argument, the <code>*this</code> pointer of the object. On the other hand, the <code>*this</code> argument mustn’t appear at the <code>Interface</code> level. In fact, as this instruction allows to write <code>Rect\Draw()</code>, it knows that the <code>Draw()</code> method involves the <code>Rect</code> object: no ambiguity! Everything happens as if the object <code>Rect</code> was «aware» of its state.</p>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p><span id="admonition-constructor-parameters"></span> The Constructor could receive, as parameters, the whole functions addresses which implement the methods. This is not the case here, because we know the implemented methods: the ones from the class. On the other hand the initial state desired by the user is unknown. Thus, the Constructor may contain parameters for attributes initialization. This case applyes here: the paramters required by <code>New_Rect()</code> are the two coordinates (<code>x1</code>, <code>y1</code>) and (<code>x2</code>, <code>y2</code>) of the diametrically opposite points of the rectangle.</p>
+</div>
+</div>
+<h1 id="object-initialization">Object Initialization</h1>
+<p>We’ve seen that after allocating the required memory area for an object, the Constructor initializes the various members of the object (methods and attributes). This operation can be isolated in a specific procedure, called by the Constructor. This precaution allows to make a distinction between an object’s memory allocation and its initialization. This approach will turn out to be very useful later on, when implementing the concept of Inheritance, because a single memory allocation is sufficient, but several initializations are required.</p>
+<p>In addition, initialization of methods and attributes are separated too — because the methods implementation depends on the class, while the attributes initialization depends on the object itself (see <a href="#admonition-constructor-parameters">previous remark</a>).</p>
+<p>In our example, the two initialization procedures will be implemented as:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Rect</span>(<span class="hl opt">*</span>Rect.Rectangle2)
+  <span class="hl opt">*</span>Rect\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+  <span class="hl opt">*</span>Rect\Erase <span class="hl opt">=</span> &#64;<span class="hl kwc">Erase_Rectangle</span>()
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Rect</span>(<span class="hl opt">*</span>Rect.Rectangle2, x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect\x1 <span class="hl opt">=</span> x1
+  <span class="hl opt">*</span>Rect\x2 <span class="hl opt">=</span> x2
+  <span class="hl opt">*</span>Rect\y1 <span class="hl opt">=</span> y1
+  <span class="hl opt">*</span>Rect\y2 <span class="hl opt">=</span> y2
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>and the Constructor becomes:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle2))
+  <span class="hl kwc">Init_Mthds_Rect</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl kwc">Init_Mbers_Rect</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<h1 id="object-destructor">Object Destructor</h1>
+<p>An object <em>Constructor</em> is always associated with its counterpart: the object <strong>Destructor</strong>. During construction of an object, a memory area is allocated to store its method and attribute definitions. When an object becomes useless, it must be destroyed to free the computer memory. This process is performed by using a specific function, known as the object’s <strong>Destructor</strong>.</p>
+<p>In our example of <code>Rectangle2</code> objects, the Destructor will be:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Free_Rect</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl kwc">FreeMemory</span>(<span class="hl opt">*</span>Rect)
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>and can be used by:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect</span>(Rect2)</code></pre>
+<div class="alert-messages">
+<div class="alert">
+<p>The Destructor could be seen as a method of the object. But to avoid weighing down the object, and to preserve homogeneity with the Constructor, I have chosen to see it as a function of the Class.</p>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p>To delete an object by its Destructor means releasing the memory area containing its information (the methods it uses, and the state of its attributes) but not deleting the object’s infrastructure. So, in our example, after doing a:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect</span>(Rect2)</code></pre>
+<p><code>Rect2</code> can be reused without specify its type again:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect2 <span class="hl opt">=</span> <span class="hl kwc">New_Rect</span>(<span class="hl num">0</span>, <span class="hl num">10</span>, <span class="hl num">0</span>, <span class="hl num">20</span>)
+Rect2\<span class="hl kwc">Draw</span>()</code></pre>
+<p>Indeed, after we instantiate an object with:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect2.Rectangle</code></pre>
+<p>the life cycle of object <code>Rect2</code> follows the same rules that apply to variables — because <code>Rect2</code> is first of all a variable: it is a structured variable, holding the functions pointers of the object’s methods. (See also the following reminder)</p>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert">
+<p>Small reminder: the life cycle of a variable is linked to the life cycle of the program part where the variable is declared:</p>
+<ul>
+<li>If the variable is declared inside a procedure, its life cycle will be linked to that of the procedure — i.e., it’s equal to the function’s time of use.</li>
+<li>If the variable is declared outside any procedure, in the program’s main body, its life cycle is linked to that of the program.</li>
+</ul>
+</div>
+</div>
+<h1 id="memory-allocations">Memory Allocations</h1>
+<p>At every new instanciation, the Constructor has to dynamically allocate a memory area the size of the information describing the object. For this purpose, the Constructor should use the <code>AllocateMemory()</code> command; and the Destructor should use its associated counterpart, the <code>FreeMemory()</code> command.</p>
+<p>But there are also other candidates for achieving dynamic memory allocation. Under Windows OS, for example, the Windows API could be employed directly.</p>
+<p>PureBasic’s standard library provides linked lists, which are also a good candidate for dynamically allocating some memory.</p>
+<h1 id="encapsulation">Encapsulation</h1>
+<p>Suppose now that we wanted to restrict the user’s access to just the <code>Draw()</code> method of the Class <code>Rectangle</code>. We shall begin by defining the desired interface:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> Rectangle
+  <span class="hl kwc">Draw</span>()
+<span class="hl kwa">EndInterface</span></code></pre>
+<p>Instanciation of a new object reamins the same:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect.Rectangle <span class="hl opt">=</span> <span class="hl kwc">New_Rect</span>()</code></pre>
+<p>with</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Rect</span>(<span class="hl opt">*</span>Rect.Rectangle2)
+  <span class="hl opt">*</span>Rect\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+  <span class="hl opt">*</span>Rect\Erase <span class="hl opt">=</span> &#64;<span class="hl kwc">Erase_Rectangle</span>()
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Rect</span>(<span class="hl opt">*</span>Rect.Rectangle2, x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect\x1 <span class="hl opt">=</span> x1
+  <span class="hl opt">*</span>Rect\x2 <span class="hl opt">=</span> x2
+  <span class="hl opt">*</span>Rect\y1 <span class="hl opt">=</span> y1
+  <span class="hl opt">*</span>Rect\y2 <span class="hl opt">=</span> y2
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle2))
+  <span class="hl kwc">Init_Mthds_Rect</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl kwc">Init_Mbers_Rect</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>It is similar to the previous example, because the first function address is that of the <code>Draw()</code> method.</p>
+<p>Now, suppose that we wanted to give to the user only the access to the <code>Erase()</code> method. We shall begin by defining the new interface:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> Rectangle
+  <span class="hl kwc">Erase</span>()
+<span class="hl kwa">EndInterface</span></code></pre>
+<p>Nevertheless, to instanciate the new object I cann’t use the <code>New_Rect()</code> Constructor above: doing so would yeld results identical to the previous case, and <code>Rect\Erase()</code> would call the <code>Draw()</code> method.</p>
+<p>Thus, a new Constructor is needed, capable of returning the correct function address.</p>
+<p>Here it is:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Rect2</span>(<span class="hl opt">*</span>Rect.Rectangle2)
+  <span class="hl opt">*</span>Rect\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Erase_Rectangle</span>()
+  <span class="hl opt">*</span>Rect\Erase <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Rect</span>(<span class="hl opt">*</span>Rect.Rectangle2, x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect\x1 <span class="hl opt">=</span> x1
+  <span class="hl opt">*</span>Rect\x2 <span class="hl opt">=</span> x2
+  <span class="hl opt">*</span>Rect\y1 <span class="hl opt">=</span> y1
+  <span class="hl opt">*</span>Rect\y2 <span class="hl opt">=</span> y2
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect2</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle2))
+  <span class="hl kwc">Init_Mthds_Rect2</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl kwc">Init_Mbers_Rect</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>Notice how the functions addresses were simply inverted at the initialization level. Certainly, it is not a very elegant solution to allocate the <code>Draw</code> field of <code>Rectangle2</code>’s <code>Structure</code> with an other function’s address. But it allows to preserve the same <code>Structure</code> of the Class; and it also underlines a point: function pointers’ names are less interesting than their values!</p>
+<p>To solve this false problem, just rename the pointers of the Class as follows:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle2
+  <span class="hl opt">*</span>Method1
+  <span class="hl opt">*</span>Method2
+  x1.l
+  x2.l
+  y1.l
+  y2.l
+<span class="hl kwa">EndStructure</span></code></pre>
+<p>Indeed, it’s the Interface and the Constructor which give meaning to these pointers:</p>
+<ul>
+<li>by giving them a name (task of the interface)</li>
+<li>by allocating them the adequate functions addresses (task of the constructor)</li>
+</ul>
+<div class="alert-messages">
+<div class="alert">
+<p>In spite of this arrangement concerning the function pointers’ names, it remains more practical to keep an explicit name when not considering to hide methods (which is the most common scenario). This allows to modify a Parent Class without having to retouch the pointers’ numbering in Children Classes.</p>
+</div>
+</div>
+<h1 id="inheritance">Inheritance</h1>
+<p>For our first implementation of the inheritance concept, let’s takes advantage of the fact that the <code>Structure</code> and <code>Interface</code> instructions can be extended thanks to the <code>Extends</code> keyword.</p>
+<p>So, to pass from the <code>Rectangle1</code> Class, which has a single <code>Draw()</code> method…</p>
+<p class="caption">
+Interface
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> Rect1
+  <span class="hl kwc">Draw</span>()
+<span class="hl kwa">EndInterface</span></code></pre>
+<p class="caption">
+Class
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle1
+  <span class="hl opt">*</span>Method1
+  x1.l
+  x2.l
+  y1.l
+  y2.l
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Draw_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle1)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Rect1</span>(<span class="hl opt">*</span>Rect.Rectangle1)
+  <span class="hl opt">*</span>Rect\Method1 <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p class="caption">
+Constructor
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Rect1</span>(<span class="hl opt">*</span>Rect.Rectangle1, x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect\x1 <span class="hl opt">=</span> x1
+  <span class="hl opt">*</span>Rect\x2 <span class="hl opt">=</span> x2
+  <span class="hl opt">*</span>Rect\y1 <span class="hl opt">=</span> y1
+  <span class="hl opt">*</span>Rect\y2 <span class="hl opt">=</span> y2
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect1</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle1))
+  <span class="hl kwc">Init_Mthds_Rect1</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl kwc">Init_Mbers_Rect1</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>…to a <code>Rectangle2</code> Class, which has two methods: <code>Draw()</code> and <code>Erase()</code>, we write:</p>
+<p class="caption">
+Interface
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> Rect2 <span class="hl kwa">Extends</span> Rect1
+  <span class="hl kwc">Erase</span>()
+<span class="hl kwa">EndInterface</span></code></pre>
+<p class="caption">
+Class
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle2 <span class="hl kwa">Extends</span> Rectangle1
+  <span class="hl opt">*</span>Method2
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Erase_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle1)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Rect2</span>(<span class="hl opt">*</span>Rect.Rectangle2)
+  <span class="hl kwc">Init_Mthds_Rect1</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl opt">*</span>Rect\Method2 <span class="hl opt">=</span> &#64;<span class="hl kwc">Erase_Rectangle</span>()
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p class="caption">
+Constructor
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Rect2</span>(<span class="hl opt">*</span>Rect.Rectangle2, x1.l, x2.l, y1.l, y2.l)
+  <span class="hl kwc">Init_Mbers_Rect1</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect2</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle2))
+  <span class="hl kwc">Init_Mthds_Rect2</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl kwc">Init_Mbers_Rect2</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>Carrying out an inheritance doesn’t consist only in extending the object’s <code>Interface</code> and Class <code>Structure</code>, but also in adapting the initialization of its methods and attributes. The <code>Init_Mthds_Rect2()</code> and <code>Init_Mbers_Rect2()</code> procedures call, respectively, the initialization of Class <code>Rectangle1</code>’s methods (<code>Init_Mthds_Rect1()</code>) and attributes (<code>Init_Mbers_Rect1()</code>), rather than the <code>New_Rect1()</code> Constructor. This because the Child Class object (<code>Rectangle2</code>) doesn’t need to instantiate its Parent Class object (<code>Rectangle1</code>), but just to inherit its methods and attributes.</p>
+<p>On the other hand, we must verify that any changes made to the Parent Class (adding a method or a variable) should be immediately reflected in its Child Class.</p>
+<p>So, is the current state of inheritance correct? No, because it doesn’t allow the object of the Child Class (<code>Rectangle2</code>) to use the new <code>Erase()</code> method. The reason being that the function pointer <code>*Method2</code> doesn’t immediately follow <code>*Method1</code> in order of succession.</p>
+<p>If we look at the explicit <code>Structure</code> of the <code>Rectangle2</code> Class, we find:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle2
+  <span class="hl opt">*</span>Method1
+  x1.l
+  x2.l
+  y1.l
+  y2.l
+  <span class="hl opt">*</span>Method2
+<span class="hl kwa">EndStructure</span></code></pre>
+<p>instead of the <code>Structure</code> below, which permits a correct initialization of the interface:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle2
+  <span class="hl opt">*</span>Method1
+  <span class="hl opt">*</span>Method2
+  x1.l
+  x2.l
+  y1.l
+  y2.l
+<span class="hl kwa">EndStructure</span></code></pre>
+<p>Remember that a correct interface initialization requires that this successsion of functions addresses appears in the same order within its <code>Interface</code> (<a href="#admonition-on-structure-interface-symmetry">see previous note</a>).</p>
+<p>To solve this problem, we’ll just group all the methods into a specific <code>Structure</code>! The Class’s <code>Structure</code> will need just a pointer to this new <code>Structure</code>, as shown in the following example:</p>
+<p class="caption">
+Interface
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> Rect1
+  <span class="hl kwc">Draw</span>()
+<span class="hl kwa">EndInterface</span></code></pre>
+<p class="caption">
+Class
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle1
+  <span class="hl opt">*</span>Methods
+  x1.l
+  x2.l
+  y1.l
+  y2.l
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Draw_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle1)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Structure</span> Methds_Rect1
+  <span class="hl opt">*</span>Method1
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Rect1</span>(<span class="hl opt">*</span>Mthds.Mthds_Rect1)
+  <span class="hl opt">*</span>Mthds\Method1 <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+<span class="hl kwa">EndProcedure</span>
+
+Mthds_Rect1.Mthds_Rect1
+<span class="hl kwc">Init_Mthds_Rect1</span>(&#64;Mthds_Rect1)</code></pre>
+<p class="caption">
+Constructor
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Rect1</span>(<span class="hl opt">*</span>Rect.Rectangle1, x1.l, x2.l, y1.l, y2.l)
+  <span class="hl opt">*</span>Rect\x1 <span class="hl opt">=</span> x1
+  <span class="hl opt">*</span>Rect\x2 <span class="hl opt">=</span> x2
+  <span class="hl opt">*</span>Rect\y1 <span class="hl opt">=</span> y1
+  <span class="hl opt">*</span>Rect\y2 <span class="hl opt">=</span> y2
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect1</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl kwa">Shared</span> Mthds_Rect1
+  <span class="hl opt">*</span>Rect.Rectangle1 <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle1))
+  <span class="hl opt">*</span>Rect\Methods <span class="hl opt">=</span> &#64;Mthds_Rect1
+  <span class="hl kwc">Init_Mbers_Rect1</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y3)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>The <code>Methds_Rect1</code> structure describes all the functions pointers of the Class’ methods. Then follows the <code>Methds_Rect1</code> variable declaration (of the <code>Methds_Rect1</code> type) and its initialization thanks to <code>Init_Mthds_Rect1()</code>.</p>
+<p>The <code>Methds_Rect1</code> variable is the Class’ <strong>method table</strong>, because it contains the set of all the addresses of its methods. This set constitutes the complete description of the methods of the Class.</p>
+<p>The <code>Structure</code> of <code>Rectangle1</code> now contains the <code>*Methods</code> pointer, which is initialized by passing the <code>Methds_Rect1</code> variable address to the Constructor.</p>
+<div class="alert-messages">
+<div class="alert alert-success">
+<p>The following expression:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Mthds_Rect1.Mthds_Rect1
+<span class="hl kwc">Init_Mthds_Rect1</span>(&#64;Mthds_Rect1)</code></pre>
+<p>can be condensed into:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Init_Mthds_Rect1</span>(&#64;Mthds_Rect1.Mthds_Rect1)</code></pre>
+</div>
+</div>
+<p>Inheritance can be now performed correctly, because by extending <code>Methd_Rect1</code>’s <code>Structure</code> into the new <code>Methd_Rect2</code>, the functions’ addresses are going to be consecutive:</p>
+<p class="caption">
+Interface
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> Rect2 <span class="hl kwa">Extends</span> Rect1
+  <span class="hl kwc">Erase</span>()
+<span class="hl kwa">EndInterface</span></code></pre>
+<p class="caption">
+Class
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle2 <span class="hl kwa">Extends</span> Rectangle1
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Erase_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle2)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Structure</span> Methds_Rect2 <span class="hl kwa">Extends</span> Methds_Rect1
+  <span class="hl opt">*</span>Method2
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Rect2</span>(<span class="hl opt">*</span>Mthds.Mthds_Rect2)
+  <span class="hl kwc">Init_Mthds_Rect1</span>(<span class="hl opt">*</span>Mthds)
+  <span class="hl opt">*</span>Mthds\Method2 <span class="hl opt">=</span> &#64;<span class="hl kwc">Erase_Rectangle</span>()
+<span class="hl kwa">EndProcedure</span>
+
+Mthds_Rect2.Mthds_Rect2
+<span class="hl kwc">Init_Mthds_Rect2</span>(&#64;Mthds_Rect2)</code></pre>
+<p class="caption">
+Constructor
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Rect2</span>(<span class="hl opt">*</span>Rect.Rectangle2 , x1.l, x2.l, y1.l, y2.l)
+  <span class="hl kwc">Init_Mbers_Rect1</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect2</span>(x1.l, x2.l, y1.l, y2.l)
+  <span class="hl kwa">Shared</span> Mthds_Rect2
+  <span class="hl opt">*</span>Rect.Rectangle2 <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle2))
+  <span class="hl opt">*</span>Rect\Methods <span class="hl opt">=</span> &#64;Mthds_Rect2
+  <span class="hl kwc">Init_Mbers_Rect2</span>(<span class="hl opt">*</span>Rect, x1, x2, y1, y2)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>In this example, <code>Rectangle2</code>’s <code>Structure</code> is empty, and it isn’t a problem. Here are two reasons why:</p>
+<ul>
+<li>First, the <code>*Methods</code> pointer only needs to exist once, and this is in the Parent Class.</li>
+<li>Second, no supplementary attributes have been added to it.</li>
+</ul>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p>There are three advantages in having the methods’ initialization function external to the Constructor, and the method table in a single variable:</p>
+<ul>
+<li>The Class’ method table needs to be initialized only once, and not at each object instanciation,</li>
+<li>Object instances will hold a single pointer toward their methods’ pointers: it is a substantial gain in memory,</li>
+<li>Since all objects referr to the same method table, this guarantees identical behavior for all objects of the same Class.</li>
+</ul>
+</div>
+</div>
+<h1 id="get-and-set-object-methods">Get() and Set() Object Methods</h1>
+<p>Through an <code>Interface</code>, it’s only possible to access an object’s methods. The interface encapsulates completely the object’s attributes. In order to allow access the object’s attributes — to examine, or to modify them — we must provide specific methods to the user. The methods allowing to examine objects’ attributes are called <code>Get()</code> methods. The methods allowing to modify objects’ attributes are called <code>Set()</code> methods.</p>
+<p>In our example of the <code>Rectangle1</code> Class, if I want to examine the value of the <code>var2</code> attribute, I should create the following <code>Get()</code> method:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Get_var2</span>(<span class="hl opt">*</span>this.Rectangle1)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>this\var2
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>Similarly, to modify the value of the <code>var2</code> attribute, I should write the following <code>Set()</code> method:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Set_var2</span>(<span class="hl opt">*</span>this.Rectangle1, value)
+  <span class="hl opt">*</span>this\var2 <span class="hl opt">=</span> value
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>Since <code>Get()</code> and <code>Set()</code> methods exist only to allow the user to modify all (or some) of the object’s attributes, they necessarily belong to the <code>Interface</code>.</p>
+<div class="alert-messages">
+<div class="alert">
+<p>See the <a href="#appendix">Appendix</a> of the tutorial for possible optimizations of <code>Get()</code>’s and <code>Set()</code>’s performance during execution.</p>
+</div>
+</div>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#notion-of-object-interface">Notion of Object Interface</a></li>
+<li><a href="#object-instanciation-and-object-constructor">Object Instanciation and Object Constructor</a></li>
+<li><a href="#object-initialization">Object Initialization</a></li>
+<li><a href="#object-destructor">Object Destructor</a></li>
+<li><a href="#memory-allocations">Memory Allocations</a></li>
+<li><a href="#encapsulation">Encapsulation</a></li>
+<li><a href="#inheritance">Inheritance</a></li>
+<li><a href="#get-and-set-object-methods">Get() and Set() Object Methods</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

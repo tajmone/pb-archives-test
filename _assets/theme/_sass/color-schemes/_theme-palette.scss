@@ -1,0 +1,65 @@
+// ******************************************************************************
+// *                                                                            *
+// *                            THEME COLORS PALETTE                            *
+// *                                                                            *
+// ******************************************************************************
+// Define the Chroma colors-palette that will be used in the website's template
+// theme scheme (ie: "theme").
+
+// NOTE: This palette uses some of GitHub's colors, as defined in Primer CSS:
+// -- https://github.com/primer/primer-css/blob/master/modules/primer-support/lib/variables/color-system.scss
+
+$chroma: define-color-scheme('theme-palette', 'The template colors definitions.');
+
+
+$chroma: add-colors('theme-palette', (
+
+	// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	//                          Normalize-SCSS TEMP PALETTE                          
+	// //////////////////////////////////////////////////////////////////////////////
+	// These colors are a temporay solution (from Chroma's example project).
+	// They are required by Normalize-SCSS, else it will report and error.
+
+	// TODO: Remove and fix "_theme-scheme.scss" so that Normalize-SCSS will use
+	// 		 colors from the Theme's palette instead!
+
+	black:                  #000,
+	grey-dark:              ('black' lighten 40%), // #666
+	'grey':                 ('black' lighten 60%), // #999
+	grey-light:             ('black' lighten 80%), // #ccc
+	grey-extra-light:       ('black' lighten 93.33%), // #eee
+	white:                  #fff,
+
+	blue:                   #0072b9,
+	red:                    #c00,
+	yellow:                 #fd0,
+
+	// ==============================================================================
+	//                                 Header Colors                                 
+	// ==============================================================================
+	// These is the color palette used for the Theme's header and breadcrumbs bar.
+	// Instead of color names we use functional references.
+	Logo-Red-Left:  #D11D2E, // ("Persian Red")  Logo's Z, Left half
+	Logo-Red-Right: #C3162D, // ("Cardinal" red) Logo's Z, Right half (darker)
+	Logo-BG:   		#5A6A84, // ("Kashmir Blue") PureBASIC Logo's BG
+	LogoRight-BG:   #48556A, // ("Fiord" blue) Logo's Right Frame BG + "PureBASIC" Text
+	LogoRight-FG:   #75849D, // ("Lynch" blue) "Archives" Text color
+	Header-BG:      #EEEEEE, // ("Gallery" gray)
+
+	Lower-Header-BG: 		#D0D2D6, // ("Iron" gray) breadcrumbs bar BG
+	Lower-Header-BG-Darker: #9C9DA0, // ("Star Dust" gray) darker shade of BG coor
+	// ------------------------------------------------------------------------------
+	//                               FLUORESCENT COLORS                              
+	// ------------------------------------------------------------------------------
+	// Used for <mark> highlighting
+	Fluorescent-Yellow: #E8FF8A,
+	Fluorescent-Red: 	#FFBBBB,
+	Fluorescent-Blue: 	#C2FAFF,
+	Fluorescent-Green: 	#BAFFC6,
+	// ------------------------------------------------------------------------------
+	//                                     ALERTS                                    
+	// ------------------------------------------------------------------------------
+	// Taken from GitHub's Primer CSS:
+	// -- https://github.com/primer/primer-css/blob/master/modules/primer-alerts/lib/flash.scss
+
+));

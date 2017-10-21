@@ -1,0 +1,82 @@
+@charset "UTF-8";
+// ******************************************************************************
+// *                                                                            *
+// *                           FONT AWESOME SETTINGS                            *
+// *                                                                            *
+// ******************************************************************************
+
+// ==============================================================================
+//                             DECLARE FA-ICONS LIST                             
+// ==============================================================================
+// We'll only create FA-Icons on demand. Just place the name of the desired icon
+// in the map below, followed by an optional color.
+//  -- http://fontawesome.io/cheatsheet/
+
+$FA-Required-Icons: (
+// Notes and Alerts:
+    warning: color(AlertError-Icon), 		// \f071 | Alias of "exclamation-triangle"
+    exclamation-circle: color(Alert-Icon),	// \f06a
+// Web Services:
+    github: 				black, 			// \f09b
+    bitbucket: 				#205081, 		// \f171
+// Operating Systems: 
+    windows: 				#4078c0,		// \f17a
+    linux: 					#4078c0, 		// \f17c
+    apple: 					#4078c0, 		// \f179
+);
+
+// Import our custom mixins:
+@import "../mixins/font-awesome-icons";
+
+
+/*!
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+
+$fa-font-path:        "../fonts/FontAwesome";
+
+// This is the full list of Font-Awesome's SCSS modules (in the order they
+// 	should be imported):
+// 
+//  - "variables"
+//  - "mixins"
+//  - "path" — Defines @font-face
+//  - "core"
+//  - "larger"
+//  - "fixed-width"
+//  - "list"
+//  - "bordered-pulled"
+//  - "animated"
+//  - "rotated-flipped"
+//  - "stacked"
+//  - "icons"
+//  - "screen-reader"
+
+// NOTE 1  — Since We use only the WOFF webfont, the @font-face definition is
+// 		handled in "/settings/_fonts.scss" and we don't need the "path" module.
+
+// ==============================================================================
+//                          Font Awesome Module Imports                          
+// ==============================================================================
+// The scss files imported in the original "font-awesome.scss" file.
+// Unneeded modules are commented out...
+
+@import "../vendors/font-awesome/variables";
+@import "../vendors/font-awesome/mixins";
+// @import "../vendors/font-awesome/path"; 			// See NOTE 1
+@import "../vendors/font-awesome/core";				// Base Class Definition
+// @import "../vendors/font-awesome/larger";
+// @import "../vendors/font-awesome/fixed-width";
+// @import "../vendors/font-awesome/list";
+// @import "../vendors/font-awesome/bordered-pulled";	//
+// @import "../vendors/font-awesome/animated";
+// @import "../vendors/font-awesome/rotated-flipped";
+// @import "../vendors/font-awesome/stacked";
+// @import "../vendors/font-awesome/icons";
+// @import "../vendors/font-awesome/screen-reader";
+
+// ==============================================================================
+//                             Build Icons-On-Demand                             
+// ==============================================================================
+@include fa-icons-on-demand;

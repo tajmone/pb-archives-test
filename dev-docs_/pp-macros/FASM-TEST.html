@@ -1,0 +1,768 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Fasm Syntax Theme Test</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>pp-macros</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Fasm Syntax Theme Test</h1>
+
+<h1 id="my-line-numbers-tests">My Line Numbers Tests</h1>
+<p>Using <code>!HighlightLN(fasm)(15)(2)</code>:</p>
+<pre class="fasm" title="; Simple text editor - fasm example program
+
+format PE GUI 4.0
+entry start
+
+include 'win32a.inc'
+
+IDR_ICON = 17
+IDR_MENU = 37"><code class="fasm" title="; Simple text editor - fasm example program
+
+format PE GUI 4.0
+entry start
+
+include 'win32a.inc'
+
+IDR_ICON = 17
+IDR_MENU = 37"><span class="hl lin">15 </span></code></pre>
+<p>Using <code>!FasmLN(15)(2)</code>:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl lin">15 </span><span class="hl slc">; Simple text editor - fasm example program</span>
+<span class="hl lin">16 </span>
+<span class="hl lin">17 </span><span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span>
+<span class="hl lin">18 </span><span class="hl kwb">entry</span> start
+<span class="hl lin">19 </span>
+<span class="hl lin">20 </span><span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+<span class="hl lin">21 </span>
+<span class="hl lin">22 </span>IDR_ICON <span class="hl opt">=</span> <span class="hl num">17</span>
+<span class="hl lin">23 </span>IDR_MENU <span class="hl opt">=</span> <span class="hl num">37</span></code></pre>
+<h1 id="my-strings-tests">My Strings Tests</h1>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl str">&apos;string&apos;</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;escaped string</span><span class="hl esc">\n</span><span class="hl str">&apos;</span></code></pre>
+<h1 id="minipad.asm">MINIPAD.ASM</h1>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl slc">; Simple text editor - fasm example program</span>
+
+<span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span>
+<span class="hl kwb">entry</span> start
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+
+IDR_ICON <span class="hl opt">=</span> <span class="hl num">17</span>
+IDR_MENU <span class="hl opt">=</span> <span class="hl num">37</span>
+
+IDM_NEW   <span class="hl opt">=</span> <span class="hl num">101</span>
+IDM_EXIT  <span class="hl opt">=</span> <span class="hl num">102</span>
+IDM_ABOUT <span class="hl opt">=</span> <span class="hl num">901</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.text&apos;</span> <span class="hl kwd">code readable executable</span>
+
+  <span class="hl kwc">start</span><span class="hl opt">:</span>
+
+    invoke  GetModuleHandle<span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hInstance<span class="hl opt">],</span><span class="hl kwa">eax</span>
+
+    invoke  LoadIcon<span class="hl opt">,</span><span class="hl kwa">eax</span><span class="hl opt">,</span>IDR_ICON
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hIcon<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    invoke  LoadCursor<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>IDC_ARROW
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hCursor<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    invoke  RegisterClass<span class="hl opt">,</span>wc
+    <span class="hl kwb">test</span>    <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  error
+
+    invoke  LoadMenu<span class="hl opt">,[</span>wc<span class="hl opt">.</span>hInstance<span class="hl opt">],</span>IDR_MENU
+    invoke  CreateWindowEx<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>_class<span class="hl opt">,</span>_title<span class="hl opt">,</span>WS_VISIBLE<span class="hl opt">+</span>WS_OVERLAPPEDWINDOW<span class="hl opt">,</span><span class="hl num">144</span><span class="hl opt">,</span><span class="hl num">128</span><span class="hl opt">,</span><span class="hl num">256</span><span class="hl opt">,</span><span class="hl num">256</span><span class="hl opt">,</span>NULL<span class="hl opt">,</span><span class="hl kwa">eax</span><span class="hl opt">,[</span>wc<span class="hl opt">.</span>hInstance<span class="hl opt">],</span>NULL
+    <span class="hl kwb">test</span>    <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  error
+
+  <span class="hl kwc">msg_loop</span><span class="hl opt">:</span>
+    invoke  GetMessage<span class="hl opt">,</span>msg<span class="hl opt">,</span>NULL<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">1</span>
+    <span class="hl kwb">jb</span>  end_loop
+    <span class="hl kwb">jne</span> msg_loop
+    invoke  TranslateMessage<span class="hl opt">,</span>msg
+    invoke  DispatchMessage<span class="hl opt">,</span>msg
+    <span class="hl kwb">jmp</span> msg_loop
+
+  <span class="hl kwc">error</span><span class="hl opt">:</span>
+    invoke  MessageBox<span class="hl opt">,</span>NULL<span class="hl opt">,</span>_error<span class="hl opt">,</span>NULL<span class="hl opt">,</span>MB_ICONERROR<span class="hl opt">+</span>MB_OK
+
+  <span class="hl kwc">end_loop</span><span class="hl opt">:</span>
+    invoke  ExitProcess<span class="hl opt">,[</span>msg<span class="hl opt">.</span>wParam<span class="hl opt">]</span>
+
+proc WindowProc hwnd<span class="hl opt">,</span>wmsg<span class="hl opt">,</span>wparam<span class="hl opt">,</span>lparam
+    <span class="hl kwb">push</span>    <span class="hl kwa">ebx esi edi</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,[</span>wmsg<span class="hl opt">]</span>
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_CREATE
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmcreate
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_SIZE
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmsize
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_SETFOCUS
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmsetfocus
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_COMMAND
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmcommand
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_DESTROY
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmdestroy
+  <span class="hl kwc">.defwndproc</span><span class="hl opt">:</span>
+    invoke  DefWindowProc<span class="hl opt">,[</span>hwnd<span class="hl opt">],[</span>wmsg<span class="hl opt">],[</span>wparam<span class="hl opt">],[</span>lparam<span class="hl opt">]</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+  <span class="hl kwc">.wmcreate</span><span class="hl opt">:</span>
+    invoke  GetClientRect<span class="hl opt">,[</span>hwnd<span class="hl opt">],</span>client
+    invoke  CreateWindowEx<span class="hl opt">,</span>WS_EX_CLIENTEDGE<span class="hl opt">,</span>_edit<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>WS_VISIBLE<span class="hl opt">+</span>WS_CHILD<span class="hl opt">+</span>WS_HSCROLL<span class="hl opt">+</span>WS_VSCROLL<span class="hl opt">+</span>ES_AUTOHSCROLL<span class="hl opt">+</span>ES_AUTOVSCROLL<span class="hl opt">+</span>ES_MULTILINE<span class="hl opt">,[</span>client<span class="hl opt">.</span>left<span class="hl opt">],[</span>client<span class="hl opt">.</span>top<span class="hl opt">],[</span>client<span class="hl opt">.</span>right<span class="hl opt">],[</span>client<span class="hl opt">.</span>bottom<span class="hl opt">],[</span>hwnd<span class="hl opt">],</span><span class="hl num">0</span><span class="hl opt">,[</span>wc<span class="hl opt">.</span>hInstance<span class="hl opt">],</span>NULL
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  <span class="hl opt">.</span>failed
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>edithwnd<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    invoke  CreateFont<span class="hl opt">,</span><span class="hl num">16</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>FALSE<span class="hl opt">,</span>FALSE<span class="hl opt">,</span>FALSE<span class="hl opt">,</span>ANSI_CHARSET<span class="hl opt">,</span>OUT_RASTER_PRECIS<span class="hl opt">,</span>CLIP_DEFAULT_PRECIS<span class="hl opt">,</span>DEFAULT_QUALITY<span class="hl opt">,</span>FIXED_PITCH<span class="hl opt">+</span>FF_DONTCARE<span class="hl opt">,</span>NULL
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  <span class="hl opt">.</span>failed
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>editfont<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    invoke  SendMessage<span class="hl opt">,[</span>edithwnd<span class="hl opt">],</span>WM_SETFONT<span class="hl opt">,</span><span class="hl kwa">eax</span><span class="hl opt">,</span>FALSE
+    <span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+      <span class="hl kwc">.failed</span><span class="hl opt">:</span>
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,-</span><span class="hl num">1</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+  <span class="hl kwc">.wmsize</span><span class="hl opt">:</span>
+    invoke  GetClientRect<span class="hl opt">,[</span>hwnd<span class="hl opt">],</span>client
+    invoke  MoveWindow<span class="hl opt">,[</span>edithwnd<span class="hl opt">],[</span>client<span class="hl opt">.</span>left<span class="hl opt">],[</span>client<span class="hl opt">.</span>top<span class="hl opt">],[</span>client<span class="hl opt">.</span>right<span class="hl opt">],[</span>client<span class="hl opt">.</span>bottom<span class="hl opt">],</span>TRUE
+    <span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+  <span class="hl kwc">.wmsetfocus</span><span class="hl opt">:</span>
+    invoke  SetFocus<span class="hl opt">,[</span>edithwnd<span class="hl opt">]</span>
+    <span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+  <span class="hl kwc">.wmcommand</span><span class="hl opt">:</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,[</span>wparam<span class="hl opt">]</span>
+    <span class="hl kwb">and</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">0FFFFh</span>
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>IDM_NEW
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>new
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>IDM_ABOUT
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>about
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>IDM_EXIT
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmdestroy
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>defwndproc
+      <span class="hl kwc">.new</span><span class="hl opt">:</span>
+    invoke  SendMessage<span class="hl opt">,[</span>edithwnd<span class="hl opt">],</span>WM_SETTEXT<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+      <span class="hl kwc">.about</span><span class="hl opt">:</span>
+    invoke  MessageBox<span class="hl opt">,[</span>hwnd<span class="hl opt">],</span>_about_text<span class="hl opt">,</span>_about_title<span class="hl opt">,</span>MB_OK
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+  <span class="hl kwc">.wmdestroy</span><span class="hl opt">:</span>
+    invoke  DeleteObject<span class="hl opt">,[</span>editfont<span class="hl opt">]</span>
+    invoke  PostQuitMessage<span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+  <span class="hl kwc">.finish</span><span class="hl opt">:</span>
+    <span class="hl kwb">pop</span> <span class="hl kwa">edi esi ebx</span>
+    <span class="hl kwb">ret</span>
+endp
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.data&apos;</span> <span class="hl kwb">data</span> <span class="hl kwd">readable writeable</span>
+
+  _title TCHAR <span class="hl str">&apos;MiniPad&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  _about_title TCHAR <span class="hl str">&apos;About MiniPad&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  _about_text TCHAR <span class="hl str">&apos;This is Win32 example program created with flat assembler.&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  _error TCHAR <span class="hl str">&apos;Startup failed.&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+  _class TCHAR <span class="hl str">&apos;MINIPAD32&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  _edit TCHAR <span class="hl str">&apos;EDIT&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+  wc WNDCLASS <span class="hl num">0</span><span class="hl opt">,</span>WindowProc<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>NULL<span class="hl opt">,</span>NULL<span class="hl opt">,</span>NULL<span class="hl opt">,</span>COLOR_BTNFACE<span class="hl opt">+</span><span class="hl num">1</span><span class="hl opt">,</span>NULL<span class="hl opt">,</span>_class
+
+  <span class="hl kwc">edithwnd</span> <span class="hl kwd">dd</span> ?
+  <span class="hl kwc">editfont</span> <span class="hl kwd">dd</span> ?
+
+  msg MSG
+  client RECT
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.idata&apos;</span> <span class="hl kwd">import</span> <span class="hl kwb">data</span> <span class="hl kwd">readable writeable</span>
+
+  library kernel<span class="hl opt">,</span><span class="hl str">&apos;KERNEL32.DLL&apos;</span><span class="hl opt">,\</span>
+      user<span class="hl opt">,</span><span class="hl str">&apos;USER32.DLL&apos;</span><span class="hl opt">,\</span>
+      gdi<span class="hl opt">,</span><span class="hl str">&apos;GDI32.DLL&apos;</span>
+
+  <span class="hl kwd">import</span> kernel<span class="hl opt">,\</span>
+     GetModuleHandle<span class="hl opt">,</span><span class="hl str">&apos;GetModuleHandleA&apos;</span><span class="hl opt">,\</span>
+     ExitProcess<span class="hl opt">,</span><span class="hl str">&apos;ExitProcess&apos;</span>
+
+  <span class="hl kwd">import</span> user<span class="hl opt">,\</span>
+     RegisterClass<span class="hl opt">,</span><span class="hl str">&apos;RegisterClassA&apos;</span><span class="hl opt">,\</span>
+     CreateWindowEx<span class="hl opt">,</span><span class="hl str">&apos;CreateWindowExA&apos;</span><span class="hl opt">,\</span>
+     DefWindowProc<span class="hl opt">,</span><span class="hl str">&apos;DefWindowProcA&apos;</span><span class="hl opt">,\</span>
+     SetWindowLong<span class="hl opt">,</span><span class="hl str">&apos;SetWindowLongA&apos;</span><span class="hl opt">,\</span>
+     RedrawWindow<span class="hl opt">,</span><span class="hl str">&apos;RedrawWindow&apos;</span><span class="hl opt">,\</span>
+     GetMessage<span class="hl opt">,</span><span class="hl str">&apos;GetMessageA&apos;</span><span class="hl opt">,\</span>
+     TranslateMessage<span class="hl opt">,</span><span class="hl str">&apos;TranslateMessage&apos;</span><span class="hl opt">,\</span>
+     DispatchMessage<span class="hl opt">,</span><span class="hl str">&apos;DispatchMessageA&apos;</span><span class="hl opt">,\</span>
+     SendMessage<span class="hl opt">,</span><span class="hl str">&apos;SendMessageA&apos;</span><span class="hl opt">,\</span>
+     LoadCursor<span class="hl opt">,</span><span class="hl str">&apos;LoadCursorA&apos;</span><span class="hl opt">,\</span>
+     LoadIcon<span class="hl opt">,</span><span class="hl str">&apos;LoadIconA&apos;</span><span class="hl opt">,\</span>
+     LoadMenu<span class="hl opt">,</span><span class="hl str">&apos;LoadMenuA&apos;</span><span class="hl opt">,\</span>
+     GetClientRect<span class="hl opt">,</span><span class="hl str">&apos;GetClientRect&apos;</span><span class="hl opt">,\</span>
+     MoveWindow<span class="hl opt">,</span><span class="hl str">&apos;MoveWindow&apos;</span><span class="hl opt">,\</span>
+     SetFocus<span class="hl opt">,</span><span class="hl str">&apos;SetFocus&apos;</span><span class="hl opt">,\</span>
+     MessageBox<span class="hl opt">,</span><span class="hl str">&apos;MessageBoxA&apos;</span><span class="hl opt">,\</span>
+     PostQuitMessage<span class="hl opt">,</span><span class="hl str">&apos;PostQuitMessage&apos;</span>
+
+  <span class="hl kwd">import</span> gdi<span class="hl opt">,\</span>
+     CreateFont<span class="hl opt">,</span><span class="hl str">&apos;CreateFontA&apos;</span><span class="hl opt">,\</span>
+     DeleteObject<span class="hl opt">,</span><span class="hl str">&apos;DeleteObject&apos;</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.rsrc&apos;</span> <span class="hl kwd">resource</span> <span class="hl kwb">data</span> <span class="hl kwd">readable</span>
+
+  <span class="hl slc">; resource directory</span>
+
+  directory RT_MENU<span class="hl opt">,</span>menus<span class="hl opt">,\</span>
+        RT_ICON<span class="hl opt">,</span>icons<span class="hl opt">,\</span>
+        RT_GROUP_ICON<span class="hl opt">,</span>group_icons<span class="hl opt">,\</span>
+        RT_VERSION<span class="hl opt">,</span>versions
+
+  <span class="hl slc">; resource subdirectories</span>
+
+  <span class="hl kwd">resource</span> menus<span class="hl opt">,\</span>
+       IDR_MENU<span class="hl opt">,</span>LANG_ENGLISH<span class="hl opt">+</span>SUBLANG_DEFAULT<span class="hl opt">,</span>main_menu
+
+  <span class="hl kwd">resource</span> icons<span class="hl opt">,\</span>
+       <span class="hl num">1</span><span class="hl opt">,</span>LANG_NEUTRAL<span class="hl opt">,</span>icon_data
+
+  <span class="hl kwd">resource</span> group_icons<span class="hl opt">,\</span>
+       IDR_ICON<span class="hl opt">,</span>LANG_NEUTRAL<span class="hl opt">,</span>main_icon
+
+  <span class="hl kwd">resource</span> versions<span class="hl opt">,\</span>
+       <span class="hl num">1</span><span class="hl opt">,</span>LANG_NEUTRAL<span class="hl opt">,</span>version
+
+  menu main_menu
+       menuitem <span class="hl str">&apos;&amp;File&apos;</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>MFR_POPUP
+        menuitem <span class="hl str">&apos;&amp;New&apos;</span><span class="hl opt">,</span>IDM_NEW
+        menuseparator
+        menuitem <span class="hl str">&apos;E&amp;xit&apos;</span><span class="hl opt">,</span>IDM_EXIT<span class="hl opt">,</span>MFR_END
+       menuitem <span class="hl str">&apos;&amp;Help&apos;</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>MFR_POPUP <span class="hl opt">+</span> MFR_END
+        menuitem <span class="hl str">&apos;&amp;About...&apos;</span><span class="hl opt">,</span>IDM_ABOUT<span class="hl opt">,</span>MFR_END
+
+  icon main_icon<span class="hl opt">,</span>icon_data<span class="hl opt">,</span><span class="hl str">&apos;minipad.ico&apos;</span>
+
+  versioninfo version<span class="hl opt">,</span>VOS__WINDOWS32<span class="hl opt">,</span>VFT_APP<span class="hl opt">,</span>VFT2_UNKNOWN<span class="hl opt">,</span>LANG_ENGLISH<span class="hl opt">+</span>SUBLANG_DEFAULT<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,\</span>
+          <span class="hl str">&apos;FileDescription&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;MiniPad - example program&apos;</span><span class="hl opt">,\</span>
+          <span class="hl str">&apos;LegalCopyright&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;No rights reserved.&apos;</span><span class="hl opt">,\</span>
+          <span class="hl str">&apos;FileVersion&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;1.0&apos;</span><span class="hl opt">,\</span>
+          <span class="hl str">&apos;ProductVersion&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;1.0&apos;</span><span class="hl opt">,\</span>
+          <span class="hl str">&apos;OriginalFilename&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;MINIPAD.EXE&apos;</span></code></pre>
+<h1 id="lasterr.asm">LASTERR.ASM</h1>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span>
+<span class="hl kwb">entry</span> start
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.text&apos;</span> <span class="hl kwd">code readable executable</span>
+
+  <span class="hl kwc">start</span><span class="hl opt">:</span>
+    invoke  SetLastError<span class="hl opt">,</span><span class="hl num">0</span>
+    invoke  ShowLastError<span class="hl opt">,</span>HWND_DESKTOP
+    invoke  ExitProcess<span class="hl opt">,</span><span class="hl num">0</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.idata&apos;</span> <span class="hl kwd">import</span> <span class="hl kwb">data</span> <span class="hl kwd">readable writeable</span>
+
+  library kernel<span class="hl opt">,</span><span class="hl str">&apos;KERNEL32.DLL&apos;</span><span class="hl opt">,\</span>
+      errormsg<span class="hl opt">,</span><span class="hl str">&apos;ERRORMSG.DLL&apos;</span>
+
+  <span class="hl kwd">import</span> kernel<span class="hl opt">,\</span>
+     SetLastError<span class="hl opt">,</span><span class="hl str">&apos;SetLastError&apos;</span><span class="hl opt">,\</span>
+     ExitProcess<span class="hl opt">,</span><span class="hl str">&apos;ExitProcess&apos;</span>
+
+  <span class="hl kwd">import</span> errormsg<span class="hl opt">,\</span>
+     ShowLastError<span class="hl opt">,</span><span class="hl str">&apos;ShowLastError&apos;</span></code></pre>
+<h1 id="errormsg.asm">ERRORMSG.ASM</h1>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl slc">; DLL creation example</span>
+
+<span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span> <span class="hl kwd">DLL</span>
+<span class="hl kwb">entry</span> DllEntryPoint
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.text&apos;</span> <span class="hl kwd">code readable executable</span>
+
+proc DllEntryPoint hinstDLL<span class="hl opt">,</span>fdwReason<span class="hl opt">,</span>lpvReserved
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>TRUE
+    <span class="hl kwb">ret</span>
+endp
+
+<span class="hl slc">; VOID ShowErrorMessage(HWND hWnd,DWORD dwError);</span>
+
+proc ShowErrorMessage hWnd<span class="hl opt">,</span>dwError
+  <span class="hl kwd">local</span> lpBuffer<span class="hl opt">:</span><span class="hl kwd">DWORD</span>
+    <span class="hl kwb">lea</span> <span class="hl kwa">eax</span><span class="hl opt">,[</span>lpBuffer<span class="hl opt">]</span>
+    invoke  FormatMessage<span class="hl opt">,</span>FORMAT_MESSAGE_ALLOCATE_BUFFER<span class="hl opt">+</span>FORMAT_MESSAGE_FROM_SYSTEM<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,[</span>dwError<span class="hl opt">],</span>LANG_NEUTRAL<span class="hl opt">,</span><span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+    invoke  MessageBox<span class="hl opt">,[</span>hWnd<span class="hl opt">],[</span>lpBuffer<span class="hl opt">],</span>NULL<span class="hl opt">,</span>MB_ICONERROR<span class="hl opt">+</span>MB_OK
+    invoke  LocalFree<span class="hl opt">,[</span>lpBuffer<span class="hl opt">]</span>
+    <span class="hl kwb">ret</span>
+endp
+
+<span class="hl slc">; VOID ShowLastError(HWND hWnd);</span>
+
+proc ShowLastError hWnd
+    invoke  GetLastError
+    stdcall ShowErrorMessage<span class="hl opt">,[</span>hWnd<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">ret</span>
+endp
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.idata&apos;</span> <span class="hl kwd">import</span> <span class="hl kwb">data</span> <span class="hl kwd">readable writeable</span>
+
+  library kernel<span class="hl opt">,</span><span class="hl str">&apos;KERNEL32.DLL&apos;</span><span class="hl opt">,\</span>
+      user<span class="hl opt">,</span><span class="hl str">&apos;USER32.DLL&apos;</span>
+
+  <span class="hl kwd">import</span> kernel<span class="hl opt">,\</span>
+     GetLastError<span class="hl opt">,</span><span class="hl str">&apos;GetLastError&apos;</span><span class="hl opt">,\</span>
+     SetLastError<span class="hl opt">,</span><span class="hl str">&apos;SetLastError&apos;</span><span class="hl opt">,\</span>
+     FormatMessage<span class="hl opt">,</span><span class="hl str">&apos;FormatMessageA&apos;</span><span class="hl opt">,\</span>
+     LocalFree<span class="hl opt">,</span><span class="hl str">&apos;LocalFree&apos;</span>
+
+  <span class="hl kwd">import</span> user<span class="hl opt">,\</span>
+     MessageBox<span class="hl opt">,</span><span class="hl str">&apos;MessageBoxA&apos;</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.edata&apos;</span> <span class="hl kwd">export</span> <span class="hl kwb">data</span> <span class="hl kwd">readable</span>
+
+  <span class="hl kwd">export</span> <span class="hl str">&apos;ERRORMSG.DLL&apos;</span><span class="hl opt">,\</span>
+     ShowErrorMessage<span class="hl opt">,</span><span class="hl str">&apos;ShowErrorMessage&apos;</span><span class="hl opt">,\</span>
+     ShowLastError<span class="hl opt">,</span><span class="hl str">&apos;ShowLastError&apos;</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.reloc&apos;</span> <span class="hl kwd">fixups</span> <span class="hl kwb">data</span> <span class="hl kwd">readable discardable</span></code></pre>
+<h1 id="ddraw.asm">DDRAW.ASM</h1>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl slc">; DirectDraw programming example</span>
+
+<span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span>
+<span class="hl kwb">entry</span> start
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;ddraw.inc&apos;</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.text&apos;</span> <span class="hl kwd">code readable executable</span>
+
+  <span class="hl kwc">start</span><span class="hl opt">:</span>
+
+    invoke  GetModuleHandleA<span class="hl opt">,</span>NULL
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>hinstance<span class="hl opt">],</span><span class="hl kwa">eax</span>
+
+    invoke  LoadIconA<span class="hl opt">,</span>NULL<span class="hl opt">,</span>IDI_APPLICATION
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hIcon<span class="hl opt">],</span><span class="hl kwa">eax</span>
+
+    invoke  LoadCursorA<span class="hl opt">,</span>NULL<span class="hl opt">,</span>IDC_ARROW
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hCursor<span class="hl opt">],</span><span class="hl kwa">eax</span>
+
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>style<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>lpfnWndProc<span class="hl opt">],</span>WindowProc
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>cbClsExtra<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>cbWndExtra<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,[</span>hinstance<span class="hl opt">]</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hInstance<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hbrBackground<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl kwd">dword</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>lpszMenuName<span class="hl opt">],</span>NULL
+    <span class="hl kwb">mov</span> <span class="hl kwd">dword</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>lpszClassName<span class="hl opt">],</span>_class
+    invoke  RegisterClassA<span class="hl opt">,</span>wc
+    <span class="hl kwb">test</span>    <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  startup_error
+
+    invoke  CreateWindowExA<span class="hl opt">,\</span>
+        <span class="hl num">0</span><span class="hl opt">,</span>_class<span class="hl opt">,</span>_title<span class="hl opt">,</span>WS_POPUP<span class="hl opt">+</span>WS_VISIBLE<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>NULL<span class="hl opt">,</span>NULL<span class="hl opt">,[</span>hinstance<span class="hl opt">],</span>NULL
+    <span class="hl kwb">test</span>    <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  startup_error
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>hwnd<span class="hl opt">],</span><span class="hl kwa">eax</span>
+
+    invoke  DirectDrawCreate<span class="hl opt">,</span>NULL<span class="hl opt">,</span>DDraw<span class="hl opt">,</span>NULL
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jnz</span> ddraw_error
+
+    cominvk DDraw<span class="hl opt">,</span>SetCooperativeLevel<span class="hl opt">,\</span>
+        <span class="hl opt">[</span>hwnd<span class="hl opt">],</span>DDSCL_EXCLUSIVE<span class="hl opt">+</span>DDSCL_FULLSCREEN
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jnz</span> ddraw_error
+
+    cominvk DDraw<span class="hl opt">,</span>SetDisplayMode<span class="hl opt">,\</span>
+        <span class="hl num">640</span><span class="hl opt">,</span><span class="hl num">480</span><span class="hl opt">,</span><span class="hl num">8</span>
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jnz</span> ddraw_error
+
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>ddsd<span class="hl opt">.</span>dwSize<span class="hl opt">],</span>sizeof<span class="hl opt">.</span>DDSURFACEDESC
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>ddsd<span class="hl opt">.</span>dwFlags<span class="hl opt">],</span>DDSD_CAPS<span class="hl opt">+</span>DDSD_BACKBUFFERCOUNT
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>ddsd<span class="hl opt">.</span>ddsCaps<span class="hl opt">.</span>dwCaps<span class="hl opt">],</span>DDSCAPS_PRIMARYSURFACE<span class="hl opt">+</span>DDSCAPS_FLIP<span class="hl opt">+</span>DDSCAPS_COMPLEX
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>ddsd<span class="hl opt">.</span>dwBackBufferCount<span class="hl opt">],</span><span class="hl num">1</span>
+    cominvk DDraw<span class="hl opt">,</span>CreateSurface<span class="hl opt">,\</span>
+        ddsd<span class="hl opt">,</span>DDSPrimary<span class="hl opt">,</span>NULL
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jnz</span> ddraw_error
+
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>ddscaps<span class="hl opt">.</span>dwCaps<span class="hl opt">],</span>DDSCAPS_BACKBUFFER
+    cominvk DDSPrimary<span class="hl opt">,</span>GetAttachedSurface<span class="hl opt">,\</span>
+        ddscaps<span class="hl opt">,</span>DDSBack
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jnz</span> ddraw_error
+
+    <span class="hl kwb">mov</span> <span class="hl kwa">esi</span><span class="hl opt">,</span>picture
+    <span class="hl kwb">call</span>    load_picture
+    <span class="hl kwb">jc</span>  open_error
+
+    <span class="hl kwb">mov</span> <span class="hl kwa">esi</span><span class="hl opt">,</span>picture
+    <span class="hl kwb">call</span>    load_palette
+    <span class="hl kwb">jc</span>  open_error
+
+    invoke  GetTickCount
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>last_tick<span class="hl opt">],</span><span class="hl kwa">eax</span>
+
+    <span class="hl kwb">jmp</span> paint
+
+<span class="hl kwc">main_loop</span><span class="hl opt">:</span>
+
+    invoke  PeekMessageA<span class="hl opt">,</span>msg<span class="hl opt">,</span>NULL<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>PM_NOREMOVE
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  no_message
+    invoke  GetMessageA<span class="hl opt">,</span>msg<span class="hl opt">,</span>NULL<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  end_loop
+    invoke  TranslateMessage<span class="hl opt">,</span>msg
+    invoke  DispatchMessageA<span class="hl opt">,</span>msg
+
+    <span class="hl kwb">jmp</span> main_loop
+
+    <span class="hl kwc">no_message</span><span class="hl opt">:</span>
+    <span class="hl kwb">cmp</span> <span class="hl opt">[</span>active<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">je</span>  sleep
+
+    cominvk DDSPrimary<span class="hl opt">,</span>IsLost
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jz</span>  paint
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>DDERR_SURFACELOST
+    <span class="hl kwb">jne</span> end_loop
+
+    cominvk DDSPrimary<span class="hl opt">,</span><span class="hl kwd">Restore</span>
+
+<span class="hl kwc">paint</span><span class="hl opt">:</span>
+
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>top<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>bottom<span class="hl opt">],</span><span class="hl num">480</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>left<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>right<span class="hl opt">],</span><span class="hl num">640</span>
+
+    cominvk DDSBack<span class="hl opt">,</span>BltFast<span class="hl opt">,\</span>
+        <span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,[</span>DDSPicture<span class="hl opt">],</span>rect<span class="hl opt">,</span>DDBLTFAST_SRCCOLORKEY
+    <span class="hl kwb">or</span>  <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jnz</span> paint_done
+
+    <span class="hl kwb">movzx</span>   <span class="hl kwa">eax</span><span class="hl opt">,[</span>frame<span class="hl opt">]</span>
+    <span class="hl kwb">xor</span> <span class="hl kwa">edx</span><span class="hl opt">,</span><span class="hl kwa">edx</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">ebx</span><span class="hl opt">,</span><span class="hl num">10</span>
+    <span class="hl kwb">div</span> <span class="hl kwa">ebx</span>
+
+    <span class="hl kwb">sal</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">6</span>
+    <span class="hl kwb">add</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">480</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>top<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">add</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">64</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>bottom<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">sal</span> <span class="hl kwa">edx</span><span class="hl opt">,</span><span class="hl num">6</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>left<span class="hl opt">],</span><span class="hl kwa">edx</span>
+    <span class="hl kwb">add</span> <span class="hl kwa">edx</span><span class="hl opt">,</span><span class="hl num">64</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>rect<span class="hl opt">.</span>right<span class="hl opt">],</span><span class="hl kwa">edx</span>
+
+    cominvk DDSBack<span class="hl opt">,</span>BltFast<span class="hl opt">,\</span>
+        <span class="hl opt">[</span>x<span class="hl opt">],[</span>y<span class="hl opt">],[</span>DDSPicture<span class="hl opt">],</span>rect<span class="hl opt">,</span>DDBLTFAST_SRCCOLORKEY
+
+    cominvk DDSPrimary<span class="hl opt">,</span>SetPalette<span class="hl opt">,[</span>DDPalette<span class="hl opt">]</span>
+
+    cominvk DDSPrimary<span class="hl opt">,</span>Flip<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+    <span class="hl kwc">paint_done</span><span class="hl opt">:</span>
+
+    invoke  GetTickCount
+    <span class="hl kwb">mov</span> <span class="hl kwa">ebx</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">sub</span> <span class="hl kwa">ebx</span><span class="hl opt">,[</span>last_tick<span class="hl opt">]</span>
+    <span class="hl kwb">cmp</span> <span class="hl kwa">ebx</span><span class="hl opt">,</span><span class="hl num">20</span>
+    <span class="hl kwb">jb</span>  main_loop
+    <span class="hl kwb">add</span> <span class="hl opt">[</span>last_tick<span class="hl opt">],</span><span class="hl num">20</span>
+
+    <span class="hl kwb">inc</span> <span class="hl opt">[</span>frame<span class="hl opt">]</span>
+    <span class="hl kwb">cmp</span> <span class="hl opt">[</span>frame<span class="hl opt">],</span><span class="hl num">60</span>
+    <span class="hl kwb">jb</span>  main_loop
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>frame<span class="hl opt">],</span><span class="hl num">0</span>
+    <span class="hl kwb">jmp</span> main_loop
+
+<span class="hl kwc">sleep</span><span class="hl opt">:</span>
+    invoke  WaitMessage
+    <span class="hl kwb">jmp</span> main_loop
+
+<span class="hl kwc">ddraw_error</span><span class="hl opt">:</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>_ddraw_error
+    <span class="hl kwb">jmp</span> error
+<span class="hl kwc">open_error</span><span class="hl opt">:</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>_open_error
+    <span class="hl kwc">error</span><span class="hl opt">:</span>
+    invoke  MessageBoxA<span class="hl opt">,[</span>hwnd<span class="hl opt">],</span><span class="hl kwa">eax</span><span class="hl opt">,</span>_error<span class="hl opt">,</span>MB_OK<span class="hl opt">+</span>MB_ICONERROR
+    invoke  DestroyWindow<span class="hl opt">,[</span>hwnd<span class="hl opt">]</span>
+    invoke  PostQuitMessage<span class="hl opt">,</span><span class="hl num">1</span>
+    <span class="hl kwb">jmp</span> main_loop
+<span class="hl kwc">startup_error</span><span class="hl opt">:</span>
+    invoke  MessageBoxA<span class="hl opt">,[</span>hwnd<span class="hl opt">],</span>_startup_error<span class="hl opt">,</span>_error<span class="hl opt">,</span>MB_OK<span class="hl opt">+</span>MB_ICONERROR
+<span class="hl kwc">end_loop</span><span class="hl opt">:</span>
+    invoke  ExitProcess<span class="hl opt">,[</span>msg<span class="hl opt">.</span>wParam<span class="hl opt">]</span>
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;gif87a.inc&apos;</span>
+
+proc WindowProc hwnd<span class="hl opt">,</span>wmsg<span class="hl opt">,</span>wparam<span class="hl opt">,</span>lparam
+    <span class="hl kwb">push</span>    <span class="hl kwa">ebx esi edi</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,[</span>wmsg<span class="hl opt">]</span>
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_CREATE
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmcreate
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_DESTROY
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmdestroy
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_ACTIVATE
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmactivate
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_SETCURSOR
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmsetcursor
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_MOUSEMOVE
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmmousemove
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>WM_KEYDOWN
+    <span class="hl kwb">je</span>  <span class="hl opt">.</span>wmkeydown
+    <span class="hl kwc">.defwindowproc</span><span class="hl opt">:</span>
+    invoke  DefWindowProcA<span class="hl opt">,[</span>hwnd<span class="hl opt">],[</span>wmsg<span class="hl opt">],[</span>wparam<span class="hl opt">],[</span>lparam<span class="hl opt">]</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+    <span class="hl kwc">.wmcreate</span><span class="hl opt">:</span>
+    <span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+    <span class="hl kwc">.wmkeydown</span><span class="hl opt">:</span>
+    <span class="hl kwb">cmp</span> <span class="hl opt">[</span>wparam<span class="hl opt">],</span>VK_ESCAPE
+    <span class="hl kwb">jne</span> <span class="hl opt">.</span>finish
+    <span class="hl kwc">.wmdestroy</span><span class="hl opt">:</span>
+    cominvk DDraw<span class="hl opt">,</span>RestoreDisplayMode
+    cominvk DDraw<span class="hl opt">,</span>Release
+    invoke  PostQuitMessage<span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+    <span class="hl kwc">.wmactivate</span><span class="hl opt">:</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,[</span>wparam<span class="hl opt">]</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>active<span class="hl opt">],</span><span class="hl kwa">al</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+    <span class="hl kwc">.wmsetcursor</span><span class="hl opt">:</span>
+    invoke  SetCursor<span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">jmp</span> <span class="hl opt">.</span>finish
+    <span class="hl kwc">.wmmousemove</span><span class="hl opt">:</span>
+    <span class="hl kwb">movsx</span>   <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwd">word</span> <span class="hl opt">[</span>lparam<span class="hl opt">]</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>x<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">movsx</span>   <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwd">word</span> <span class="hl opt">[</span>lparam<span class="hl opt">+</span><span class="hl num">2</span><span class="hl opt">]</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>y<span class="hl opt">],</span><span class="hl kwa">eax</span>
+    <span class="hl kwc">.finish</span><span class="hl opt">:</span>
+    <span class="hl kwb">pop</span> <span class="hl kwa">edi esi ebx</span>
+    <span class="hl kwb">ret</span>
+endp
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.data&apos;</span> <span class="hl kwb">data</span> <span class="hl kwd">readable writeable</span>
+
+  <span class="hl kwc">_title</span> <span class="hl kwd">db</span> <span class="hl str">&apos;flat assembler DirectDraw application&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">_class</span> <span class="hl kwd">db</span> <span class="hl str">&apos;FDDRAW32&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+  <span class="hl kwc">_error</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Error&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">_startup_error</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Startup failed.&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">_ddraw_error</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Direct Draw initialization failed.&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">_open_error</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Failed opening data file.&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+  <span class="hl kwc">picture</span> <span class="hl kwd">db</span> <span class="hl str">&apos;DDRAW.GIF&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.bss&apos;</span> <span class="hl kwd">readable writeable</span>
+
+  <span class="hl kwc">hinstance</span> <span class="hl kwd">dd</span> ?
+  <span class="hl kwc">hwnd</span> <span class="hl kwd">dd</span> ?
+  wc WNDCLASS
+  msg MSG
+
+  ddsd DDSURFACEDESC
+  ddscaps DDSCAPS
+
+  DDraw DirectDraw
+  DDSPrimary DirectDrawSurface
+  DDSBack DirectDrawSurface
+
+  DDSPicture DirectDrawSurface
+  DDPalette DirectDrawPalette
+
+  <span class="hl kwc">bytes_count</span> <span class="hl kwd">dd</span> ?
+  <span class="hl kwc">last_tick</span> <span class="hl kwd">dd</span> ?
+  <span class="hl kwc">frame</span> <span class="hl kwd">db</span> ?
+  <span class="hl kwc">active</span> <span class="hl kwd">db</span> ?
+  <span class="hl kwc">LZW_bits</span> <span class="hl kwd">db</span> ?
+  <span class="hl kwc">LZW_table</span> <span class="hl kwd">rd</span> <span class="hl opt">(</span><span class="hl num">0F00h</span><span class="hl opt">-</span><span class="hl num">2</span><span class="hl opt">)*</span><span class="hl num">2</span>
+  <span class="hl kwc">buffer</span> <span class="hl kwd">rb</span> 40000h
+  rect RECT
+  <span class="hl kwc">x</span> <span class="hl kwd">dd</span> ?
+  <span class="hl kwc">y</span> <span class="hl kwd">dd</span> ?
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.idata&apos;</span> <span class="hl kwd">import</span> <span class="hl kwb">data</span> <span class="hl kwd">readable</span>
+
+  library kernel<span class="hl opt">,</span><span class="hl str">&apos;KERNEL32.DLL&apos;</span><span class="hl opt">,\</span>
+      user<span class="hl opt">,</span><span class="hl str">&apos;USER32.DLL&apos;</span><span class="hl opt">,\</span>
+      ddraw<span class="hl opt">,</span><span class="hl str">&apos;DDRAW.DLL&apos;</span>
+
+  <span class="hl kwd">import</span> kernel<span class="hl opt">,\</span>
+     GetModuleHandleA<span class="hl opt">,</span><span class="hl str">&apos;GetModuleHandleA&apos;</span><span class="hl opt">,\</span>
+     CreateFileA<span class="hl opt">,</span><span class="hl str">&apos;CreateFileA&apos;</span><span class="hl opt">,\</span>
+     ReadFile<span class="hl opt">,</span><span class="hl str">&apos;ReadFile&apos;</span><span class="hl opt">,\</span>
+     CloseHandle<span class="hl opt">,</span><span class="hl str">&apos;CloseHandle&apos;</span><span class="hl opt">,\</span>
+     GetTickCount<span class="hl opt">,</span><span class="hl str">&apos;GetTickCount&apos;</span><span class="hl opt">,\</span>
+     ExitProcess<span class="hl opt">,</span><span class="hl str">&apos;ExitProcess&apos;</span>
+
+  <span class="hl kwd">import</span> user<span class="hl opt">,\</span>
+     RegisterClassA<span class="hl opt">,</span><span class="hl str">&apos;RegisterClassA&apos;</span><span class="hl opt">,\</span>
+     CreateWindowExA<span class="hl opt">,</span><span class="hl str">&apos;CreateWindowExA&apos;</span><span class="hl opt">,\</span>
+     DestroyWindow<span class="hl opt">,</span><span class="hl str">&apos;DestroyWindow&apos;</span><span class="hl opt">,\</span>
+     DefWindowProcA<span class="hl opt">,</span><span class="hl str">&apos;DefWindowProcA&apos;</span><span class="hl opt">,\</span>
+     GetMessageA<span class="hl opt">,</span><span class="hl str">&apos;GetMessageA&apos;</span><span class="hl opt">,\</span>
+     PeekMessageA<span class="hl opt">,</span><span class="hl str">&apos;PeekMessageA&apos;</span><span class="hl opt">,\</span>
+     TranslateMessage<span class="hl opt">,</span><span class="hl str">&apos;TranslateMessage&apos;</span><span class="hl opt">,\</span>
+     DispatchMessageA<span class="hl opt">,</span><span class="hl str">&apos;DispatchMessageA&apos;</span><span class="hl opt">,\</span>
+     LoadCursorA<span class="hl opt">,</span><span class="hl str">&apos;LoadCursorA&apos;</span><span class="hl opt">,\</span>
+     LoadIconA<span class="hl opt">,</span><span class="hl str">&apos;LoadIconA&apos;</span><span class="hl opt">,\</span>
+     SetCursor<span class="hl opt">,</span><span class="hl str">&apos;SetCursor&apos;</span><span class="hl opt">,\</span>
+     MessageBoxA<span class="hl opt">,</span><span class="hl str">&apos;MessageBoxA&apos;</span><span class="hl opt">,\</span>
+     PostQuitMessage<span class="hl opt">,</span><span class="hl str">&apos;PostQuitMessage&apos;</span><span class="hl opt">,\</span>
+     WaitMessage<span class="hl opt">,</span><span class="hl str">&apos;WaitMessage&apos;</span>
+
+  <span class="hl kwd">import</span> ddraw<span class="hl opt">,\</span>
+     DirectDrawCreate<span class="hl opt">,</span><span class="hl str">&apos;DirectDrawCreate&apos;</span></code></pre>
+<h1 id="beer.asm">BEER.ASM</h1>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl slc">; Beer - example of tiny (one section) Win32 program</span>
+
+<span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span>
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+
+<span class="hl slc">; no section defined - fasm will automatically create .flat section for both</span>
+<span class="hl slc">; code and data, and set entry point at the beginning of this section</span>
+
+    invoke  MessageBoxA<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span>_message<span class="hl opt">,</span>_caption<span class="hl opt">,</span>MB_ICONQUESTION<span class="hl opt">+</span>MB_YESNO
+    <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>IDYES
+    <span class="hl kwb">jne</span> exit
+
+    invoke  mciSendString<span class="hl opt">,</span>_cmd_open<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+    invoke  mciSendString<span class="hl opt">,</span>_cmd_eject<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+    invoke  mciSendString<span class="hl opt">,</span>_cmd_close<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+<span class="hl kwc">exit</span><span class="hl opt">:</span>
+    invoke  ExitProcess<span class="hl opt">,</span><span class="hl num">0</span>
+
+<span class="hl kwc">_message</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Do you need additional place for the beer?&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwc">_caption</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Desktop configuration&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+<span class="hl kwc">_cmd_open</span> <span class="hl kwd">db</span> <span class="hl str">&apos;open cdaudio&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwc">_cmd_eject</span> <span class="hl kwd">db</span> <span class="hl str">&apos;set cdaudio door open&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwc">_cmd_close</span> <span class="hl kwd">db</span> <span class="hl str">&apos;close cdaudio&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+<span class="hl slc">; import data in the same section</span>
+
+<span class="hl kwb">data</span> <span class="hl kwd">import</span>
+
+ library kernel32<span class="hl opt">,</span><span class="hl str">&apos;KERNEL32.DLL&apos;</span><span class="hl opt">,\</span>
+     user32<span class="hl opt">,</span><span class="hl str">&apos;USER32.DLL&apos;</span><span class="hl opt">,\</span>
+     winmm<span class="hl opt">,</span><span class="hl str">&apos;WINMM.DLL&apos;</span>
+
+ <span class="hl kwd">import</span> kernel32<span class="hl opt">,\</span>
+    ExitProcess<span class="hl opt">,</span><span class="hl str">&apos;ExitProcess&apos;</span>
+
+ <span class="hl kwd">import</span> user32<span class="hl opt">,\</span>
+    MessageBoxA<span class="hl opt">,</span><span class="hl str">&apos;MessageBoxA&apos;</span>
+
+ <span class="hl kwd">import</span> winmm<span class="hl opt">,\</span>
+    mciSendString<span class="hl opt">,</span><span class="hl str">&apos;mciSendStringA&apos;</span>
+
+<span class="hl kwb">end data</span></code></pre>
+<h1 id="pe64demo.asm">PE64DEMO.ASM</h1>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl slc">; Example of 64-bit PE program</span>
+
+<span class="hl kwb">format</span> <span class="hl kwd">PE64 GUI</span>
+<span class="hl kwb">entry</span> start
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.text&apos;</span> <span class="hl kwd">code readable executable</span>
+
+  <span class="hl kwc">start</span><span class="hl opt">:</span>
+    <span class="hl kwb">sub</span> <span class="hl kwa">rsp</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">*</span><span class="hl num">5</span>     <span class="hl slc">; reserve stack for API use and make stack dqword aligned</span>
+
+    <span class="hl kwb">mov</span> <span class="hl kwa">r9d</span><span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">lea</span> <span class="hl kwa">r8</span><span class="hl opt">,[</span>_caption<span class="hl opt">]</span>
+    <span class="hl kwb">lea</span> <span class="hl kwa">rdx</span><span class="hl opt">,[</span>_message<span class="hl opt">]</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">rcx</span><span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">call</span>    <span class="hl opt">[</span>MessageBoxA<span class="hl opt">]</span>
+
+    <span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+    <span class="hl kwb">call</span>    <span class="hl opt">[</span>ExitProcess<span class="hl opt">]</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.data&apos;</span> <span class="hl kwb">data</span> <span class="hl kwd">readable writeable</span>
+
+  <span class="hl kwc">_caption</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Win64 assembly program&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">_message</span> <span class="hl kwd">db</span> <span class="hl str">&apos;Hello World!&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.idata&apos;</span> <span class="hl kwd">import</span> <span class="hl kwb">data</span> <span class="hl kwd">readable writeable</span>
+
+  <span class="hl kwd">dd</span> <span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl kwb">RVA</span> kernel_name<span class="hl opt">,</span><span class="hl kwb">RVA</span> kernel_table
+  <span class="hl kwd">dd</span> <span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl kwb">RVA</span> user_name<span class="hl opt">,</span><span class="hl kwb">RVA</span> user_table
+  <span class="hl kwd">dd</span> <span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+  <span class="hl kwc">kernel_table</span><span class="hl opt">:</span>
+    <span class="hl kwc">ExitProcess</span> <span class="hl kwd">dq</span> <span class="hl kwb">RVA</span> _ExitProcess
+    <span class="hl kwd">dq</span> <span class="hl num">0</span>
+  <span class="hl kwc">user_table</span><span class="hl opt">:</span>
+    <span class="hl kwc">MessageBoxA</span> <span class="hl kwd">dq</span> <span class="hl kwb">RVA</span> _MessageBoxA
+    <span class="hl kwd">dq</span> <span class="hl num">0</span>
+
+  <span class="hl kwc">kernel_name</span> <span class="hl kwd">db</span> <span class="hl str">&apos;KERNEL32.DLL&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">user_name</span> <span class="hl kwd">db</span> <span class="hl str">&apos;USER32.DLL&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+
+  <span class="hl kwc">_ExitProcess</span> <span class="hl kwd">dw</span> <span class="hl num">0</span>
+    <span class="hl kwd">db</span> <span class="hl str">&apos;ExitProcess&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">_MessageBoxA</span> <span class="hl kwd">dw</span> <span class="hl num">0</span>
+    <span class="hl kwd">db</span> <span class="hl str">&apos;MessageBoxA&apos;</span><span class="hl opt">,</span><span class="hl num">0</span></code></pre>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#my-line-numbers-tests">My Line Numbers Tests</a></li>
+<li><a href="#my-strings-tests">My Strings Tests</a></li>
+<li><a href="#minipad.asm">MINIPAD.ASM</a></li>
+<li><a href="#lasterr.asm">LASTERR.ASM</a></li>
+<li><a href="#errormsg.asm">ERRORMSG.ASM</a></li>
+<li><a href="#ddraw.asm">DDRAW.ASM</a></li>
+<li><a href="#beer.asm">BEER.ASM</a></li>
+<li><a href="#pe64demo.asm">PE64DEMO.ASM</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

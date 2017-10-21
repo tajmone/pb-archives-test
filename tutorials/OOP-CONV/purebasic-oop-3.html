@@ -1,0 +1,192 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureBasic and Object-Oriented Programming</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Dräc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tutorials</a></li>
+	<li><a href='index.html'>OOP-CONV</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
+					<p class="subtitle">3. First Implementation of the Concepts</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<h2 id="status-wip">STATUS: WIP</h2>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Implementation1_en.htm">WWW ORIGINAL</a></li>
+</ul>
+<p><strong>TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix subtitle casing
+</li>
+</ul>
+</div>
+</div>
+<p>In this section, I shall demonstrate how the aforementioned object concepts can be implemented in PureBasic. This implementation doesn’t refer to what is programmed in object-oriented languages. Furthermore, this implementations is meant be improved upon, or adapted according to needs.</p>
+<p>I’ll be presenting here one of these implementations, with all its pros and cons.</p>
+<h1 id="concrete-class-and-abstract-class">Concrete Class and Abstract Class</h1>
+<p>As seen, a Class defines the contents of an object:</p>
+<ul>
+<li>Its attributes (each variable type)</li>
+<li>Its methods (Names, implementation)</li>
+</ul>
+<p>For example, if I want to represent Rectangle objects and display them on screen, I shall define a <code>Rectangle</code> Class including a <code>Draw()</code> method.</p>
+<p>The <code>Rectangle</code> Class could have the following construction:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle
+  <span class="hl opt">*</span>Draw
+  x1.l
+  x2.l
+  y1.l
+  y2.l
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Draw_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>where <code>x1</code>, <code>x2</code>, <code>y1</code> and <code>y2</code> are four attributes (the coordinates of the diametrically opposed points of the rectangle) and <code>*Draw</code> is a pointer referencing the drawing function which displays Rectangles.</p>
+<p>Here <code>*Draw</code> is a function pointer used to contain the address of the desired function: <code>@Draw_Rectangle()</code>. Functions referenced in this manner can be invoked by using <code>CallFunctionFast()</code>.</p>
+<p>Thus, the proposed <code>Structure</code> is completely adapted to the notion of Class: * the structure stores the definition of the object’s attributes: here <code>x1</code>, <code>x2</code>, <code>y1</code> and <code>y2</code> are Long variables. * the structure stores the definition of the object’s method: here the <code>Draw()</code> function, through to a function pointer.</p>
+<p>When a similar Class definition is followed by the implementations of its methods (in our example, <code>Draw_Rectangle()</code>’s <code>Procedure : EndProcedure</code> block statement), it becomes a concrete Class. Otherwise, it will be an abstract Class.</p>
+<div class="alert-messages">
+<div class="alert">
+<p><code>*this</code> always refers to the object on which the method must be applied. This notation can be seen in the previous example, within the <code>Draw_Rectangle()</code> method.</p>
+</div>
+</div>
+<h1 id="instanciation">Instanciation</h1>
+<p>Now, to create an object called <code>Rect1</code> from the <code>Rectangle</code> Class, write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect1.Rectangle</code></pre>
+<p>To initialize it, simple write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect1\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+Rect1\x1 <span class="hl opt">=</span> <span class="hl num">0</span>
+Rect1\x2 <span class="hl opt">=</span> <span class="hl num">10</span>
+Rect1\y1 <span class="hl opt">=</span> <span class="hl num">0</span>
+Rect1\y2 <span class="hl opt">=</span> <span class="hl num">20</span></code></pre>
+<p>Next, to draw the <code>Rect1</code> object, use:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">CallFunctionFast</span>(Rect1\Draw, &#64;Rect1)</code></pre>
+<h1 id="encapsulation">Encapsulation</h1>
+<p>In this implementation, encapsulation doesn’t exist, simply because there is no way to hide the attributes or the methods of such an object.</p>
+<p>By writing <code>Rect1\x1</code>, the user can access the <code>x1</code> attribute of the object. This is the way we used to initialize the object. The next implementation (&lt;<Second Implementation>&gt; section) will show how to fix this. Although significant, this feature is not essential in implementing OOP.</p>
+<h1 id="inheritance">Inheritance</h1>
+<p>Now I want to create a new Class with the capability to Erase rectangles from the screen. I can implement this new <code>Rectangle2</code> Class by using the existing <code>Rectangle</code> Class and by providing it with a new method called <code>Erase()</code>.</p>
+<p>A Class being a <code>Structure</code>, let’s take advantage of the extension property of structures. So, the new Class <code>Rectangle2</code> could be:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rectangle2 <span class="hl kwa">Extends</span> Rectangle
+  <span class="hl opt">*</span>Erase
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Erase_Rectangle</span>(<span class="hl opt">*</span>this.Rectangle2)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>The Class <code>Rectangle2</code> includes the members of the previous <code>Rectangle</code> Class as well as those of the new <code>Erase()</code> method. To instanciate an object from this new Class write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect2.Rectangle2
+
+Rect2\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()
+Rect2\Erase <span class="hl opt">=</span> &#64;<span class="hl kwc">Erase_Rectangle</span>()
+Rect2\x1 <span class="hl opt">=</span> <span class="hl num">0</span>
+Rect2\x2 <span class="hl opt">=</span> <span class="hl num">10</span>
+Rect2\y1 <span class="hl opt">=</span> <span class="hl num">0</span>
+Rect2\y2 <span class="hl opt">=</span> <span class="hl num">20</span></code></pre>
+<p>To use <code>Rect2</code>’s <code>Draw()</code> and <code>Erase()</code> methods, I shall proceed the same way as before: through <code>CallFunctionFast()</code>.</p>
+<p>This demonstrates that the <code>Rectangle2</code> Class inherited the properties of the <code>Rectangle</code> Class.</p>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p>Inheritance is a category of polymorphism. The object <code>Rect2</code> can be also seen as an Object from the <code>Rectangle</code> Class — just don’t use the <code>Erase()</code> method! By inheritance, the object carries several forms: those of the objects coming from the Parent Classes. It is called inheritance polymorphism.</p>
+</div>
+</div>
+<h1 id="overloading">Overloading</h1>
+<p>During initialization of an object, its function pointers are initialized by assigning to them the addresses of the methods suiting the object.</p>
+<p>So, given an object <code>Rect</code> from the <code>Rectangle</code> Class, by writing:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect1\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle</span>()</code></pre>
+<p>I can invoke its <code>Draw()</code> method the following way:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">CallFunctionFast</span>(Rect1\Draw, &#64;Rect1)</code></pre>
+<p>Now, imagine that it was possible to implement another method for displaying a rectangle (by using a different algorithm from the one in the first method).</p>
+<p>Let us call this implementation as <code>Draw_Rectangle2()</code>:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">Draw_Rectangle2</span>(<span class="hl opt">*</span>this.Rectangle)
+  <span class="hl slc">; [ ...some code... ]</span>
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>It’s possible to initialize our object <code>Rect1</code> with this new method effortlessly:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect1\Draw <span class="hl opt">=</span> &#64;<span class="hl kwc">Draw_Rectangle2</span>()</code></pre>
+<p>To use the method, write again:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">CallFunctionFast</span>(Rect1\Draw, &#64;Rect1)</code></pre>
+<p>We can see that with both the former method (ie: <code>Draw_Rectangle()</code>) as well as the latter (ie: <code>Draw_Rectangle2()</code>) the use of the <code>Rect1</code> method is strictly identical.</p>
+<p>It isn’t possible to distinguish by the single line of code <code>CallFunctionFast(Rect1\Draw, @Rect1)</code> which one of the <code>Draw()</code> methods the <code>Rect1</code> object is really using. To know this, it is necessary to go back to the object initialization.</p>
+<p>The notion of <em>function pointer</em> allows overloading the <code>Draw()</code> method.</p>
+<p>One limitation: the use of the <code>CallFunctionFast()</code> instruction implies paying attention to the number of parameters passed.</p>
+<h1 id="conclusion">Conclusion:</h1>
+<p>In this first implementation, we produced an object capable of meeting the main object-oriented concepts, albeit with certain limitations.</p>
+<p>We mainly just lay the foundations upon which we shall implement a more complete object — thanks to PureBasic’s <code>Interface</code> statement!</p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#concrete-class-and-abstract-class">Concrete Class and Abstract Class</a></li>
+<li><a href="#instanciation">Instanciation</a></li>
+<li><a href="#encapsulation">Encapsulation</a></li>
+<li><a href="#inheritance">Inheritance</a></li>
+<li><a href="#overloading">Overloading</a></li>
+<li><a href="#conclusion">Conclusion:</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

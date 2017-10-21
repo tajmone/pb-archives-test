@@ -1,0 +1,97 @@
+// ==============================================================================
+//                                     ALERTS                                    
+// ==============================================================================
+// This file was freely adapted from the Primer CSS project by GitHub Inc.:
+// 
+// -- https://github.com/primer/primer-css/blob/master/modules/primer-alerts/lib/flash.scss
+// 
+// Copyright (c) 2016 GitHub Inc. Released under The MIT License (MIT).
+// ==============================================================================
+
+/* ===== ALERTS ===== */
+.alert {
+    // position: relative;
+    // padding: 16px;
+padding: ($base-line-height/2)-1; // <= 11px (ie: 1/2 line-height minus border)
+    color:            color(Alert-Text);
+    background-color: color(Alert-BG);
+    border: 1px solid color(Alert-Border);
+    border-radius: 4px;
+
+    p {
+        margin-top: 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.alert-messages {
+    // margin-bottom: 24px;
+    margin-bottom: $base-line-height;
+}
+.alert-warn {
+    color:            color(AlertWarn-Text);
+    background-color: color(AlertWarn-BG);
+    border-color:     color(AlertWarn-Border);
+}
+.alert-error {
+    color:            color(AlertError-Text);
+    background-color: color(AlertError-BG);
+    border-color:     color(AlertError-Border);
+}
+.alert-success {
+    color:            color(AlertSuccess-Text);
+    background-color: color(AlertSuccess-BG);
+    border-color:     color(AlertSuccess-Border);
+}
+.alert-note {
+    color:            color(AlertNote-Text);
+    background-color: color(AlertNote-BG);
+    border-color:     color(AlertNote-Border);
+}
+
+// ==============================================================================
+//                           Headings 1-6 Inside Alerts                          
+// ==============================================================================
+// Fix margins for H1-6 occuring inside Alerts, and set appropriate colors.
+.alert-warn h1,
+.alert-warn h2,
+.alert-warn h3,
+.alert-warn h4,
+.alert-warn h5,
+.alert-warn h6 {
+    color:            color(AlertWarn-Text);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.alert-error h1,
+.alert-error h2,
+.alert-error h3,
+.alert-error h4,
+.alert-error h5,
+.alert-error h6 {
+    color:            color(AlertError-Text);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.alert-success h1,
+.alert-success h2,
+.alert-success h3,
+.alert-success h4,
+.alert-success h5,
+.alert-success h6 {
+    color:            color(AlertSuccess-Text);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.alert-note h1,
+.alert-note h2,
+.alert-note h3,
+.alert-note h4,
+.alert-note h5,
+.alert-note h6 {
+    color:            color(AlertNote-Text);
+    margin-top: 0;
+    margin-bottom: 0;
+}

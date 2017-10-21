@@ -1,0 +1,235 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>2bbcode</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tools</a></li>
+	<li><a href='index.html'>pandoc2bbcode</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">2bbcode</h1>
+
+<p>A set of custom Pandoc writers for converting to BBCode.</p>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p><strong>WIP TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Change CMD code block to <code>!CMD</code> Macro
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Change Bash code block to <code>!Bash</code> Macro? (don’t clash with built-in macro!!)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> handle <code>bbcode</code> blocks highlighting (supported by Highlight only):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create <code>bbcode</code> Highlight theme!
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> XXX
+</li>
+</ul>
+</div>
+</div>
+<h1 id="introduction">Introduction</h1>
+<p><strong>2bbcode</strong> is a project hosting custom pandoc writers, written in Lua, which allow to convert to BBCode any input format supported by pandoc.</p>
+<p>Since pandoc ships with a built-in Lua interpreter, using <strong>2bbcode</strong> wrtiers doesn’t require installing Lua on the system.</p>
+<p>There are currently two 2bbcode writers in this project, addressing different BBCode flavors:</p>
+<ul>
+<li><code>2bbcode.lua</code> – the original 2bbcode writer by <a href="https://github.com/lilydjwg/2bbcode">@lilydjwg</a>, targeting the BBCode used by <a href="https://fluxbb.org/forums/help.php#bbcode"><strong>FluxBB</strong></a>.</li>
+<li><code>bbcode_phpbb.lua</code> – a fork of <code>2bbcode.lua</code> by <a href="https://github.com/tajmone/2bbcode">@tajmone</a>, targeting the BBCode used by <a href="https://www.phpbb.com/community/faq.php?mode=bbcode"><strong>phpBB</strong></a>.</li>
+</ul>
+<h2 id="about-pandoc">About Pandoc</h2>
+<ul>
+<li><a href="http://pandoc.org/">Pandoc website</a> | <a href="http://pandoc.org/MANUAL.html">User’s Guide</a></li>
+<li><a href="https://github.com/jgm/pandoc">Pandoc’s GitHub repo</a></li>
+<li><a href="https://github.com/jgm/pandoc/releases/latest">Pandoc download page</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pandoc">Pandoc entry at Wikipedia</a></li>
+</ul>
+<p>Pandoc is a cross-platform FOSS command line tool for converting documents from one format to another. It natively supports more than 20 <a href="#pandoc-supported-input-formats">input formats</a> and over 40 output formats, and can be extended to work with custom input (<em>reader</em>) and outupt (<em>writer</em>) formats through external scripts – likes the custom BBCode writers in this project.</p>
+<p>Pandoc is written in Haskell, and precompiled binary releases for Windows, Mac OS X and Linux are available for download.</p>
+<p>Pandoc was originally created by <a href="http://johnmacfarlane.net/">John MacFarlane</a>, a philosophy professor at the University of California, Berkeley, and is now maintained collaboratively on <a href="https://github.com/jgm/pandoc">GitHub</a>.</p>
+<h2 id="about-bbcode">About BBCode</h2>
+<ul>
+<li><a href="http://php.net/manual/en/book.bbcode.php">BBCode manual at PHP.net</a></li>
+<li><a href="http://www.bbcode.org/">BBCode.org</a> (website dedicate to BBCode resources)</li>
+<li><a href="https://www.phpbb.com/community/faq.php?mode=bbcode"><strong>phpBB</strong>’s BBCode guide</a></li>
+<li><a href="https://en.wikipedia.org/wiki/BBCode">BBCode entry at Wikipedia</a></li>
+</ul>
+<p>BBCode (Bulletin Board Code) is a lightweight markup language used by many message boards to format posts. From <a href="https://en.wikipedia.org/wiki/BBCode">Wikipedia</a>:</p>
+<blockquote>
+<p>BBCode was introduced in 1998 by the messageboard software <strong>Ultimate Bulletin Board</strong> (<strong>UBB</strong>) implemented in Perl. In 2000 BBCode was used in <a href="https://www.phpbb.com/"><strong>phpBB</strong></a> – an internet forum system written in PHP. <a href="https://www.vbulletin.com/"><strong>vBulletin</strong></a> also uses BBCode.</p>
+</blockquote>
+<p>BBCode tags work in a similar way to HTML tags, but square brackets are employed instead of angle brackets, and no paragraph tag is needed:</p>
+<pre class="bbcode"><code>Here comes a [b]bold word[/d].</code></pre>
+<p>BBCode has fewer tags than HTML, intended to cover simple formatting cases.</p>
+<p>Since different implementations of BBCode employ different subsets of tags, there are different flavors of BBCode, and while the most common tags should work across all BBCode implementations, advanced formatting tags might not.</p>
+<h1 id="system-requirements">System Requirements</h1>
+<p>Just <strong>pandoc</strong>:</p>
+<ul>
+<li><a href="https://github.com/jgm/pandoc/releases/latest">Pandoc</a></li>
+</ul>
+<p>For more information, see <a href="#pandoc-setup">Pandoc Setup</a>.</p>
+<h1 id="linux-usage">Linux Usage</h1>
+<h2 id="bbcode">2bbcode</h2>
+<p>Required <strong>2bbcode</strong> Linux files:</p>
+<ul>
+<li><code>bbcode.lua</code></li>
+<li><code>2bbcode</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">./2bbcode</span> -f FORMAT <span class="op">&lt;</span>input <span class="op">&gt;</span>output</code></pre></div>
+<p><code>FORMAT</code> defaults to <code>markdown_github</code>. Use <code>pandoc --list-input-formats</code> to list <a href="#pandoc-supported-input-formats">acceptable formats</a>.</p>
+<h2 id="bbcode_phpbb">2bbcode_phpbb</h2>
+<p>Required <strong>2bbcode_phpbb</strong> Linux files:</p>
+<ul>
+<li><code>bbcode_phpbb.lua</code></li>
+<li><code>2bbcode_phpbb</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">./2bbcode_phpbb</span> -f FORMAT <span class="op">&lt;</span>input <span class="op">&gt;</span>output</code></pre></div>
+<p>Same as with <strong>2bbcode</strong>, except for scripts names.</p>
+<h1 id="windows-usage">Windows Usage</h1>
+<p>If you want to use <strong>2bbcode</strong> globally, put all the required <code>*.lua</code> and <code>*.bat</code> files in a same folder which is on the system <code>%PATH%</code>.</p>
+<h2 id="bbcode-1">2bbcode</h2>
+<p>Required <strong>2bbcode</strong> Windows files:</p>
+<ul>
+<li><code>bbcode.lua</code></li>
+<li><code>2bbcode.bat</code></li>
+<li><code>gfm2bbcode.bat</code></li>
+</ul>
+<ol type="1">
+<li><p>Using <code>2bbcode.bat</code> via command line:</p>
+<pre class="cmd"><code class="cmd">2bbcode filename.ext</code></pre>
+<p>… creates <code>filename.bbcode</code>.</p>
+<p>Pandoc will guess input format from input file’s extension. This batch script allows conversion from any <a href="">pandoc supported input format</a>. For markdown input files, it will default to <a href="http://pandoc.org/MANUAL.html#pandocs-markdown">pandoc’s extended Markdown</a>.</p></li>
+<li><p>Using <code>gfm2bbcode.bat</code> via command line:</p>
+<pre class="cmd"><code class="cmd">gfm2bbcode filename.md</code></pre>
+<p>This will convert the GitHub-Flavored (no hard-linebreaks) input markdown file to <code>filename.bbcode</code>. This batch script invokes pandoc with the following settings:</p>
+<pre><code>--smart --wrap=none --normalize -f markdown_github-hard_line_breaks</code></pre>
+<p>… which is most likely what you’re looking for when working with GitHub related markdown files.</p></li>
+<li><p>Using <code>2bbcode.bat</code> and <code>gfm2bbcode.bat</code> from Windows File Explorer:</p>
+<p>Just drag’n’drop input file over <code>2bbcode.bat</code> or <code>gfm2bbcode.bat</code>, a converted <code>*.bbcode</code> file will be created in the same folder as input file.</p></li>
+</ol>
+<h2 id="bbcode_phpbb-1">2bbcode_phpbb</h2>
+<p>Required <strong>2bbcode_phpbb</strong> Windows files:</p>
+<ul>
+<li><code>bbcode_phpbb.lua</code></li>
+<li><code>2bbcode_phpbb.bat</code></li>
+<li><code>gfm2bbcode_phpbb.bat</code></li>
+</ul>
+<p>Use is the same as with <strong>2bbcode</strong>, except for scripts names.</p>
+<h1 id="pandoc-setup">Pandoc Setup</h1>
+<h2 id="windows">Windows</h2>
+<p>You have different choices for setting up pandoc:</p>
+<ol type="1">
+<li><a href="#pandoc-msi-installer">Use pandoc’s msi installer</a></li>
+<li><a href="#pandoc-via-chocolatey">Install via Chocolatey</a></li>
+<li><a href="#pandoc-standalone">Use pandoc executable in standalone mode</a></li>
+</ol>
+<p>The advised choice is <strong>#2</strong> – install via Chocolatey!</p>
+<h3 id="pandoc-msi-installer">Pandoc MSI Installer</h3>
+<p>Pandoc for Windows ships with an msi installer.</p>
+<p>When asked, choose “install pandoc for current user” (best choice).</p>
+<h3 id="pandoc-via-chocolatey">Pandoc via Chocolatey</h3>
+<p>Since Pandoc doesn’t (can’t) check for updates, the best method of installation is via <a href="https://chocolatey.org/">Chocolatey</a> (or <a href="https://chocolatey.org/packages/ChocolateyGUI">ChocolateyGUI</a>):</p>
+<ul>
+<li><a href="https://chocolatey.org/packages/pandoc">Pandoc package</a> at Chocolatey.org</li>
+</ul>
+<p>Chocolatey handles silent installation and updates in the background (using default options), and helps you keeping pandoc always updated to the latest release.</p>
+<h3 id="pandoc-standalone">Pandoc Standalone</h3>
+<p>If you prefer to use pandoc in standalone mode, you’ll need to extract pandoc binary executable from the installer file – for some reasons, the standalone version is no longer available for download. The installer contains two binary files (<code>pandoc.exe</code> and <code>pandoc-citeproc.exe</code>), the html User’s Guide and the license files.</p>
+<ol type="1">
+<li>Dowload the pandoc msi installer (eg: <code>pandoc-1.XX-windows.msi</code>)</li>
+<li>Unpack it (using <a href="http://www.7-zip.org/">7-Zip</a>) and extract and rename the <code>pandocEXE</code> file to <code>pandoc.exe</code></li>
+<li>Optionally (if you need to use <a href="https://en.wikipedia.org/wiki/CiteProc">CiteProc</a> for working with citations and bibliography files) also extract <code>pandoc_citeprocEXE</code> and rename it to <code>pandoc_citeproc.exe</code>.</li>
+</ol>
+<p>Make sure that <code>pandoc.exe</code> (and, eventually, <code>pandoc_citeproc.exe</code>) is reachable via <code>%PATH%</code>, or just put it in the same folder as the <code>2bbcode.lua</code> script and the documents you want to convert (this is a good solution if you want to keep all your work within one folder).</p>
+<h2 id="pandoc-supported-input-formats">Pandoc Supported Input Formats</h2>
+<p>As of pandoc v1.19, the supported input formats are:</p>
+<ul>
+<li><code>commonmark</code> – <a href="http://commonmark.org/">CommonMark Markdown</a>.</li>
+<li><code>docbook</code> – <a href="http://docbook.org/">DocBook</a>.</li>
+<li><code>docx</code> – Word <a href="https://en.wikipedia.org/wiki/Office_Open_XML">docx</a>.</li>
+<li><code>epub</code> – <a href="http://idpf.org/epub">EPUB</a>.</li>
+<li><code>haddock</code> – <a href="https://www.haskell.org/haddock/doc/html/ch03s08.html">Haddock markup</a>.</li>
+<li><code>html</code> – HTML.</li>
+<li><code>json</code> – <a href="http://www.json.org/">JSON</a> version of native AST.</li>
+<li><code>latex</code> – <a href="https://www.latex-project.org">LaTeX</a>.</li>
+<li><code>markdown</code> – <a href="http://pandoc.org/MANUAL.html#pandocs-markdown">pandoc’s extended Markdown</a>.</li>
+<li><code>markdown_github</code> – <a href="https://help.github.com/articles/about-writing-and-formatting-on-github/">GitHub-Flavored Markdown</a>.</li>
+<li><code>markdown_mmd</code> – <a href="http://fletcherpenney.net/multimarkdown/">MultiMarkdown</a>.</li>
+<li><code>markdown_phpextra</code> – <a href="https://michelf.ca/projects/php-markdown/extra/">PHP Markdown Extra</a>.</li>
+<li><code>markdown_strict</code> – original unextended <a href="http://daringfireball.net/projects/markdown/">Markdown</a>.</li>
+<li><code>mediawiki</code> – <a href="https://www.mediawiki.org/wiki/Help:Formatting">MediaWiki markup</a>.</li>
+<li><code>native</code> – native <a href="https://www.haskell.org/">Haskell</a>.</li>
+<li><code>odt</code> – <a href="http://en.wikipedia.org/wiki/OpenDocument">ODT</a> (Open Document Format for Office Applications).</li>
+<li><code>opml</code> – <a href="http://dev.opml.org/spec2.html">OPML</a> (Outline Processor Markup Language).</li>
+<li><code>org</code> – <a href="http://orgmode.org/">Emacs Org mode</a>.</li>
+<li><code>rst</code> – <a href="http://docutils.sourceforge.net/docs/ref/rst/introduction.html">reStructuredText</a>.</li>
+<li><code>t2t</code> – <a href="http://txt2tags.org/">txt2tags</a>.</li>
+<li><code>textile</code> – (subsets of) <a href="http://redcloth.org/textile">Textile</a>.</li>
+<li><code>twiki</code> – <a href="http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules">TWiki markup</a>.</li>
+</ul>
+<p>You can view a list of all input formats supported in pandoc by typing:</p>
+<pre class="nohighlight"><code>pandoc --list-input-formats</code></pre>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#about-pandoc">About Pandoc</a></li>
+<li><a href="#about-bbcode">About BBCode</a></li>
+</ul></li>
+<li><a href="#system-requirements">System Requirements</a></li>
+<li><a href="#linux-usage">Linux Usage</a><ul>
+<li><a href="#bbcode">2bbcode</a></li>
+<li><a href="#bbcode_phpbb">2bbcode_phpbb</a></li>
+</ul></li>
+<li><a href="#windows-usage">Windows Usage</a><ul>
+<li><a href="#bbcode-1">2bbcode</a></li>
+<li><a href="#bbcode_phpbb-1">2bbcode_phpbb</a></li>
+</ul></li>
+<li><a href="#pandoc-setup">Pandoc Setup</a><ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#pandoc-supported-input-formats">Pandoc Supported Input Formats</a></li>
+</ul></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

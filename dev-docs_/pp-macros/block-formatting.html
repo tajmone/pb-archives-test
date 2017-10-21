@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Block-Formatting Macros</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>pp-macros</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Block-Formatting Macros</h1>
+
+<p>Macros deinition file: <code>BlockFormatting.pp</code></p>
+<p>Macros list:</p>
+<ul>
+<li><code>!FakeH3</code></li>
+<li><code>!Caption</code></li>
+<li><code>!QuoteSource</code></li>
+</ul>
+<h1 id="quotesource-macro">QuoteSource Macro</h1>
+<p>The <code>!QuoteSource</code> macro is used to render the source of a blockquote.</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">&gt;<span class="dt"> A block quote with some text. Blah, blah, blah.</span>
+<span class="dt">&gt; </span>
+<span class="dt">&gt; </span>
+<span class="dt">&lt;p class=&quot;source&quot;&gt;— the source of the text&lt;/p&gt;</span></code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;blockquote&gt;</span>
+<span class="kw">&lt;p&gt;</span>A block quote with some text. Blah, blah, blah.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;source&quot;</span><span class="kw">&gt;</span>
+— the source of the text
+<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;/blockquote&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<blockquote>
+<p>A block quote with some text. Blah, blah, blah.</p>
+<p class="source">
+— the source of the text
+</p>
+</blockquote>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#quotesource-macro">QuoteSource Macro</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

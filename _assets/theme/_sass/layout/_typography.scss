@@ -1,0 +1,220 @@
+// ******************************************************************************
+// *                                                                            *
+// *                                 TYPOGRAPHY                                 *
+// *                                                                            *
+// ******************************************************************************
+
+// ------------------------------------------------------------------------------
+//                                     HR Fix                                    
+// ------------------------------------------------------------------------------
+// <HR> default settings brokes vertical rythm by a pixel (ie: the height of the
+// border).
+// FIX: make the line 2px high and remove 1px from top and bottom margins.
+hr,
+hr > :first-child {
+  margin: -1px 0;
+  padding: 0;
+  border: 0;
+  // border-top: 1px solid #000;
+  // border-bottom: 1px solid #000;
+  border-color: #000;
+  border-width: 1px 0;
+  border-style: solid;
+}
+
+// ------------------------------------------------------------------------------
+//                                  Justify <P>                                  
+// ------------------------------------------------------------------------------
+p {
+	text-align: justify;
+}
+
+// ------------------------------------------------------------------------------
+//                                    Headings                                   
+// ------------------------------------------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+  @include typeface(headings);  
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+// ------------------------------------------------------------------------------
+//                                 Title/Subtitle                                
+// ------------------------------------------------------------------------------
+h1.title {
+  text-align: center;
+  // border-bottom: 1px solid #eee; // TODO: Use theme var instead!
+  @include margin-bottom(0.5, xxl);
+}
+p.subtitle {
+  @include typeface(headings);
+  text-align: center;
+  font-weight: normal;
+  // @include type-layout(l, 1.5);
+  @include type-layout(l, 1);
+  // @include margin-top(1, l);
+  margin-top: 0;
+  @include margin-bottom(0.5, l);
+  @include padding-top(0.5, l);
+  @include padding-bottom(0.5, l);
+  border-top: 1px solid #eee; // TODO: Use theme var instead!
+
+}
+// ------------------------------------------------------------------------------
+//                                  GFM-TaskList                                 
+// ------------------------------------------------------------------------------
+// Taken and readapted from "github-markdown-css" by Sindre Sorhus (MIT License):
+//  -- https://github.com/sindresorhus/github-markdown-css
+// 
+.task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+:checked+.radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+// ------------------------------------------------------------------------------
+//                                   blockquote                                  
+// ------------------------------------------------------------------------------
+// Adapted from Primer-CSS's (GitHub Inc., MIT License) "markdown-body.scss" file:
+// -- https://github.com/primer/primer-css/blob/master/modules/primer-markdown/lib/markdown-body.scss
+blockquote {
+  padding: 0 1em;
+  color: color(PrimerCSS, gray-500);
+  border-left: 0.25em solid lighten(color(PrimerCSS, gray-300), 5%);
+  margin-left: 0;
+  margin-right: 0;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+// ==============================================================================
+//                                INLINE ELEMENTS                                
+// ==============================================================================
+
+// ------------------------------------------------------------------------------
+//                                <kbd> KEYSTROKES                               
+// ------------------------------------------------------------------------------
+// Adapted from "GitHub Markdown CSS" (c) Sindre Sorhus, MIT License (MIT):
+// -- https://github.com/sindresorhus/github-markdown-css
+// 
+// To make things simpler, we use EMs --- we base our calculations on font-size
+// 11px (ie: as the element shows in a <P>)...
+kbd {
+  display: inline-block;
+
+  // padding: 3px 5px;
+  // padding: 0.2727272727272727em 0.45454545454545453em; // <= exactly: 3px 5px in <p>
+  padding: calculate-em-px(3px, 11px) calculate-em-px(5px, 11px);
+
+  // font-family: monospace, monospace;
+
+  // font-size: 11px; 
+  // font-size: 0.6875em;  // <= exactly 11px in <p>
+  font-size: calculate-em-px(11px, $base-font-size);
+
+  // line-height: 10px;
+  // line-height: 0.9090909090909091em;  // <= exactly 10px in <p>
+  line-height: calculate-em-px(10px, 11px); // approx! = 9.999px
+
+
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #c6cbd1;
+  border-bottom-color: #959da5;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+
+position: relative; // Rise it by 1 px to V-align it nicely in the line.
+// top: -0.09090909090909091em; // <= exactly -1px in <p>
+top: calculate-em-px(-1px, 11px); // <= exactly -1px in <p>
+}
+
+// ------------------------------------------------------------------------------
+//                                     <mark>                                    
+// ------------------------------------------------------------------------------
+// Styling for the <mark> tag and its color variations (handled by PP macros).
+
+// TODO:
+//  -- Create ::seletcion color definitions into Chroma Scheme/Palette!
+
+// PP macro: !mark()
+mark {
+  -webkit-border-radius: 3px;
+  -moz-border-radius:    3px;
+  border-radius:         3px;
+  padding-left:  5px;
+  padding-right: 5px;
+  background-color: color(mark);
+  &::selection {
+    background-color: darken(color(mark), 30%); 
+  }
+}
+
+// PP macro: !markRed()
+mark.red {
+  background-color: color(markRed);
+  &::selection {
+    background-color: darken(color(markRed), 5%); 
+  }
+}
+
+// PP macro: !markGreen()
+mark.green {
+  background-color: color(markGreen);
+  &::selection {
+    background-color: darken(color(markGreen), 30%); 
+  }
+}
+
+// PP macro: !markBlue()
+mark.blue {
+  background-color: color(markBlue);
+  &::selection {
+    background-color: darken(color(markBlue), 15%); 
+  }
+}
+
+// ==============================================================================
+//                                 BLOCK ELEMENTS                                
+// ==============================================================================
+
+// ------------------------------------------------------------------------------
+//                                     FakeH3                                    
+// ------------------------------------------------------------------------------
+// An H3-Like fake heading for out-of-TOC titles, generated with !BigP() macro.
+p.FakeH3 {
+  @include type-layout(l, 1.5);
+  @include margin-top(1, l);
+  @include margin-bottom(1, l);
+}
+
+// ==============================================================================
+//                                    Caption                                    
+// ==============================================================================
+// Used for adding caption to code examples, generated with !Caption() macro.
+p.caption {
+  // font-weight: bold;
+  font-style: italic;
+  color: color(PureBASIC-Palette, Cannon-Pink);
+  margin-bottom: 0;
+}
+// Remove top-margin of Code Blocks following a Caption:
+p.caption + pre {
+  margin-top: 0;
+}

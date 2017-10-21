@@ -1,0 +1,50 @@
+
+// ==============================================================================
+//                                Define @fontFace                               
+// ==============================================================================
+// "@fontFace" mixin v1.0 (20\7-07-23) by Tristano Ajmone
+// 
+// This mixin takes as parameter the font name and the font-file name (if they
+// differ, else just pass the font name), and creates a @font-face definition
+// for that font covering four variants:
+// 
+//  -- Regular 		(font/file name + "-Regular-webfont.woff")
+//  -- Italic 		(font/file name + "-Italic-webfont.woff")
+//  -- Bold 		(font/file name + "-Bold-webfont.woff")
+//  -- Bold Italic 	(font/file name + "-BoldItalic-webfont.woff")
+// 
+// The woff font files must exist in the "../fonts/" folder (relative to CSS file)
+// inside a folder with the same name as the $file parameter for all four style variants.
+
+// NOTE: The second "$file" paramter is optional, and if not passade it defaults
+// 		 to the font name.
+// 
+// NOTE: Only WOFF fonts are taken into consideration (ie: no TTF. EOT, or SVG
+// 		 fonts version) because all modern browser support WOFF.
+
+@mixin fontFace($family, $file: $family) {
+	@font-face {
+		font-family: '#{$family}';
+		src: url('../fonts/#{$file}/#{$file}-Regular-webfont.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: '#{$family}';
+		src: url('../fonts/#{$file}/#{$file}-Italic-webfont.woff') format('woff');
+		font-weight: normal;
+		font-style: italic;
+	}
+	@font-face {
+		font-family: '#{$family}';
+		src: url('../fonts/#{$file}/#{$file}-Bold-webfont.woff') format('woff');
+		font-weight: bold;
+		font-style: normal;
+	}
+		@font-face {
+		font-family: '#{$family}';
+		src: url('../fonts/#{$file}/#{$file}-BoldItalic-webfont.woff') format('woff');
+		font-weight: bold;
+		font-style: italic;
+	}
+}

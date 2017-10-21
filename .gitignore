@@ -1,0 +1,81 @@
+# The PureBASIC Archives
+# https://github.com/tajmone/purebasic-archives
+################################################################################
+## For templates/examples of common gitignore lists, see GitHub's:             #
+## -- https://github.com/github/gitignore                            (CC0-1.0) #
+## and Joe Blau's:                                                             #
+## -- https://www.gitignore.io                                                 #
+################################################################################
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#                                 TEMP PATTERNS                                 
+# //////////////////////////////////////////////////////////////////////////////
+# Exclusion patterns for the alpha-testing stage:
+
+__*
+**/STEPS*
+
+# //////////////////////////////////////////////////////////////////////////////
+
+# ==============================================================================
+#                               EXCLUSION DEFAULTS                              
+# ==============================================================================
+# All files that should be excluded from Git tracking based on their extensions.
+
+
+## =================================
+## DEVS' WORK FILES (ref links, etc)
+## =================================
+*.lnk
+*.url
+
+
+## ============
+## CONFIG FILES
+## ============
+
+
+## PureBASIC Config Files
+## ----------------------
+*.pb.cfg
+*.pbi.cfg
+project.cfg
+
+
+## =================
+## COMPILERS' OUTPUT
+## =================
+
+
+## Executables
+## -----------
+*.exe
+*.app
+
+
+# Shared/Dynamic libraries
+## ------------------------
+*.so
+*.dylib
+*.dll
+
+
+## ===============
+## TEMPORARY FILES
+## ===============
+.sass-cache/
+
+
+# ==============================================================================
+#                               CUSTOM EXCEPTIONS                               
+# ==============================================================================
+# Specific files matching exclusion patterns that should be tracked by Git.
+
+# ============================== Shared libraries ==============================
+# Example to include "some_file.dll" in same folder as ".gitignore" file: 
+# /some_file.dll
+
+
+# ============================= Binary Executables =============================
+

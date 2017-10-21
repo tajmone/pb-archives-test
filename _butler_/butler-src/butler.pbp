@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 5.61 (Windows - x64)">
+  <section name="config">
+    <options closefiles="1" openmode="1" name="Butler"/>
+    <comment>
+      Butler CMS, a PP-Pandoc markdown to html documentation builder for GitHub repos.
+      Copyright (c) 2017 Tristano Ajmone &lt;tajmone@gmail.com&gt;.
+      Released under the MIT License.
+    </comment>
+  </section>
+  <section name="data">
+    <explorer view="D:\Programmazione\PureBasic\Libraries PB\Scintilla\PB Full Examples\" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2017-10-20 10:46" user="P.K.Dick" host="PKDICK-HP"/>
+  </section>
+  <section name="files">
+    <file name="butler-mod_ini.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="9d42dc60cb9a48e93d10531696b30150"/>
+    </file>
+    <file name="butler-mod_msg.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="adc5e044406fce5a7821173adbf6a76c"/>
+    </file>
+    <file name="butler.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="46a7d95fca487367ca9bc975fdb66aa9"/>
+    </file>
+    <file name="mod_fs.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="bb8352bc4e6d658950b5f9776fb49345"/>
+    </file>
+    <file name="mod_ppp.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="a0d698e2aaaf607388cfa0b2ecae367f"/>
+    </file>
+    <file name="mod_text-funcs.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="c51243fc709eec010c382fa5fd3ac6b0"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Default Target" enabled="1" default="1">
+      <inputfile value="butler.pb"/>
+      <outputfile value="../butler.exe"/>
+      <executable value="..\butler.exe"/>
+      <options asm="1"/>
+      <temporaryexe value="source"/>
+      <format exe="console" cpu="0"/>
+    </target>
+  </section>
+</project>

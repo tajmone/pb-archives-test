@@ -1,0 +1,154 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Dräc’s <em>PureBasic and OOP</em></title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../../index.html'>Home</a></li>
+	<li><a href='../../index.html'>tutorials</a></li>
+	<li><a href='../index.html'>oop</a></li>
+	<li><a href='index.html'>drac</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Dräc’s <em>PureBasic and OOP</em></h1>
+
+<p>By «Dräc,» © 2005, license: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p><strong>WIP TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links to <code>index.html</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Asciidoc References
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> 
+</li>
+<p>Remove gfmtoc]</p>
+</ul>
+</div>
+</div>
+<hr />
+<p><strong>TUTORIAL HTML-PREVIEW LINKS:</strong></p>
+<ul>
+<li><p>English version: ( <a href="./en/OOP-Demystified.html">local preview</a> | <a href="http://htmlpreview.github.io/?https://github.com/tajmone/purebasic-archives/blob/master/tutorials/oop/drac/en/OOP-Demystified.html">live preview</a> )</p></li>
+<li><p>French version: ( <a href="./fr/POO-Demystifiee.html">local preview</a> | <a href="http://htmlpreview.github.io/?https://github.com/tajmone/purebasic-archives/blob/master/tutorials/oop/drac/fr/POO-Demystifiee.html">live preview</a> )</p></li>
+</ul>
+<p><strong>NOTE</strong>: If you are viewing this page on GitHub, you’ll need to click the <code>live preview</code> links in order to view the tutorial in HTML.</p>
+<h1 id="about-this-article">About This Article</h1>
+<p>This long tutorials shows, step by step, how to implement the OOP paradigm in PureBASIC. Two approaches to OOP implementation are presented, in order of complexity, with detailed explanations and in-document code examples. Along with the tutorial are provided the fully functional source codes of the two OOP implementations, along with a <code>*.pbi</code> OOP resource reusable in other projects.</p>
+<h2 id="reprint-and-changes">Reprint And Changes</h2>
+<p>This is a reprint of «Dräc»’s multi-part tutorial <em>PureBasic and the Object-Oriented Programming</em> (French title: <em>PureBasic et la Programmation Orientée Objet</em>) also knwon as <em>the OOP demystified</em>, published in 2005 on <a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/indexTutorials_en.htm">drac.site.chez-alice.fr</a>:</p>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm">Original French article</a></li>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm">Original English article</a></li>
+</ul>
+<p>It was reprinted with explicit permission of the author, who released the tutorial text and source codes under Creative Commons Attribution (CC BY 4.0) in response to the permission request to reproduce it inside the <a href="https://github.com/tajmone/purebasic-archives"><strong>PureBASIC Archives</strong></a>.</p>
+<p>The tutorial was ported from HTML to AsciiDoc by Tristano Ajmone, who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the original French tutorial as a reference) — and made minor changes to code examples (either aesthetic or to ensure compatibility with latest version of PureBASIC).</p>
+<h2 id="asciidoc-format">AsciiDoc Format</h2>
+<p>The text was recreated in <a href="http://asciidoc.org/">AsciiDoc</a> format using the <a href="http://www.asciidocfx.com/">AsciidocFX</a> free editor.</p>
+<p>If you wish to edit the AsciiDoc source, and/or compile it to HTML, you might do so with AsciidocFX: it’s a cross-platform, self-contanied and standalone toolchain that doesn’t require installation of Python AsciiDoc or Ruby Asciidoctor.</p>
+<h1 id="files-list">Files List</h1>
+<h2 id="english-tutorial-files">English Tutorial Files</h2>
+<ul>
+<li><a href="./en/"><code>/en/</code></a> – Folder of English article.</li>
+<li><a href="./en/OOP-Demystified.asciidoc"><code>/en/OOP-Demystified.asciidoc</code></a> – AsciiDoc source of English article.</li>
+<li><a href="./en/OOP-Demystified.html"><code>/en/OOP-Demystified.html</code></a> – HTML output of English article.</li>
+<li><a href="./en/OOP-Inheritance-Ex1.pb"><code>/en/OOP-Inheritance-Ex1.pb</code></a> – PureBASIC source of First Example of OOP implementation (English comments and naming convention).</li>
+<li><a href="./en/OOP-Inheritance-Ex2.pb"><code>/en/OOP-Inheritance-Ex2.pb</code></a> – PureBASIC source of Second Example of OOP implementation (EN ver.).</li>
+<li><a href="./en/OOP-Inheritance-Ex2_preprocessed.pb"><code>/en/OOP-Inheritance-Ex2_preprocessed.pb</code></a> – The preprocessed version of <code>./en/OOP-Inheritance-Ex2.pb</code>: contains all included external code, and macros are expanded (orignal macros are kept as comments next to their expanded code), comments are preserved. Included by Tristano Ajmone to simplify analysis of source code.</li>
+<li><a href="./en/OOP.pbi"><code>/en/OOP.pbi</code></a> – PureBASIC include file, imported by Second Example, and reusable in custom OOP-projects (EN ver.).</li>
+</ul>
+<h2 id="french-tutorial-files">French Tutorial Files</h2>
+<ul>
+<li><a href="./fr/"><code>/fr/</code></a> – Folder of French article.</li>
+<li><a href="./fr/POO-Demystifiee.asciidoc"><code>/fr/POO-Demystifiee.asciidoc</code></a> – AsciiDoc source of French article.</li>
+<li><a href="./fr/POO-Demystifiee.html"><code>/fr/POO-Demystifiee.html</code></a> – TML output of French article.</li>
+<li><a href="./fr/POO-Heritage-Ex1.pb"><code>/fr/POO-Heritage-Ex1.pb</code></a> – PureBASIC source of First Example of OOP implementation (French comments and naming convention).</li>
+<li><a href="./fr/POO-Heritage-Ex2.pb"><code>/fr/POO-Heritage-Ex2.pb</code></a> – PureBASIC source of Second Example of OOP implementation (FR ver.).</li>
+<li><a href="./fr/POO-Heritage-Ex2_preprocessed.pb"><code>/fr/POO-Heritage-Ex2_preprocessed.pb</code></a> – – The preprocessed version of <code>./fr/POO-Heritage-Ex2.pb</code>: contains all included external code, and macros are expanded (orignal macros are kept as comments next to their expanded code), comments are preserved. Included by Tristano Ajmone to simplify analysis of source code.</li>
+<li><a href="./fr/POO.pbi"><code>/fr/POO.pbi</code></a> – PureBASIC include file, imported by Second Example, and reusable in custom OOP-projects (FR ver.).</li>
+</ul>
+<h2 id="shared-files">Shared Files</h2>
+<p>These files are required by, and common to, all locale-versions of the tutorial. Don’t rename these files and folders.</p>
+<ul>
+<li><a href="./hjs/"><code>/hjs/</code></a> – Folder containing JavaScript and CSS resources for PureBASIC syntax highlighting in final HTML articles (common to both English and French versions).</li>
+<li><a href="./hjs/highlight.min.js"><code>/hjs/highlight.min.js</code></a> – Highlight.js v9.3.0 prebuilt for PureBASIC (only) syntax highlighting — <a href="https://github.com/tajmone/highlight.js/tree/PureBASIC">modded version</a>, mimicking 100% PB native IDE.</li>
+<li><a href="./hjs/styles/github.min.css"><code>/hjs/styles/github.min.css</code></a> – CSS from modded Highlight.js syntax coloring: theme mimicks PB native IDE. Added a few tweaks to change background of PureBASIC «pseudocode» examples found in tutorial.</li>
+<li><a href="./LICENSE">LICENSE</a> — CC BY 4.0 license terms.</li>
+</ul>
+<h2 id="dev-files">Dev-Files</h2>
+<p>Work files used during republishing the tutorial from HTML to AsciiDoc. Stored here to aid contributors wishing to make changes or translate to other locales.</p>
+<ul>
+<li><a href="./work/"><code>/work/</code></a> – Dev-Files folder.</li>
+<li><a href="./work/DEV-NOTES.md"><code>/work/DEV-NOTES.md</code></a> — Some work notes left behind for contributors.</li>
+<li><a href="./work/ppEnEx2.bat"><code>/work/ppEnEx2.bat</code></a> — The batch script used for creating <code>/en/OOP-Inheritance-Ex2_preprocessed.pb</code>. Works by invoking <code>/work/pppbsource.bat</code>.</li>
+<li><a href="./work/ppEnEx2_header"><code>/work/ppEnEx2_header</code></a> — Text file of the header injected in the final preprocessed version of <code>/en/OOP-Inheritance-Ex2.pb</code>. Adds a description (PB comments) to the preprocessed source.</li>
+<li><a href="./work/ppEnEx2.bat"><code>/work/ppFrEx2.bat</code></a> — The batch script used for creating <code>/fr/POO-Heritage-Ex2_preprocessed.pb</code>. Works by invoking <code>/work/pppbsource.bat</code>.</li>
+<li><a href="./work/ppEnEx2_header"><code>/work/ppFrEx2_header</code></a> — Text file of the header injected in the final preprocessed version of <code>/fr/POO-Heritage-Ex2.pb</code>. Adds a description (PB comments) to the preprocessed source.</li>
+<li><a href="./work/pppbsource.bat"><code>/work/pppbsource.bat</code></a> — The common batch script that handles preprocessing Examples for all locales.</li>
+<li><a href="./work/tutorial_en_code_snippets.pb"><code>/work/tutorial_en_code_snippets.pb</code></a> – All the snippets of PB code and pseudocode found in English tutorial, with reference numbers pointing to HTML comments in AsciiDoc source. This source file was used to auto-indent the snippets in PB IDE and carry out S&amp;R operations.</li>
+<li><a href="./work/tutorial_fr_code_snippets.pb"><code>/work/tutorial_fr_code_snippets.pb</code></a> — same as above, but for French version.</li>
+</ul>
+<h1 id="help-needed-french">HELP NEEDED (FRENCH)!</h1>
+<p>The following files need checking their French, and translation of some parts in English (either is source comments, or added notices or headers/banners):</p>
+<ul>
+<li><a href="./fr/POO-Demystifiee.asciidoc"><code>/fr/POO-Demystifiee.asciidoc</code></a> (translation of copyright notice, proofreading)</li>
+<li><a href="./en/OOP-Inheritance-Ex1.pb"><code>/en/OOP-Inheritance-Ex1.pb</code></a> (translation of header comments)</li>
+<li><a href="./en/OOP-Inheritance-Ex2.pb"><code>/en/OOP-Inheritance-Ex2.pb</code></a> (translation of header comments)</li>
+<li><a href="./fr/POO.pbi"><code>/fr/POO.pbi</code></a> (translation of comments)</li>
+<li><a href="./work/ppEnEx2_header"><code>/work/ppFrEx2_header</code></a> (translation of header comments text)</li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#about-this-article">About This Article</a><ul>
+<li><a href="#reprint-and-changes">Reprint And Changes</a></li>
+<li><a href="#asciidoc-format">AsciiDoc Format</a></li>
+</ul></li>
+<li><a href="#files-list">Files List</a><ul>
+<li><a href="#english-tutorial-files">English Tutorial Files</a></li>
+<li><a href="#french-tutorial-files">French Tutorial Files</a></li>
+<li><a href="#shared-files">Shared Files</a></li>
+<li><a href="#dev-files">Dev-Files</a></li>
+</ul></li>
+<li><a href="#help-needed-french">HELP NEEDED (FRENCH)!</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Typography CSS Tests</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>html-tests</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Typography CSS Tests</h1>
+
+<hr />
+<h1 id="test-custom-code-css">Test Custom Code CSS</h1>
+<p>Lorem markdownum quoniam specie adsumpserat quo ora habet retinacula miserata in essent Thybris ab concita mactatarumque, <strong>sidera</strong>? At aethera, petii via spuma, Aegides, teneat evolvere erat, nec et. Uni Achaidas accipe videndi, querenti cinguntur trabeati <em>addiderat duobus ut</em> loris et <strong>Virbius manat</strong>, Iove.</p>
+<p>Test external custom CSS (“<code>test-typography2.css</code>”) for fine-tuning <code>code</code> elements.</p>
+<hr />
+<h1 id="columns-ruler">80 Columns Ruler</h1>
+<pre><code>12345678901234567890123456789012345678901234567890123456789012345678901234567890
+        10        20        30        40        50        60        70        80</code></pre>
+<hr />
+<h1 id="inline-code">Inline Code</h1>
+<p>This is an <code>inline code</code> element. This is an <code>inline code</code> element. This is an <code>inline code</code> element. This is an <code>inline code</code> element. This is an <code>inline code</code> element. This is an <code>inline code</code> element. This is an <code>inline code</code> element.</p>
+<hr />
+<h1 id="zxxxx">zxxxx</h1>
+<h1 id="h1-with-inline-code-inline">H1 With <code>inline code</code> Inline</h1>
+<h2 id="h2-with-inline-code-inline">H2 With <code>inline code</code> Inline</h2>
+<h3 id="h3-with-inline-code-inline">H3 With <code>inline code</code> Inline</h3>
+<h4 id="h4-with-inline-code-inline">H4 With <code>inline code</code> Inline</h4>
+<h5 id="h5-with-inline-code-inline">H5 With <code>inline code</code> Inline</h5>
+<h6 id="h6-with-inline-code-inline">H6 With <code>inline code</code> Inline</h6>
+<h1 id="h1-with-inline-code">H1 <em>With <code>inline</code> code</em></h1>
+<h1 id="h1-with-inline-code-1">H1 With <code>inline</code> code</h1>
+<p>Lorem ipsum.</p>
+<p><code>just inline</code></p>
+<p>Lorem ipsum.</p>
+<hr />
+<h2 id="inline-with-attributes">Inline With Attributes</h2>
+<p>L’estensione <code>inline_code_attributes</code> (abilitata di default) consente un controllo granulare sugli stili del codice inline, ed assegnando l’attributo di un linguaggio esegue pure il syntax highglighting:</p>
+<blockquote>
+<p><strong>Extension</strong>: <code>inline_code_attributes</code></p>
+<p>Attributes can be attached to verbatim text, just as with [fenced code blocks]:</p>
+<pre><code>`&lt;$&gt;`{.haskell}</code></pre>
+</blockquote>
+<p>Un mio test:</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre><code>Inline Python: `s = &#39;The value of x is &#39; + repr(x)`{.python}.</code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;p&gt;</span>Inline Python: <span class="kw">&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode python&quot;</span><span class="kw">&gt;</span>s <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;op&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;st&quot;</span><span class="kw">&gt;</span>&#39;The value of x is &#39;<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;op&quot;</span><span class="kw">&gt;</span>+<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;bu&quot;</span><span class="kw">&gt;</span>repr<span class="kw">&lt;/span&gt;</span>(x)<span class="kw">&lt;/code&gt;</span>.<span class="kw">&lt;/p&gt;</span></code></pre></div>
+<p>… come vedi, ha eseguito il syntax highlighting dell’inline-code!!</p>
+<p><strong>HTML RESULT:</strong></p>
+<p>Inline Python: <code class="sourceCode python">s <span class="op">=</span> <span class="st">&#39;The value of x is &#39;</span> <span class="op">+</span> <span class="bu">repr</span>(x)</code>.</p>
+<h1 id="preformatted-blocks">Preformatted Blocks</h1>
+<p>In order to achieve a simple <code>&lt;pre&gt;</code> block (not followed by <code>&lt;code&gt;</code>)…</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+<pre>I'm a preformatted block, no code inside</pre>
+<h1 id="non-highlighted-code-blocks">Non-Highlighted Code Blocks</h1>
+<p>To define a code block without any highlighting, just enclosed it in tildas or backticks (fenced code), or use indentation (4 spaces or one Tab).</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<p>fenced (backticks):</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
+For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next
+```</code></pre></div>
+<p>identented (4 spaces):</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">    For i=1 To 10</span>
+<span class="bn">      Debug(&quot;Counting &quot; + Str(i))</span>
+<span class="bn">    Next</span></code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+<pre><code>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next</code></pre>
+<h1 id="pandoc-highlighting">Pandoc Highlighting</h1>
+<h2 id="line-numbers">Line Numbers</h2>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}
+qsort []     = []
+qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
+<span class="bn">               qsort (filter (&gt;= x) xs)</span>
+~~~~</code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> startfrom=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;table</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell numberLines&quot;</span><span class="kw">&gt;&lt;tbody&gt;&lt;tr</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;lineNumbers&quot;</span><span class="kw">&gt;&lt;pre&gt;</span>100
+101
+102
+<span class="kw">&lt;/pre&gt;&lt;/td&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell&quot;</span><span class="kw">&gt;</span>qsort []     <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> []
+qsort (x<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>:<span class="kw">&lt;/span&gt;</span>xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;lt;</span><span class="kw">&lt;/span&gt;</span> x) xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span> [x] <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span>
+               qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;gt;</span>=<span class="kw">&lt;/span&gt;</span> x) xs)<span class="kw">&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</span></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+<div class="sourceCode" id="mycode" startFrom="100"><table class="sourceCode haskell numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>100
+101
+102
+</pre></td><td class="sourceCode"><pre><code class="sourceCode haskell">qsort []     <span class="fu">=</span> []
+qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span>
+               qsort (filter (<span class="fu">&gt;=</span> x) xs)</code></pre></td></tr></table></div>
+<hr />
+<h1 id="highlight">Highlight</h1>
+<h2 id="block-simple">Block Simple</h2>
+<pre class="purebasic ; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next"><code class="purebasic ; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next"></code></pre>
+<h2 id="block-with-line-numbers">Block With Line Numbers</h2>
+<pre class="purebasic ; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next"><code class="purebasic ; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next"><span class="hl lin">1 </span></code></pre>
+<h2 id="section">——</h2>
+<h1 id="snippets">SNIPPETS</h1>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"></code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#test-custom-code-css">Test Custom Code CSS</a></li>
+<li><a href="#columns-ruler">80 Columns Ruler</a></li>
+<li><a href="#inline-code">Inline Code</a></li>
+<li><a href="#zxxxx">zxxxx</a></li>
+<li><a href="#h1-with-inline-code-inline">H1 With <code>inline code</code> Inline</a><ul>
+<li><a href="#h2-with-inline-code-inline">H2 With <code>inline code</code> Inline</a></li>
+</ul></li>
+<li><a href="#h1-with-inline-code">H1 <em>With <code>inline</code> code</em></a></li>
+<li><a href="#h1-with-inline-code-1">H1 With <code>inline</code> code</a><ul>
+<li><a href="#inline-with-attributes">Inline With Attributes</a></li>
+</ul></li>
+<li><a href="#preformatted-blocks">Preformatted Blocks</a></li>
+<li><a href="#non-highlighted-code-blocks">Non-Highlighted Code Blocks</a></li>
+<li><a href="#pandoc-highlighting">Pandoc Highlighting</a><ul>
+<li><a href="#line-numbers">Line Numbers</a></li>
+</ul></li>
+<li><a href="#highlight">Highlight</a><ul>
+<li><a href="#block-simple">Block Simple</a></li>
+<li><a href="#block-with-line-numbers">Block With Line Numbers</a></li>
+<li><a href="#section">——</a></li>
+</ul></li>
+<li><a href="#snippets">SNIPPETS</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

@@ -1,0 +1,508 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>TODOs</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Tristano Ajmone">
+		<meta name="dcterms.date" content="2017-10-14">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../index.html'>Home</a></li>
+	<li><a href='index.html'>dev-docs</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBASIC Archives: TODOs List</h1>
+
+<h1 id="todo-before-publishing">TODO Before Publishing</h1>
+<p>The following tasks must be fulfilled before publishing on GitHub:</p>
+<h2 id="miscellanea">Miscellanea</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Cleanup all folders
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Create Git files:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> <code>.gitattributes</code>
+</li>
+to handle EOL normalization.
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <code>.gitignore</code>:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>*.url</code> and <code>*.lnk</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add <code>__*</code> pattern (etc) for temp &amp; backup files
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="pp-macros">PP Macros</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>README.md</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>LICENSE</code> file (MIT)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Clean up code to make them similar
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Remove Inline-CSS Macros
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Highlight macros:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Cover all variants for PB and Fasm
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create Pandoc/Skylighting macros too
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Inline macros:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create text color macros (<code>red</code>, <code>green</code>, etc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create CSS classes for text color macros
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create Anchor macro (for linking)
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Verbatim macros:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create a <code>Pre</code> macro, and some variants that can handle either classes and BG color.
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> MISC MACROS
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Quotation source macro (aligns right)
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="theme">Theme</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Theme Credits:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Credit PB Logo
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Theme:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Move to <code>/_assets/theme/</code>
+</li>
+and change template links
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Define/fix styles:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Tables Styles
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix inline code colors
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix top margin of H1-H6 headers inside alters (first header no spacing!)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Define Quotation Source class
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Define <code>&lt;pre&gt;</code> and simple <code>&lt;pre&gt;&lt;code&gt;</code> colors
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create fallback Highlight theme
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create fallback Skylight theme
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Chroma:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Rename <code>\settings\_colors.scss</code> to <code>_chroma.scss</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Rename <code>\colors\</code> folder to <code>\palettes\</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Define theme palette (<em>WIP</em>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Theme colors handled by Chroma
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Define/Fix Chroma color schemes used by Normalize-scss:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> See: <code>/normalize-scss/init/_colors.scss</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> See: <a href="../_assets/_sass/Results-Normalize-scss.txt"><code>Results-Normalize-scss.txt</code></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Typey:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> fix font stacks using proper func
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Syntax Highlighting:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> PureBASIC: Add border
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="butler">Butler</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> LICENSE:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>LICENSE</code> file
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add PB standard license file + PCRE to <code>LICENSE</code> file
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add license in source headers’ comments
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Implement check Butler version
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Win: Implement check Bash only
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Move all TODOs from <code>TODO</code> file here
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Deploy:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Implement Deploy code.
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Implement creating <code>.nojekyll</code> file.
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Implement <code>DEPLOY.gitignore</code>, etc.
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> PB Proj file issue — resolve problem of proj file by:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <strong>a)</strong> creating a proj file template (eg: <code>_Butler.pbp</code>) with some XML fields remove to copy and rename (ie: <code>_Butler.pbp</code>) and add its name to <code>.gitignore</code> so that when the user saves the project it doesn’t create a false commit! The problem with this approach is that if I change the proj template file users might not be aware of it!
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <strong>b)</strong> create a small PB app that cleans up the project file of all spurious fields, and invoke it before commiting.
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="pandoc-template">Pandoc template</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Metadata:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>keywords</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>description</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>date</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>meta-title</code> and <code>$if$</code> cross-checks with <code>title</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>author-meta</code> (and not <code>author-meta</code>)
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create footer
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Finish header and add PB Logo
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Sidebar Ideas:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <code>$ignore-toc$</code>: if true, don’t add TOC in sidebar (for indexes)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Some var that if true adds side banner? (raw html?)
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="sass-folder">Sass Folder</h2>
+<p>I must fix all the files in the Sass folder so that I can publish it without worries:</p>
+<h3 id="vendors">Vendors</h3>
+<p>Check these:</p>
+<ul>
+<li>Make sure the <code>LICENSE</code> file is in place (rename it if name differs)</li>
+<li>Rename the original <code>README.md</code> file to <code>LIBNAME_README.md</code></li>
+<li>Add my own <code>README.md</code> file stating changes.</li>
+</ul>
+<p>For all vendors:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Normalize-scss
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Chroma
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Typey
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Gridle
+</li>
+</ul>
+<p>Also check:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> <code>LICENSE</code> files are in <code>CRLF</code>
+</li>
+</ul>
+<h3 id="sass-source-files">Sass source files</h3>
+<p>In my scss source files, check that:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Comments with License attributions are correct
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Derivative files (copy &amp; paste) mention their source
+</li>
+</ul>
+<hr />
+<h2 id="licenses">Licenses</h2>
+<p>Check that all the license files and credits are in place…</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Create Theme (non Sass) license file (MIT):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit GitHub’s Primer CSS
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit syntax Themes
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit Chroma
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit Typey
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit Gridle
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit Normalize-scss
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit inspirational material/tutorials
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Create Sass license file (GPLv2):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit GitHub’s Primer CSS
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit syntax Themes
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Credit inspirational material/tutorials
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Sass vendors (Include License files):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Chroma
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Typey
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Gridle
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Normalize-scss
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Baseline: add license file and mention it
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Sass vendors: Rename <code>README.md</code> and <code>LICENSE</code> files
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Sass vendors: Add my <code>README.md</code> file
+</li>
+</ul>
+<hr />
+<h1 id="long-term-todos">Long-Term TODOs</h1>
+<p>The following tasks are for the long-term planning, and can be taken care even after publishing on GitHub:</p>
+<h2 id="sasscss">Sass/CSS</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add FontAwesome Sass code
+</li>
+</ul>
+<h2 id="pandoc-template-1">Pandoc Template</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Make sidebar after TOC usable on demand
+</li>
+</ul>
+<h2 id="butler-1">Butler</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Implement functionality:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> download/update PP
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> download/update Pandoc
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> download/update Highlight
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> version constraints <code>~</code> and <code>^</code> (SemVer and Ver)
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Implement options:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <code>--dry-run</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <code>--unbuild</code> (folder and All)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <code>--undeploy</code>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <code>--create-ini</code>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="pp-macros-1">PP Macros</h2>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Create Licenses macros (to emit tables like on <a href="https://choosealicense.com">choosealicense.com</a>)
+</li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#todo-before-publishing">TODO Before Publishing</a><ul>
+<li><a href="#miscellanea">Miscellanea</a></li>
+<li><a href="#pp-macros">PP Macros</a></li>
+<li><a href="#theme">Theme</a></li>
+<li><a href="#butler">Butler</a></li>
+<li><a href="#pandoc-template">Pandoc template</a></li>
+<li><a href="#sass-folder">Sass Folder</a></li>
+<li><a href="#licenses">Licenses</a></li>
+</ul></li>
+<li><a href="#long-term-todos">Long-Term TODOs</a><ul>
+<li><a href="#sasscss">Sass/CSS</a></li>
+<li><a href="#pandoc-template-1">Pandoc Template</a></li>
+<li><a href="#butler-1">Butler</a></li>
+<li><a href="#pp-macros-1">PP Macros</a></li>
+</ul></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

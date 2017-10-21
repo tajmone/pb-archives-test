@@ -1,0 +1,157 @@
+// ******************************************************************************
+// *                                                                            *
+// *                                   LAYOUT                                   *
+// *                                                                            *
+// ******************************************************************************
+
+/* ******************************************************************************
+   *                                                                            *
+   *                                   LAYOUT                                   *
+   *                                                                            *
+   ******************************************************************************/
+
+// ==============================================================================
+//                                     GRIDLE                                    
+// ==============================================================================
+// "Gridle" v2.0.47 (2016/06/24):
+// 	-- http://gridle.org/
+// 	-- https://github.com/Coffeekraken/gridle
+
+// import gridle
+@import "../vendors/gridle/gridle"; // <= Float based grid (ie: non-Flex)
+
+// ------------------------------------------------------------------------------
+//                                1. Gridle Setup                                
+// ------------------------------------------------------------------------------
+// First, we need to setup the grid
+@include gridle_setup( (
+    context       : 12,
+    gutter-width  : 24px, // WAS: 20px
+) );
+// default settings:
+//     context : 12,           // number of columns in your grid
+//     column-width : null,    // by default it's percentage based depending on the context but you can specify a column width yourself
+//     gutter-width : 20px,    // size of the gutters
+//     gutter-height : 0,      // size of top and bottom gutters
+//     gutter-top    : 0,      // size of top gutter
+//     gutter-bottom : 0,      // size of bottom gutter
+//     gutter-left   : 10px,   // size of left gutter
+//     gutter-right  : 10px,   // size of right gutter
+//     direction : ltr,        // direction
+//     dir-attribute : false,  // if need to generate support for dir="rtl" in order to set part of layout direction
+//     states-classes : false, // if we need to generate the states classes
+//     name-multiplicator : 1, // if 5, generate gr-5, gr-10, etc...
+//     classes-prefix : ''     // the prefix used for all classes 
+
+// ------------------------------------------------------------------------------
+//                              2. Initialize Gridle                             
+// ------------------------------------------------------------------------------
+// When using gridle with the mixins, you have to init it in order to avoid some
+// potential issues with libsass. You have to call the gridle_init() mixin AFTER
+// the section where you have all your gridle setup kind of mixins (this includes
+// gridle_setup, gridle_register_states, etc...) and BEFORE you call any gridle
+// mixins that generate css output like gridle, gridle_container, etc...
+@include gridle_init();
+// ------------------------------------------------------------------------------
+//                           3. Gridle Layout (Mixins)                           
+// ------------------------------------------------------------------------------
+
+
+/* ==== Gridle classes ==== */
+
+// generate classes :
+// @include gridle_generate_classes ( );
+
+div.gridle-row {
+  @include gridle_row();
+}
+/* ==== Layout Settings ==== */
+
+// manage container width :
+#container,
+div.gidle-row {
+  @include gridle_container(); // set a clearfix to avoid any problems
+  // width :     1200px;
+  // min-width : 1200px;
+  max-width : 1200px;
+  margin : 0 auto;
+}
+
+#siteheader {
+  @include gridle_grid ( 12 );
+  // height: $base-line-height * 8;
+  height: 144px; // = $base-line-height * 6
+  background-image: url("../PureBasic-Archives.png");
+}
+
+#breadcrumbs {
+  @include gridle_grid ( 12 );
+  background-image: url("../breadcrumbs-bg.png");
+  // border-width: 2px 0;
+  // border-color:     color(PureBASIC-Palette, Tradewind);
+  // background-color: color(PureBASIC-Palette, Half-and-Half);
+  // border-style: solid;
+	height: $base-line-height * 2;        // <= 48px
+  @include font-size(s);                // <= 14px
+  @include padding(0.5);                // <= 12px 
+}
+
+#document {
+  @include gridle_grid ( 9 );
+	// border-right: 2px solid #000;
+}
+
+#sidebar {
+  @include gridle_grid ( 3 );
+	// background-color: rgba(255,0,0,0.1);
+}
+
+// ==============================================================================
+//                                  BREAD CRUMBS                                 
+// ==============================================================================
+// Adapted  by by Tristano Ajmone from Sebastiano Guerriero's tutorial and code:
+// https://codyhouse.co/gem/css-breadcrumbs-and-multi-step-indicator/
+
+
+/* breadcrumbs */
+
+#breadcrumbs {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  ol,
+  ol li {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    float: left;
+
+    &::after {
+      display: inline-block;
+      content: '\00bb'; // <= Separator char "»"
+      margin: 0 6px;
+      color: color(Breadcrumbs-Separator);
+    }
+    &::last-of-type::after {
+      display: none;  // hide separator after the last item 
+    }
+  }
+  a {
+    &:link,
+    &:visited,
+    &:active {
+      color: color(Breadcrumbs-Link);
+    }
+    &:hover {
+      color: color(Breadcrumbs-Link-Hover);
+      font-weight: bold;
+    }
+    text-decoration: none;
+  }
+}

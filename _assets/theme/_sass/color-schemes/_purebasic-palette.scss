@@ -1,0 +1,20 @@
+// ******************************************************************************
+// *                                                                            *
+// *                          PUREBASIC COLOR PALETTE                           *
+// *                                                                            *
+// ******************************************************************************
+// Define (via Chroma) the colors palette used by PureBASIC's native IDE.
+
+
+$chroma: define-color-scheme('PureBASIC-Palette', 'PureBASIC IDE colors palette');
+
+
+$chroma: add-colors('PureBASIC-Palette', (
+	Blue-Stone: 	#006666, // PureBASIC Keywords
+	Half-and-Half:  #ffffdf, // (Pale yellow) IDE Background
+	Black: 			#000000, // Normal Text + Numbers + Operators
+	Azure-Radiance: #0080ff, // Strings
+	Tradewind: 		#00aaaa, // (Green) Comments
+	Gray: 			#808080, // Line numbers
+	Cannon-Pink: 	#924b72, // Constants + Inline ASM + ASM Keywords
+));

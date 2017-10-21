@@ -1,0 +1,96 @@
+// ******************************************************************************
+// *                                                                            *
+// *                             FASM SYNTAX THEME                              *
+// *                                                                            *
+// ******************************************************************************
+// Syntax highlighting theme for Fasm code (using André Simon's Highlight).
+// Designed by Tristano Ajmone.
+
+// NOTES:
+// -- Some of the Highlight tokens defined here are actually unused by Fasm syntax
+//    (for the time being I left them here, I shall clean them up later).
+
+// UNUSED PALETTE COLORS:
+//  -- base01 // Tuatara ( almost black )
+//  -- base06 // Cararra ( light gray )
+//  -- base07 // Pampas ( light gray )
+//  -- base09 // Atomic Tangerine ( orange )
+//  -- base0F // Raw Sienna ( brownish )
+
+// ------------------------------------------------------------------------------
+//                                      TODO                                     
+// ------------------------------------------------------------------------------
+// - [ ] Check Syntax file & Remove unused tokens 
+// - [X] replace colors values with Sass/Chroma vars
+// - [ ] Define and test Line numbers FG/BG
+
+// Change active Chroma scheme to "Base16 Eigthies":
+$chroma-active-scheme: 'b16-Eighties';
+
+/* ============ FASM ============ */
+pre.fasm,
+code.fasm	{
+	color: color(base05); 					// Timberwolf ( gray )
+	background-color: color(base00); 		// Mine Shaft ( black )
+}
+
+code.fasm	{
+
+	.hl.num {
+		// Numbers
+		color: color(base0A); 				// Golden Tainoi ( yellow )
+	}
+	.hl.opt {
+		// Operators
+		color: color(base0C);				// Downy ( cyan )
+	}
+	.hl.str,
+	.hl.esc,
+	.hl.pps,
+	.hl.ipl {
+		// String + Escape sequences in strings +
+		// String within preprocessor directives +
+		// Interpolation
+		background-color: color(base02);	// Fuscous Gray
+		color: color(base0B);				// Moss Green
+	}
+	.hl.slc,
+	.hl.com {
+		// Comments (Single Line & Block ) 
+		color: color(base04); 				// Lemon Grass ( mid grayish )
+		font-style: italic;
+	}
+	.hl.lin {
+		// Line numbers
+		color: color(base03);				// Flint ( dark gray )
+	}
+	.hl.kwa {
+		// REGISTERS
+		color: color(base08);				// Froly ( red )
+	}
+	.hl.kwb {
+		// INSTRUCTIONS
+		color: color(base0D);				// Danube ( blue )
+		font-weight: bold;
+	}
+	.hl.kwc {
+		// LABELS
+		background-color: color(base08); 	// Froly ( red )
+		color: color(base00);				// Mine Shaft ( black )
+		font-weight: bold;
+		&::before {
+			content: "\2009"; // Thin-space ( &thinsp; )
+		}
+		&::after {
+			content: "\2009";
+		}
+	}
+	.hl.kwd {
+		// DIRECTIVES
+		color: color(base0E);				// Lilac ( purple )
+		font-weight: bold;
+	}
+}
+
+// Restore Chroma's default active scheme:
+$chroma-active-scheme: 'theme';

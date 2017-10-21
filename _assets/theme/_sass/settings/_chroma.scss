@@ -1,0 +1,78 @@
+//  was "vendors/normalize-scss/init/_colors.scss"
+
+// ******************************************************************************
+// *                                                                            *
+// *                           CHROMA COLORS SETTINGS                           *
+// *                                                                            *
+// ******************************************************************************
+
+
+// Colors
+//
+// Use the `color()` function to add colors to CSS properties. To learn more,
+// [read the Chroma documentation](http://johnalbin.github.io/chroma/).
+
+// ==============================================================================
+//                              DEFINE COLOR SCHEMES                             
+// ==============================================================================
+// The Chroma lib allows defining different color schemes. There is a default
+// root scheme which has no parent; all other schemes inherit from either the
+// default scheme or one of its children.
+
+// We'll be using the following color shcemes (hierarchical diagram):
+// 
+// 'theme-palette'             <= (default) The theme's color palette.
+//   ├── 'theme'               <= The theme's color scheme.
+//   ├── 'PureBASIC-Palette'   <= PB's IDE color palette.
+//   ├── 'b16-Eighties'        <= Fasm highlithing palette (and YASM when available)
+//   │
+ 
+// NOTE: For the difference between "palettes" and "schemes" in this context,
+//       see below.
+// ==============================================================================
+//                        DEFAULT SCHEME: "THEME-PALETTE"                        
+// ==============================================================================
+// Rename the default color scheme name to "theme-palette" (was "default").
+// This is the main colors palette for the website's theme and must  be at the
+// top of the hierarchy so that all schemes can inherit it.
+$chroma: define-default-color-scheme('theme-palette', 'Colors palette of the website template.');
+
+// ==============================================================================
+//                         LOAD COLOR PALETTES & SCHEMES                         
+// ==============================================================================
+// Color palettes define a list of colors (color name + color value).
+// Color schemes assign palette colors to various theme elements (eg. borders,
+// headings text color, etc).
+// Palettes and schemes are kept separate because different schemes might share
+// colors from the same palettes. Therefore, all palettes must be imported
+// before importing the actual color schemes.
+// 
+// The main difference between palettes and schemes is that schemes are an
+// intermediate step in the definition of colors for the theme's functional
+// elements (eg: 'link' and 'link-visited'). This allows controlling all the
+// color definitions for functional elements from a single file, instead of 
+// having to change multiple scss modules. The advantage of a separate palette
+// file consists in working with human friendly color names in the schemes,
+// instead of hex values.
+
+// ------------------------------------------------------------------------------
+//                              LOAD COLOR PALETTES                              
+// ------------------------------------------------------------------------------
+// Load the modules that define the color palettes ...
+
+@import 'color-schemes/purebasic-palette'; // PureBASIC palette
+@import 'color-schemes/base16-eighties';   // Base16 "Eighties" palette for FASM
+@import 'color-schemes/primercss-palette'; // GitHub color palette (Primer CSS)
+@import 'color-schemes/theme-palette';     // Theme palette
+
+// ------------------------------------------------------------------------------
+//                               LOAD COLOR SCHEMES                              
+// ------------------------------------------------------------------------------
+// Load the modules that define and populate the color schemes ...
+
+@import 'color-schemes/theme-scheme'; // Theme color scheme
+
+
+
+
+

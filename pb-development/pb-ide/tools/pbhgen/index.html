@@ -1,0 +1,158 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PBHGEN – PureBasic Header Generator</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../../../index.html'>Home</a></li>
+	<li><a href='../../../index.html'>pb-development</a></li>
+	<li><a href='../../index.html'>pb-ide</a></li>
+	<li><a href='../index.html'>tools</a></li>
+	<li><a href='index.html'>pbhgen</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PBHGEN – PureBasic Header Generator</h1>
+
+<p>Will read a <a href="http://www.purebasic.com/">PureBasic</a> source file (<code>*.pb</code>) and generate a header out of it (<code>*.pbi</code>). <code>Declare</code> statements are automatically generated for every procedure.</p>
+<p>This program also works with <a href="https://www.spiderbasic.com/">SpiderBasic</a>.</p>
+<h1 id="useful-links">Useful Links</h1>
+<ul>
+<li><a href="http://00laboratories.com/downloads/dl-pbhgen/">Project HomePage</a></li>
+<li><a href="http://00laboratories.com/download_file/6">Precompiled Binary for PureBasic 5.42</a></li>
+<li><a href="https://dl.dropboxusercontent.com/u/19541374/00laboratories/downloads/PBHGEN/PBHGEN.7z">Precompiled Binary for PureBasic 5.42 - mirror</a></li>
+<li><a href="http://www.purebasic.fr/english/viewtopic.php?f=27&amp;t=53414">Official PureBasic Thread</a></li>
+</ul>
+<h1 id="usage-instructions">Usage Instructions</h1>
+<p>Under “<strong>Tools</strong>” in the PureBasic IDE add a new tool called “<code>PBHGEN</code>”:</p>
+<ul>
+<li>At <strong>Commandline</strong> select your copy of <code>PBHGEN.exe</code>.</li>
+<li>At <strong>Arguments</strong> type <code>%FILE</code>.</li>
+<li>At <strong>Event to trigger the tool</strong> select “<strong>Sourcecode Saved</strong>”.</li>
+</ul>
+<p>Ensure you include your headers in the Source using:</p>
+<div class="sourceCode"><pre class="sourceCode purebasic"><code class="sourceCode purebasic"><span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;i&quot;</span> <span class="co">;- PBHGEN</span></code></pre></div>
+<p>To use automatic header generation also in modules use:</p>
+<div class="sourceCode"><pre class="sourceCode purebasic"><code class="sourceCode purebasic"><span class="kw">Module</span> MyModule
+  <span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;.i&quot;</span> <span class="co">;- PBHGEN</span>
+<span class="kw">EndModule</span></code></pre></div>
+<h1 id="remarks">Remarks</h1>
+<p>At the moment if you wish to have a procedure with structured List/Array/Map arguments, you will have to put that procedure above the code where you call it from. This does not apply when using basic types and is a limitation of PureBasic.</p>
+<h1 id="motivation">Motivation</h1>
+<p>PureBasic is a great language but I was always annoyed about the fact I could never choose where I would locate my Procedures, if I wished to use a Procedure somewhere I would have to move it above of the Procedure that was going to call it, the Declare statement allows to tell the compiler specific Procedures are going to exist and to find them but writing them over and over, fixing arguments is not only a pain but makes your source look like a mess. That’s the reason I required an automatic header generator for PureBasic. I hope you too will enjoy the new freedom thanks to this little tool!</p>
+<h1 id="changes">Changes</h1>
+<p><strong>V5.42</strong></p>
+<ul>
+<li>Added SpiderBasic header generation support.</li>
+</ul>
+<p><strong>V5.31e</strong></p>
+<ul>
+<li>Fixed a comment after <code>EndProcedure</code> / <code>EndModule</code> / <code>EndMacro</code> skipping the next procedure declaration.</li>
+<li>Now ignoring content between <code>Macro</code> / <code>EndMacro</code> statements.</li>
+</ul>
+<p><strong>V5.31d</strong></p>
+<ul>
+<li>Fixed case where the compiler directives failed when a module is declared above global procedures.</li>
+</ul>
+<p><strong>V5.31c</strong></p>
+<ul>
+<li>Using compiler directives to remove the need of multiple files for modules.</li>
+</ul>
+<p><strong>V5.31b</strong></p>
+<ul>
+<li>Improved parsing engine to comply with latest PureBasic syntax.</li>
+<li>Optimized header file content and size.</li>
+<li>Now supports any amount of spaces in front of a procedure.</li>
+<li>Treats a colon seperator as a new line to allow multiple declarations on a single line.</li>
+<li>Added support for module header generation (requires additional files and include lines in source code).</li>
+</ul>
+<p><strong>V5.31</strong></p>
+<ul>
+<li>Now naming version after PureBasic’s version when possible.</li>
+<li>Added support for Runtime procedure statements.</li>
+<li>Added support for case independent keyword detection.</li>
+<li>Improved <code>ProcedureDLL</code> and <code>ProcedureCDLL</code> with appropriate <code>DeclareDLL</code> and <code>DeclareCDLL</code>.</li>
+</ul>
+<p><strong>V0.9</strong></p>
+<ul>
+<li>Fixed issue with multiline arguments. Thanks majikeyric for pointing this out.</li>
+</ul>
+<p><strong>V0.8</strong></p>
+<ul>
+<li>Fixed issue with a space in the directory/file path of source file.</li>
+</ul>
+<p><strong>V0.7</strong></p>
+<ul>
+<li>Stops when encountering the statement seperator “<code>:</code>” or comment “<code>;</code>” operators.</li>
+</ul>
+<p><strong>V0.6</strong></p>
+<ul>
+<li>Fixed issue where array arguments would still have impossible structures.</li>
+<li>Added support for structured List/Array/Map arguments with some conditions.</li>
+<li>Added support for all basic types when used with List/Array/Map arguments.</li>
+</ul>
+<p><strong>V0.5</strong></p>
+<ul>
+<li>Fixed issue where a <code>*pointer.structure</code> had no default parameter.</li>
+<li>Fixed issue with a string as custom parameter, it was not escaped.</li>
+</ul>
+<p><strong>V0.4</strong></p>
+<ul>
+<li>Fixed issue where a <code>*pointer</code> would cause further Procedure Parameters to lose their types.</li>
+</ul>
+<p><strong>V0.3</strong></p>
+<ul>
+<li>Fixed issue with Structured List/Array/Map in Procedure Parameters.</li>
+</ul>
+<p><strong>V0.2</strong></p>
+<ul>
+<li>Fixed issue with Structure Pointers in Procedure Parameters, transforms to Pointers now.</li>
+</ul>
+<p><strong>V0.1</strong></p>
+<ul>
+<li>Initial Design</li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#useful-links">Useful Links</a></li>
+<li><a href="#usage-instructions">Usage Instructions</a></li>
+<li><a href="#remarks">Remarks</a></li>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#changes">Changes</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

@@ -1,0 +1,32 @@
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                              BUTLER USAGE NOTES                              
+//////////////////////////////////////////////////////////////////////////////
+MARKDOWN SOURCE FILES :: Butler will convert any "*.markdown" file to HTML
+    -- "*.markdown" files are always source files (build but don't deploy) and
+       they must be in Pandoc Markdown format.
+       -- "_*.markdown" files (ie: name starts with underscore) are excluded
+          from building. This is useful for reusable markdown snippets that
+          are included in various docs but are not standalone docs (see below).
+    -- "*.md" files are GitHub Flavored Markdown files and butler will treat
+       them as ordinary files.
+
+    The rationale for this distinction is that the ".md" extension is the most
+    commnly used for markdown files found inside projects; so Butler expects
+    that files with this extension are part of a subproject documentation.
+    Also, this allows using the ".md" extension for developer notes and other
+    docs that we don't wish to see converted into an HTML page.
+------------------------------------------------------------------------------
+BUILD/DEPLOY EXCLUSIONS :: Some files and folders will be excluded from the
+    build and/or deploy process based on the following criteria:
+    -- Files/Folders whose name start with "_" are excluded from building.
+    -- Files/Folders whose name end with "_" are excluded from deploying.
+    A file/folder whose name starts and ends with "_" will be excluded from both
+    building and deploying.
+    -- "PBA_DEV_*.md" files will be excluded from deployment as they are assumed
+       to be documents reserved to the PureBASIC Archives Source project.
+       This is useful to leave some notes in GFM MD regarding the maintainance
+       and development of a specific subfolder -- eg:
+       -- "PBA_DEV_NOTES.md"
+       -- "PBA_DEV_README.md"
+
+////// END :: BUTLER WORKING NOTES ///////////////////////////////////////////

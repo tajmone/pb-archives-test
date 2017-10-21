@@ -1,0 +1,85 @@
+// ******************************************************************************
+// *                                                                            *
+// *                           PUREBASIC SYNTAX THEME                           *
+// *                                                                            *
+// ******************************************************************************
+// Syntax highlighting theme for PureBASIC code (using André Simon's Highlight).
+// Based on the default colors scheme used by PureBASIC's native IDE.
+// Designed for PureBASIC Language Definition v1.2 (2017/05/11) by Tristano Ajmone
+
+// NOTES:
+// -- Highlight tokens unused by PB syntax are omitted.
+// ------------------------------------------------------------------------------
+//                                      TODO                                     
+// ------------------------------------------------------------------------------
+// - [ ] Check Syntax file & Remove unused tokens 
+// - [ ] replace colors values with Sass/Chroma vars
+
+/* ============ PureBASIC ============ */
+
+// Change active Chroma scheme to "PureBASIC Palette":
+$chroma-active-scheme: 'PureBASIC-Palette';
+
+
+pre.purebasic,
+code.purebasic	{
+	color: color(Black);
+	background-color: color(Half-and-Half); // (Pale yellow)
+}
+
+pre.purebasic {
+	border: 1px solid color(Gray);
+}
+
+code.purebasic	{
+
+	.hl.num,
+	.hl.opt {
+		// Numbers + Operators
+		color: color(Black);
+	}
+	.hl.str,
+	// .hl.str + .hl.esc,
+	.hl.esc,
+	.hl.kwd {
+		// String + Escape Sequences in Strings + Escaped-String Prefix ("~")
+		color: color(Azure-Radiance);
+	}
+	.hl.slc {
+		// Comments (Single Line) 
+		color: color(Tradewind); // (Green)
+	}
+	.hl.lin {
+		// Line Numbers
+		color: color(Gray);
+	}
+	.hl.kwa {
+		// PureBASIC Keywords
+		color: color(Blue-Stone);
+		font-weight:bold;
+	}
+	.hl.kwb {
+		// Constants + Inline ASM + ASM Keywords
+		color: color(Cannon-Pink);
+	}
+	.hl.kwc {
+		// Procedure calls
+		color: color(Blue-Stone);
+	}
+
+}
+
+
+// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+//                                PRE/CODE CLASSES                               
+// //////////////////////////////////////////////////////////////////////////////
+
+
+pre.purebasic.pseudocode,
+code.purebasic.pseudocode	{
+	background-color: #F9FAF1; // A greyer version of IDE's "Half-and-Half" yellow
+}
+
+
+// Restore Chroma's default active scheme:
+$chroma-active-scheme: 'theme';

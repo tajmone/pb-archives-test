@@ -1,0 +1,93 @@
+// ******************************************************************************
+// *                                                                            *
+// *                             THEME COLOR SCHEME                             *
+// *                                                                            *
+// ******************************************************************************
+// The colors scheme for the website template.
+
+
+// Change active Chroma scheme to the Theme Palette just imported:
+
+
+$chroma: define-color-scheme('theme', 'The template colors definitions.');
+
+$chroma-active-scheme: 'theme-palette';
+
+$chroma: add-colors('theme', (
+
+	// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	//                             Normalize-SCSS SCHEME                             
+	// //////////////////////////////////////////////////////////////////////////////
+	// These color definitions are required by Normalize-SCSS.
+
+	// Colors used in the main content area.
+	text:                   'black',
+
+	link:                   'blue',
+	link-visited:           ('blue' darken 20%),
+	link-active:            'red',
+
+	border:                 'grey-light',
+
+	button:                 'text',
+	button-disabled:        'grey',
+
+	mark-bg:                'yellow',
+
+	// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	//                                  THEME SCHEME                                 
+	// //////////////////////////////////////////////////////////////////////////////
+
+	// ==============================================================================
+	//                              BREADCRUMBS NAV-BAR                              
+	// ==============================================================================
+	// We use the header's color palette (functional definitions):
+	Breadcrumbs-BG: 		Lower-Header-BG, 				  // ("Iron" gray)
+	Breadcrumbs-Separator: 	Lower-Header-BG-Darker,		      // ("Star Dust" gray)
+	Breadcrumbs-Link: 		LogoRight-BG, 					  // ("Fiord" blue) 
+	Breadcrumbs-Link-Hover: Logo-Red-Left, 				  	  // ("Persian Red")
+	// ==============================================================================
+	//                                     ALERTS                                    
+	// ==============================================================================
+	// Alert (Default) » Blue
+	Alert-Text:          color(PrimerCSS, blue-800),
+	Alert-BG: 	         color(PrimerCSS, blue-100),
+	Alert-Icon:	         color(PrimerCSS, blue-400),
+	Alert-Border:        color(PrimerCSS, black-fade-15),
+
+	// Alert Warn » Yellow
+	AlertWarn-Text:      color(PrimerCSS, yellow-900),
+	AlertWarn-BG: 	     color(PrimerCSS, yellow-100),
+	AlertWarn-Icon: 	 color(PrimerCSS, yellow-400),
+	AlertWarn-Border:    color(PrimerCSS, black-fade-15),
+
+	// Alert Error » Red
+	AlertError-Text:     color(PrimerCSS, red-900),
+	AlertError-BG: 	     color(PrimerCSS, red-100),
+	AlertError-Icon: 	 color(PrimerCSS, red-400),
+	AlertError-Border:   color(PrimerCSS, black-fade-15),
+
+	// Alert Success » Green
+	AlertSuccess-Text:   color(PrimerCSS, green-800),
+	AlertSuccess-BG: 	 color(PrimerCSS, green-100),
+	AlertSuccess-Icon: 	 color(PrimerCSS, green-400),
+	AlertSuccess-Border: color(PrimerCSS, black-fade-15),
+
+	// Alert Note » Gray (not part of Primer CSS)
+	AlertNote-Text:      color(PrimerCSS, gray-800),
+	AlertNote-BG: 	     color(PrimerCSS, gray-100),
+	AlertNote-Icon: 	 color(PrimerCSS, gray-400),
+	AlertNote-Border:    color(PrimerCSS, black-fade-15),
+
+	// ------------------------------------------------------------------------------
+	//                                   <mark> tag                                  
+	// ------------------------------------------------------------------------------
+	mark:      color(Fluorescent-Yellow),
+	markRed:   color(Fluorescent-Red),
+	markBlue:  color(Fluorescent-Blue),
+	markGreen: color(Fluorescent-Green),	
+
+));
+
+// Restore Chroma's default active scheme:
+$chroma-active-scheme: 'theme';

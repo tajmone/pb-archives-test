@@ -1,0 +1,173 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureBasic and Object-Oriented Programming</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Dräc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tutorials</a></li>
+	<li><a href='index.html'>OOP-CONV</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
+					<p class="subtitle">6. Synthesis and Notation</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<h2 id="status-wip">STATUS: WIP</h2>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Synthese_en.htm">WWW ORIGINAL</a></li>
+</ul>
+<p><strong>TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix subtitle casing
+</li>
+</ul>
+</div>
+</div>
+<p>Before presenting the final Class implementation, I’m going to spend some time summarizing in a formal notation the work made so far. Implementation of an object involved the following elements:</p>
+<ul>
+<li>An <strong>Interface</strong>,</li>
+<li>A <em>Class</em> (concrete/abstract) including methods definitions,</li>
+<li>A <em>Constructor</em> provided with a routine for initializating attributes,</li>
+<li>A <strong>Destructor</strong>.</li>
+</ul>
+<p>The following table summarizes what is our object in PureBasic.</p>
+<ul>
+<li>The word <code>Class</code> refers to the name of the Class (e.g.: <code>Methd_Class</code>)</li>
+<li>The word <code>Parent</code> refers to the name of the Parent Class during inheritance (e.g.: <code>Methd_ ParentClass</code>)</li>
+<li>Expressions between braces <code>{…}</code> are to be used during inheritance</li>
+</ul>
+<p class="caption">
+Interface
+</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl kwa">Interface</span> <span class="hl opt">&lt;</span><span class="hl kwa">Interface</span><span class="hl opt">&gt;</span> {<span class="hl kwa">Extends</span> <span class="hl opt">&lt;</span>ParentInterface<span class="hl opt">&gt;</span>}
+  <span class="hl kwc">Method1</span>()
+  [<span class="hl kwc">Method2</span>()]
+  [<span class="hl kwc">Method3</span>()]
+  ...
+<span class="hl kwa">EndInterface</span></code></pre>
+<p class="caption">
+Class
+</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl kwa">Structure</span> <span class="hl opt">&lt;</span>Class<span class="hl opt">&gt;</span> {<span class="hl kwa">Extends</span> <span class="hl opt">&lt;</span>ParentClass<span class="hl opt">&gt;</span>}
+  <span class="hl opt">*</span>Methods
+  [Attribute1]
+  [Attribute2]
+  ...
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Method1</span>(<span class="hl opt">*</span>this.Class, [arg1]...)
+  ...
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Method2</span>(<span class="hl opt">*</span>this.Class, [arg1]...)
+  ...
+<span class="hl kwa">EndProcedure</span>
+...
+
+<span class="hl kwa">Structure</span> <span class="hl opt">&lt;</span>Mthds_Class<span class="hl opt">&gt;</span> {<span class="hl kwa">Extends</span> <span class="hl opt">&lt;</span>Mthds_ParentClass<span class="hl opt">&gt;</span>}
+  <span class="hl opt">*</span>Method1
+  <span class="hl opt">*</span>Method2
+  ...
+<span class="hl kwa">EndStructure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mthds_Class</span>(<span class="hl opt">*</span>Mthds.Mthds_Class)
+  {<span class="hl kwc">Init_Mthds_ParentClass</span>(<span class="hl opt">*</span>Mthds)}
+  <span class="hl opt">*</span>Mthds\Method1 <span class="hl opt">=</span> &#64;<span class="hl kwc">Method1</span>()
+  <span class="hl opt">*</span>Mthds\Method2 <span class="hl opt">=</span> &#64;<span class="hl kwc">Method2</span>()
+  ...
+<span class="hl kwa">EndProcedure</span>
+
+Mthds_Class.Mthds_Class
+<span class="hl kwc">Init_Mthds_Class</span>(&#64;Mthds_Class)</code></pre>
+<p class="caption">
+Constructor
+</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl kwa">Procedure</span> <span class="hl kwc">Init_Mbers_Class</span>(<span class="hl opt">*</span>this.Class, [var1]...)
+  {<span class="hl kwc">Init_Mbers_ParentClass</span>(<span class="hl opt">*</span>this)}
+  [<span class="hl opt">*</span>this\Attibute1 <span class="hl opt">=</span> var1]
+  ...
+<span class="hl kwa">EndProcedure</span>
+
+<span class="hl kwa">Procedure</span> <span class="hl kwc">New_Class</span>([var1]...)
+  <span class="hl kwa">Shared</span> Mthds_Class
+  <span class="hl opt">*</span>this.Class <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Class))
+  <span class="hl opt">*</span>this\Methods <span class="hl opt">=</span> &#64;Mthds_Class
+  <span class="hl kwc">Init_Mbers_Class</span>(<span class="hl opt">*</span>this, [var1]...)
+  <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>this
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p class="caption">
+Destructor
+</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl kwa">Procedure</span> <span class="hl kwc">Free_Class</span>(<span class="hl opt">*</span>this)
+  <span class="hl kwc">FreeMemory</span>(<span class="hl opt">*</span>this)
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p class="FakeH3">
+First Code-Example
+</p>
+<p>Here is an example file of inheritance in action:</p>
+<ul>
+<li><a href="./OOP-Inheritance-Ex1.pb"><code>OOP-Inheritance-Ex1.pb</code></a></li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

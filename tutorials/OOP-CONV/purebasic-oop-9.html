@@ -1,0 +1,134 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureBasic and Object-Oriented Programming</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Dräc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tutorials</a></li>
+	<li><a href='index.html'>OOP-CONV</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
+					<p class="subtitle">Appendix</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<h2 id="status-wip">STATUS: WIP</h2>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Annexes_en.htm">WWW ORIGINAL</a></li>
+</ul>
+<p><strong>TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add <code>subtitle</code> and fix header levels
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix subtitle casing
+</li>
+</ul>
+</div>
+</div>
+<p>This section offers some considerations on how to improve runtime performance of our Object-oriented approach.</p>
+<h1 id="optimisation-get-and-set-methods">Optimisation: Get() and Set() Methods</h1>
+<p>Making frequent calls to <code>Get()</code> and <code>Set()</code> methods means lots of function calls, and therefore a loss in performance.</p>
+<p>For those seeking performance, there are two possible ways to speedup the process: both consist in coupling a pointer to the object, but the second solution adds a layer to the first one.</p>
+<h2 id="first-solution">First Solution</h2>
+<p>The pointer is specified by the Class’ Structure.</p>
+<p>So, for an object <code>Rect</code> of the <code>Rectangle1</code> Class, write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect.Rect <span class="hl opt">=</span> <span class="hl kwc">New_Rect</span>()
+<span class="hl opt">*</span>Rect.Rectangle1 <span class="hl opt">=</span> Rect</code></pre>
+<p>To act on the <code>var2</code> attribute write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl opt">*</span>Rect\var2</code></pre>
+<p>It is then possible to both examine and modify it.</p>
+<p>This is the simpler solution to implement.</p>
+<h2 id="second-solution">Second Solution</h2>
+<p>The first solution requires that we work with two differently typed elements: <code>Rect</code> and <code>*Rect</code>. This second solution suggests grouping these two elements in a <code>StructureUnion</code> block.</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> Rect_
+  <span class="hl kwa">StructureUnion</span>
+    Mthd.Rect
+    <span class="hl opt">*</span>Mbers.Rectangle1
+  <span class="hl kwa">EndStructureUnion</span>
+<span class="hl kwa">EndStructure</span></code></pre>
+<p>Creating an object of <code>Rectangle1</code> Class means declaring the object through this new Structure, by adapting its constructor like this:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">New_Rect</span>(&#64;Rect.Rect_)</code></pre>
+<p>with,</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Procedure</span> <span class="hl kwc">New_Rect</span>(<span class="hl opt">*</span>Instance.Rect_)
+  <span class="hl opt">*</span>Rect <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Rectangle2))
+  <span class="hl kwc">Init_Rect1</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl kwc">Init_Rect2</span>(<span class="hl opt">*</span>Rect)
+  <span class="hl opt">*</span>Instance\Mthd <span class="hl opt">= *</span>Rect
+<span class="hl kwa">EndProcedure</span></code></pre>
+<p>To access to the <code>Draw()</code> method, write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect\Mthd\<span class="hl kwc">Draw</span>()</code></pre>
+<p>To access to the <code>var2</code> attribute, write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect\Mbers\var2</code></pre>
+<p>The advantage of this second solution is that there is just a single element that can be dealt with, like an object whose attributes are all accessible from outside of the class. It also preserves object-oriented notation, although it introduces an extra level in its fields.</p>
+<p>The inconvenience lies in the fact that it introduces the necessity of maintaining a new structure within the Class.</p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#optimisation-get-and-set-methods">Optimisation: Get() and Set() Methods</a><ul>
+<li><a href="#first-solution">First Solution</a></li>
+<li><a href="#second-solution">Second Solution</a></li>
+</ul></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

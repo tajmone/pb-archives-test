@@ -1,0 +1,34 @@
+// ******************************************************************************
+// *                                                                            *
+// *                         FONT AWESOME ICONS MIXINS                          *
+// *                                                                            *
+// ******************************************************************************
+// Generate icons on demand.
+
+// Import Icons Map 
+@import "font-awesome-icons-map";
+
+// NOTE 1 — HUGE THANKS to Stephen Rodriguez (@Stephn-R) for his solution that
+// 		allows preserving the actual unicode escape string (eg: "\f06a";) in the
+// 		final CSS with Sass >= 3.4 — whereas Sass would otherwise output the 
+// 		actual character. You can find his solution here:
+// 		-- https://github.com/sass/sass/issues/1395#issuecomment-57483844
+
+@mixin fa-icons-on-demand {
+	/* For each key in the map, created an own class */
+	@each $name, $color in $FA-Required-Icons {
+		$fa-unicode: map-get($FA-Icons, $name);
+		// Now we use @Stephn-R's hack (see Note 1):
+		$fa-unicode: unquote("\"")+unquote(str-insert($fa-unicode,"\\", 1))+unquote("\"");
+	  .fa-#{$name}:before {
+	    content: $fa-unicode;
+
+	    @if $color {
+	    	color: $color;
+		}
+	  }
+	}
+}
+
+
+

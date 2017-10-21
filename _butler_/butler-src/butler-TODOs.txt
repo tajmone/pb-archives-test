@@ -1,0 +1,141 @@
+==============================================================================
+                              BUTLER TODOs LIST                               
+==============================================================================
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                       CURRENTLY WORKING ON TODOs TASKS                       
+//////////////////////////////////////////////////////////////////////////////
+
+TODO: ini::
+	-- Check if "butler.ini" settings file exists
+	-- Implement parsing "butler.ini"
+	-- Check if PP/Pandoc versions in .ini match actual apps version
+
+TODO: PPP:: GetPPVersion() & GetPandocVersion()
+------------------------------------------------------------------------------
+                                BUTLER PROJECT                                
+------------------------------------------------------------------------------
+TODO: PATH --- check if butler folder should be added BEFORE or AFTER sys path
+               (check precedence order, Win and Linux)
+
+TODO: TEST PAGES --- either add a special option (build "_bulter/tests/") or
+                     just create a folder in root "tests_" that is not ignored
+                     on build but on deploy. I must decide what is best.
+                     Maybe the option is better, so they are kept under butler
+                     folder.
+
+DONE: Move PB Proj and Sources in "_butler/butler-src/" folder, and have it
+      compile "butler.exe" up one level ("_butler/butler.exe") so I keep the
+      "_butler" folder clean from files of not-immediate use. Also, it will
+      help when in the future Butler becomes a submodule from an independent
+      repository!
+
+TODO: "_butler.ini" settings file. (Either in "_butler" or in proj.root!)
+  -- Load custom exclusion and inclusion list (files & folders)
+
+------------------------------------------------------------------------------
+                                   OPTIONS                                    
+------------------------------------------------------------------------------
+TODO: "--verbose" vs "--version" :: "-V" and "-v" ... which one should be which?
+
+Still need to implement long opts and non-build opts:
+  -v | --verbose : get more detailed output
+  -h | --help    : print options summary
+       --dbg     : print some debugging info?
+------------------------------------------------------------------------------
+                                SANITY CHECKS                                 
+------------------------------------------------------------------------------
+
+TODO: Add version check at start: load external file with latest version info
+      and check if current binary needs compiling to latest version!
+
+IDEA: the checks could be run only once at first butler run, and then set an
+      an env-var stating the checks were done. At each execution Butler checks
+      if the env-var is set, and if not performs the check. This would allow
+      auto adding to path, and checking Butler, pandoc and PP ver.
+      NOTE: there should also be a manual option to perform again this check,
+            so that any changes could be detected (ie: change of pandoc version,
+            or Butler recompilation).
+      So this idea has pros and cons which need be considered.
+
+TODO: Use Bash complex env var (dotted) to store all Butler settings.
+      This allows to load settings only once, at first use, and then store
+      them in an env var. At each invocation Butler can check if the env var
+      is present, and if so avoid loading the ini file again.
+      NOTE: Should add an option to destroy/reload ini file so it can
+            reload it when manually changed. Or I could find a way to check
+            if the ini file was changed (date? CRC?)
+
+TODO: VALID FILE/PATHS CHARS :: Check if path and files contains spaces!
+      Then either throw error or implement a cross-platform solution
+      --- ie: on Windows use quotes. Not sure how to handle it on Linux, but
+      I think Linux doesn't do well with spaces in path and the problem shouldn't really
+      exist for Linux OS. Not sure about Mac behavior though.
+TODO: ADD CLI OPT to sanity check whole project for badly named files/folders!
+      This opt (on Linux) should also check that no two files exist with same name but
+      different capitalization --- in Linux is allowed, but no on Windows which
+      is CS! This would prevent Linux users to create files incompatible with Win!
+
+------------------------------------------------------------------------------
+                              DEPLOY OPERATIONS                               
+------------------------------------------------------------------------------
+TODO: ".gitignore" files --- The dev branch has its own ".gitignore" files,
+      they should be ingored when deploying.
+      The master branch shouldn't need any ".gitignore" files since its
+      contents are deleted/overwritten each time.
+      But in some cases it might need its own ".gitignore" files, for example
+      in folders where the users wants to compiler the examples, or where the
+      code provided does produce some outputs. So the solution is:
+
+TODO: "master.gitignore" files => ".gitignore" --- The actual ".gitignore" files
+      on dev branch will be skipped in deployment; but files named "master.gitignore"
+      will be deployed renamed as ".gitignore".
+      This allows creating the master's branch ".gitignore" files iside the dev
+      branch ("master.gitignore" files will be ignored by Git)
+
+TODO: Deletion of master files? I thought that all files and folders (except
+      ".git" folder) could be destroyed at each build. But then we must keep
+      in mind that some user-produced files need be preserved --- ie: compiled
+      examples, output of apps (like highlighter keywords gen and it's DLL
+      files collection), etc. These files are .gitignored on GitHub, but they
+      need to be preserved in the user's local folder.
+      So I can't delete anything, only overwrite --- this means that when
+      renaming/deleting source files/folders in dev branch I need to manually
+      delete on master branch also! (ie: to avoid keeping old files and folders)
+------------------------------------------------------------------------------
+                                   MISC...                                    
+------------------------------------------------------------------------------
+
+TODO: PANDOC WARNINGS --- They should appear below the file cnt being processed
+    Indentent, with "~~~"+ lines (above and below).
+    Should make a Procedure for Warnings, that takes an indent paramter!
+    NOTE: This is going to be handled in the Convert2HTML(), not ind the BuildFolder(),
+          so I must figure out how to manage the indents (because they vary)!
+          I could just set a fixed indent that is more inset than the basic cnt indent.
+
+TODO: Make sure that when program quits or aborts the current folder in the CMD
+      has not changed!
+
+TODO: Improve Abort Procedure to check that working path doesn not change on quit.
+
+TODO: Should I check if the env-vars used by Butler already exist?
+      And if so, restore they initial value (or else destroy them) on exit?
+
+TODO: Move IncludeFile to the latest place possible (just before is needed)
+
+TODO: Create SETTINGS BLOCK at beginning of source code to define all settings
+      constants and vars, so tweaking is easier.
+
+------------------------------------------------------------------------------
+                               POST-PROCESSORS                                
+------------------------------------------------------------------------------
+NOTE: Currently no need for post-processors!
+
+Later on I should consider making post-processors as a separate Include file.
+This would allow Butler to be used for different projects: custom post-proc.
+will be initialized and registered as a list of procedure pointers that Butler
+invokes in order.
+This means that there needs to be a standard for Post-Processing Procedures --
+my guess is that a pointer to the HTML doc string should suffice.
+
+··············································································

@@ -1,0 +1,165 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureBasic and Object-Oriented Programming</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Dräc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tutorials</a></li>
+	<li><a href='index.html'>OOP-CONV</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
+					<p class="subtitle">4. Interface Instruction</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<h2 id="status-wip">STATUS: WIP</h2>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Interface_en.htm">WWW ORIGINAL</a></li>
+</ul>
+<p><strong>TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix subtitle casing
+</li>
+</ul>
+</div>
+</div>
+<p class="caption">
+Syntax
+</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl kwa">Interface</span> <span class="hl opt">&lt;</span>Name1<span class="hl opt">&gt;</span> [<span class="hl kwa">Extends</span> <span class="hl opt">&lt;</span>Name2<span class="hl opt">&gt;</span>]
+  [Procedure1]
+  [Procedure2]
+  ...
+<span class="hl kwa">EndInterface</span></code></pre>
+<p>The PureBasic <code>Interface</code> instruction allows grouping under the same Name (<code>&lt;Name1&gt;</code> in the above box) various procedures.</p>
+<p class="caption">
+Example
+</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Interface</span> My_Object
+  <span class="hl kwc">Procedure1</span>(x1.l, y1.l)
+  <span class="hl kwc">Procedure2</span>(x2.l, y2.l)
+<span class="hl kwa">EndInterface</span></code></pre>
+<p>It’s now sufficient to declare an element as being of the <code>My_Object</code> type in order to access all the procedures that it contains. The declaration is carried out in the same manner as with <code>Structure</code>types:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Object.My_Object</code></pre>
+<p>As a result, we can now acess the <code>Object</code>’s functions directly:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Object\<span class="hl kwc">Procedure1</span>(<span class="hl num">10</span>, <span class="hl num">20</span>)
+Object\<span class="hl kwc">Procedure2</span>(<span class="hl num">30</span>, <span class="hl num">40</span>)</code></pre>
+<p>Thanks to the <code>Interface</code> instruction, procedures can be called via a very practical and pleasant notation. By writing <code>Object\Procedure1(10, 20)</code>, the <code>Procedure1()</code> from <code>Object</code> is called. This notation is typical of the Object-oriented Programming paradigm.</p>
+<h1 id="initialization">Initialization</h1>
+<p>Any typed variable declaration is normally followed by initialization. The same applies when declaring an element whose type is an <code>Interface</code>.</p>
+<p>Unexpectedly, naming the <code>Interface : EndInterface</code> block with the name of a desired Procedure isn’t enough to make it refer to its implementation — i.e., to reference the <code>Procedure : EndProcedure</code> block of the desired procedure.</p>
+<p>In fact, we can rename procedures inside an <code>Interface : EndInterface</code> block: we can give any name we like to the procedures that we are going to use.</p>
+<p>Then, how are we going to connect this new name with the desired real procedure?</p>
+<p>As with overloaded methods, the solution is in function addresses. We must see the names inside the <code>Interface : EndInterface</code> block as function pointers to the desired function — i.e., as pointer holding function addresses.</p>
+<p>However, to initialize the function pointers of an <code>Interface</code> typed element, the approach is different from that of a <code>Structure</code> typed element. Indeed, it isn’t possible to initialize individually each field defined by an <code>Interface</code>, because, you must remember, that writing <code>Object\Procedure1()</code> means calling that procedure.</p>
+<p>Initialization occurs indirectly, by giving to the element the address of a pre-initialized variable storing functions pointers.</p>
+<p>This kind of variable is called a <strong>method table</strong>.</p>
+<p class="FakeH3">
+Example:
+</p>
+<p>Let us carry on with the <code>Interface My_Object</code>. Consider the following <code>Structure</code> describing the function pointers:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> My_Methods
+  <span class="hl opt">*</span>Procedure1
+  <span class="hl opt">*</span>Procedure2
+<span class="hl kwa">EndStructure</span></code></pre>
+<p>and its associated method table:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Methods.My_Methods
+Methods\Procedure1 <span class="hl opt">=</span> &#64;<span class="hl kwc">My_Procedure1</span>()
+Methods\Procedure2 <span class="hl opt">=</span> &#64;<span class="hl kwc">My_Procedure2</span>()</code></pre>
+<p>where <code>My_Procedure1()</code> and <code>My_Procedure2()</code> are the desired procedure implementations.</p>
+<p>Then, initialization of <code>Object</code> (of the <code>My_Object</code> type, an <code>Interface</code>) looks like this:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Object.My_Object <span class="hl opt">=</span> &#64;Methods</code></pre>
+<p>Next, by writing</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Object\<span class="hl kwc">Procedure2</span>(<span class="hl num">30</span>, <span class="hl num">40</span>)</code></pre>
+<p>the <code>Object</code>’s <code>Procedure2()</code> function is called — i.e., <code>My_Procedure2()</code>.</p>
+<div class="alert-messages">
+<div class="alert">
+<p>When declaring elements of an <code>Interface</code>, it’s essential to initialize them before using their procedures. Therefore, it is strongly advisable to initialize elements at declaration time.</p>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert">
+<p><span id="admonition-on-structure-interface-symmetry"></span> The <strong>method table</strong>’s <code>Structure</code> must reflect exactly the composition of its correlated <code>Interface</code>. It must contain the same number of fields, and preserve their order, to ensure the correct assignation of each function’s name and address. It is only under these conditions that the element will be properly initialized.</p>
+</div>
+</div>
+<p>To summarize, using an <code>Interface</code> involves:</p>
+<ul>
+<li>an <code>Interface</code> describing the required procedures to use,</li>
+<li>a <code>Structure</code> describing the function pointers,</li>
+<li>a <strong>method table</strong>: a structured variable initialized with the required function adresses.</li>
+</ul>
+<p>And its benefits are:</p>
+<ul>
+<li>an object-oriented notation</li>
+<li>an easy way to rename procedures</li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#initialization">Initialization</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

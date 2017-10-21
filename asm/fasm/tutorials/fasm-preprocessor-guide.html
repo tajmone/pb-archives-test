@@ -1,0 +1,1259 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>FASM Preprocessor Guide</title>
+		<meta name="generator" content="pandoc">
+		<meta name="description" content=".">
+		<meta name="author" content="Vid">
+		<meta name="dcterms.date" content="December 23, 2004">
+		<meta name="keywords" content="fasm, flat assembler, asm, assembler, assembly, TAJGA Team">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../../index.html'>Home</a></li>
+	<li><a href='../../index.html'>asm</a></li>
+	<li><a href='../index.html'>fasm</a></li>
+	<li><a href='index.html'>tutorials</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">FASM Preprocessor Guide</h1>
+					<p class="subtitle">An introductory tutorial — by Vid, 2004</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p><strong>WIP TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Change FASM code to Highlight Macro
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Use FasmSmall Macro in code too large to fit
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Change <code>&lt;mark&gt;</code> tags to Macro
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix HTML Alerts with Alert Macros (<em>done, just check again</em>!)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Inline FASM Code
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Convert plain instructions in Alerts to inline code
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix <code>nohighlight</code> blocks with Pre Macro
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Clean-up YAML metadata
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix revision number
+</li>
+</ul>
+</div>
+</div>
+<pre><code>Current revision: 2017-01-26</code></pre>
+<p>This is a reprint of the <em>FASM Preprocessor Guide</em> by «<strong>Vid</strong>», from the <strong>TAJGA Team</strong>. License: <a href="#legal-stuff">unrestricted</a> public domain (confirmed by Vid via private messagging). Last edited by the author in 2004-12-23.</p>
+<p>Ported to Markdown, edited and reprinted by Tristano Ajmone <a href="https://github.com/tajmone"><strong><span class="citation" data-cites="tajmone">@tajmone</span></strong></a> (2017-01-26). Original file downloaded from:</p>
+<ul>
+<li><a href="http://bos.asmhackers.net/docs/FASM%20tutorial/preproc.html">http://bos.asmhackers.net/docs/FASM%20tutorial/preproc.html</a></li>
+</ul>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p><strong>CHANGES</strong> — Some changes made to original text:</p>
+<ul>
+<li>English text polished to improve readability.</li>
+<li>Some paragraphs rewritten to improve clarity.</li>
+<li>Renamed first and last chapters title.</li>
+<li>Fixed some code typos/errors.</li>
+<li>Added or corrected links to mentioned references.</li>
+<li>Styled notes, tips and warnings with CSS Alert Boxes.</li>
+<li>Applied highlighter style to key passages.</li>
+</ul>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p><strong>NOTE</strong> — The original website of the <strong>TAJGA Team</strong> is now defunct (tajga.kallimagarden.com), but the team has now an <a href="https://github.com/tajga">organization profile</a> and a <a href="http://tajga.github.io/">website</a> on GitHub.</p>
+</div>
+</div>
+<h1 id="introduction">Introduction</h1>
+<p>I wrote this doc because I saw many people asking lots of questions on FASM board because they’re’ understanding the genarl idea of the preprocessor, or one of its specific features. (I’m not discouraging you from asking anything on the forum — failing to understand something is not a shame, and if your question isn’t too hard someone will surely answer it).</p>
+<p>Please if you can’t understand something from this tutorial tell me about it on <a href="https://board.flatassembler.net/topic.php?t=1178">my tutorial’s thread on FASM board</a>, or via <a href="mailto:vid@InMail.sk">email</a> if you prefer.</p>
+<h1 id="what-is-a-preprocessor">1. What Is a Preprocessor</h1>
+<p>A preprocessor is a program (or usually, part of the compiler) which modifies your source code before it is compiled. For example, if you use some piece of code very often, you can give it a name and tell preprocessor to replace that name with the piece of code each time it’s found.</p>
+<p>Another example is when you want to simulate an instruction which doesn’t exist: using the preprocessor you can automatically replace it with a set of instructions yielding the same effect.</p>
+<p>The preprocessor scans the source and replaces some things with others. But how do you tell it what should be preprocess? For this purpose, “preprocessor directives” are used. We will discuss them now.</p>
+<p>The preprocessor doesn’t know anything about instructions, compiler directives, etc., it has its own set of directives and simply ignores parts of the source not meant for it.</p>
+<h1 id="basic-preprocessing">2. Basic Preprocessing</h1>
+<p>First, I shall describe basic preprocessing, which is performed on the file before any other preprocessing.</p>
+<h2 id="comment">2.1. Comment <code>;</code></h2>
+<p>Like in most assemblers, comments in FASM start with a semicolon (<code>;</code>). Everything else up to end of the line is ignored and removed from the source.</p>
+<p>For example, the following source:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl slc">;fill 100h bytes at EDI with zeros</span>
+<span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span> <span class="hl slc">;zero value in eax</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span>100h<span class="hl opt">/</span><span class="hl num">4</span>
+<span class="hl kwb">rep stosd</span></code></pre>
+<p>… after preprocessing will become:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span>100h<span class="hl opt">/</span><span class="hl num">4</span>
+<span class="hl kwb">rep stosd</span></code></pre>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p><strong>NOTE</strong>: <code>;</code> can be also understood as a preprocessor operator which deletes all text beyond it, up to the end of that line.</p>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p><strong>NOTE</strong>: A line containing only a comment won’t be deleted, like in my example. It will become an empty line. I’ve skipped empty lines because of the text structure. This point will turn out to be important in the next chapter.</p>
+</div>
+</div>
+<h2 id="line-break">2.2. Line Break <code>\</code></h2>
+<p>If a line seems too long for you, you can “break” it with a backslash (“<code>\</code>”) symbol (or preprocessor operator). When a line ends with a <code>\</code>, the next line will be appended to current line.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,\</span>
+   <span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">,</span><span class="hl num">6</span><span class="hl opt">,\</span>
+   <span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">9</span></code></pre>
+<p>… will be preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">,</span><span class="hl num">6</span><span class="hl opt">,</span><span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">9</span></code></pre>
+<p>Of course a <code>\</code> inside strings or comments doesn’t concatenate lines: inside a string it’s interpreted as a string character (like everything else, except for the ending quote), and comments are deleted up to the end of line without inspecting what’s inside them.</p>
+<p>There can’t be anything after the <code>\</code> in a line, except blank space and comment.</p>
+<p>In the previous chapter I’ve mentioned that a line containing only a comment won’t be deleted, it will just become an empty line. That means, that code like this:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,\</span>
+<span class="hl slc">;   4,5,6,\   - commented</span>
+   <span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">9</span></code></pre>
+<p>… after preprocessing will become:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span>
+<span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">9</span></code></pre>
+<p>… thus raising an error. To solve a situation like this, you must place a line break before the comment:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,\</span>
+<span class="hl opt">\</span><span class="hl slc">;   4,5,6     - validly commented</span>
+   <span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">9</span></code></pre>
+<p>… which will become:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">9</span></code></pre>
+<p>… like we wanted.</p>
+<h2 id="directive-include">2.3. Directive “<code>include</code>”</h2>
+<p>Its syntax:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">include</span> <span class="hl opt">&lt;</span>quoted string <span class="hl opt">-</span> <span class="hl kwd">file</span> name<span class="hl opt">&gt;</span></code></pre>
+<p>It will insert a text file into the source code. It allows you to break up the source code into multiple files. Of course, the inserted text will be preprocessed too. File path and name should be quoted (enclosed in <code>'</code>,<code>'</code> or <code>&quot;</code>,<code>&quot;</code>).</p>
+<p>Examples:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">include</span> <span class="hl str">&apos;file.asm&apos;</span>
+<span class="hl kwd">include</span> <span class="hl str">&apos;HEADERS\data.inc&apos;</span>
+<span class="hl kwd">include</span> <span class="hl str">&apos;..\lib\strings.asm&apos;</span>
+<span class="hl kwd">include</span> <span class="hl str">&apos;C:\config.sys&apos;</span></code></pre>
+<p>You can also access environment variables enclosed in <code>%</code>,<code>%</code>:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">include</span> <span class="hl str">&apos;%FASMINC%\win32a.inc&apos;</span>
+<span class="hl kwd">include</span> <span class="hl str">&apos;%SYSTEMROOT%\somefile.inc&apos;</span>
+<span class="hl kwd">include</span> <span class="hl str">&apos;%myproject%\headers\something.inc&apos;</span>
+<span class="hl kwd">include</span> <span class="hl str">&apos;C:\%myprojectdir%\headers\something.inc&apos;</span></code></pre>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p><strong>TODO</strong>: 1.52 paths system (someone could describe it for me…)</p>
+</div>
+</div>
+<h2 id="strings-preprocessing">2.4. Strings Preprocessing</h2>
+<p>You might face problems including a <code>'</code> in a string declared using <code>'</code>s, or including a <code>&quot;</code> in a string declared using <code>&quot;</code>s. For this purpose you must place the character twice in the string; this won’t end the current string and begin a next one, as you may think, it will instead include the literal quote character in the string.</p>
+<p>For example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl str">&apos;It&apos;&apos;s okay&apos;</span></code></pre>
+<p>… will generate a binary containing string <code>It's okay</code>.</p>
+<p>It’s same with <code>&quot;</code>.</p>
+<h1 id="equates">3. Equates</h1>
+<h2 id="directive-equ">3.1. Directive “<code>equ</code>”</h2>
+<p>The simplest preprocessor command. It’s syntax:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl opt">&lt;</span>name1<span class="hl opt">&gt;</span> equ <span class="hl opt">&lt;</span>name2<span class="hl opt">&gt;</span></code></pre>
+<p>This command tells the preprocessor to replace every following occurrence of <code>&lt;name1&gt;</code> with <code>&lt;name2&gt;</code>.</p>
+<p>Example, the source:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">count equ <span class="hl num">10</span>  <span class="hl slc">;this is a preprocessor command</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span>count</code></pre>
+<p>… is preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span><span class="hl num">10</span></code></pre>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+count equ <span class="hl num">10</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span>count</code></pre>
+<p>… is preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span><span class="hl num">10</span></code></pre>
+<p>… because the preprocessor only replaces occurrences of <code>count</code> that come <em>after</em> the <code>equ</code> directive.</p>
+<p>Even this works:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl num">10</span> equ <span class="hl num">11</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span><span class="hl num">10</span></code></pre>
+<p>… after preprocessing, it becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span><span class="hl num">11</span></code></pre>
+<p>Bare in mind that <mark><code>name1</code> can be <em>any</em> symbol</mark>. A symbol is just a set of chars, terminated by a blank character (space, tab, end of line), a comment (<code>;</code>), a line-break (<code>\</code>) or an operator (including assembly-time operators, not just preprocessor operators). <mark>But it can’t be an operator or a special symbol</mark></p>
+<p><code>name2</code> can be anything, not just one symbol: everything up to end of line is taken. It can even be empty, then <code>&lt;name1&gt;</code> is replaced with blank space.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl num">10</span> equ <span class="hl num">11</span><span class="hl opt">,</span><span class="hl num">12</span><span class="hl opt">,</span><span class="hl num">13</span>
+<span class="hl kwd">db</span> <span class="hl num">10</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">11</span><span class="hl opt">,</span><span class="hl num">12</span><span class="hl opt">,</span><span class="hl num">13</span></code></pre>
+<h2 id="directive-restore">3.2. Directive “<code>restore</code>”</h2>
+<p>You can also tell the preprocessor to stop replacing a particular equate. This is achieved with the <code>restore</code> operator:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">restore</span> <span class="hl opt">&lt;</span>name<span class="hl opt">&gt;</span></code></pre>
+<p>Where <code>&lt;name&gt;</code> is some equation. From this command onward, <code>&lt;name&gt;</code> will no longer be replaced as previously specified by <code>equ</code>.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+count equ <span class="hl num">10</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwd">restore</span> count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">10</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count</code></pre>
+<p>Note that replacements are “stacked”: this means that if you define two equates for one symbol, and then restore it (once), the first one will be used.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+count equ <span class="hl num">1</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+count equ <span class="hl num">2</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+count equ <span class="hl num">3</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwd">restore</span> count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwd">restore</span> count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwd">restore</span> count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">1</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">2</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">3</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">2</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl num">1</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count</code></pre>
+<p>If you try to restore a non-existing equation nothing will happen.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwd">restore</span> count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count
+<span class="hl kwb">mov</span> <span class="hl kwa">eax</span><span class="hl opt">,</span>count</code></pre>
+<h1 id="simple-macros-without-arguments">4. Simple Macros without Arguments</h1>
+<h2 id="simple-macro-definition">4.1. Simple Macro Definition</h2>
+<p>You can create your own instruction/directive using “<code>macro</code>”:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl opt">&lt;</span>name<span class="hl opt">&gt;</span>
+<span class="hl opt">{</span>
+  <span class="hl opt">&lt;</span>body<span class="hl opt">&gt;</span>
+<span class="hl opt">}</span></code></pre>
+<p>When the preprocessor encounters a <code>macro</code> directive it defines a macro, which means that each following occurence of a line starting with <code>&lt;name&gt;</code> will be replaced by <code>&lt;body&gt;</code>. <code>&lt;name&gt;</code> must be a single symbol, <code>&lt;body&gt;</code> can be anything except <code>}</code> which denotes end of macro body.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a
+<span class="hl opt">{</span>
+  <span class="hl kwb">push</span> <span class="hl kwa">eax</span>
+<span class="hl opt">}</span>
+<span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+a</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
+<span class="hl kwb">push</span> <span class="hl kwa">eax</span></code></pre>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a
+<span class="hl opt">{</span>
+  <span class="hl kwb">push</span> <span class="hl kwa">eax</span>
+<span class="hl opt">}</span>
+<span class="hl kwd">macro</span> b
+<span class="hl opt">{</span>
+  <span class="hl kwb">push</span> <span class="hl kwa">ebx</span>
+<span class="hl opt">}</span>
+b
+a</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">push</span> <span class="hl kwa">ebx</span>
+<span class="hl kwb">push</span> <span class="hl kwa">eax</span></code></pre>
+<p>Of course, a macro doesn’t have to be indented like in my examples, you could also write it this way:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> push5 <span class="hl opt">{</span><span class="hl kwb">push</span> <span class="hl kwd">dword</span> <span class="hl num">5</span><span class="hl opt">}</span>
+push5</code></pre>
+<p>… which becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">push</span> <span class="hl kwd">dword</span> <span class="hl num">5</span></code></pre>
+<p>Or even like this:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> push5 <span class="hl opt">{</span><span class="hl kwb">push</span> <span class="hl kwd">dword</span> <span class="hl num">5</span>
+<span class="hl opt">}</span></code></pre>
+<p>… producing the same result. You have freedom of style reagarding macros indentation.</p>
+<h2 id="nested-macros">4.2. Nested Macros</h2>
+<p>You can nest macros. This means that if you redefine a macro, then the last definition is used. But if you use the original macro inside the last one, it will still work. Look at this example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">{</span><span class="hl kwb">mov</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">}</span>
+<span class="hl kwd">macro</span> a
+<span class="hl opt">{</span>
+  a
+  <span class="hl kwb">mov</span> <span class="hl kwa">bx</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl opt">}</span>
+<span class="hl kwd">macro</span> a
+<span class="hl opt">{</span>
+  a
+  <span class="hl kwb">mov</span> <span class="hl kwa">cx</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl opt">}</span>
+a</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">bx</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">cx</span><span class="hl opt">,</span><span class="hl num">5</span></code></pre>
+<p>Or this example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">{</span><span class="hl num">1</span><span class="hl opt">}</span>
+a
+
+<span class="hl kwd">macro</span> a <span class="hl opt">{</span>
+  a
+  <span class="hl num">2</span><span class="hl opt">}</span>
+
+a
+<span class="hl kwd">macro</span> a <span class="hl opt">{</span>
+  a
+  <span class="hl num">3</span><span class="hl opt">}</span>
+
+a</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl num">1</span>
+
+<span class="hl num">1</span>
+<span class="hl num">2</span>
+
+<span class="hl num">1</span>
+<span class="hl num">2</span>
+<span class="hl num">3</span></code></pre>
+<h2 id="directive-purge-macro-undefinition">4.3. Directive “<code>purge</code>” (macro undefinition)</h2>
+<p>You can also undefine macros, like you undefined equate. This is acomplished with the <code>purge</code> directive followed by the macro’s name:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">a
+<span class="hl kwd">macro</span> a <span class="hl opt">{</span><span class="hl num">1</span><span class="hl opt">}</span>
+a
+<span class="hl kwd">macro</span> a <span class="hl opt">{</span><span class="hl num">2</span><span class="hl opt">}</span>
+a
+<span class="hl kwd">purge</span> a
+a
+<span class="hl kwd">purge</span> a
+a</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">a
+<span class="hl num">1</span>
+<span class="hl num">2</span>
+<span class="hl num">1</span>
+a</code></pre>
+<p>If you try to <code>purge</code> a non-existing macro nothing will happen.</p>
+<h2 id="macros-behaviour">4.4. Macros Behaviour</h2>
+<p>A macro’s name will be replaced by the macro’s body not just when the line starts with the macro, but in every place where an instruction mnemonic (like <code>add</code>, <code>mov</code>) is accepted. It is because the main purpose of macros is to simulate instructions. The only exception is instruction prefix: <nark>a macro is not accepted after an instruction prefix</nark>.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> CheckErr
+<span class="hl opt">{</span>
+  <span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,-</span><span class="hl num">1</span>
+  <span class="hl kwb">jz</span> error
+<span class="hl opt">}</span>
+<span class="hl kwb">call</span> Something
+<span class="hl kwc">a</span><span class="hl opt">:</span> CheckErr    <span class="hl slc">;here macro name is preceded by label definition, but it</span>
+               <span class="hl slc">;will be replaced</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">call</span> Something
+<span class="hl kwc">a</span><span class="hl opt">:</span>
+<span class="hl kwb">cmp</span> <span class="hl kwa">eax</span><span class="hl opt">,-</span><span class="hl num">1</span>
+<span class="hl kwb">jz</span> error</code></pre>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> stos0
+<span class="hl opt">{</span>
+  <span class="hl kwb">mov</span> <span class="hl kwa">al</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwb">stosb</span>
+<span class="hl opt">}</span>
+stos0       <span class="hl slc">;this is place for instruction, will be replaced</span>
+<span class="hl kwc">here</span><span class="hl opt">:</span> stos0 <span class="hl slc">;this is place for instruciton too</span>
+<span class="hl kwd">db</span> stos0    <span class="hl slc">;this in not place for instruction and so it won&apos;t be replaced</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl kwa">al</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">stosb</span>
+<span class="hl kwc">here</span><span class="hl opt">:</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">al</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">stosb</span>
+<span class="hl kwd">db</span> stos0</code></pre>
+<p>You can also “overload” instructions with macros. Since the preprocessor isn’t aware of instructions, it allows macro names to be instruction mnemonics:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl kwb">pusha</span>
+<span class="hl opt">{</span>
+  <span class="hl kwb">push</span> <span class="hl kwa">eax ebx ecx edx ebp esi edi</span>
+<span class="hl opt">}</span>
+<span class="hl kwd">macro</span> <span class="hl kwb">popa</span>
+<span class="hl opt">{</span>
+  <span class="hl kwb">pop</span> <span class="hl kwa">edi esi ebp edx ecx ebx eax</span>
+<span class="hl opt">}</span></code></pre>
+<p>… these 2 save 4 bytes for every <code>pusha</code> because they don’t push <code>ESP</code>. But overloading istructions isn’t a very good idea, because someone reading your code may be fooled if he doesn’t know that the instruction is overloaded.</p>
+<p>You can also overload assembly-time directives:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro use32</span>
+<span class="hl opt">{</span>
+  <span class="hl kwb">align</span> <span class="hl num">4</span>
+  <span class="hl kwd">use32</span>
+<span class="hl opt">}</span>
+<span class="hl kwd">macro use16</span>
+<span class="hl opt">{</span>
+  <span class="hl kwb">align</span> <span class="hl num">2</span>
+  <span class="hl kwd">use16</span>
+<span class="hl opt">}</span></code></pre>
+<h1 id="macros-with-fixed-number-of-arguments">5. Macros with Fixed Number of Arguments</h1>
+<h2 id="macros-with-single-argument">5.1. Macros with Single Argument</h2>
+<p>You can also define a macro’s argument. This argument is represented by a symbol, which will be replaced in the macro’s body by the passed argument.</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl opt">&lt;</span>name<span class="hl opt">&gt; &lt;</span>argument<span class="hl opt">&gt; { &lt;</span>body<span class="hl opt">&gt; }</span></code></pre>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> add5 where
+<span class="hl opt">{</span>
+  <span class="hl kwb">add</span> where<span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl opt">}</span>
+add5 <span class="hl kwa">ax</span>
+add5 <span class="hl opt">[</span>variable<span class="hl opt">]</span>
+add5 <span class="hl kwa">ds</span>
+add5 <span class="hl kwa">ds</span><span class="hl opt">+</span><span class="hl num">2</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">add</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl kwb">add</span> <span class="hl opt">[</span>variable<span class="hl opt">],</span><span class="hl num">5</span>
+<span class="hl kwb">add</span> <span class="hl kwa">ds</span><span class="hl opt">,</span><span class="hl num">5</span>   <span class="hl slc">;There is no such instruction, but it&apos;s not the task of the</span>
+           <span class="hl slc">;preprocessor to check it. It will be preprocessed in this form,</span>
+           <span class="hl slc">;and will throw an error during the assembling stage.</span>
+<span class="hl kwb">add</span> <span class="hl kwa">ds</span><span class="hl opt">+</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">5</span> <span class="hl slc">;Same as previous, but this is also syntactically wrong,</span>
+           <span class="hl slc">;so it will throw an error during the parsing stage.</span></code></pre>
+<p>(of course there won’t be those comments in the preprocessed file :)</p>
+<h2 id="macros-with-miltiple-arguments">5.2. Macros with Miltiple Arguments</h2>
+<p>Macros can have multiple arguments, separated with commas (<code>,</code>):</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> movv where<span class="hl opt">,</span>what
+<span class="hl opt">{</span>
+  <span class="hl kwb">push</span> what
+  <span class="hl kwb">pop</span>  where
+<span class="hl opt">}</span>
+movv <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl kwa">bx</span>
+movv <span class="hl kwa">ds</span><span class="hl opt">,</span><span class="hl kwa">es</span>
+movv <span class="hl opt">[</span>var1<span class="hl opt">],[</span>var2<span class="hl opt">]</span></code></pre>
+<p>… gets preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">push</span> <span class="hl kwa">bx</span>
+<span class="hl kwb">pop</span> <span class="hl kwa">ax</span>
+<span class="hl kwb">push</span> <span class="hl kwa">es</span>
+<span class="hl kwb">pop</span> <span class="hl kwa">ds</span>
+<span class="hl kwb">push</span> <span class="hl opt">[</span>var2<span class="hl opt">]</span>
+<span class="hl kwb">pop</span> <span class="hl opt">[</span>var1<span class="hl opt">]</span></code></pre>
+<p>If multiple arguments have the same name, the first one is used :).</p>
+<p>If you pass less arguments than listed in macro declaration, the value of unspecified arguments will be blank:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> pupush a1<span class="hl opt">,</span>a2<span class="hl opt">,</span>a3<span class="hl opt">,</span>a4
+<span class="hl opt">{</span>
+  <span class="hl kwb">push</span> a1 a2 a3 a4
+  <span class="hl kwb">pop</span> a4 a3 a2 a1
+<span class="hl opt">}</span>
+pupush <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwd">dword</span> <span class="hl opt">[</span><span class="hl num">3</span><span class="hl opt">]</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">push</span> <span class="hl kwa">eax</span> <span class="hl kwd">dword</span> <span class="hl opt">[</span><span class="hl num">3</span><span class="hl opt">]</span>
+<span class="hl kwb">pop</span> <span class="hl kwd">dword</span> <span class="hl opt">[</span><span class="hl num">3</span><span class="hl opt">]</span> <span class="hl kwa">eax</span></code></pre>
+<p>If you want to include a comma (<code>,</code>) in a macro’s argument, you must enclose the argument in angle brackets <code>&lt;</code>,<code>&gt;</code>:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> safe_declare name<span class="hl opt">,</span>what
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> <span class="hl kwd">used</span> name
+    name what
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span>
+safe_declare var1<span class="hl opt">,</span> <span class="hl kwd">db</span> <span class="hl num">5</span>
+safe_declare array5<span class="hl opt">, &lt;</span><span class="hl kwd">dd</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">&gt;</span>
+safe_declare string<span class="hl opt">, &lt;</span><span class="hl kwd">db</span> <span class="hl str">&quot;hi, i&apos;m stupid string&quot;</span><span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">&gt;</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">if</span> <span class="hl kwd">used</span> var1
+  <span class="hl kwc">var1</span> <span class="hl kwd">db</span> <span class="hl num">5</span>
+<span class="hl kwb">end if</span>
+<span class="hl kwb">if</span> <span class="hl kwd">used</span> array5
+  <span class="hl kwc">array5</span> <span class="hl kwd">dd</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl kwb">end if</span>
+<span class="hl kwb">if</span> <span class="hl kwd">used</span> string
+  <span class="hl kwc">string</span> <span class="hl kwd">db</span> <span class="hl str">&quot;hi, i&apos;m stupid string&quot;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>Of course, you can use <code>&lt;</code> and <code>&gt;</code> in the macro’s body too:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a arg <span class="hl opt">{</span><span class="hl kwd">db</span> arg<span class="hl opt">}</span>
+<span class="hl kwd">macro</span> b arg1<span class="hl opt">,</span>arg2 <span class="hl opt">{</span>a <span class="hl opt">&lt;</span>arg1<span class="hl opt">,</span>arg2<span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">&gt;}</span>
+b <span class="hl opt">&lt;</span><span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">1</span><span class="hl opt">&gt;,</span><span class="hl num">2</span></code></pre>
+<p>… is preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span></code></pre>
+<h2 id="directive-local">5.3. Directive “<code>local</code>”</h2>
+<p>You may want to declare a label inside the macro’s body:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> pushstr string
+<span class="hl opt">{</span>
+  <span class="hl kwb">call</span> behind <span class="hl slc">;pushes address of string and jumps to behind</span>
+  <span class="hl kwd">db</span> string<span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">behind</span><span class="hl opt">:</span>
+<span class="hl opt">}</span></code></pre>
+<p>but if you use this macro twice, label “<code>behind</code>” will be defined twice and that will raise an error. You can solve this by making the “<code>behind</code>” label local to the macro. This can be done using the “<code>local</code>” preprocessor directive:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">local</span> <span class="hl opt">&lt;</span>name<span class="hl opt">&gt;</span></code></pre>
+<p>It must be inside the macro’s body. It makes all following occurences of <code>&lt;name&gt;</code> inside the macro’s body local to macro. Therefore, if the macro is used twice:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> pushstr string
+<span class="hl opt">{</span>
+  <span class="hl kwd">local</span> behind
+  <span class="hl kwb">call</span> behind
+  <span class="hl kwd">db</span> string<span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">behind</span><span class="hl opt">:</span>
+<span class="hl opt">}</span>
+pushstr <span class="hl str">&apos;aaaaa&apos;</span>
+pushstr <span class="hl str">&apos;bbbbbbbb&apos;</span>
+<span class="hl kwb">call</span> something</code></pre>
+<p>this won’t cause any problems. This is done by replacing <code>behind</code> with <code>behind?XXXXXXXX</code> where <code>XXXXXXXX</code> is some hexadecimal number generated by the preprocessor. The previous code could, for example, be preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">call</span> behind?<span class="hl num">00000001</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;aaaaa&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+behind?<span class="hl num">00000001</span><span class="hl opt">:</span>
+<span class="hl kwb">call</span> behind?<span class="hl num">00000002</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;bbbbbbbb&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+behind?<span class="hl num">00000002</span><span class="hl opt">:</span>
+<span class="hl kwb">call</span> something</code></pre>
+<p>Note that you can’t directly access names containing <code>?</code>, as it is a special symbol for fasm, and for this reason it is used with local names. For example <code>aa?bb</code> is considered as symbol <code>aa</code>, special symbol <code>?</code> and symbol <code>bb</code>.</p>
+<p>If you want more local labels you don’t have to use <code>local</code> twice: you can list them all in a single <code>local</code> directive, separated by commas (<code>,</code>):</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> pushstr string  <span class="hl slc">;does same job as previous macro</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">local</span> addr<span class="hl opt">,</span>behind
+  <span class="hl kwb">push</span> addr
+  <span class="hl kwb">jmp</span> behind
+  <span class="hl kwc">addr</span> <span class="hl kwd">db</span> string<span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">behind</span><span class="hl opt">:</span>
+<span class="hl opt">}</span></code></pre>
+<p>It is always good practice to start all macro local label names with two dots (<code>..</code>), which means they won’t change the current global label. For example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> pushstr string
+<span class="hl opt">{</span>
+  <span class="hl kwd">local</span> behind
+  <span class="hl kwb">call</span> behind
+  <span class="hl kwd">db</span> string<span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">behind</span><span class="hl opt">:</span>
+<span class="hl opt">}</span>
+<span class="hl kwc">MyProc</span><span class="hl opt">:</span>
+  pushstr <span class="hl str">&apos;aaaa&apos;</span>
+  <span class="hl kwc">.a</span><span class="hl opt">:</span></code></pre>
+<p>… will be preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwc">MyProc</span><span class="hl opt">:</span>
+<span class="hl kwb">call</span> behind?<span class="hl num">00000001</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;aaaa&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+behind?<span class="hl num">00000001</span><span class="hl opt">:</span>
+<span class="hl kwc">.a</span><span class="hl opt">:</span></code></pre>
+<p>… which will create a <code>behind?00000001.a</code> label instead of <code>MyProc.a</code>. But names that start with two dots (<code>..</code>) don’t change the current global label, so in the following case <code>MyProc.a</code> would be declared:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> pushstr string
+<span class="hl opt">{</span>
+  <span class="hl kwd">local</span> <span class="hl opt">..</span>behind
+  <span class="hl kwb">call</span> <span class="hl opt">..</span>behind
+  <span class="hl kwd">db</span> string<span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">..behind</span><span class="hl opt">:</span>
+<span class="hl opt">}</span>
+<span class="hl kwc">MyProc</span><span class="hl opt">:</span>
+  pushstr <span class="hl str">&apos;aaaa&apos;</span>
+  <span class="hl kwc">.a</span><span class="hl opt">:</span></code></pre>
+<h2 id="operator-symbol-concatenation">5.4. Operator <code>#</code> (symbol concatenation)</h2>
+<p>Another feature of fasm’s macrolanguage is symbols manipulation. This is achieved with the symbol-concatenation operator <code>#</code>, which concatenates two symbols into one: for example, <code>a#b</code> will become <code>ab</code>, and <code>aaa bbb#ccc ddd</code> -&gt; <code>aaa bbbccc ddd</code>. This operator can be used only inside a macro’s body, and symbols concatenatiion will occur after the replacement of a macro’s arguments, so you can use this feature to create a symbol from a macro’s argument.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> string name<span class="hl opt">,</span> <span class="hl kwb">data</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">local</span> <span class="hl opt">..</span>start
+  <span class="hl kwc">..start</span><span class="hl opt">:</span>
+  <span class="hl kwc">name</span> <span class="hl kwd">db</span> <span class="hl kwb">data</span><span class="hl opt">,</span><span class="hl num">0</span>
+  sizeof<span class="hl opt">.#</span>name <span class="hl opt">=</span>  <span class="hl kwc">$</span> <span class="hl opt">- ..</span>start
+<span class="hl opt">}</span>
+string s1<span class="hl opt">,</span><span class="hl str">&apos;macros are stupid&apos;</span>
+string s2<span class="hl opt">,&lt;</span><span class="hl str">&apos;here I am&apos;</span><span class="hl opt">,</span><span class="hl num">13</span><span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,</span><span class="hl str">&apos;rock you like a hurricane&apos;</span><span class="hl opt">&gt;</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl opt">..</span>start?<span class="hl num">00000001</span><span class="hl opt">:</span>
+<span class="hl kwc">s1</span> <span class="hl kwd">db</span> <span class="hl str">&apos;macros are stupid&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+sizeof<span class="hl opt">.</span>s1 <span class="hl opt">=</span> <span class="hl kwc">$</span> <span class="hl opt">- ..</span>start?<span class="hl num">00000001</span>
+<span class="hl opt">..</span>start?<span class="hl num">00000002</span><span class="hl opt">:</span>
+<span class="hl kwc">s2</span> <span class="hl kwd">db</span> <span class="hl str">&apos;here I am&apos;</span><span class="hl opt">,</span><span class="hl num">13</span><span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,</span><span class="hl str">&apos;rock you like a hurricane&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+sizeof<span class="hl opt">.</span>s2 <span class="hl opt">=</span> <span class="hl kwc">$</span> <span class="hl opt">- ..</span>start?<span class="hl num">00000002</span></code></pre>
+<p>… where for each string defined via the macro, a symbol <code>sizeof.&lt;name of string&gt;</code> gets defined.</p>
+<p>This operator can also concatenate quoted strings:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> debug name
+<span class="hl opt">{</span>
+  <span class="hl kwd">db</span> <span class="hl str">&apos;name: &apos;</span><span class="hl opt">#</span>name<span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl opt">}</span>
+debug <span class="hl str">&apos;1&apos;</span>
+debug <span class="hl str">&apos;barfoo&apos;</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl str">&apos;name: 1&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;name: barfoo&apos;</span><span class="hl opt">,</span><span class="hl num">0</span></code></pre>
+<p>this is usefull when passing argument from macro to macro:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> pushstring string
+<span class="hl opt">{</span>
+  <span class="hl kwd">local</span> <span class="hl opt">..</span>behind
+  <span class="hl kwb">call</span> <span class="hl opt">..</span>behind
+  <span class="hl kwd">db</span> string<span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwc">..behind</span><span class="hl opt">:</span>
+<span class="hl opt">}</span>
+<span class="hl kwd">macro</span> debug string
+<span class="hl opt">{</span>
+  <span class="hl kwb">push</span> MB_OK
+  <span class="hl kwb">push</span> <span class="hl num">0</span> <span class="hl slc">;empty caption</span>
+  pushstring <span class="hl str">&apos;debug: &apos;</span><span class="hl opt">#</span>string  <span class="hl slc">;&quot;pushstring&quot; takes one argument</span>
+  <span class="hl kwb">push</span> <span class="hl num">0</span> <span class="hl slc">;no partent window</span>
+  <span class="hl kwb">call</span> <span class="hl opt">[</span>MessageBox<span class="hl opt">]</span>
+<span class="hl opt">}</span></code></pre>
+<p>Note that you can’t use <code>#</code> in arguments of <code>local</code>, because <code>local</code> is processed before <code>#</code>. Therefore, code like this won’t work:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a arg
+<span class="hl opt">{</span>
+  <span class="hl kwd">local</span> name_<span class="hl opt">#</span>arg
+<span class="hl opt">}</span>
+a foo</code></pre>
+<h2 id="operator">5.5. Operator “<code>`</code>”</h2>
+<p>There is also the <code>`</code> operator, which transfers the symbol following it to a quoted string. This operator can be used only inside macros.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> proc name
+<span class="hl opt">{</span>
+  <span class="hl kwc">name</span><span class="hl opt">:</span>
+  log <span class="hl opt">`</span>name   <span class="hl slc">;log can be a macro which takes a string as argument</span>
+<span class="hl opt">}</span>
+proc DummyProc</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwc">DummyProc</span><span class="hl opt">:</span>
+log <span class="hl str">&apos;DummyProc&apos;</span></code></pre>
+<p>A slightly more complicated example of <code>#</code> usage:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> proc name
+<span class="hl opt">{</span>
+  <span class="hl kwc">name</span><span class="hl opt">:</span>
+  log <span class="hl str">&apos;entering procedure: &apos;</span><span class="hl opt">#`</span>name
+<span class="hl opt">}</span>
+proc DummyProc
+<span class="hl kwb">retn</span>
+proc Proc2
+<span class="hl kwb">retn</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwc">DummyProc</span><span class="hl opt">:</span>
+log <span class="hl str">&apos;entering procedure: DummyProc&apos;</span>
+<span class="hl kwb">retn</span>
+<span class="hl kwc">Proc2</span><span class="hl opt">:</span>
+log <span class="hl str">&apos;entering procedure: Proc2&apos;</span>
+<span class="hl kwb">retn</span></code></pre>
+<h1 id="macros-with-group-argument">6. Macros with Group Argument</h1>
+<h2 id="declaring-macros-with-group-argument">6.1. Declaring Macros with Group Argument</h2>
+<p>Macros can have the so-called “group argument”, allowing for a non-fixed number of arguments. The group argument must be enclosed in square brackets <code>[</code>,<code>]</code> in the macro definition:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> name arg1<span class="hl opt">,</span>arg2<span class="hl opt">,[</span>grouparg<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl opt">&lt;</span>body<span class="hl opt">&gt;</span>
+<span class="hl opt">}</span></code></pre>
+<p>The group argument must be the last argument in the macro defintion. Group argument can contain multiple arguments, like:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> name arg1<span class="hl opt">,</span>arg2<span class="hl opt">,[</span>grouparg<span class="hl opt">] {}</span>
+name <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">,</span><span class="hl num">6</span></code></pre>
+<p>… here the values of group argument (<code>grouparg</code>) are values 3, 4, 5 and 6. 1 and 2 are the values of <code>arg1</code> and <code>arg2</code>.</p>
+<h2 id="directive-common">6.2. Directive “<code>common</code>”</h2>
+<p>To work with group arguments, you use some preprocessor directives. These directives can be used only inside the body of a macro with group argument. The first of these directives is <code>common</code>. It means that from this directive onward the group argument’s name in a macro’s body will be replaced by all the arguments:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> string <span class="hl opt">[</span>grp<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">common</span>
+    <span class="hl kwd">db</span> grp<span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl opt">}</span>
+string <span class="hl str">&apos;aaaaaa&apos;</span>
+string <span class="hl str">&apos;line1&apos;</span><span class="hl opt">,</span><span class="hl num">13</span><span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,</span><span class="hl str">&apos;line2&apos;</span>
+string <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl str">&apos;aaaaaa&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;line1&apos;</span><span class="hl opt">,</span><span class="hl num">13</span><span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,</span><span class="hl str">&apos;line2&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">,</span><span class="hl num">0</span></code></pre>
+<h2 id="directive-forward">6.3. Directive “<code>forward</code>”</h2>
+<p>But you can also work with the arguments in group argument by treating them separately. For this purpose, the <code>forward</code> preprocessor directive is used. The part of the macro’s body following the <code>forward</code> directive is preprocessed for each argument of the group argument:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a arg1<span class="hl opt">,[</span>grparg<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+<span class="hl kwd">forward</span>
+  <span class="hl kwd">db</span> arg1
+  <span class="hl kwd">db</span> grparg
+<span class="hl opt">}</span>
+a <span class="hl num">1</span><span class="hl opt">,</span><span class="hl str">&apos;a&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;b&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;c&apos;</span>
+a <span class="hl opt">-</span><span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,</span><span class="hl num">20</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;a&apos;</span>
+<span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;b&apos;</span>
+<span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;c&apos;</span>
+<span class="hl kwd">db</span> <span class="hl opt">-</span><span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl num">10</span>
+<span class="hl kwd">db</span> <span class="hl opt">-</span><span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl num">20</span></code></pre>
+<p><code>forward</code> is the default behavior for macros with group arguments, so the previous macro could be just as well written:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a arg1<span class="hl opt">,[</span>grparg<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">db</span> arg1
+  <span class="hl kwd">db</span> grparg
+<span class="hl opt">}</span></code></pre>
+<h2 id="directive-reverse">6.4. Directive “<code>reverse</code>”</h2>
+<p><code>reverse</code> is the same as <code>forward</code>, except that it processess the arguments in group argument from last to first (reverse order):</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a arg1<span class="hl opt">,[</span>grparg<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+<span class="hl kwd">reverse</span>
+  <span class="hl kwd">db</span> arg1
+  <span class="hl kwd">db</span> grparg
+  <span class="hl opt">}</span>
+a <span class="hl num">1</span><span class="hl opt">,</span><span class="hl str">&apos;a&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;b&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;c&apos;</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;c&apos;</span>
+<span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;b&apos;</span>
+<span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;a&apos;</span></code></pre>
+<h2 id="combining-group-control-directives">6.5. Combining Group Control Directives</h2>
+<p>These three directives divide a macro into blocks. Each block is processed after the previous one. For example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">[</span>grparg<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">forward</span>
+    f_<span class="hl opt">#</span>grparg<span class="hl opt">:</span>         <span class="hl slc">;symbol-concatenation operator #, see chapter 4.4</span>
+  <span class="hl kwd">common</span>
+    <span class="hl kwd">db</span> grparg
+  <span class="hl kwd">reverse</span>
+    r_<span class="hl opt">#</span>grparg<span class="hl opt">:</span>
+<span class="hl opt">}</span>
+a <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwc">f_1</span><span class="hl opt">:</span>
+<span class="hl kwc">f_2</span><span class="hl opt">:</span>
+<span class="hl kwc">f_3</span><span class="hl opt">:</span>
+<span class="hl kwc">f_4</span><span class="hl opt">:</span>
+<span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span>
+<span class="hl kwc">r_4</span><span class="hl opt">:</span>
+<span class="hl kwc">r_3</span><span class="hl opt">:</span>
+<span class="hl kwc">r_2</span><span class="hl opt">:</span>
+<span class="hl kwc">r_1</span><span class="hl opt">:</span></code></pre>
+<h2 id="behavior-of-local-inside-a-macro-with-group-argument">6.6. Behavior of <code>local</code> inside a Macro with Group Argument</h2>
+<p>There is yet another very nice feature with labels that are local in a macro (ie: listed with the <code>local</code> preprocessor directive; see <a href="#directive-local"><strong>Chapter 5.3</strong></a>). If the <code>local</code> directive is defined inside a <code>forward</code> or <code>reverse</code> block, then a unique label is defined for each argument in the group, and the same labels are then used with their correspective arguments in the following <code>forward</code> or <code>reverse</code> blocks. Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> string_table <span class="hl opt">[</span>string<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">forward</span>         <span class="hl slc">;table of pointers to strings</span>
+    <span class="hl kwd">local</span> addr    <span class="hl slc">;declare label for this string as local</span>
+    <span class="hl kwd">dd</span> addr       <span class="hl slc">;pointer to string</span>
+  <span class="hl kwd">forward</span>         <span class="hl slc">;strings</span>
+    <span class="hl kwc">addr</span> <span class="hl kwd">db</span> string<span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl opt">}</span>
+string_table <span class="hl str">&apos;aaaaa&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;bbbbbb&apos;</span><span class="hl opt">,</span><span class="hl str">&apos;5&apos;</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">dd</span> addr?<span class="hl num">00000001</span>
+<span class="hl kwd">dd</span> addr?<span class="hl num">00000002</span>
+<span class="hl kwd">dd</span> addr?<span class="hl num">00000003</span>
+addr?<span class="hl num">00000001</span> <span class="hl kwd">db</span> <span class="hl str">&apos;aaaaa&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+addr?<span class="hl num">00000002</span> <span class="hl kwd">db</span> <span class="hl str">&apos;bbbbbb&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+addr?<span class="hl num">00000003</span> <span class="hl kwd">db</span> <span class="hl str">&apos;5&apos;</span><span class="hl opt">,</span><span class="hl num">0</span></code></pre>
+<p>Another example, this time with a <code>reverse</code> block:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">[</span>x<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+<span class="hl kwd">forward</span>
+  <span class="hl kwd">local</span> here
+  <span class="hl kwc">here</span> <span class="hl kwd">db</span> x
+<span class="hl kwd">reverse</span>
+  <span class="hl kwd">dd</span> here
+<span class="hl opt">}</span>
+a <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">here?<span class="hl num">00000001</span> <span class="hl kwd">db</span> <span class="hl num">1</span>
+here?<span class="hl num">00000002</span> <span class="hl kwd">db</span> <span class="hl num">2</span>
+here?<span class="hl num">00000003</span> <span class="hl kwd">db</span> <span class="hl num">3</span>
+<span class="hl kwd">dd</span> here?<span class="hl num">00000003</span>
+<span class="hl kwd">dd</span> here?<span class="hl num">00000002</span>
+<span class="hl kwd">dd</span> here?<span class="hl num">00000001</span></code></pre>
+<p>… the same unique label is used with each argument in both the <code>forward</code> and <code>reverse</code> blocks.</p>
+<h2 id="macros-with-multiple-group-arguments">6.7. Macros with Multiple Group Arguments</h2>
+<p>You can also have multiple group arguments. In that case a macro definition won’t look like:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">[</span>grp1<span class="hl opt">],[</span>grp2<span class="hl opt">]</span></code></pre>
+<p>… because then it would be unclear which arguments belong to which group. For this reason you declare them like this:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">[</span>grp1<span class="hl opt">,</span>grp2<span class="hl opt">]</span></code></pre>
+<p>… here every odd argument belongs to <code>grp1</code>, and every even argument to <code>grp2</code>.</p>
+<p>Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">[</span>grp1<span class="hl opt">,</span>grp2<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">forward</span>
+    l_<span class="hl opt">#</span>grp1<span class="hl opt">:</span>
+  <span class="hl kwd">forward</span>
+    l_<span class="hl opt">#</span>grp2<span class="hl opt">:</span>
+<span class="hl opt">}</span>
+a <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">,</span><span class="hl num">6</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwc">l_1</span><span class="hl opt">:</span>
+<span class="hl kwc">l_3</span><span class="hl opt">:</span>
+<span class="hl kwc">l_5</span><span class="hl opt">:</span>
+<span class="hl kwc">l_2</span><span class="hl opt">:</span>
+<span class="hl kwc">l_4</span><span class="hl opt">:</span>
+<span class="hl kwc">l_6</span><span class="hl opt">:</span></code></pre>
+<p>Another example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> ErrorList <span class="hl opt">[</span>name<span class="hl opt">,</span>value<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">forward</span>
+    ERROR_<span class="hl opt">#</span>name <span class="hl opt">=</span> value
+<span class="hl opt">}</span>
+ErrorList <span class="hl opt">\</span>
+ NONE<span class="hl opt">,</span><span class="hl num">0</span><span class="hl opt">,\</span>
+ OUTOFMEMORY<span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,\</span>
+ INTERNAL<span class="hl opt">,</span><span class="hl num">20</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">ERROR_NONE <span class="hl opt">=</span> <span class="hl num">0</span>
+ERROR_OUTOFMEMORY <span class="hl opt">=</span> <span class="hl num">10</span>
+ERROR_INTERNAL <span class="hl opt">=</span> <span class="hl num">20</span></code></pre>
+<p>Of course, there can be more than just two group arguments:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a <span class="hl opt">[</span>g1<span class="hl opt">,</span>g2<span class="hl opt">,</span>g3<span class="hl opt">]</span>
+<span class="hl opt">{</span>
+  <span class="hl kwd">common</span>
+    <span class="hl kwd">db</span> g1
+    <span class="hl kwd">db</span> g2
+    <span class="hl kwd">db</span> g3
+<span class="hl opt">}</span>
+a <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">,</span><span class="hl num">6</span><span class="hl opt">,</span><span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">9</span><span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,</span><span class="hl num">11</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">4</span><span class="hl opt">,</span><span class="hl num">7</span><span class="hl opt">,</span><span class="hl num">10</span>
+<span class="hl kwd">db</span> <span class="hl num">2</span><span class="hl opt">,</span><span class="hl num">5</span><span class="hl opt">,</span><span class="hl num">8</span><span class="hl opt">,</span><span class="hl num">11</span>
+<span class="hl kwd">db</span> <span class="hl num">3</span><span class="hl opt">,</span><span class="hl num">6</span><span class="hl opt">,</span><span class="hl num">9</span></code></pre>
+<h1 id="preprocessor-conditionals">7. Preprocessor Conditionals</h1>
+<p>In fact, there is no preprocessor conditional syntax in FASM (too bad). But the assembly directive <code>if</code> can be used in conjuction with the preprocessor to achieve the same results as with preprocessor conditionals (but this way it wastes more time and memory).</p>
+<p>As you know, <code>if</code> is an assembly-time statement. It means that the statement is checked after preprocessing, and this allows some special conditional operators to work.</p>
+<p>I won’t describe its assembly-time behavior (conditional operators like <code>&amp;</code>, <code>|</code>, etc), read FASM’s docs for this. Here I will describe only those operators that are used with the preprocessor.</p>
+<h2 id="operator-eq">7.1. Operator <code>eq</code></h2>
+<p>The simplest on is <code>eq</code>. It just compares two symbols and checks if they are the same. Value of <code>abcd eq abcd</code> is true, value of <code>abcd eq 1</code> is false, etc. It is useful for comparing a symbol that will be preprocessed, like:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">STRINGS equ ASCII
+<span class="hl kwb">if</span> STRINGS <span class="hl kwd">eq</span> ASCII
+  <span class="hl kwd">db</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else if</span> STRINGS <span class="hl kwd">eq</span> UNICODE
+  <span class="hl kwd">du</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">display</span> <span class="hl str">&apos;unknown string type&apos;</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>… after preprocessing it will become:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">if</span> ASCII <span class="hl kwd">eq</span> ASCII
+  <span class="hl kwd">db</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else if</span> ASCII <span class="hl kwd">eq</span> UNICODE
+  <span class="hl kwd">du</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">display</span> <span class="hl str">&apos;unknown string type&apos;</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>… where the first condition (<code>ASCII eq ASCII</code>) is true, so only <code>db 'Oh yeah',0</code> will be assembled.</p>
+<p>Another example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">STRINGS equ UNICODE   <span class="hl slc">;only difference here, UNICODE instead of ASCII</span>
+<span class="hl kwb">if</span> STRINGS <span class="hl kwd">eq</span> ASCII
+  <span class="hl kwd">db</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else if</span> STRINGS <span class="hl kwd">eq</span> UNICODE
+  <span class="hl kwd">du</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">display</span> <span class="hl str">&apos;unknown string type&apos;</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>… after preprocessing it will be:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">if</span> UNICODE <span class="hl kwd">eq</span> ASCII
+  <span class="hl kwd">db</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else if</span> UNICODE <span class="hl kwd">eq</span> UNICODE
+  <span class="hl kwd">du</span> <span class="hl str">&apos;Oh yeah&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">display</span> <span class="hl str">&apos;unknown string type&apos;</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>… now the first condition (<code>UNICODE eq ASCII</code>) will be false, and the second one (<code>UNICODE eq UNICODE</code>) will be true, therefore <code>du 'Oh yeah',0</code> will be assembled.</p>
+<p>A better usage of this operator is for checking macro arguments, like:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> item type<span class="hl opt">,</span>value
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> type <span class="hl kwd">eq BYTE</span>
+    <span class="hl kwd">db</span> value
+  <span class="hl kwb">else if</span> type <span class="hl kwd">eq WORD</span>
+    <span class="hl kwd">dw</span> value
+  <span class="hl kwb">else if</span> type <span class="hl kwd">eq DWORD</span>
+    <span class="hl kwd">dd</span> value
+  <span class="hl kwb">else if</span> type <span class="hl kwd">eq</span> STRING
+    <span class="hl kwd">db</span> value<span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span>
+item <span class="hl kwd">BYTE</span><span class="hl opt">,</span><span class="hl num">1</span>
+item STRING<span class="hl opt">,</span><span class="hl str">&apos;aaaaaa&apos;</span></code></pre>
+<p>… which becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">if</span> <span class="hl kwd">BYTE eq BYTE</span>
+  <span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwb">else if</span> <span class="hl kwd">BYTE eq WORD</span>
+  <span class="hl kwd">dw</span> <span class="hl num">1</span>
+<span class="hl kwb">else if</span> <span class="hl kwd">BYTE eq DWORD</span>
+  <span class="hl kwd">dd</span> <span class="hl num">1</span>
+<span class="hl kwb">else if</span> <span class="hl kwd">BYTE eq</span> STRING
+  <span class="hl kwd">db</span> <span class="hl num">1</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">end if</span>
+<span class="hl kwb">if</span> STRING <span class="hl kwd">eq BYTE</span>
+  <span class="hl kwd">db</span> <span class="hl str">&apos;aaaaaa&apos;</span>
+<span class="hl kwb">else if</span> STRING <span class="hl kwd">eq WORD</span>
+  <span class="hl kwd">dw</span> <span class="hl str">&apos;aaaaaa&apos;</span>
+<span class="hl kwb">else if</span> STRING <span class="hl kwd">eq DWORD</span>
+  <span class="hl kwd">dd</span> <span class="hl str">&apos;aaaaaa&apos;</span>
+<span class="hl kwb">else if</span> STRING <span class="hl kwd">eq</span> STRING
+  <span class="hl kwd">db</span> <span class="hl str">&apos;aaaaaa&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>… so only these two commands will get assembled:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">1</span>
+<span class="hl kwd">db</span> <span class="hl str">&apos;aaaaaa&apos;</span><span class="hl opt">,</span><span class="hl num">0</span></code></pre>
+<p><code>eq</code> (like all other preprocessor operators) can also work with empty arguments. This means, for example, that <code>if eq</code> is true, and <code>if 5 eq</code> is false etc. Example macro:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl kwb">mov</span> dest<span class="hl opt">,</span>src<span class="hl opt">,</span>src2
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> src2 <span class="hl kwd">eq</span>
+    <span class="hl kwb">mov</span> dest<span class="hl opt">,</span>src
+  <span class="hl kwb">else</span>
+    <span class="hl kwb">mov</span> dest<span class="hl opt">,</span>src
+    <span class="hl kwb">mov</span> src<span class="hl opt">,</span>src2
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span></code></pre>
+<h2 id="operator-eqtype">7.2. Operator <code>eqtype</code></h2>
+<p>Another operator is <code>eqtype</code>. It compares whether symbols are of the same type. Types are:</p>
+<ul>
+<li>individual quoted strings (those not being a part of numerical expression)</li>
+<li>floating point numbers</li>
+<li>any numerical expression (note that any unknown word will be treated as a label, so it will also will be seen as an expression),</li>
+<li>addresses - the numerical expressions in square brackets (with size operators and segment prefixes)</li>
+<li>instruction mnemonics</li>
+<li>registers</li>
+<li>size operators</li>
+<li>near/far operators,</li>
+<li>use16/use32 operators</li>
+<li>blank space</li>
+</ul>
+<p>Example of a macro which allows an <code>SHL</code> instruction with a memory variable as count, like <code>shl ax,[myvar]</code>:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl kwb">shl</span> dest<span class="hl opt">,</span>count
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> count <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">]</span>   <span class="hl slc">;if count is a memory variable</span>
+    <span class="hl kwb">push</span> <span class="hl kwa">cx</span>
+    <span class="hl kwb">mov</span> <span class="hl kwa">cl</span><span class="hl opt">,</span>count
+    <span class="hl kwb">shl</span> dest<span class="hl opt">,</span><span class="hl kwa">cl</span>
+    <span class="hl kwb">pop</span> <span class="hl kwa">cx</span>
+  <span class="hl kwb">else</span>                  <span class="hl slc">;if count is of another type</span>
+    <span class="hl kwb">shl</span> dest<span class="hl opt">,</span>count      <span class="hl slc">;just use original shl</span>
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span>
+<span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl kwc">byte_variable</span> <span class="hl kwd">db</span> <span class="hl num">5</span>
+<span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,[</span>byte_variable<span class="hl opt">]</span></code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">if</span> <span class="hl num">5</span> <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">]</span>
+  <span class="hl kwb">push</span> <span class="hl kwa">cx</span>
+  <span class="hl kwb">mov</span> <span class="hl kwa">cl</span><span class="hl opt">,</span><span class="hl num">5</span>
+  <span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl kwa">cl</span>
+  <span class="hl kwb">pop</span> <span class="hl kwa">cx</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl kwb">end if</span>
+<span class="hl kwc">byte_variable</span> <span class="hl kwd">db</span> <span class="hl num">5</span>
+<span class="hl kwb">if</span> <span class="hl opt">[</span>byte_variable<span class="hl opt">]</span> <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">]</span>
+  <span class="hl kwb">push</span> <span class="hl kwa">cx</span>
+  <span class="hl kwb">mov</span> <span class="hl kwa">cl</span><span class="hl opt">,[</span>byte_variable<span class="hl opt">]</span>
+  <span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl kwa">cl</span>
+  <span class="hl kwb">pop</span> <span class="hl kwa">cx</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,[</span>byte_variable<span class="hl opt">]</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>… and so, because of the conditionals, it will be assembled to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl num">5</span>
+<span class="hl kwc">byte_variable</span> <span class="hl kwd">db</span> <span class="hl num">5</span>
+<span class="hl kwb">push</span> <span class="hl kwa">cx</span>
+<span class="hl kwb">mov</span> <span class="hl kwa">cl</span><span class="hl opt">,[</span><span class="hl kwd">byte</span> variable<span class="hl opt">]</span>
+<span class="hl kwb">shl</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl kwa">cl</span>
+<span class="hl kwb">pop</span> <span class="hl kwa">cx</span></code></pre>
+<p>Note that <code>shl ax,byte [variable]</code> wouldn’t work with this macro, because condition <code>byte [variable] eqtype [0]</code> isn’t true (read further).</p>
+<!-- NEXT PARAGRAPH NEED REVISING: BADLY BROKEN!!!! -->
+<p>The <code>eqtype</code> operator isn’t limited to just two operands. It just compares whether types of operands on its left-hand side and same to type of operands on right side of <code>eqtype</code>. For example, <code>if eax 4 eqtype ebx name</code> is true (<code>name</code> is a label, and thus it is a number too).</p>
+<p>Example of extending the <code>mov</code> intruction so it allows moving between memory variables:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl kwb">mov</span> dest<span class="hl opt">,</span>src
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> dest src <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">] [</span><span class="hl num">0</span><span class="hl opt">]</span>
+    <span class="hl kwb">push</span> src
+    <span class="hl kwb">pop</span> dest
+  <span class="hl kwb">else</span>
+    <span class="hl kwb">mov</span> dest<span class="hl opt">,</span>src
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span>
+<span class="hl kwb">mov</span> <span class="hl opt">[</span>var1<span class="hl opt">],</span><span class="hl num">5</span>
+<span class="hl kwb">mov</span> <span class="hl opt">[</span>var1<span class="hl opt">],[</span>var2<span class="hl opt">]</span></code></pre>
+<p>… will be preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">if</span> <span class="hl opt">[</span>var1<span class="hl opt">]</span> <span class="hl num">5</span> <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">] [</span><span class="hl num">0</span><span class="hl opt">]</span>  <span class="hl slc">;false</span>
+  <span class="hl kwb">push</span> <span class="hl num">5</span>
+  <span class="hl kwb">pop</span> <span class="hl opt">[</span>var1<span class="hl opt">]</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">mov</span> <span class="hl opt">[</span>var1<span class="hl opt">],</span><span class="hl num">5</span>
+<span class="hl kwb">end if</span>
+<span class="hl kwb">if</span> <span class="hl opt">[</span>var1<span class="hl opt">] [</span>var2<span class="hl opt">]</span> <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">] [</span><span class="hl num">0</span><span class="hl opt">]</span>  <span class="hl slc">;true</span>
+  <span class="hl kwb">push</span> <span class="hl opt">[</span>var2<span class="hl opt">]</span>
+  <span class="hl kwb">pop</span> <span class="hl opt">[</span>var1<span class="hl opt">]</span>
+<span class="hl kwb">else</span>
+  <span class="hl kwb">mov</span> <span class="hl opt">[</span>var1<span class="hl opt">],[</span>var2<span class="hl opt">]</span>
+<span class="hl kwb">end if</span></code></pre>
+<p>… and assembled to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">mov</span> <span class="hl opt">[</span>var1<span class="hl opt">],</span><span class="hl num">5</span>
+<span class="hl kwb">push</span> <span class="hl opt">[</span>var2<span class="hl opt">]</span>
+<span class="hl kwb">pop</span> <span class="hl opt">[</span>var1<span class="hl opt">]</span></code></pre>
+<p>Anyway, a better (and more readable) way to write a similar macro is to use the <code>&amp;</code> operator (not covered in this document, see FASM documentation), like:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl kwb">mov</span> dest<span class="hl opt">,</span>src
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> <span class="hl opt">(</span>dest <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">]) &amp; (</span>src <span class="hl kwd">eqtype</span> <span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">])</span>
+    <span class="hl kwb">push</span> src
+    <span class="hl kwb">pop</span> dest
+  <span class="hl kwb">else</span>
+    <span class="hl kwb">mov</span> dest<span class="hl opt">,</span>src
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span></code></pre>
+<p>The previous example using <code>eqtype</code> with four arguments was meant only to demonstrate its possibilities, but <code>&amp;</code> should be used if possible.</p>
+<p>Note that currently you can use incomplete expressions as argument of <code>eqtype</code>, it is sufficent that the parser recognizes its type, but this is undocumented behavior so I won’t describe it any further.</p>
+<h2 id="operator-in">7.3. Operator “<code>in</code>”</h2>
+<p>FASM also includes another operator which can be employed if you use multiple <code>eq</code>s:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl kwb">mov</span> a<span class="hl opt">,</span>b
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> <span class="hl opt">(</span>a <span class="hl kwd">eq</span> <span class="hl kwa">cs</span><span class="hl opt">) | (</span>a <span class="hl kwd">eq</span> <span class="hl kwa">ds</span><span class="hl opt">) | (</span>a <span class="hl kwd">eq</span> <span class="hl kwa">es</span><span class="hl opt">) | (</span>a <span class="hl kwd">eq</span> <span class="hl kwa">fs</span><span class="hl opt">) |\</span>
+     <span class="hl opt">(</span>a <span class="hl kwd">eq</span> <span class="hl kwa">gs</span><span class="hl opt">) | (</span>a <span class="hl kwd">eq</span> <span class="hl kwa">ss</span><span class="hl opt">)</span>
+    <span class="hl kwb">push</span> b
+    <span class="hl kwb">pop</span> a
+  <span class="hl kwb">else</span>
+    <span class="hl kwb">mov</span> a<span class="hl opt">,</span>b
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span></code></pre>
+<p>Instead of many <code>|</code>ed <code>eq</code>s, you can use the <code>in</code> operator. It compares the symbol on its left-hand side with multiple symbols in a list on its right-hand side. The symbols list must be enclosed in angle brackets (<code>&lt;</code> and <code>&gt;</code>), and the symbols inside the list should be separated by commas (<code>,</code>).</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> <span class="hl kwb">mov</span> a<span class="hl opt">,</span>b
+<span class="hl opt">{</span>
+  <span class="hl kwb">if</span> a <span class="hl kwb">in</span> <span class="hl opt">&lt;</span><span class="hl kwa">cs</span><span class="hl opt">,</span><span class="hl kwa">ds</span><span class="hl opt">,</span><span class="hl kwa">es</span><span class="hl opt">,</span><span class="hl kwa">fs</span><span class="hl opt">,</span><span class="hl kwa">gs</span><span class="hl opt">,</span><span class="hl kwa">ss</span><span class="hl opt">&gt;</span>
+    <span class="hl kwb">push</span> b
+    <span class="hl kwb">pop</span> a
+  <span class="hl kwb">else</span>
+    <span class="hl kwb">mov</span> a<span class="hl opt">,</span>b
+  <span class="hl kwb">end if</span>
+<span class="hl opt">}</span></code></pre>
+<p><code>in</code> also works with multiple symbols on both sides (like <code>eq</code>):</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">if</span> <span class="hl kwd">dword</span> <span class="hl opt">[</span><span class="hl kwa">eax</span><span class="hl opt">]</span> <span class="hl kwb">in</span> <span class="hl opt">&lt;[</span><span class="hl kwa">eax</span><span class="hl opt">],</span> <span class="hl kwd">dword</span> <span class="hl opt">[</span><span class="hl kwa">eax</span><span class="hl opt">],</span> <span class="hl kwd">ptr</span> <span class="hl kwa">eax</span><span class="hl opt">,</span> <span class="hl kwd">dword ptr</span> <span class="hl kwa">eax</span><span class="hl opt">&gt;</span></code></pre>
+<h1 id="structures">8. Structures</h1>
+<p>Structures are almost the same as macros. You declare them with the <code>struc</code> directive:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">struc</span> <span class="hl opt">&lt;</span>name<span class="hl opt">&gt; &lt;</span>arguments<span class="hl opt">&gt; { &lt;</span>body<span class="hl opt">&gt; }</span></code></pre>
+<p>The difference is that when you use a structure in code, it must be preceded by a label (structure name). For example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">struc</span> a <span class="hl opt">{</span><span class="hl kwd">db</span> <span class="hl num">5</span><span class="hl opt">}</span>
+a</code></pre>
+<p>… doesn’t work. A structure is only recognized when preceded by <code>name</code>, like:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">struc</span> a <span class="hl opt">{</span><span class="hl kwd">db</span> <span class="hl num">5</span><span class="hl opt">}</span>
+name a</code></pre>
+<p>… which, like a macro, will get preprocessed to:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">db</span> <span class="hl num">5</span></code></pre>
+<p>The reason for the preceding <code>name</code> (ie: the one before the structure) is that <code>name</code> will be appended before every symbol inside the structure’s body that starts with a <code>.</code>. For example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">struc</span> a <span class="hl opt">{.</span><span class="hl kwd">local</span><span class="hl opt">:}</span>
+name1 a
+name2 a</code></pre>
+<p>… will become:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">name1<span class="hl opt">.</span><span class="hl kwd">local</span><span class="hl opt">:</span>
+name2<span class="hl opt">.</span><span class="hl kwd">local</span><span class="hl opt">:</span></code></pre>
+<p>This way you can define something similar to structures found in other languages. Example:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">struc</span> rect left<span class="hl opt">,</span>right<span class="hl opt">,</span>top<span class="hl opt">,</span>bottom  <span class="hl slc">;has arguments, like macros</span>
+<span class="hl opt">{</span>
+  <span class="hl kwc">.left</span> <span class="hl kwd">dd</span> left
+  <span class="hl kwc">.right</span> <span class="hl kwd">dd</span> right
+  <span class="hl kwc">.top</span> <span class="hl kwd">dd</span> top
+  <span class="hl kwc">.bottom</span> <span class="hl kwd">dd</span> bottom
+<span class="hl opt">}</span>
+r1 rect <span class="hl num">0</span><span class="hl opt">,</span><span class="hl num">20</span><span class="hl opt">,</span><span class="hl num">10</span><span class="hl opt">,</span><span class="hl num">30</span>
+r2 rect ?<span class="hl opt">,</span>?<span class="hl opt">,</span>?<span class="hl opt">,</span>?</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">r1<span class="hl opt">.</span>left <span class="hl kwd">dd</span> <span class="hl num">0</span>
+r1<span class="hl opt">.</span>right <span class="hl kwd">dd</span> <span class="hl num">20</span>
+r1<span class="hl opt">.</span>top <span class="hl kwd">dd</span> <span class="hl num">10</span>
+r1<span class="hl opt">.</span>bottom <span class="hl kwd">dd</span> <span class="hl num">30</span>
+r2<span class="hl opt">.</span>left <span class="hl kwd">dd</span> ?
+r2<span class="hl opt">.</span>right <span class="hl kwd">dd</span> ?
+r2<span class="hl opt">.</span>top <span class="hl kwd">dd</span> ?
+r2<span class="hl opt">.</span>bottom <span class="hl kwd">dd</span> ?</code></pre>
+<p>You can also use a cool trick with which you don’t have to specify arguments (and <code>0</code> will be used instead):</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">struc</span> ymmud arg
+<span class="hl opt">{</span>
+  <span class="hl kwc">.member</span> <span class="hl kwd">dd</span> arg<span class="hl opt">+</span><span class="hl num">0</span>
+<span class="hl opt">}</span>
+y1 ymmud <span class="hl num">0xACDC</span>
+y2 ymmud</code></pre>
+<p>… becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">y1<span class="hl opt">.</span>member <span class="hl kwd">dd</span> <span class="hl num">0xACDC</span><span class="hl opt">+</span><span class="hl num">0</span>
+y2<span class="hl opt">.</span>member <span class="hl kwd">dd</span> <span class="hl opt">+</span><span class="hl num">0</span></code></pre>
+<p>As mentioned in 4.2, if an argument remain unspecified its value is blank inside macro/structure body. We also exploited the fact that <code>+</code> is both a binary (with two operands) and unary (with one operand) operator.</p>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p><strong>NOTE</strong>: You’ll often encounter a defined macro or structure called <code>struct</code> (not <code>struc</code>), which declares a structure or extends structure declaration. Don’t mistake that <code>struct</code> with <code>struc</code>.</p>
+</div>
+</div>
+<h1 id="fixes">9. Fixes</h1>
+<p>By the time FASM was evolving, it still missed one very useful feature: the ability to declare a macro inside a macro — ie: the result of unrolling the macro becomes a macro definition. Hypothetically, something like this:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> declare_macro_AAA
+<span class="hl opt">{</span>
+  <span class="hl kwd">macro</span> <span class="hl kwb">AAA</span>
+  <span class="hl opt">{</span>
+     <span class="hl kwd">db</span> <span class="hl str">&apos;AAA&apos;</span><span class="hl opt">,</span><span class="hl num">0</span>
+  <span class="hl opt">}</span> <span class="hl slc">;end of &quot;AAA&quot; declaration</span>
+<span class="hl opt">}</span> <span class="hl slc">;end of &quot;declare_macro_AAA&quot; declaration</span></code></pre>
+<p>The problem here is that when macro <code>declare_macro_AAA</code> is read by the preprocessor, the first <code>}</code> encountered is interpreted as its end, which isn’t what we intended. It is similar to what happens with other preprocessor symbols/operators (eg: <code>#</code>, <code>`</code>, <code>forward</code>, <code>local</code>, etc.), they get processed during expansion of the outer macro, so they can’t be used in inner macro declaration.</p>
+<h2 id="explaination-of-fixes">9.1. Explaination of Fixes</h2>
+<p>In the meantime, another preprocessor directive was added. It does the same job as <code>equ</code>, but BEFORE other preprocessing (except for things listed in <a href="#basic-preprocessing"><strong>Chapter 2</strong></a>, which are done in a pre-preprocessing stage, but this is internal stuff, not particularly interesting). This directive is <code>fix</code>.</p>
+<p>It has the same syntax as <code>equ</code> (<code>&lt;symbol&gt; fix &lt;anything&gt;</code>), but replacing fixed symbols in line is done before any other preprocessing (except things listed in <a href="#basic-preprocessing"><strong>Chapter 2</strong></a>, again). Preprocessing is done line by line, left to right, so if we have the following code:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">a equ <span class="hl num">1</span>
+b equ a
+a b</code></pre>
+<p>… its preprocessing will happens like this:</p>
+<ul>
+<li><em>Preprocessing line 1:</em>
+<ul>
+<li><code>a</code> — Preprocessor finds unknown word, skips it.</li>
+<li><code>equ</code> — “<code>equ</code>” is second word of line, so it memorizes that “<code>a</code>” equals rest of line (“<code>1</code>”), then deletes line.</li>
+</ul></li>
+<li><em>Preprocessing line 2:</em>
+<ul>
+<li><code>b</code> — Preprocessor finds unknown word, skips it.</li>
+<li><code>equ</code> — “<code>equ</code>” is second word of line, so it memorizes that “<code>b</code>” equals rest of line (“<code>a</code>”), then deletes line.</li>
+</ul></li>
+<li><em>Preprocessing line 3:</em>
+<ul>
+<li><code>a</code> — Preprocessor replaces “<code>a</code>” with “<code>1</code>”</li>
+<li><code>b</code> — Preprocessor replaces “<code>b</code>” with “<code>a</code>”</li>
+</ul></li>
+</ul>
+<p>So it becomes:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl num">1</span> a</code></pre>
+<p>But if we have:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">a fix <span class="hl num">1</span>
+b fix a
+a b</code></pre>
+<p>… then it looks like:</p>
+<ul>
+<li><em>Fixing line 1:</em> No symbols to be fixed</li>
+<li><em>Preprocessing line 1:</em>
+<ul>
+<li><code>a</code> — Preprocessor finds unknown word, skips it.</li>
+<li><code>fix</code> — “<code>fix</code>” is second word of line, so it memorizes that “<code>a</code>” is fixed to rest of line (“<code>1</code>”), then deletes line.</li>
+</ul></li>
+<li><em>Fixing line 2:</em> “<code>a</code>” is fixed to “<code>1</code>”, so line becomes “<code>b fix 1</code>”</li>
+<li><em>Preprocessing line 2:</em>
+<ul>
+<li><code>b</code> — Preprocessor finds unknown word, skips it.</li>
+<li><code>fix</code> — “<code>fix</code>” is second word of line, so it memorizes that “<code>b</code>” is fixed to rest of line (“<code>1</code>”) and deletes line</li>
+</ul></li>
+<li><em>Fixing line 3:</em> “<code>a</code>” is fixed to “<code>1</code>”, “<code>b</code>” is fixed to “<code>1</code>” so line becomes “<code>1 1</code>”</li>
+<li><em>Preprocessing line 3:</em>
+<ul>
+<li><code>1</code> — Preprocessor finds unknown word, skips it.</li>
+<li><code>1</code> — Preprocessor finds unknown word, skips it.</li>
+</ul></li>
+</ul>
+<p>This was only an example to show how fixing works, it isn’t usually used in this manner.</p>
+<h2 id="using-fixes-for-nested-macro-declaration">9.2. Using Fixes for Nested Macro Declaration</h2>
+<p>Now let’s get back to declaring a macro inside a macro. First of all, we need to know how macros are preprocessed. You can quite easily work it out yourself: at macro declaration the macro’s body is saved, and when a macro is expanded the preprocessor replaces the line containing the macro with that macro’s body, it internally declares equates to handle its arguments and then continues preprocessing the macro body. (of course it’s more complicated than this, but this is enough for understanding fixes).</p>
+<p>So what was the problem with declaring a macro inside a macro? The first time the compiler encountered a “<code>}</code>” inside the macro’s body it interpreted it as the end of the macro’s body declaration, so there wasn’t any way to include “<code>}</code>” in a macro’s body. But we can easily fix <strong>:)</strong> this:</p>
+<pre class="fasm small" title="Flat Assembler (Fasm) source code"><code class="fasm small" title="Flat Assembler (Fasm) source code"><span class="hl kwd">macro</span> a
+<span class="hl opt">{</span>
+  <span class="hl kwd">macro</span> b
+  %_
+     <span class="hl kwb">display</span> <span class="hl str">&apos;Never fix before something really needs to be fixed&apos;</span>
+  _%
+<span class="hl opt">}</span>
+%_ fix <span class="hl opt">{</span>
+_% fix <span class="hl opt">}</span>
+a
+b</code></pre>
+<p>Now preprocessing looks like this (simplified):</p>
+<ol type="1">
+<li>Preprocessor loads declaration of macro “<code>a</code>”</li>
+<li>Preprocessor loads declaration of fixes “<code>%_</code>” and “<code>_%</code>”</li>
+<li>Preprocessor expands macro “<code>a</code>”</li>
+<li>Preprocessor loads macro “<code>b</code>” declaration (“<code>_%</code>” and “<code>%_</code>” are fixed in each line before being handled by rest of preprocessor)</li>
+<li>Preprocessor expands macro “<code>b</code>”</li>
+</ol>
+<p>Here you can see how important is the positioning of fixes’ declaration, because the macro’s body is fixed too before being loaded by the preprocessor. For example, this won’t work:</p>
+<pre class="fasm small" title="Flat Assembler (Fasm) source code"><code class="fasm small" title="Flat Assembler (Fasm) source code">%_ fix <span class="hl opt">{</span>
+_% fix <span class="hl opt">}</span>
+<span class="hl kwd">macro</span> a
+<span class="hl opt">{</span>
+  <span class="hl kwd">macro</span> b
+  %_
+     <span class="hl kwb">display</span> <span class="hl str">&apos;Never fix before something really needs to be fixed, here you see it&apos;</span>
+  _%
+<span class="hl opt">}</span>
+a
+b</code></pre>
+<p>Because “<code>%_</code>” and “<code>_%</code>” will be fixed before loading macro “<code>a</code>”, so loading of the macro’s body will end at “<code>_%</code>” (by then, fixed to “<code>}</code>”) and the second “<code>}</code>” will remain there.</p>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p><strong>NOTE</strong>: Character “<code>%</code>” isn’t a special character for FASM’s preprocessor, so you use it just like any other normal character (eg: “<code>a</code>” or “<code>9</code>”). It has special meaning AFTER preprocessing, and only when it is the only char of a whole word (eg: “<code>%</code>” but not “<code>anything%anything</code>”).</p>
+</div>
+</div>
+<p>We also need to fix other macro-releated operators:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">%_ fix <span class="hl opt">{</span>
+_% fix <span class="hl opt">}</span>
+%<span class="hl kwd">local</span> fix <span class="hl kwd">local</span>
+%<span class="hl kwd">forward</span> fix <span class="hl kwd">forward</span>
+%<span class="hl kwd">reverse</span> fix revese
+%<span class="hl kwd">common</span> fix <span class="hl kwd">common</span>
+%tostring fix <span class="hl opt">`</span></code></pre>
+<!-- NOTE: UNCLEAR... doesn't explain why # is special, and why we'd want to fix it. Lacks context, and lacks clear connection with preceding text  -->
+<p>Only <code>#</code> is a special case, you can fix it, but there is an easier way. Every time the preprocessor finds multiple <code>#</code>s, it removes one, so it is something like (this won’t actually work):</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">etc<span class="hl opt">...</span>
+<span class="hl opt">######</span> fix <span class="hl opt">#####</span>
+<span class="hl opt">#####</span>  fix <span class="hl opt">####</span>
+<span class="hl opt">####</span>   fix <span class="hl opt">###</span>
+<span class="hl opt">###</span>    fix <span class="hl opt">##</span>
+<span class="hl opt">##</span>     fix <span class="hl opt">#</span></code></pre>
+<p>So instead of using symbol fixed to “<code>#</code>” you can just use “<code>##</code>” etc.</p>
+<h2 id="using-fixes-for-moving-parts-of-codes">9.3. Using Fixes for Moving Parts of Codes</h2>
+<p>You can also use fixes to move parts of code. In assembly programming this is useful, especially when you break code into modules but want to have data and code grouped in separate segment/section, but defined in a single file.</p>
+<p>Right now this part of tutorial is <strong>TODO</strong>, I hope I will write it soon, for now you can look at JohnFound’s Fresh’s macro library, file <code>INCLUDE\MACRO\globals.inc</code>.</p>
+<p>I know fixes are confusing, and to understand them you have to learn the inner workings of the preprocessor, but they give you great coding power. Privalov wanted FASM to be as powerful as possible, even at the cost of comprehensibility.</p>
+<h1 id="closing-remarks">Closing Remarks</h1>
+<p>Don’t forget to read FASM documentation. Almost everything from this tutorial is there, maybe written in a way that’s a little harder for learning but definitely a better reference. It is not so long, nor hard to remember — 99% of FASM users have learnt it from these docs and from the forum.</p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#what-is-a-preprocessor">1. What Is a Preprocessor</a></li>
+<li><a href="#basic-preprocessing">2. Basic Preprocessing</a><ul>
+<li><a href="#comment">2.1. Comment <code>;</code></a></li>
+<li><a href="#line-break">2.2. Line Break <code>\</code></a></li>
+<li><a href="#directive-include">2.3. Directive “<code>include</code>”</a></li>
+<li><a href="#strings-preprocessing">2.4. Strings Preprocessing</a></li>
+</ul></li>
+<li><a href="#equates">3. Equates</a><ul>
+<li><a href="#directive-equ">3.1. Directive “<code>equ</code>”</a></li>
+<li><a href="#directive-restore">3.2. Directive “<code>restore</code>”</a></li>
+</ul></li>
+<li><a href="#simple-macros-without-arguments">4. Simple Macros without Arguments</a><ul>
+<li><a href="#simple-macro-definition">4.1. Simple Macro Definition</a></li>
+<li><a href="#nested-macros">4.2. Nested Macros</a></li>
+<li><a href="#directive-purge-macro-undefinition">4.3. Directive “<code>purge</code>” (macro undefinition)</a></li>
+<li><a href="#macros-behaviour">4.4. Macros Behaviour</a></li>
+</ul></li>
+<li><a href="#macros-with-fixed-number-of-arguments">5. Macros with Fixed Number of Arguments</a><ul>
+<li><a href="#macros-with-single-argument">5.1. Macros with Single Argument</a></li>
+<li><a href="#macros-with-miltiple-arguments">5.2. Macros with Miltiple Arguments</a></li>
+<li><a href="#directive-local">5.3. Directive “<code>local</code>”</a></li>
+<li><a href="#operator-symbol-concatenation">5.4. Operator <code>#</code> (symbol concatenation)</a></li>
+<li><a href="#operator">5.5. Operator “<code>`</code>”</a></li>
+</ul></li>
+<li><a href="#macros-with-group-argument">6. Macros with Group Argument</a><ul>
+<li><a href="#declaring-macros-with-group-argument">6.1. Declaring Macros with Group Argument</a></li>
+<li><a href="#directive-common">6.2. Directive “<code>common</code>”</a></li>
+<li><a href="#directive-forward">6.3. Directive “<code>forward</code>”</a></li>
+<li><a href="#directive-reverse">6.4. Directive “<code>reverse</code>”</a></li>
+<li><a href="#combining-group-control-directives">6.5. Combining Group Control Directives</a></li>
+<li><a href="#behavior-of-local-inside-a-macro-with-group-argument">6.6. Behavior of <code>local</code> inside a Macro with Group Argument</a></li>
+<li><a href="#macros-with-multiple-group-arguments">6.7. Macros with Multiple Group Arguments</a></li>
+</ul></li>
+<li><a href="#preprocessor-conditionals">7. Preprocessor Conditionals</a><ul>
+<li><a href="#operator-eq">7.1. Operator <code>eq</code></a></li>
+<li><a href="#operator-eqtype">7.2. Operator <code>eqtype</code></a></li>
+<li><a href="#operator-in">7.3. Operator “<code>in</code>”</a></li>
+</ul></li>
+<li><a href="#structures">8. Structures</a></li>
+<li><a href="#fixes">9. Fixes</a><ul>
+<li><a href="#explaination-of-fixes">9.1. Explaination of Fixes</a></li>
+<li><a href="#using-fixes-for-nested-macro-declaration">9.2. Using Fixes for Nested Macro Declaration</a></li>
+<li><a href="#using-fixes-for-moving-parts-of-codes">9.3. Using Fixes for Moving Parts of Codes</a></li>
+</ul></li>
+<li><a href="#closing-remarks">Closing Remarks</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

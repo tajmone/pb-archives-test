@@ -1,0 +1,180 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Scintilla</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../../index.html'>Home</a></li>
+	<li><a href='../../index.html'>pb-development</a></li>
+	<li><a href='../index.html'>purelibs</a></li>
+	<li><a href='index.html'>scintilla</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Scintilla</h1>
+
+<pre><code>PureBASIC 5.51
+Scintilla version: 3.4.2 (2014-05-22)
+License: Historical Permission Notice and Disclaimer (HPND)</code></pre>
+<h1 id="external-refrence-links">External Refrence Links</h1>
+<ul>
+<li><a href="http://www.scintilla.org/">Scintilla Homepage</a></li>
+<li><a href="http://www.purebasic.com/documentation/scintilla/index.html">Scintilla – PureBASIC Documentation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scintilla_(software)">Scintilla – WikiPedia</a></li>
+</ul>
+<h1 id="in-this-repo">In This Repo</h1>
+<ul>
+<li><a href="./GoScintilla/"><code>/GoScintilla/</code></a> — <strong>GoScintilla</strong> updated to PB 5.x.</li>
+<li><a href="./icons1/"><code>/icons1/</code></a> — Icons that can be used with Scintilla.</li>
+<li><a href="./pb-scidoc/"><code>/pb-scidoc/</code></a> — Scintilla documentation adapted to PB usage (empty)</li>
+<li><a href="./scidoc/"><code>/scidoc/</code></a> — Selected files from Scintilla documentation.</li>
+<li><a href="./CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a> — Maintainers/contributors guidelines for this repo section.</li>
+<li><a href="./Scintilla_License"><code>Scintilla_License</code></a> – License for Scintilla and SciTE (HPND), as required.</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
+<p>This sections strives to gather documentation matching the version of the Scintilla component used in the latest PureBASIC stable release. This ensures that we are reading the correct documentation for using the Scintilla PureLib component.</p>
+<p>The current latest version of Scintilla is 3.7.2 (2016/12/30), the version used by PureBASIC (5.51) is lagging behind Scintilla by 21 releases — with 3 major releases inbetween —, and it’s over 2 years older (954 days); therefore the online Scintilla documentation might contain references to features which are not present in the Scintilla PureLib, or that have changed since.</p>
+<h3 id="scintilla-documentation">Scintilla Documentation</h3>
+<ul>
+<li><a href="./scidoc/"><code>/scidoc/</code></a></li>
+</ul>
+<p>This folder contains a selection of documentation files taken from the Scintilla 3.4.2 source code package — except <code>ScintillaHistory.html</code> (3.7.2) — and are licensed under the <a href="https://en.wikipedia.org/wiki/Historical_Permission_Notice_and_Disclaimer">Historical Permission Notice and Disclaimer (HPND)</a> license:</p>
+<ul>
+<li><a href="./scidoc/Design.html"><code>/scidoc/Design.html</code></a> – «<em>Scintilla Component Design</em>».</li>
+<li><a href="./scidoc/ScintillaDoc.html"><code>/scidoc/ScintillaDoc.html</code></a> – «<em>Scintilla Documentation</em>».</li>
+<li><a href="./scidoc/ScintillaHistory.html"><code>/scidoc/ScintillaHistory.html</code></a> – «<em>History of Scintilla and SciTE</em>» updated to Scintilla 3.7.2 (2016/12/30).</li>
+<li><a href="./scidoc/ScintillaUsage.html"><code>/scidoc/ScintillaUsage.html</code></a> – «<em>Scintilla Usage Notes</em>» (Implementing Auto-Indent, Syntax Styling, and Calltips).</li>
+<li><a href="./scidoc/Steps.html"><code>/scidoc/Steps.html</code></a> – «<em>How to use the Scintilla Edit Control in windows?</em>».</li>
+<li><a href="./scidoc/Lexer.txt"><code>/scidoc/Lexer.txt</code></a> – «<em>How to Write a Scintilla Lexer</em>», C++ tutorial by Edward K. Ream.</li>
+<li><a href="./scidoc/Lexer.md"><code>/scidoc/Lexer.md</code></a> – markdown adaptation of <code>Lexer.txt</code>, formatting added.</li>
+</ul>
+<h3 id="pb-scintilla-documentation">PB-Scintilla Documentation</h3>
+<ul>
+<li><a href="pb-scidoc/"><code>/pb-scidoc/</code></a> (empty)</li>
+</ul>
+<p>This folder will contain a readaptation of Scintilla documentation for PureBASIC specific usage.</p>
+<p>(coming soon)</p>
+<h2 id="goscintilla">GoScintilla</h2>
+<ul>
+<li><a href="./GoScintilla/"><code>/GoScintilla/</code></a></li>
+</ul>
+<p>by Stephen Rodriguez (aka <a href="http://www.purebasic.fr/english/memberlist.php?mode=viewprofile&amp;u=678"><strong><span class="citation" data-cites="srod">@srod</span></strong></a> and <strong>nxSoftWare</strong>).</p>
+<p>GoScintilla is a small Purebasic source-code utility which wraps a lot of the Scintilla API in order to make it easier to use the Scintilla control within our applications to give our programs source code editing facilities.</p>
+<p>It comes with a powerful little lexer which is easily configured to give us syntax styling and/or code folding and/or code-completion and/or call-tips (code-tips) … as appropriate for some programming/scripting language or other.</p>
+<p>With a few lines of Purebasic code we can have a fully configured Scintilla control up and running in no time and without the need to code our own lexer.</p>
+<h2 id="icons">Icons</h2>
+<ul>
+<li><a href="./icons1/"><code>/icons1/</code></a></li>
+</ul>
+<p>Drawn by Iago Rubio, Philippe Lhoste, and Neil Hodgson.</p>
+<p>Available sizes: 12x12, 16x16, 24x24, 32x32.</p>
+<p>These <code>*.xpp</code> icons images were downloaded from <a href="http://www.scintilla.org/Icons.html">Scintilla website</a> and may be used under the same <a href="Scintilla_License">license</a> as Scintilla.</p>
+<p>From <a href="https://en.wikipedia.org/wiki/X_PixMap">Wikipedia</a>:</p>
+<blockquote>
+<p><strong>X PixMap</strong> (<strong>XPM</strong>) is an image file format used by the X Window System […] primarily for creating icon pixmaps, and supports transparent pixels.</p>
+</blockquote>
+<p>The <code>*.png</code> and <code>*.bmp</code> version of the icons were added by <span class="citation" data-cites="tajmone">@tajmone</span> via <a href="https://www.imagemagick.org"><strong>ImageMagick</strong></a>’s <code>convert</code> utility, using the following batch script:</p>
+<ul>
+<li><a href="./icons1/convert-icons.bat"><code>/icons1/convert-icons.bat</code></a></li>
+</ul>
+<hr />
+<h1 id="about-scintilla">About Scintilla</h1>
+<p>In PureBASIC for Windows the Scintilla component comes as a shared library (DLL) which has to be distributed with the final application — it’s named <code>Scintilla.dll</code> and can be found inside PureBASIC’s <code>/compilers/</code> subfolder, usually at this path:</p>
+<pre class="nohighlight"><code>C:\Program Files
+&lt;pre class=&quot;purebasic&quot; title=&quot;PureBASIC source code&quot;&gt;&lt;code class=&quot;purebasic&quot; title=&quot;PureBASIC source code&quot;&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+\compilers\Scintilla.dll</code></pre>
+<p>In PureBASIC for Linux and Mac it comes as a static library that is automatically linked with the final compiled binary application, and no additioanl files need to be distributed with your app.</p>
+<h2 id="pb-scintilla-version">PB Scintilla Version</h2>
+<p>PureBASIC 5.51 uses Scintilla version 3.4.2 (2014-05-22) — last updated in PureBASIC 5.30 (2014/07/23).</p>
+<p>The current latest version of Scintilla is 3.7.2 (2016/12/30):</p>
+<ul>
+<li><a href="http://www.scintilla.org/ScintillaHistory.html">Scintilla History Page</a></li>
+</ul>
+<p>From the Scintilla History page you might download the source code package matching the version that ships with PureBASIC, and extract the documentation, lexers examples, headers files, and other useful stuff.</p>
+<p>There are no known hacks to display which version of Scintilla component is used by the current PureBASIC release — Scintilla doesn’t offer any function to query for version number, nor any constants are present with such info.</p>
+<p>The only way of knowing which version of Scintilla is being used by PureBASIC is from PureBASIC History page (also available ins PB Help):</p>
+<ul>
+<li><a href="http://www.purebasic.com/documentation/mainguide/history.html">PureBASIC Documentation: History</a></li>
+</ul>
+<h2 id="license">License</h2>
+<p>Scintilla and SciTE are released under the terms of the <strong>Historical Permission Notice and Disclaimer</strong> (<strong>HPND</strong>) license:</p>
+<ul>
+<li><a href="https://opensource.org/licenses/HPND">HPND License — Open Source Initiative (OSI)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Historical_Permission_Notice_and_Disclaimer">HPND License — Wikipedia</a></li>
+</ul>
+<p>Scintilla license terms requires that the following copyright notice shall appear in all copies of a software application using the Scintilla component:</p>
+<pre><code>License for Scintilla and SciTE
+Copyright 1998-2003 by Neil Hodgson &lt;neilh@scintilla.org&gt;
+All Rights Reserved </code></pre>
+<p>and that the following license text is included in the documentation for the software:</p>
+<pre><code>License for Scintilla and SciTE
+
+Copyright 1998-2003 by Neil Hodgson &lt;neilh@scintilla.org&gt;
+
+All Rights Reserved 
+
+Permission to use, copy, modify, and distribute this software and its 
+documentation for any purpose and without fee is hereby granted, 
+provided that the above copyright notice appear in all copies and that 
+both that copyright notice and this permission notice appear in 
+supporting documentation. 
+
+NEIL HODGSON DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS 
+SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY 
+AND FITNESS, IN NO EVENT SHALL NEIL HODGSON BE LIABLE FOR ANY 
+SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES 
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, 
+WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER 
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE 
+OR PERFORMANCE OF THIS SOFTWARE.</code></pre>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#external-refrence-links">External Refrence Links</a></li>
+<li><a href="#in-this-repo">In This Repo</a><ul>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#goscintilla">GoScintilla</a></li>
+<li><a href="#icons">Icons</a></li>
+</ul></li>
+<li><a href="#about-scintilla">About Scintilla</a><ul>
+<li><a href="#pb-scintilla-version">PB Scintilla Version</a></li>
+<li><a href="#license">License</a></li>
+</ul></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

@@ -1,0 +1,173 @@
+// ==============================================================================
+//                            PureBASIC Archives SASS                            
+// ==============================================================================
+
+// ===================
+// WORKING ENVIRONMENT
+// ===================
+// This project was designed and tested using:
+//  -- Ruby 2.3.3p222 (2016-11-21 revision 56859) [x64-mingw32]
+//  -- Ruby Sass 3.4.23 (Selective Steve)
+// 
+// ==============================================================================
+//                        NORMALIZE-SCSS / TYPEY / CHROMA                        
+// ==============================================================================
+// This part must come first in order because it sets up the "normalize-scss"
+// library by John Albin -- a Sass port of Nicolas Gallagher's "normalize.css"
+// that integrates two other Sass libraries:
+// 
+// 	-- "Chroma", a library to maange colors names, palettes and schemes.
+// 	-- "Typey", a typography framework to manage fonts and vertical rythm.
+// 
+// Since we are using the "typey-chroma-kss" fork-version of "normalize-scss",
+// these three libraries share their settings in order to dynamically create an
+// optimized version of "normalize.css" taylored on our settings for "Typey".
+// And since we are relying on "Chroma" to manage colors, "Typey" needs to
+// access Chroma's settings and mixins to handle typography colors.
+// 
+// For these reasons, these three modules need to be initialized in the correct
+// order:
+// 
+//  1. Chroma -- setup colors and palettes.
+//  2. Typey -- setup fonts, typography and vertical rythm.
+//  3. Normalize-scss -- adapt "normalize.css" to our typography settings.
+// 
+// 
+// =============
+// A NOTE ON KSS
+// =============
+// John Albin, in his "normalize-scss" and "Chroma" modules, employs KSS (Knyle
+// Style Sheets) in Sass comments, to (optionally) allow automated creation of
+// styleguides documentation. Since we aren't currently using KSS in the project,
+// no efforts are made to preserve KSS integrity. For more info:
+// 
+//  -- http://warpspire.com/kss/
+// 
+// ====================
+// DEPENDENCIES VERSION
+// ====================
+// As of "normalize-scss" v7.0.0, its dependencies version-range are:
+//  -- Chroma ~> 1.0   -- ie: >= 1.0   and < 2.0
+//  -- Typey  ~> 1.0.0 -- ie: >= 1.0.0 and < 1.1.0
+// 
+// The versions used here are the latest available:
+//  -- Chroma v1.2.6
+//  -- Typey  v1.0.3
+// 
+// ------------------------------------------------------------------------------
+//                                   1. CHROMA                                   
+// ------------------------------------------------------------------------------
+// "Chroma" v1.2.6 (2016/10/16) by John Albin (GPLv2):
+// 	-- http://johnalbin.github.io/chroma/
+// 	-- https://github.com/JohnAlbin/chroma
+// 
+// The following Sass functions/mixins are required to generate some variables'
+// values, so we load them first.
+@import 'vendors/chroma/chroma/functions';
+// 
+// Import project's Chroma settings:
+@import 'settings/chroma'; // <= This will load all palettes and color-schemes!
+// 
+// Add Chroma to manage colors.
+@import 'vendors/chroma/chroma';
+@import 'vendors/chroma/chroma/kss';
+// 
+// ------------------------------------------------------------------------------
+//                                    2. TYPEY                                   
+// ------------------------------------------------------------------------------
+// "Typey" v1.0.3 (2016/07/19) by Jack Taranto (GPLv2):
+//  -- https://github.com/jptaranto/typey
+// 
+@import 'settings/typey';
+// 
+// Add typey to manage font sizes and margins.
+@import 'vendors/typey/typey';
+
+// $typey-debug: true;
+// $typey-debug-color: #bbb;
+// p {
+// 	@include typey-debug-grid(1);
+// }
+// 
+// ------------------------------------------------------------------------------
+//                               3. NORMALIZE.SCSS                               
+// ------------------------------------------------------------------------------
+// "normalize-scss" v7.0.0 (2017/05/17) by John Albin:
+// 	-- https://github.com/JohnAlbin/normalize-scss
+
+// combining normalize.css v7.0.0 with v1.1.3
+// fork-versions/typey-chroma-kss:
+//  -- https://github.com/JohnAlbin/normalize-scss/tree/master/fork-versions/typey-chroma-kss
+// 
+
+// Switch Chroma's active color scheme to 'theme':
+$chroma-active-scheme: 'theme';
+
+@import 'vendors/normalize-scss/init/rtl/rtl';
+// 
+// Ensure fonts get loaded first to minimize front-end performance impact.
+@import 'settings/fonts';
+@import 'vendors/normalize-scss/base/normalize';
+// 
+
+// ==============================================================================
+//                                  FONT AWSOME                                  
+// ==============================================================================
+// Font Awesome v4.7.0 (License: SIL OFL 1.1)
+// 
+// "font-awesome-sass-mixins" by Peter M. Elias, MIT License.
+//  -- https://github.com/petermelias/font-awesome-sass-mixins
+$fa-font-size-base: 	$base-font-size;
+$fa-line-height-base: 	$base-line-height;
+// @import 'vendors/font-awesome-mixins/font-awesome-mixins';
+// @import 'vendors/font-awesome-mixins/font-awesome-mixins/extends';
+// @import 'vendors/font-awesome-mixins/font-awesome-mixins/mixins';
+
+// "fontAwesome-SCSS" by reskwer and sokoliurii (License: ???)
+// -- https://github.com/reskwer/fontAwesome-SCSS
+@import 'settings/font-awesome';
+// 
+
+// ==============================================================================
+//                                     GRIDLE                                    
+// ==============================================================================
+// "Gridle" v2.0.47 (2016/06/24):
+// 	-- http://gridle.org/
+// 	-- https://github.com/Coffeekraken/gridle
+
+@import 'layout/layout';
+
+
+// ==============================================================================
+//                                   TYPOGRAPHY                                  
+// ==============================================================================
+@import 'layout/typography';		// <= Basic Typography
+@import 'layout/typography-code';	// <= Styles for code and code blocks
+@import 'layout/tables';			// <= Tables
+@import 'layout/alerts';			// <= Alerts
+
+
+// ==============================================================================
+//                              SYNTAX HIGHLIGHTING                              
+// ==============================================================================
+// Syntax highlighting color schemes for code highlighted with either pandoc's
+// internal highlighter (skylighting) or André Simon's Highlight tool.
+
+@import 'syntax-highlighting/purebasic'; // PureBASIC (Highlight)
+@import 'syntax-highlighting/fasm'; 	 // Fasm      (Highlight)
+
+// ------------------------------------------------------------------------------
+//                                  Code Classes                                 
+// ------------------------------------------------------------------------------
+// Color schemes for (non-highighlited) code with classes.
+// (eg: "DOS" class to mimick Windows CMD/DOS Shell colors)
+
+@import 'syntax-highlighting/code-classes';
+
+// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+//                                VISUAL DEBUGGING                               
+// //////////////////////////////////////////////////////////////////////////////
+// For development only! Comment out in release ...
+
+// @import 'layout/_debug.scss';
+

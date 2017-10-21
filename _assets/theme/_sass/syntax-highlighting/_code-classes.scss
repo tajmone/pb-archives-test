@@ -1,0 +1,26 @@
+// ******************************************************************************
+// *                                                                            *
+// *                                CODE CLASSES                                *
+// *                                                                            *
+// ******************************************************************************
+// Color schemes for (non-highighlited) code with classes.
+
+
+// ==============================================================================
+//                                      DOS                                      
+// ==============================================================================
+// Mimick Window's CMD/DOS prompt default color scheme...
+// 
+// NOTE: Currently CDM and DOS yeld the same result, but in the future they will
+//       have a bar above with "CMD" or "MS DOS" caption!
+
+// TODO: Find a font similar to DOS/CMD's "Terminal" typeface!
+
+pre.dos,
+code.dos,
+pre.cmd,
+code.cmd {
+	color:#C1C1C1;
+	background-color:#000;
+	font-weight: bold;
+}

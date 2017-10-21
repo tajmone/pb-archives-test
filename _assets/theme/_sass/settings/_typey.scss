@@ -1,0 +1,117 @@
+//  was "vendors/normalize-scss/init/_variables.scss"
+
+
+
+// Variables
+//
+// Set variables for this site before a library sets its !default value.
+//
+// Style guide: sass.variables
+
+
+// Font faces, stacks and sizes.
+//
+// Font styling and line heights are controlled by the several variables that
+// used by mixins like `type-layout()`, `margin-top()`, and `margin-bottom()`.
+// These variable and mixins are documented on the [Typey
+// homepage](https://github.com/jptaranto/typey).
+//
+// Style guide: sass.variables.typey
+
+// The font size set on the root html element.
+$base-font-size:    16px;
+
+// The base line height determines the basic unit of vertical rhythm.
+$base-line-height:  24px;
+
+// Rhythm allows us to specify line-heights as a multiple of $base-line-height.
+$line-height-method: rhythm;
+
+// The font sizes in our type hierarchy as tee shirt sizes.
+$font-size: (
+  xxl:              32px,
+  xl:               24px,
+  l:                20px,
+  m:                $base-font-size,
+  s:                14px,
+  xs:               10px
+);
+
+// Typey allows you to alter font weights site-wide with this map.
+$font-weight: (
+  bold:             bold,
+  medium:           500,
+  normal:           normal,
+  light:            300,
+  lighter:          lighter,
+);
+
+// The following font family declarations use widely available fonts.
+// A user's web browser will look at the comma-separated list and will
+// attempt to use each font in turn until it finds one that is available
+// on the user's computer. The final "generic" font (sans-serif, serif or
+// monospace) hints at what type of font to use if the web browser doesn't
+// find any of the fonts in the list.
+
+// Sans-serif font stacks.
+// ORIGINAL ---- $verdana:         Verdana, Tahoma, 'DejaVu Sans', sans-serif;
+$verdana:     Verdana, Tahoma, 'DejaVu Sans', sans-serif;
+$roboto:			Roboto, Arial, Helvetica, sans-serif;
+
+// Serif font stacks:
+// $droid-serif:			'Droid Serif', 'Times New Roman', Times, serif;
+$texgyretermes:	'TeX Gyre Termes', 'Times New Roman', Times, serif;
+
+
+// Monospace font stacks.
+// For an explanation of why "sans-serif" is at the end of this list, see
+// http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
+// ORIGINAL ---- $menlo:           Menlo, 'DejaVu Sans Mono', 'Ubuntu Mono', Courier, 'Courier New', monospace, sans-serif;
+$LiberationMono:	'Liberation Mono', 'DejaVu Sans Mono', 'Ubuntu Mono', Courier, 'Courier New', monospace, sans-serif;
+
+// The font faces you specify in the $typefaces map can be used in the
+// typeface() mixin.
+$typefaces: (
+  body: (
+    font-family: $verdana,
+  ),
+  monospace: (
+    font-family: $LiberationMono,
+  ),
+  headings: (
+    font-family: $roboto,
+  ),
+  );
+
+// Output a horizontal grid to help with debugging typography.
+$typey-debug: false;
+
+// PIXEL-ONLY: We only care about pixels, so we disable the auto-featrues for printing
+$auto-print-sizing: false;
+// The length unit in which to output font size and margin values.
+// Supported values: px, em, rem.
+$base-unit:         'px'; // IN ORIGINAL WAS: rem
+
+
+
+// px fallbacks for rem units are needed for IE 8 and earlier.
+$rem-fallback:      false;
+
+
+// Miscellaneous variables
+//
+// `$indent-amount` controls the amount lists, blockquotes and comments are indented.
+//
+// `$include-rtl` controls whether RTL styles are output. If set to `true, a `[dir="rtl"]` ruleset adds RTL language support.
+//
+// weight: 10
+//
+// Style guide: sass.variables.misc
+
+$indent-amount: 2 * $base-font-size;
+
+$include-rtl: false;
+
+
+
+

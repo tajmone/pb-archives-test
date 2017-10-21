@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Test MD 2 HTML Macros</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>html-tests</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Test MD 2 HTML Macros</h1>
+
+<p>Testing the new changes to Test macros, implementing escaping in Markdown 2 HTML.</p>
+<blockquote>
+<p>NOTE: In order for this macros to work correctly, you’ll have to escape some chars in the markdown source, according to context — eg: <code>`</code></p>
+</blockquote>
+<p>Here are some excerpts from Pandoc documentation regarding escaping and the <code>all_symbols_escapable</code> extension…</p>
+<h2 id="backslash-escapes">Backslash escapes</h2>
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html#backslash-escapes" class="uri">http://pandoc.org/MANUAL.html#backslash-escapes</a></li>
+</ul>
+<p>Extension: <code>all_symbols_escapable</code></p>
+<p>Except inside a code block or inline code, any punctuation or space character preceded by a backslash will be treated literally, even if it would normally indicate formatting.</p>
+<p>…</p>
+<p>This rule is easier to remember than standard Markdown’s rule, which allows only the following characters to be backslash-escaped:</p>
+<pre><code>\`*_{}[]()&gt;#+-.!</code></pre>
+<p>A backslash-escaped newline (i.e. a backslash occurring at the end of a line) is parsed as a hard line break. It will appear in HTML as <code>&lt;br /&gt;</code>.</p>
+<hr />
+<h1 id="test-html-escaping">Test HTML Escaping</h1>
+<h2 id="md2html">md2html</h2>
+<pre><code>!md2html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INLINE CODE: \`inline code\` END.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
+<p><strong>BECOMES:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;p&gt;</span>INLINE CODE: <span class="kw">&lt;code&gt;</span>inline code<span class="kw">&lt;/code&gt;</span> END.<span class="kw">&lt;/p&gt;</span></code></pre></div>
+<hr />
+<pre><code>!md2html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\`\`\`
+If X = 1
+    printN(&quot;xxx&quot;)
+EndIf
+\`\`\`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
+<p><strong>BECOMES:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>If X = 1
+    printN(<span class="dv">&amp;quot;</span>xxx<span class="dv">&amp;quot;</span>)
+EndIf<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<hr />
+<h1 id="double-tests">Double Tests</h1>
+<h2 id="doubletest">DoubleTest</h2>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">| The _limerick packs_ laughs anatomical
+| In space that is quite economical.
+|    But the good ones I&#39;ve seen
+|    So seldom are __clean__
+| And the clean ones so seldom are <span class="bn">`comical`</span>.
+</code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<div style="white-space: pre-line;">The <em>limerick packs</em> laughs anatomical
+In space that is quite economical.
+   But the good ones I’ve seen
+   So seldom are <strong>clean</strong>
+And the clean ones so seldom are <code>comical</code>.</div>
+<p><br /></p>
+<hr />
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
+If X = 1
+<span class="bn">    printN(&quot;xxx&quot;)</span>
+EndIf
+```
+</code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<pre><code>If X = 1
+    printN(&quot;xxx&quot;)
+EndIf</code></pre>
+<hr />
+<h1 id="triple-tests">Triple Tests</h1>
+<h2 id="tripletest">TripleTest</h2>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">| The _limerick packs_ laughs anatomical
+| In space that is quite economical.
+|    But the good ones I&#39;ve seen
+|    So seldom are __clean__
+| And the clean ones so seldom are <span class="bn">`comical`</span>.
+</code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> style=</span><span class="st">&quot;white-space: pre-line;&quot;</span><span class="kw">&gt;</span>The <span class="kw">&lt;em&gt;</span>limerick packs<span class="kw">&lt;/em&gt;</span> laughs anatomical
+In space that is quite economical.
+   But the good ones I&#39;ve seen
+   So seldom are <span class="kw">&lt;strong&gt;</span>clean<span class="kw">&lt;/strong&gt;</span>
+And the clean ones so seldom are <span class="kw">&lt;code&gt;</span>comical<span class="kw">&lt;/code&gt;</span>.<span class="kw">&lt;/div&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<div style="white-space: pre-line;">The <em>limerick packs</em> laughs anatomical
+In space that is quite economical.
+   But the good ones I’ve seen
+   So seldom are <strong>clean</strong>
+And the clean ones so seldom are <code>comical</code>.</div>
+<p><br /></p>
+<hr />
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
+If X = 1
+<span class="bn">    printN(&quot;xxx&quot;)</span>
+EndIf
+```
+</code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>If X = 1
+    printN(<span class="dv">&amp;quot;</span>xxx<span class="dv">&amp;quot;</span>)
+EndIf<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<pre><code>If X = 1
+    printN(&quot;xxx&quot;)
+EndIf</code></pre>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#backslash-escapes">Backslash escapes</a></li>
+<li><a href="#test-html-escaping">Test HTML Escaping</a><ul>
+<li><a href="#md2html">md2html</a></li>
+</ul></li>
+<li><a href="#double-tests">Double Tests</a><ul>
+<li><a href="#doubletest">DoubleTest</a></li>
+</ul></li>
+<li><a href="#triple-tests">Triple Tests</a><ul>
+<li><a href="#tripletest">TripleTest</a></li>
+</ul></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

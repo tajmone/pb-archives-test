@@ -1,0 +1,486 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Code Blocks Tests</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>html-tests</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Code Blocks Tests</h1>
+
+<blockquote>
+<p><strong>NOTE</strong>: Pandoc code with line-numbers doesn’t produce H-scrollbar when exceeding width — issue is with table’s CSS: must implement <code>overflow</code>!</p>
+</blockquote>
+<h1 id="code-blocks-examples">Code Blocks Examples</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>(Using the <code>!PureBasic</code> macro)</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span></code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>(Using the <code>!PureBasicSmall</code> macro)</p>
+<pre class="purebasic small" title="PureBASIC source code"><code class="purebasic small" title="PureBASIC source code"><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span></code></pre>
+<h1 id="code-rulers-test">Code Rulers Test</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>A normal (default) code block can show up to 80 chars before displaying a horizontal scrollbar:</p>
+<pre class=""><code class="">12345678901234567890123456789012345678901234567890123456789012345678901234567890
+        10        20        30        40        50        60        70        80
+</code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>A code block with <code>&lt;code class=&quot;small&quot;&gt;</code> can show up to 100 chars before displaying a horizontal scrollbar:</p>
+<pre class="small"><code class="small">1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+        10        20        30        40        50        60        70        80        90       100</code></pre>
+</code>
+</pre>
+<h1 id="test-code-and-codesmall">Test <code>!Code</code> and <code>!CodeSmall</code></h1>
+<h1 id="code-macro"><code>!Code</code> Macro</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>(Using the <code>!Code</code> macro)</p>
+<pre class=""><code class="">Some fictional code
+  If this or that
+    X = 10 * y
+  EndIf
+</code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>(Using the <code>!CodeSmall</code> macro)</p>
+<pre><code class="small">Some fictional code
+  If this or that
+    X = 10 * y
+  EndIf
+</code></pre>
+<h1 id="test-highlightsmall">Test <code>!HighlightSmall</code></h1>
+<pre class="purebasic small xxx" title="For i=1 To 10
+  Debug("Counting " + Str(i))
+Next"><code class="purebasic small xxx" title="For i=1 To 10
+  Debug("Counting " + Str(i))
+Next"></code></pre>
+<hr />
+<h1 id="code-and-verbatim">Code and Verbatim</h1>
+<p>Some tests for code, syntax highlighting and preformatted blocks.</p>
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html">Pandoc Documentation</a>:</li>
+<li><a href="http://pandoc.org/MANUAL.html#verbatim-code-blocks">Verbatim (code) blocks</a></li>
+</ul>
+<h1 id="preformatted-blocks">Preformatted Blocks</h1>
+<p>In order to achieve a simple <code>&lt;pre&gt;</code> block (not followed by the <code>&lt;code&gt;</code> code) you have to resort to raw HTML tags inside markdown — ie: there is no way to achived it in pure markdown.</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+<pre>I'm a preformatted block, no code inside</pre>
+<h1 id="non-highlighted-code-blocks">Non-Highlighted Code Blocks</h1>
+<p>To define a code block without any highlighting, just enclosed it in tildas or backticks (fenced code), or use indentation (4 spaces or one Tab).</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<p>fenced (backticks):</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
+For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next
+```</code></pre></div>
+<p>identented (4 spaces):</p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">    For i=1 To 10</span>
+<span class="bn">      Debug(&quot;Counting &quot; + Str(i))</span>
+<span class="bn">    Next</span></code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+<pre><code>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next</code></pre>
+<h1 id="pandoc-highlighting">Pandoc Highlighting</h1>
+<h2 id="line-numbers">Line Numbers</h2>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}
+qsort []     = []
+qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
+<span class="bn">               qsort (filter (&gt;= x) xs)</span>
+~~~~</code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> startfrom=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;table</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell numberLines&quot;</span><span class="kw">&gt;&lt;tbody&gt;&lt;tr</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;lineNumbers&quot;</span><span class="kw">&gt;&lt;pre&gt;</span>100
+101
+102
+<span class="kw">&lt;/pre&gt;&lt;/td&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell&quot;</span><span class="kw">&gt;</span>qsort []     <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> []
+qsort (x<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>:<span class="kw">&lt;/span&gt;</span>xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;lt;</span><span class="kw">&lt;/span&gt;</span> x) xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span> [x] <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span>
+               qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;gt;</span>=<span class="kw">&lt;/span&gt;</span> x) xs)<span class="kw">&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</span></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+<div class="sourceCode" id="mycode" startFrom="100"><table class="sourceCode haskell numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>100
+101
+102
+</pre></td><td class="sourceCode"><pre><code class="sourceCode haskell">qsort []     <span class="fu">=</span> []
+qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span>
+               qsort (filter (<span class="fu">&gt;=</span> x) xs)</code></pre></td></tr></table></div>
+<h3 id="test-line-numbers">Test line numbers…</h3>
+<div class="sourceCode" id="mycode" startFrom="1"><table class="sourceCode python numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+</pre></td><td class="sourceCode"><pre><code class="sourceCode python"><span class="im">from</span> appium <span class="im">import</span> webdriver
+<span class="im">from</span> appium <span class="im">import</span> SauceTestCase, on_platforms
+<span class="im">from</span> appium.webdriver.common.touch_action <span class="im">import</span> TouchAction
+<span class="im">from</span> appium.webdriver.common.multi_action <span class="im">import</span> MultiAction
+
+<span class="im">from</span> time <span class="im">import</span> sleep
+
+app <span class="op">=</span> <span class="st">&quot;http://appium.github.io/appium/assets/ApiDemos-debug.apk&quot;</span>
+platforms <span class="op">=</span> [{
+                <span class="st">&quot;platformName&quot;</span>: <span class="st">&quot;Android&quot;</span>,
+                <span class="st">&quot;platformVersion&quot;</span>: <span class="st">&quot;4.4&quot;</span>,
+                <span class="st">&quot;deviceName&quot;</span>: <span class="st">&quot;Android Emulator&quot;</span>,
+                <span class="st">&quot;appActivity&quot;</span>: <span class="st">&quot;.graphics.TouchPaint&quot;</span>,
+                <span class="st">&quot;app&quot;</span>: app,
+                <span class="st">&quot;appiumVersion&quot;</span>: <span class="st">&quot;1.3.4&quot;</span>
+            }]
+
+
+<span class="at">@on_platforms</span>(platforms)
+<span class="kw">class</span> AndroidGesturesSauceTests(SauceTestCase):
+
+    <span class="kw">def</span> test_drag_and_drop(<span class="va">self</span>):
+        <span class="co"># first get to the right activity</span>
+        <span class="va">self</span>.driver.start_activity(<span class="st">&quot;io.appium.android.apis&quot;</span>, <span class="st">&quot;.view.DragAndDropDemo&quot;</span>)
+
+        start <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_dot_3&quot;</span>)
+        end <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_dot_2&quot;</span>)
+
+        action <span class="op">=</span> TouchAction(<span class="va">self</span>.driver)<span class="op">;</span>
+        action.long_press(start).move_to(end).release().perform()
+
+        sleep(.<span class="dv">5</span>)
+
+        text <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_result_text&quot;</span>).text
+        <span class="va">self</span>.assertEqual(text, <span class="st">&quot;Dropped!&quot;</span>)
+
+
+    <span class="kw">def</span> test_smiley_face(<span class="va">self</span>):
+        <span class="co"># just for the fun of it.</span>
+        <span class="co"># this doesn&#39;t really assert anything.</span>
+        <span class="co"># paint</span>
+        eye1 <span class="op">=</span> TouchAction()
+        eye1.press(x<span class="op">=</span><span class="dv">150</span>, y<span class="op">=</span><span class="dv">100</span>).release()
+
+        eye2 <span class="op">=</span> TouchAction()
+        eye2.press(x<span class="op">=</span><span class="dv">250</span>, y<span class="op">=</span><span class="dv">100</span>).release()
+
+        smile <span class="op">=</span> TouchAction()
+        smile.press(x<span class="op">=</span><span class="dv">110</span>, y<span class="op">=</span><span class="dv">200</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
+            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>)
+        smile.release()
+
+        ma <span class="op">=</span> MultiAction(<span class="va">self</span>.driver)
+        ma.add(eye1, eye2, smile)
+        ma.perform()
+
+        <span class="co"># so you can see it</span>
+        sleep(<span class="dv">10</span>)</code></pre></td></tr></table></div>
+<hr />
+<h1 id="highlight">Highlight</h1>
+<h2 id="block-simple">Block Simple</h2>
+<pre class="purebasic" title="; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next
+"><code class="purebasic" title="; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next
+"></code></pre>
+<h2 id="block-with-line-numbers">Block With Line Numbers</h2>
+<pre class="purebasic" title="; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next
+"><code class="purebasic" title="; PureBASIC 5.60
+For i=1 To 10
+  Debug("Counting " + Str(i))
+Next
+"><span class="hl lin">1 </span></code></pre>
+<hr />
+<h1 id="line-blocks">Line blocks</h1>
+<pre><code>Extension: line_blocks</code></pre>
+<p>A line block is a sequence of lines beginning with a vertical bar (“<code>|</code>”) followed by a space. The division into lines will be preserved in the output, as will any leading spaces; otherwise, the lines will be formatted as Markdown. This is useful for verse and addresses:</p>
+<pre><code>| The limerick packs laughs anatomical
+| In space that is quite economical.
+|    But the good ones I&#39;ve seen
+|    So seldom are clean
+| And the clean ones so seldom are comical
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div style="white-space: pre-line;">The limerick packs laughs anatomical
+In space that is quite economical.
+   But the good ones I’ve seen
+   So seldom are clean
+And the clean ones so seldom are comical</div>
+<hr />
+<p>It basicall wraps the contents in a <code>&lt;div style=&quot;white-space: pre-line;&quot;&gt;</code>.</p>
+<p>The lines can be hard-wrapped if needed, but the continuation line must begin with a space.</p>
+<pre><code>| The Right Honorable Most Venerable and Righteous Samuel L.
+  Constable, Jr.
+| 200 Main St.
+| Berkeley, CA 94718
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div style="white-space: pre-line;">The Right Honorable Most Venerable and Righteous Samuel L. Constable, Jr.
+200 Main St.
+Berkeley, CA 94718</div>
+<hr />
+<p>Long lines will wrap around:</p>
+<pre><code>| A very lengthy and overly-verbose line of text that will surely exceed its container&#39;s width by an abundant measure and force wrapping!
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div style="white-space: pre-line;">A very lengthy and overly-verbose line of text that will surely exceed its container’s width by an abundant measure and force wrapping!</div>
+<hr />
+<h1 id="snippets">SNIPPETS</h1>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"></code></pre></div>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"></code></pre></div>
+<p><strong>HTML RESULT:</strong></p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#code-blocks-examples">Code Blocks Examples</a></li>
+<li><a href="#code-rulers-test">Code Rulers Test</a></li>
+<li><a href="#test-code-and-codesmall">Test <code>!Code</code> and <code>!CodeSmall</code></a></li>
+<li><a href="#code-macro"><code>!Code</code> Macro</a></li>
+<li><a href="#test-highlightsmall">Test <code>!HighlightSmall</code></a></li>
+<li><a href="#code-and-verbatim">Code and Verbatim</a></li>
+<li><a href="#preformatted-blocks">Preformatted Blocks</a></li>
+<li><a href="#non-highlighted-code-blocks">Non-Highlighted Code Blocks</a></li>
+<li><a href="#pandoc-highlighting">Pandoc Highlighting</a><ul>
+<li><a href="#line-numbers">Line Numbers</a></li>
+</ul></li>
+<li><a href="#highlight">Highlight</a><ul>
+<li><a href="#block-simple">Block Simple</a></li>
+<li><a href="#block-with-line-numbers">Block With Line Numbers</a></li>
+</ul></li>
+<li><a href="#line-blocks">Line blocks</a></li>
+<li><a href="#snippets">SNIPPETS</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

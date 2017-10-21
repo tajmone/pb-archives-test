@@ -1,0 +1,230 @@
+# The PureBASIC Archives
+# https://github.com/tajmone/purebasic-archives
+################################################################################
+## For examples of common gitattributes lists, see Alexander Karatarakis':     #
+## -- https://github.com/alexkaratarakis/gitattributes           (MIT License) #
+################################################################################
+
+# Set Git's default behaviour to text-files autodetection, in case users don't
+# have `core.autocrlf` set:
+
+* text=auto
+
+# ==============================================================================
+#                    Text Files (EOL Normalization Settings)                    
+# ==============================================================================
+# Explicitly declare all files that are text and tell Git how to handle EOLs:
+
+## =================
+## SOURCE CODE FILES
+## =================
+
+
+## PureBASIC
+## ---------
+*.pb       text
+*.pbi      text
+*.pbp      text
+*.pbf      text
+*.cfg      text
+
+
+## Pandoc/PP
+## ---------
+*.html5      text
+*.markdown   text
+*.md         text
+*.pp         text
+
+
+## Shell scripts
+## -------------
+*.bat      text eol=crlf
+*.com      text eol=crlf
+*.sh       text eol=lf
+
+
+## PowerShell
+## ----------
+*.ps1      text  eol=crlf
+*.psm1     text  eol=crlf
+*.psd1     text  eol=crlf
+*.psc1     text  eol=crlf
+*.ps1xml   text  eol=crlf
+*.clixml   text  eol=crlf
+
+
+## Scripts
+## -------
+*.lua      text
+*.php      text
+*.pl       text
+*.py       text
+*.rb       text
+*.sql      text
+
+
+## C/C++
+## -----
+*.c        text
+*.cc       text
+*.cxx      text
+*.cpp      text
+*.c++      text
+*.hpp      text
+*.h        text
+*.h++      text
+*.hh       text
+
+
+## ASM (Fasm/Yasm)
+## ---------------
+*.asm      text
+*.inc      text
+
+
+## ==================
+## MISC. DATA FORMATS
+## ==================
+*.json     text
+*.xml      text
+*.xhtml    text
+
+
+## =================
+## WEB-RELATED FILES
+## =================
+*.htm      text
+*.html     text
+*.css      text
+*.js       text
+*.sass     text
+*.scss     text
+
+
+## ===================
+## DOCUMENTATION FILES
+## ===================
+*.txt        text
+AUTHORS      text
+CHANGELOG    text
+CHANGES      text
+CONTRIBUTING text
+COPYING      text
+copyright    text
+*COPYRIGHT*  text
+INSTALL      text
+license      text
+LICENSE      text
+NEWS         text
+readme       text
+*README*     text
+TODO         text
+
+
+## ============
+## CONFIG FILES
+## ============
+*.cnf          text
+*.conf         text
+*.config       text
+*.ini          text
+*.prefs        text
+*.yaml         text
+*.yml          text
+.editorconfig  text
+.gitattributes text
+.gitconfig     text
+.gitignore     text
+Makefile       text
+makefile       text
+
+## ================================
+## MISC PLAIN-TEXT DOCUMENT FORMATS
+## ================================
+*.asciidoc     text
+*.adoc         text
+
+
+# ==============================================================================
+#                                  Binary Files                                 
+# ==============================================================================
+# Explicitly declare all files that are binary and shouldn't be modified by Git:
+
+## =================
+## COMPILERS' OUTPUT
+## =================
+
+## Executables
+## -----------
+*.exe   binary
+*.app   binary
+*.pyc   binary
+*.out   binary
+
+
+## Shared/Dynamic libraries
+## ------------------------
+*.so    binary
+*.dylib binary
+*.dll   binary
+
+## Static libraries
+## ----------------
+*.lai   binary
+*.la    binary
+*.a     binary
+*.lib   binary
+
+
+## Object files
+## ------------
+*.slo   binary
+*.lo    binary
+*.o     binary
+*.obj   binary
+
+
+## ========
+## ARCHIVES
+## ========
+*.7z    binary
+*.gz    binary
+*.jar   binary
+*.rar   binary
+*.tar   binary
+*.zip   binary
+
+## =====
+## FONTS
+## =====
+*.ttf   binary
+*.eot   binary
+*.otf   binary
+*.woff  binary
+*.woff2 binary
+
+## ========
+## GRAPHICS
+## ========
+*.ai    binary
+*.bmp   binary
+*.eps   binary
+*.gif   binary
+*.ico   binary
+*.jng   binary
+*.jp2   binary
+*.jpg   binary
+*.jpeg  binary
+*.jpx   binary
+*.jxr   binary
+*.pdf   binary
+*.png   binary
+*.psb   binary
+*.psd   binary
+*.svg   binary
+*.svgz  binary
+*.tif   binary
+*.tiff  binary
+*.wbmp  binary
+*.webp  binary

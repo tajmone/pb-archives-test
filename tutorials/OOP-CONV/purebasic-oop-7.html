@@ -1,0 +1,548 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>PureBasic and Object-Oriented Programming</title>
+		<meta name="generator" content="pandoc">
+		<meta name="author" content="Dräc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>tutorials</a></li>
+	<li><a href='index.html'>OOP-CONV</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
+					<p class="subtitle">7. PB Class</p>
+
+<div class="alert-messages">
+<div class="alert alert-warn">
+<h2 id="status-wip">STATUS: WIP</h2>
+<ul>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Classes_PB_en.htm">WWW ORIGINAL</a></li>
+</ul>
+<p><strong>TODOs LIST</strong>:</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> <strong>Headers Levels</strong> need fixing! (h1 &gt; h3)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix subtitle casing
+</li>
+</ul>
+</div>
+</div>
+<p>Now that we’ve explored OOP concepts and their possible implementations in PureBasic, it’s time to establish an implementation.</p>
+<p>Here I shall present an implementation which I deem, to the best of my current knowledge, as the one best fitting OOP programming in PureBasic.</p>
+<p>It is based on all the previously exposed work, as well as on my personal practical experience with the subject matter at hand. Another goal here is to simplify the use of object concepts, through clear commands and by automating operations as much as possible. During this step, macros are going to play a decisive role. Greatly facilitated by the <code>Interface</code> and <code>Macro</code> commands, the proposed implementation remains naturally limited by the language itself.</p>
+<p>At first, I’ll present the instructions for a Class in PureBasic. Then I’ll analyze what hides behind by firing parallels with the previous pages. This chapter ends with a discussion about the choices made.</p>
+<h1 id="purebasic-class">PureBasic Class</h1>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Object class</span>
+<span class="hl kwc">Class</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+  [<span class="hl kwc">Method1</span>()]
+  [<span class="hl kwc">Method2</span>()]
+  [<span class="hl kwc">Method3</span>()]
+  ...
+  <span class="hl kwc">Methods</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+    [<span class="hl opt">&lt;*</span>Method1<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;*</span>Method2<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;*</span>Method3<span class="hl opt">&gt;</span>]
+    ...
+  <span class="hl kwc">Members</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+    [<span class="hl opt">&lt;</span>Attribute1<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;</span>Attribute2<span class="hl opt">&gt;</span>]
+    ...
+<span class="hl kwc">EndClass</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+
+<span class="hl slc">; Object methods (implementation)</span>
+<span class="hl kwc">Method</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>, Method1) [,<span class="hl opt">&lt;</span>variable1 [<span class="hl opt">=</span> DefaultValue]<span class="hl opt">&gt;</span>,...])
+  ...
+  [<span class="hl kwa">ProcedureReturn</span> value]
+<span class="hl kwc">EndMethod</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>, Method1)
+
+<span class="hl slc">; ...(ditto For each method)...</span>
+
+<span class="hl slc">; Object constructor</span>
+<span class="hl kwc">New</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+  ...
+EndNew
+
+<span class="hl slc">; Object destructor</span>
+<span class="hl kwc">Free</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+  ...
+EndFree</code></pre>
+<p>As shown, a PureBasic Class revolves around four main themes:</p>
+<ul>
+<li>Definition of the Class via the <code>Class : EndClass</code> block,</li>
+<li>Implementation of the Class’ methods via the <code>Method : EndMethod</code> block,</li>
+<li>Construction of the object via the <code>New : EndNew</code> block,</li>
+<li>Destruction of the object via the <code>Free : EndFree</code> block.</li>
+</ul>
+<h1 id="second-code-example">Second Code-Example</h1>
+<p>Here is a header file cotaining the definition of this set of commands, along with a usage-example file (based on the [previous inheritance example][First Code-Example], so that you might compare them):</p>
+<ul>
+<li><a href="./OOP.pbi"><code>OOP.pbi</code></a></li>
+<li><a href="./OOP-Inheritance-Ex2.pb"><code>OOP-Inheritance-Ex2.pb</code></a></li>
+</ul>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p>If you have already looked at the source code of the <code>OOP.pbi</code> file, you might have noticed that the code of the final OOP implementation is slightly more complex than its presentation in this tutorial. This is because some rearrangements were made in the code in order simplify its maintainance.</p>
+</div>
+</div>
+<p>Let me guide you through the PureBasic Class declaration…</p>
+<h1 id="class-endclass">Class : EndClass</h1>
+<p>The <code>Class : EndClass</code> block allows declaring three types of constituent:</p>
+<ul>
+<li>The object’s <strong>Interface</strong>, i.e: the only part of the object that the user can handle.</li>
+<li>The object’s <em>Methods</em> — implementation excluded — which are reduced to pointers to the methods.</li>
+<li>The object’s <em>Members</em> — methods excluded. Henceforth, the terms «<strong>member</strong>» and (more correctly) «<strong>attribute</strong>» will mainly refer to just these elements of an object (not including its methods, which are also members of the object, strictly speaking).</li>
+</ul>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Object class</span>
+<span class="hl kwc">Class</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+  [<span class="hl kwc">Method1</span>()]
+  [<span class="hl kwc">Method2</span>()]
+  [<span class="hl kwc">Method3</span>()]
+  ...
+  <span class="hl kwc">Methods</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+    [<span class="hl opt">&lt;*</span>Method1<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;*</span>Method2<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;*</span>Method3<span class="hl opt">&gt;</span>]
+    ...
+  <span class="hl kwc">Members</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+    [<span class="hl opt">&lt;</span>Attribute1<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;</span>Attribute2<span class="hl opt">&gt;</span>]
+    ...
+<span class="hl kwc">EndClass</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)</code></pre>
+<p>Each constituent is clearly identified with keywords: <code>Class</code>/<code>Methods</code>/<code>Members</code>. Their order must be preserved and all keywords must always be present, even when a method or a member will not be declared. Also, the name of a class is always a parameter of the keyword, and must be enclosed in parentheses.</p>
+<p>The explanation for this is to be found in the definition of each keyword. Here is the code:</p>
+<h3 id="class-keyword">Class keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">Class</span>(ClassName)
+  <span class="hl slc">; Declare the class interface</span>
+  <span class="hl kwa">Interface</span> ClassName<span class="hl kwb">#_</span>
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The keyword <code>Class</code> defines just the header of the <code>Interface</code> statement. The name of the interface is derived from the Class’ name followed by “<code>_</code>”. So, whatever follows <code>Class</code> will become the definition of the object’s interface.</p>
+<h3 id="methods-keyword">Methods keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">Methods</span>(ClassName)
+  <span class="hl kwa">EndInterface</span>
+  <span class="hl slc">; Declare the method-table structure</span>
+  <span class="hl kwa">Structure</span> Mthds_<span class="hl kwb">#ClassName</span>
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The keyword <code>Methods</code> starts by closing the interface’s definition with <code>EndInterface</code>. Then it opens the definition of the <code>Structure</code> which defines the pointers to the methods.</p>
+<h3 id="members-keyword">Members keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">Members</span>(ClassName)
+  <span class="hl kwa">EndStructure</span>
+  <span class="hl slc">; Create the method-table</span>
+  Mthds_<span class="hl kwb">#ClassName</span>.Mthds_<span class="hl kwb">#ClassName</span>
+  <span class="hl slc">; Declare the members</span>
+  <span class="hl slc">; No parent class: implement pointers for the Methods and the instance</span>
+  <span class="hl kwa">Structure</span> Mbrs_<span class="hl kwb">#ClassName</span>
+    <span class="hl opt">*</span>Methods
+    <span class="hl opt">*</span>Instance.ClassName
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The keyword <code>Members</code> is more complicated than the two previous ones.</p>
+<p>It begins by closing the <code>Structure</code> definition previously opened by <code>Methods</code>. Then it declares the <strong>method table</strong>, using the freshly-built structure (as its type). For the moment this table is empty; it will be filled up a the end of <code>Method : EndMethod</code> statement. I’ll be discussing this further on (<a href="#endmethod-keyword">I can’t wait!</a>).</p>
+<p>Finally <code>Members</code> ends by opening the <code>Structure</code> declaration which defines the object’s members. In first position — as expected — we find the pointer to the <em>method table</em> (i.e.: to the variable just mentioned above). Its assignment will be done later, by the Constructor. Then follows another pointer, which will contain the address of the object itself. I shall explain later the reasons for this new member (<a href="#admonition-on-object-being-a-pointer">no, now!</a>).</p>
+<p>After the <code>Members</code> keyword, the user has only to declare the other members of the object.</p>
+<h3 id="endclass-keyword">EndClass keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">EndClass</span>(ClassName)
+  <span class="hl kwa">EndStructure</span>
+
+  <span class="hl kwa">Structure</span> ClassName
+    <span class="hl kwa">StructureUnion</span>
+      <span class="hl opt">*</span>Md.ClassName<span class="hl kwb">#_</span>     <span class="hl slc">; its methods</span>
+      <span class="hl opt">*</span>Mb.Mbrs_<span class="hl kwb">#ClassName</span> <span class="hl slc">; its memebers</span>
+    <span class="hl kwa">EndStructureUnion</span>
+  <span class="hl kwa">EndStructure</span>
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>EndClass</code> keyword code is at the origin of the implementation chosen for our object. So I’m now going to describe it correctly.</p>
+<p>As with <code>Methods</code> and <code>Members</code>, it begins by closing what was opened by the previous keyword, in this case: the <code>Structure</code> describing the object’s members.</p>
+<p>Then, follows a <code>Structure</code> named as the Class’ name, which will be use to instanciate the object.</p>
+<p>This <code>Structure</code> is in fact the union of two elements:</p>
+<ol type="1">
+<li>The first is a pointer typed by the interface which allows to call the object’s methods.</li>
+<li>The second is a pointer typed by the structure defining members. It helps accessing the object’s members.</li>
+</ol>
+<p>This design puts into practice the optimizations for <code>Get()</code> and <code>Set()</code> methods presented in the <a href="#optimisation-get-and-set-methods">Appendix</a>. The benefit of this choice is twofold:</p>
+<ul>
+<li>It provides a seamless approach for reaching an object’s methods and members.</li>
+<li><p>To reach a method, write:</p></li>
+<li></li>
+</ul>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl opt">*</span>Rect\Md\<span class="hl kwc">Draw</span>()</code></pre>
+<ul>
+<li><p>To reach an attribute, write:</p></li>
+<li></li>
+</ul>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl opt">*</span>Rect\Mb\var1</code></pre>
+<ul>
+<li>It prevents having to systematically declare an object’s <code>Get()</code> and <code>Set()</code> methods, when these are trivial. This saves time and it’s practical. At the same time, it reduces the number of objects’ methods (small optimization).</li>
+</ul>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p>The price of this choice is that all members of an object are visible to the user.</p>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert alert-success">
+<p>This structure could be slighly retouched. Since terms like “<code>Md</code>» and “<code>Mb</code>» are visually very similar, a better distinction could be arranged. Although this choice was not retained, here is an interesting possibility:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> ClassName
+  <span class="hl kwa">StructureUnion</span>
+    <span class="hl opt">*</span>Md.ClassName<span class="hl kwb">#_</span>       <span class="hl slc">; methods</span>
+    <span class="hl opt">*</span>Get.Mbrs_<span class="hl kwb">#ClassName</span>  <span class="hl slc">; used to read a member</span>
+    <span class="hl opt">*</span>Set.Mbrs_<span class="hl kwb">#ClassName</span>  <span class="hl slc">; used to modify a member</span>
+  <span class="hl kwa">EndStructureUnion</span>
+<span class="hl kwa">EndStructure</span></code></pre>
+<p>In this code, the <code>*Mb</code> pointer was replaced by two pointers: <code>*Get</code> and <code>*Set</code>. They have the same functionality but they can lead to more legible code, by clarifying if an attribute is being read or modified.</p>
+</div>
+</div>
+<h1 id="method-endmethod">Method : EndMethod</h1>
+<p>The <code>Method : EndMethod</code> block allows to achieve implementation of the various methods of an object.</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Object methods (implementation)</span>
+<span class="hl kwc">Method</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>, Method1) [,<span class="hl opt">&lt;</span>variable1 [<span class="hl opt">=</span> DefaultValue]<span class="hl opt">&gt;</span>,...])
+  ...
+  [<span class="hl kwa">ProcedureReturn</span> value]
+<span class="hl kwc">EndMethod</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>, Method1)</code></pre>
+<p>Each keyword occurence has the Class name and the method name as parameters.</p>
+<p>Usewise, <code>Method : EndMethod</code> works like <code>Procedure : EndProcedure</code> — in fact it’s a wrapper of this block, as we shall see next.</p>
+<div class="alert-messages">
+<div class="alert">
+<p>Note the very special syntax of the method which requires two closing parentheses. This specificity ensues from the use of a macro combined with a different number of possible arguments for each method.</p>
+</div>
+</div>
+<h3 id="method-keyword">Method keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">Method</span>(ClassName, Mthd)
+  <span class="hl kwa">Procedure</span> Mthd<span class="hl kwb">#_#ClassName</span>(<span class="hl opt">*</span>this.Mbrs_<span class="hl kwb">#ClassName</span>
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>Method</code> keyword is nothing more than a <code>Procedure</code> instruction for pre-declaring the variable <code>*this</code>, which is required as first argument.</p>
+<p>The code omits the closing parenthesis so that the user might complete it by adding the parameters specific to its method. It’s the user’s responsibility to close this parenthesis, as shown in the syntax — and if he forgets, the compiler won’t fail to notice it!</p>
+<h3 id="endmethod-keyword">EndMethod keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">EndMethod</span>(ClassName, Mthd)
+  <span class="hl kwa">EndProcedure</span>
+  <span class="hl slc">; Save the method’s address into the method-table</span>
+  Mthds_<span class="hl kwb">#ClassName</span>\Mthd<span class="hl opt">=</span>&#64;Mthd<span class="hl kwb">#_#ClassName</span>()
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>EndMethod</code> keyword begins by closing the <code>Procedure</code> opened by the <code>Method</code> keyword. Once defined, the method can be referenced in the <code>method table</code> (declared by the <code>Members</code> keyword of the Class). Actually, by declaring a method, this method is automatically referenced.</p>
+<h1 id="object-constructor">Object Constructor</h1>
+<p>The <code>New : EndNew</code> block allows to instanciate a new object of the Class by declaring and initializing it.</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Object constructor</span>
+<span class="hl kwc">New</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+  ...
+EndNew</code></pre>
+<p>The <code>New</code> keyword takes the class name as parameter.</p>
+<h3 id="new-keyword">New keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">New</span>(ClassName)
+  <span class="hl kwa">Declare</span> Init_Mbers_<span class="hl kwb">#ClassName</span>(<span class="hl opt">*</span>this, <span class="hl opt">*</span>input.Mbrs_<span class="hl kwb">#ClassName</span><span class="hl opt">=</span><span class="hl num">0</span>)
+
+  <span class="hl kwa">Procedure</span>.l New_<span class="hl kwb">#ClassName</span>(<span class="hl opt">*</span>input.Mbrs_<span class="hl kwb">#ClassName</span> <span class="hl opt">=</span><span class="hl num">0</span>)
+    <span class="hl kwa">Shared</span> Mthds_<span class="hl kwb">#ClassName</span>
+    <span class="hl slc">; Allocate the memory required for the object members</span>
+    <span class="hl opt">*</span>this.Mbrs_<span class="hl kwb">#ClassName</span> <span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(Mbrs_<span class="hl kwb">#ClassName</span>))
+    <span class="hl slc">; Attach the method-table to the object</span>
+    <span class="hl opt">*</span>this\Methods<span class="hl opt">=</span>&#64;Mthds_<span class="hl kwb">#ClassName</span>
+    <span class="hl slc">; The object is created then initialized</span>
+    <span class="hl slc">; Create the object</span>
+    <span class="hl opt">*</span>this\Instance<span class="hl opt">=</span> <span class="hl kwc">AllocateMemory</span>(<span class="hl kwc">SizeOf</span>(ClassName))
+    <span class="hl opt">*</span>this\Instance\Md <span class="hl opt">= *</span>this
+    <span class="hl slc">; Now init members</span>
+    Init_Mbers_<span class="hl kwb">#ClassName</span>(<span class="hl opt">*</span>this, <span class="hl opt">*</span>input)
+    <span class="hl kwa">ProcedureReturn</span> <span class="hl opt">*</span>this\Instance
+  <span class="hl kwa">EndProcedure</span>
+
+  <span class="hl kwc">Init_Mbers</span>(ClassName)
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>New</code> keyword is dense, but hasn’t really changed compared to the previous design.</p>
+<p>The goal of this keyword is to create a new object and initialize it. These tasks are performed in the <code>New_ClassName</code> procedure, which is the main part of the <code>New</code> macro.</p>
+<p>This procedure accepts a single argument, the one required by <code>Init_Mbers</code> for attributes initialization.</p>
+<p>It begins by allocating the memory space required for the object’s members.</p>
+<p>Then it attaches to the object the <em>method table</em> of the Class.</p>
+<p>Next it instanciates the object by assigning an address to it and initializing the interface.</p>
+<p>Then follows initialization of the object’s attributes via the <code>Init_Mbers</code> method.</p>
+<p>Finally, <code>New</code> returns the object’s address.</p>
+<p>The trick in the <code>New</code> macro is that it ends with the <code>Init_Mbers</code> keyword. This way, what the user has to add inside the <code>New : EndNew</code> block is simply the attributes initialization. More on that in a moment though (<a href="#init_mbers-endinit_mbers-private-block">Show me now!</a>).</p>
+<p>This arrangement is made possible by declaring the <code>Init_Mbers</code> method first in the macro.</p>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p>Notice how the <code>New_ClassName</code> procedure is common to all kind of Classes. It is because its variable part (and therefore object-specific) was externalized into the <code>Init_Mbers</code> method.</p>
+</div>
+</div>
+<h3 id="endnew-keyword">EndNew keyword</h3>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> EndNew
+  EndInit_Mbers
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>EndNew</code> keyword is limited to calling the <code>EndInit_Mbers</code> keyword, which completes the attributes’ initialization declaration started at the end of the <code>New</code> macro.</p>
+<p>Conclusion: the goal is reached. Through the <code>New : EndNew</code> block, we have created from the Class a new object with initialized methods and attributes.</p>
+<p>In practical use, the <code>New : EndNew</code> block allows to initialize attibutes like this:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">New</span>(Rect1)
+  <span class="hl opt">*</span>this\var1 <span class="hl opt">= *</span>input\var1
+  <span class="hl opt">*</span>this\var2 <span class="hl opt">= *</span>input\var2
+  <span class="hl slc">; [ ...some code... ]</span>
+EndNew</code></pre>
+<p>to instanciate such an object, write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">input.Mbrs_Rect1
+input\var1 <span class="hl opt">=</span> <span class="hl num">10</span>
+input\var2 <span class="hl opt">=</span> <span class="hl num">20</span>
+
+<span class="hl slc">; *Rect is a new object from Rect1 class</span>
+<span class="hl opt">*</span>Rect.Rect1 <span class="hl opt">=</span> <span class="hl kwc">New_Rect1</span>(input)</code></pre>
+<p>Note that the constructor name is <code>New</code> followed by the Class’ name separated by “<code>_</code>”.</p>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p><span id="admonition-on-object-being-a-pointer"></span> In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members (<a href="#endclass-keyword">What?! I don’t remember!</a>).</p>
+</div>
+</div>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p><span id="admonition-about-this-instance"></span> The choice of <code>StructureUnion</code> requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here). This bivalence — which didn’t exist in the previous implementation — leads us to store information into the object itself. So, within the object’s methods you can access its members address through <code>*this</code>, and its instance’s address (method and members) through <code>*this\Instance</code>.</p>
+<p>An important feature ensues: the us of <code>*this\Instance</code> to call the object’s methods within its methods (<strong>No, I’m not drunk</strong>!). This is the best way to do it, because it hides the name of the procedure behind the method, which is an essential part of the inheritance process.</p>
+<p>For this purpose, a <code>Mtd</code> macro is present in the <a href="./OOP.pbi"><code>OOP.pbi</code></a> file.</p>
+</div>
+</div>
+<h3 id="init_mbers-endinit_mbers-private-block">Init_Mbers : EndInit_Mbers private block</h3>
+<p>The <code>Init_Mbers: EndInit_Mbers</code> is a private block of the OOP implementation, used by the <code>New : EndNew</code> block to initialize an object’s attributes. Explaining this internal block is important for understanding how initialization of an object will be carried out.</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Attributes initialization</span>
+<span class="hl kwc">Init_Mbers</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+  ...
+EndInit_Mbers</code></pre>
+<p>Between the two keywords are a series of member’s initialization. Note that only the <code>Init_Mbers</code> keyword requires the Class’ name as parameter.</p>
+<h5 id="init_mbers-keyword">Init_Mbers keyword</h5>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">Init_Mbers</span>(ClassName)
+  <span class="hl kwc">Method</span>(ClassName, Init_Mbers), <span class="hl opt">*</span>input.Mbrs_<span class="hl kwb">#ClassName</span> <span class="hl opt">=</span><span class="hl num">0</span>)
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>Init_Mbers</code> instruction is defined as a method of the object accepting a single argument.</p>
+<p>In order to initialize the object according to the user’s wishes, and because the number of its members can’t be known in advance, it was chosen to pass information by reference.</p>
+<p>This choice is reinforced by the bias that it’s the Constructor’s responsibility to initialize the object (by calling this particular method). Last but not least, this arrangement allows to automate the process of inheritance.</p>
+<p>In practical use, members’ initialization will mostly look like this:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Init_Mbers</span>(Rect1)
+  <span class="hl opt">*</span>this\var1 <span class="hl opt">= *</span>input\var1
+  <span class="hl opt">*</span>this\var2 <span class="hl opt">= *</span>input\var2
+  <span class="hl slc">; [ ...some code... ]</span>
+EndInit_Mbers</code></pre>
+<h5 id="endinit_mbers-keyword">EndInit_Mbers keyword</h5>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> EndInit_Mbers
+  <span class="hl kwa">EndProcedure</span>
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>EndInit_Mbers</code> keyword is nothing more than the <code>EndProcedure</code> keyword, which ends the definition of the object’s initialization method.</p>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p>If you are the impatient sort, and have already peeked at the source code, you might have noticed that the final OOP implementation file includes extra optional parameters, named <code>arg1</code> to <code>arg5</code>. This is because in some situations it is useful to complete the standard <code>*input</code> pointer by additional information.</p>
+</div>
+</div>
+<h1 id="object-destructor">Object destructor</h1>
+<p>The <code>Free: EndFree</code> block allows to destroy an object of the Class and to restore its memory.</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Object destructor</span>
+<span class="hl kwc">Free</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+ ...
+EndFree</code></pre>
+<p>The <code>Free</code> keyword takes the Class’ name as parameter.</p>
+<h4 id="free-endfree-block">Free : EndFree block</h4>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">Free</span>(ClassName)
+  <span class="hl kwa">Procedure</span> Free_<span class="hl kwb">#ClassName</span>(<span class="hl opt">*</span>Instance.ClassName)
+    <span class="hl kwa">If</span> <span class="hl opt">*</span>Instance
+<span class="hl kwa">EndMacro</span>
+
+<span class="hl kwa">Macro</span> EndFree
+      <span class="hl kwc">FreeMemory</span>(<span class="hl opt">*</span>Instance\Md)
+      <span class="hl kwc">FreeMemory</span>(<span class="hl opt">*</span>Instance)
+    <span class="hl kwa">EndIf</span>
+  <span class="hl kwa">EndProcedure</span>
+<span class="hl kwa">EndMacro</span></code></pre>
+<p>The <code>Free : EndFree</code> block is rather simple.</p>
+<ul>
+<li><code>Free</code> opens a <code>Procedure</code> with the object’s address as argument. We then check that the passed argument is not a Null address — nevertheless, it doesn’t guarantee that it’s a valid address for <code>FreeMemory()</code>!</li>
+<li><code>EndFree</code> releases the memory allocated to the object’s members, then that of the object itself — in that specific order.</li>
+</ul>
+<p>In practical use, to free an object’s intance write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect1</span>(<span class="hl opt">*</span>Rect)</code></pre>
+<p>As for the constructor, note that the destructor’s name is “<code>Free</code>” followed by the class’ name separated by “<code>_</code>”.</p>
+<div class="alert-messages">
+<div class="alert alert-error">
+<p>If your object consists of other objects — i.e.: that some objects are members of the current object, and they exist by (and for) this object (<strong>hic</strong>!) — it’s then important to free them too, by calling their destructors in-between the <code>Free</code> and <code>EndFree</code> keywords.</p>
+<p>Even if PureBasic does automatically free the allocated memory areas, it will occur only when the programs ends. During programs execution, it is up to the user to take care of any garbage memory, especially its bloat.</p>
+</div>
+</div>
+<h1 id="inheritance">Inheritance</h1>
+<p>In the set of commands just exposed, nothing makes reference to the process of inheritance. It is normal, because the current commands do not support it! (<strong>Damn</strong>! <strong>What an anguish</strong>!)! We need to introduce an additional set of commands to deal with the concept (<strong>Arghhh</strong>! <strong>Mega-anguish</strong>!).</p>
+<p>Fortunately, it is not rocket science, and our design is ready for this (<strong>Phew</strong>! <strong>I’m feeling better now</strong>).</p>
+<p>Here is what the Class looks like in this case:</p>
+<pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Object class</span>
+<span class="hl kwc">ClassEx</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>,<span class="hl opt">&lt;</span>ParentClass<span class="hl opt">&gt;</span>)
+  [<span class="hl kwc">Method1</span>()]
+  [<span class="hl kwc">Method2</span>()]
+  [<span class="hl kwc">Method3</span>()]
+  ...
+  <span class="hl kwc">MethodsEx</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>,<span class="hl opt">&lt;</span>ParentClass<span class="hl opt">&gt;</span>)
+    [<span class="hl opt">&lt;*</span>Method1<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;*</span>Method2<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;*</span>Method3<span class="hl opt">&gt;</span>]
+    ...
+  <span class="hl kwc">MembersEx</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>,<span class="hl opt">&lt;</span>ParentClass<span class="hl opt">&gt;</span>)
+    [<span class="hl opt">&lt;</span>Attribute1<span class="hl opt">&gt;</span>]
+    [<span class="hl opt">&lt;</span>Attribute2<span class="hl opt">&gt;</span>]
+    ...
+<span class="hl kwc">EndClass</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+
+<span class="hl slc">; Object methods (implementation)</span>
+<span class="hl kwc">Method</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>, Method1) [,<span class="hl opt">&lt;</span>variable1 [<span class="hl opt">=</span> DefaultValue]<span class="hl opt">&gt;</span>,...])
+  ...
+  [<span class="hl kwa">ProcedureReturn</span> value]
+<span class="hl kwc">EndMethod</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>, Method1)
+
+<span class="hl slc">; ...(ditto For each method)...</span>
+
+<span class="hl slc">; Object constructor</span>
+<span class="hl kwc">NewEx</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>,<span class="hl opt">&lt;</span>ParentClass<span class="hl opt">&gt;</span>)
+  ...
+EndNew
+
+<span class="hl slc">; Object destructor</span>
+<span class="hl kwc">Free</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>)
+  ...
+EndFree</code></pre>
+<p>Four extra keywords are supplied as replacements for <code>Class</code>, <code>Methods</code>, <code>Members</code> and <code>New</code> keywords: <code>ClassEx</code>, <code>MethodsEx</code>, <code>MembersEx</code> and <code>NewEx</code> (respectively).</p>
+<p>For each new keyword, in addition to the current class’ name, its parent class’ name is now a parameter being passed.</p>
+<p>The operation is simple enough for the end user, making the process of inheritance easily accessible.</p>
+<p>In order to save space, I won’t review here the code of the new keywords; but it might be a good idea to check out <a href="./OOP.pbi"><code>OOP.pbi</code></a> in your IDE to get a feel of it.</p>
+<h1 id="discussion">Discussion</h1>
+<p>Phew! The presentation of a PureBasic Class is finished.</p>
+<p>What else? Well, macros allow to define a real set of commands that:</p>
+<ul>
+<li>Clarify the object’s structure,</li>
+<li>Facilitate or automate some processes, like methods’ initialization or inheritance.</li>
+</ul>
+<p>I list here the various design choices which drive the object’s conception. Let me remind you that it’s possible to partly re-adapt the design to customize objects, according to your own style, without fundamentally altering it:</p>
+<ol type="1">
+<li><p>Use <code>StructureUnion</code> to define the object. It confers to the object the peculiarity to act on the members without requiring any mutator (setter/getter) method.</p></li>
+<li><p>The <em>method table</em> is class-specific and not object-specific:</p>
+<ul>
+<li>It is initialized only once, at the beginning of program execution, rather than at objects’ instanciation time,</li>
+<li>Objects’ instances store only a pointer to their <strong>method table</strong>: a substantial save of memory space,</li>
+<li>All the objects point to the same <strong>method table</strong>, which guarantees identical behavior for all objects of the same class.</li>
+</ul></li>
+<li><p>A constructor which initializes the object by taking a single pointer as its input parameter, which store the initialization data of the object. The process of inheritance is largely facilitated. We can envisage to split the process in two steps: step one, the user create an object; step two, the user calls the initialization routine himself. In this case, the <code>Init_Mbers</code> method is no longer called by the <code>New</code> method, and therefore it might contain any number of arguments. Two disadvantages:</p>
+<ul>
+<li>The risk of an incorrect initialization of the object: one can forget to do it, but — more important — it’s no longer possible to automate the inheritance process: it’s up to the user to manage it!</li>
+<li>Strong class-interdependence of input parameters: as soon as the initialization method’s parameters of a parent class change, the user has to carry out this changes across all its children classes.</li>
+</ul></li>
+</ol>
+<ul>
+<li>In extreme — but it’s not advisable — we can imagine the user initializing all members, one after the other, by using mutators (setters). But members’ initialization doesn’t always boil down to mere assignment operations: it may involve more complex internal operations to reach its goal. If this is going to be repeated with each new object, it is strongly recommended to keep a dedicated method.</li>
+</ul>
+<ol start="4" type="1">
+<li><p>A destructor consistent with the constructor. It is not part of the interface, although it possibly could be. In this case, to free an object write <code>Objet\Md\Free()</code> instead of writing <code>Free_ClassName(object)</code>. This arrangement is easy to operate, and doesn’t alter the design of the object.</p></li>
+<li><p>I have not managed to automate the generation of the <code>method table</code>. It is important to remember why it was implemented with a <code>Structure</code>. Structures allow to create abstract classes — i.e.: classes whose methods are not implemented. It is a major notion of OOP’s concepts. Structures facilitate preserving the addresses’ order within the <em>method table</em> — whatever the implemented methods of the Class might be —, which in turn preserves the inheritance process! Using an array, a linked list, or a hash map as replacement for a Structure shall not provide this flexibility (at least I didn’t find such a solution).</p></li>
+</ol>
+<h1 id="reminder-of-types">Reminder of Types</h1>
+<p>Here is a list of the types used by a Class:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Applied to</th>
+<th>Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;ClassName&gt;</code></td>
+<td>Object instance</td>
+<td><code>EndClass</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;ClassName&gt;_</code></td>
+<td>Interface</td>
+<td><code>Class</code></td>
+</tr>
+<tr class="odd">
+<td><code>Mthds_&lt;ClassName&gt;</code></td>
+<td>Method Table</td>
+<td><code>Methods</code></td>
+</tr>
+<tr class="even">
+<td><code>Mbrs_&lt;ClassName&gt;_</code> <i class="fa fa-warning"></i></td>
+<td>Members structure</td>
+<td><code>Members</code></td>
+</tr>
+<tr class="odd">
+<td><code>Mbrs_&lt;ClassName&gt;</code></td>
+<td>Members structure</td>
+<td><code>EndClass</code></td>
+</tr>
+</tbody>
+</table>
+<div class="alert-messages">
+<div class="alert alert-warn">
+<p><i class="fa fa-warning"></i> The <code>Mbrs_&lt;ClassName&gt;_</code> type wasn’t presented in this paper. It is an intermediate step used to build the <code>Mbrs_&lt;ClassName&gt;</code> structure of the members definition. This arrangement is required to achieve the <code>*this\Instance</code> feature <a href="#admonition-about-this-instance">explained here</a>.</p>
+</div>
+</div>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#purebasic-class">PureBasic Class</a></li>
+<li><a href="#second-code-example">Second Code-Example</a></li>
+<li><a href="#class-endclass">Class : EndClass</a></li>
+<li><a href="#method-endmethod">Method : EndMethod</a></li>
+<li><a href="#object-constructor">Object Constructor</a></li>
+<li><a href="#object-destructor">Object destructor</a></li>
+<li><a href="#inheritance">Inheritance</a></li>
+<li><a href="#discussion">Discussion</a></li>
+<li><a href="#reminder-of-types">Reminder of Types</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+
+	</body>
+</html>

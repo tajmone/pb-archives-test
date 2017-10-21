@@ -1,0 +1,154 @@
+// ******************************************************************************
+// *                                                                            *
+// *                           SOURCECODE TYPOGRAPHY                            *
+// *                                                                            *
+// ******************************************************************************
+
+
+// ==============================================================================
+//                                  INLINE CODE                                  
+// ==============================================================================
+// NOTE: We're going to take a Pixel-Perfect approach (screen only!)...
+
+// Add a non-breaking space before and after the element's content to pad
+// right and left the colored background (applies to all ementes)...
+code::before,
+code::after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+// ------------------------------------------------------------------------------
+//                                 Main Body Text                                
+// ------------------------------------------------------------------------------
+// First, let's deal with defining inline code for the main body text ...
+// (ie: when parent is a <P> --- line-height 24px & font size 16px)
+code {
+  background-color: rgba($PrimerCSS-Black, 0.1); // WAS: 0.05
+  color: #000;
+  border-radius: 4px;
+  margin: 0;
+  padding: 4px 0 2px 0;
+  font-size: 14px;		// Smaller font to allow padding the frame
+  line-height: 20px;	// Smaller line-heigth to preserve V-rythm!
+  position: relative;	// Rise it by 1 px to V-align it nicely in the line.
+  top: -1px;
+  letter-spacing: 1px;
+}
+
+// ------------------------------------------------------------------------------
+//                                Headings (H1-6)                                
+// ------------------------------------------------------------------------------
+// Now let's customize inline code settings for every heading...
+// NOTE: Instead of a Pixel-Perfect approach, we use EM values that fit all
+// 		 headings well.
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  border-radius: 0.250em;
+  padding: 0.25em 0em 0.05em 0em;
+  line-height: 0.875em;
+  font-size: 0.875em;
+  margin: 0;
+  top: -0.055em;
+}
+// ==============================================================================
+//                                  CODE BLOCKS                                  
+// ==============================================================================
+// Default code blocks can show up to 80 chars without horizontal scroll bar.
+
+
+// Disable non-breaking space in code blocks...
+pre code::before,
+pre code::after {
+  content: normal;
+}
+
+// Let's undo the custom changes applied to inline code...
+pre code {
+	@include type-layout(m, 1); // Restore font-size and line-eigth values:
+	margin: 0;
+	padding: 0;
+	top: 0;
+}
+
+// The "small" class is used for code with lines exceeding 80 chars/cols
+// (can show up to 100 chars without horizontal scroll bar)
+pre code.small {
+  @include type-layout(s, 0.5); // Restore font-size and line-eigth values:
+  letter-spacing: 0.075px;
+}
+
+pre {
+  // margin-top: 0;
+  // margin-bottom: 0;
+  // font: 12px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+pre {
+  // word-wrap: normal;
+}
+
+pre>code {
+  // padding: 0;
+  // margin: 0;
+  // // font-size: 100%;
+word-break: normal;
+white-space: pre;
+  // background: transparent;
+  // border: 0;
+
+}
+
+
+// .highlight pre,
+pre {
+//   padding: 16px;
+overflow: auto;
+//   font-size: 85%;
+//   line-height: 1.45;
+background-color: rgba(153, 153, 153, 0.25); // GitHub: #f6f8fa;
+// border: 1px solid #aaa; // <= Border breaks V-Rythm!!!!
+color: blue;
+border-radius: 4px;
+@include padding(0.5);
+}
+
+pre code {
+display: inline;
+max-width: auto;
+padding: 0;
+margin: 0;
+overflow: visible;
+  // line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+  // border: 0;
+color: red;
+}
+
+// @include padding(2 1);
+
+// ==============================================================================
+//                              Pandoc's Skylighting                             
+// ==============================================================================
+// Style settings specific to Pandoc's built in syntax-highlighter (skylighting)
+
+// ------------------------------------------------------------------------------
+//                             Code With Line-Numbers                            
+// ------------------------------------------------------------------------------
+// Fix Skylighting's table radius borders between the line-nums column and the
+// sourcecode column...
+td.lineNumbers pre {
+  border-top-right-radius: 0;   
+  border-bottom-right-radius: 0;
+  background-color: rgba(153, 153, 153, 0.5); // FIXME (darker color for BG)
+}
+
+td.sourceCode pre {
+  border-top-left-radius: 0;   
+  border-bottom-left-radius: 0;
+}
