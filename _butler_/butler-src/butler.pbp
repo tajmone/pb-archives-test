@@ -12,32 +12,36 @@
   <section name="data">
     <explorer view="D:\Programmazione\PureBasic\Libraries PB\Scintilla\PB Full Examples\" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2017-10-20 10:46" user="P.K.Dick" host="PKDICK-HP"/>
+    <lastopen date="2017-10-22 13:52" user="P.K.Dick" host="PKDICK-HP"/>
   </section>
   <section name="files">
     <file name="butler-mod_ini.pbi">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="9d42dc60cb9a48e93d10531696b30150"/>
+      <fingerprint md5="f8e87f9007213c742ec080113145eb8a"/>
     </file>
     <file name="butler-mod_msg.pbi">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="adc5e044406fce5a7821173adbf6a76c"/>
+      <fingerprint md5="a9e3b29f61c8bde2b732908e5ee5c4b1"/>
     </file>
     <file name="butler.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="46a7d95fca487367ca9bc975fdb66aa9"/>
+      <fingerprint md5="c89b889bb5174ac4f5745fd009d677aa"/>
     </file>
     <file name="mod_fs.pbi">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="bb8352bc4e6d658950b5f9776fb49345"/>
+      <fingerprint md5="55b9e630b11bdd448a5e6937eaff370a"/>
     </file>
     <file name="mod_ppp.pbi">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="a0d698e2aaaf607388cfa0b2ecae367f"/>
+      <fingerprint md5="d9fbb3d0b5091235378591e992453236"/>
     </file>
     <file name="mod_text-funcs.pbi">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="c51243fc709eec010c382fa5fd3ac6b0"/>
+      <fingerprint md5="de0b15d2d8e8186a98e02a8875075004"/>
+    </file>
+    <file name="butler-mod_build.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="1088ecd2fb36a1bb6d10400171156db5"/>
     </file>
   </section>
   <section name="targets">

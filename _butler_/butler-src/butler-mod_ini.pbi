@@ -5,7 +5,7 @@
 ; ····························· by Tristano Ajmone ·····························
 ; ··············································································
 ; ··············································································
-; "butler-mod_ini.pbi" | PureBASIC 5.60
+; "butler-mod_ini.pbi" | PureBASIC 5.61
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -73,7 +73,7 @@ DeclareModule ini
   ; Strcutured vars with data and info on current project and its requirements...
   ; ------------------------------------------------------------------------------
   ; FIXME: Convert to Structure? ie: hold all proj setting (eg: PP req ver, etc)
-;   Define ProjRoot$
+  ;   Define ProjRoot$
   
   Structure projectinfo
     Root$             ; Absolute path to project's root.
@@ -119,17 +119,22 @@ DeclareModule ini
     #SERR_Mismatched_Pandoc_Version
   EndEnumeration
   ; ==============================================================================
-  ;                               PUBLIC PROCEDURES                               
+  ;                         PUBLIC PROCEDURES DECLARATION                         
   ; ==============================================================================
   Declare Init()
 EndDeclareModule
 
 Module ini
   ; ==============================================================================
-  ;                               PRIVATE PROCEDURES                              
+  ;                         PRIVATE PROCEDURES DECLARATION                        
   ; ==============================================================================
   Declare ParseCLIArgs(numParams)
   Declare ReadSettingsFile()
+  ; ******************************************************************************
+  ; *                                                                            *
+  ; *                             PUBLIC PROCEDURES                              *
+  ; *                                                                            *
+  ; ******************************************************************************
   ; ******************************************************************************
   ; *                             Initialize Butler                              *
   ; ******************************************************************************
@@ -228,7 +233,7 @@ Module ini
         PrintN("!!! Butler.ini NOT found !!!") ; DELME
       EndIf 
     EndIf 
-
+    
     
     ;}------------------------------------------------------------------------------
     ;                         Establish Project's Root Path                         
@@ -243,13 +248,18 @@ Module ini
     ; ------------------------------------------------------------------------------
     
     
-
+    
     
     ConsoleError("ini::Init() << LEAVE")
     ConsoleError("******************************************************************************")
     ProcedureReturn operativeStatus
     
   EndProcedure
+  ; ******************************************************************************
+  ; *                                                                            *
+  ; *                             PRIVATE PROCEDURES                             *
+  ; *                                                                            *
+  ; ******************************************************************************
   
   ; ******************************************************************************
   ; *                        Parse Command Line Arguments                        *
@@ -426,12 +436,12 @@ Module ini
           UserOpts | #opt_opStatusReq         ; This opt requires operativeStatus
           UserOpts | #opt_BuildFolder
           ConsoleError(" -- Build current folder"); DBG Eval User Opts
-        Case #optsmap_BuildAll                ; ====> Build whole project  <==============
-          UserOpts | #opt_opStatusReq         ; This opt requires operativeStatus
+        Case #optsmap_BuildAll                    ; ====> Build whole project  <==============
+          UserOpts | #opt_opStatusReq             ; This opt requires operativeStatus
           UserOpts | #opt_BuildAll
           UserOpts | #opt_Recursive
           ConsoleError(" -- Build whole project"); DBG Eval User Opts
-        Case #optsmap_Recursive               ; ====> Recursive Mode       <==============
+        Case #optsmap_Recursive                  ; ====> Recursive Mode       <==============
           UserOpts | #opt_Recursive
           ConsoleError(" -- Recursive Mode")  ; DBG Eval User Opts
         Case #optsmap_Verbose                 ; ====> Verbosity Mode       <==============
@@ -455,7 +465,7 @@ Module ini
     ; This local operativeStatus will be returned to the calling procedure, so it
     ; can be ANDed with its counterpart:
     operativeStatus = #True ; Assume true until some problems are found!
-
+    
     
     Shared Butler, Proj, Env
     Shared StatusErr
@@ -521,14 +531,14 @@ Module ini
     If Not ( StatusErr & #SERR_Pandoc_Not_Found )
       If Proj\PandocVersion$ <> Env\PandocVersion$
         StatusErr | #SERR_Mismatched_Pandoc_Version
-       operativeStatus = #False
-       ConsoleError("!!! PandocVersion$ <> Env\PandocVersion$: " + Proj\PandocVersion$ + " <> " + Env\PandocVersion$ ) ; DELME Debugging
-      Else  ; DELME Debugging
-         ConsoleError("!!! PandocVersion$ == Env\PandocVersion$ !!!") ; DELME Debugging
+        operativeStatus = #False
+        ConsoleError("!!! PandocVersion$ <> Env\PandocVersion$: " + Proj\PandocVersion$ + " <> " + Env\PandocVersion$ ) ; DELME Debugging
+      Else                                                                                                              ; DELME Debugging
+        ConsoleError("!!! PandocVersion$ == Env\PandocVersion$ !!!")                                                    ; DELME Debugging
       EndIf
     EndIf
     
-
+    
     
     ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
     

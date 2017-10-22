@@ -5,7 +5,7 @@
 ; ····························· by Tristano Ajmone ·····························
 ; ··············································································
 ; ··············································································
-; "mod_ppp.pbi" | PureBASIC 5.60
+; "mod_ppp.pbi" | PureBASIC 5.61
 
 ; A module to convert files via PP and pandoc external tools.
 
@@ -58,13 +58,13 @@ Module PPP
   ; ==============================================================================
   #Success = 1
   #Failure = 0
-; ------------------------------------------------------------------------------
-;                            Cross-Platform Settings                            
-; ------------------------------------------------------------------------------
+  ; ------------------------------------------------------------------------------
+  ;                            Cross-Platform Settings                            
+  ; ------------------------------------------------------------------------------
   CompilerIf #PB_Compiler_OS = #PB_OS_Windows
     ; ================================= Windows OS ===============================
     #EOL$ = #CRLF$ ; Line ending is CR+LF sequence.
-                  ; NOTE: Bash for Windows can handle correctly CR+LF line ends!
+                   ; NOTE: Bash for Windows can handle correctly CR+LF line ends!
     #EOL_WRONG$ = #LF$
   CompilerElse
     ; ================================ Linux/macOS ===============================
@@ -94,6 +94,8 @@ Module PPP
     ; ------------------------------------------------------------------------------
     PP     = RunProgram("pp",     argsPP$,     "", #PB_Program_Open | #PB_Program_Read | #PB_Program_Error | #PB_Program_UTF8)
     Pandoc = RunProgram("pandoc", argsPandoc$, "", #PB_Program_Open | #PB_Program_Read | #PB_Program_Error | #PB_Program_UTF8 | #PB_Program_Write)
+    ;     PrintN("argsPP$: "     + argsPP$)     ; DBG PP Args
+    ;     PrintN("argsPandoc$: " + argsPandoc$) ; DBG Pandoc Args
     If Not PP Or Not Pandoc
       ; ------------------------------------------------------------------------------
       ;                               Somethig Wrong...                               
@@ -109,7 +111,7 @@ Module PPP
       ProcedureReturn #Failure
     EndIf 
     
-
+    
     While ProgramRunning(PP) Or ProgramRunning(Pandoc)
       
       ; ------------------------------------------------------------------------------
@@ -166,7 +168,7 @@ Module PPP
     CloseProgram(Pandoc) ; Close the connection to the program
     CloseProgram(PP)     ; Close the connection to the program
     
-;     PrintN("<<<<<<<<<< PPP::Convert() <<<<<<<<<<") ; DELME
+    ;     PrintN("<<<<<<<<<< PPP::Convert() <<<<<<<<<<") ; DELME
     
     
     If PPExCode Or PandocExCode Or      ; <= Errors
@@ -194,10 +196,10 @@ Module PPP
     ; This RegEx is flexible: it captures both SemVer 2.0 strings and the more common
     ; digits-only version strings (eg: 1.1.1.1).
     Rex$ = "(?i)^.*?v?("+                        ; (case insensitive mode) [...anything...] "v" (optional)
-           "(?:0|[1-9]\d*)"+                        ; Num-ID (mandatory) = MAJ
-           "(?:\.(?:0|[1-9]\d*)){1,3}"+             ; .Num-ID (1 mandatory + 2 optional) = .MIN [.PATCH .BUILD]
-           "(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?"+     ; -PRERELEASE (optional)     = SemVer specific
-           "(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?"+    ; +BUILD_METADATA (optional) = SemVer specific
+           "(?:0|[1-9]\d*)"+                     ; Num-ID (mandatory) = MAJ
+           "(?:\.(?:0|[1-9]\d*)){1,3}"+          ; .Num-ID (1 mandatory + 2 optional) = .MIN [.PATCH .BUILD]
+           "(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?"+  ; -PRERELEASE (optional)     = SemVer specific
+           "(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?"+ ; +BUILD_METADATA (optional) = SemVer specific
            ")"
     If Not CreateRegularExpression(0, Rex$)
       ; FIXME: Butler Internal Error (use custom msg:: proc)

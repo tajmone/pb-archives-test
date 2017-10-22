@@ -5,7 +5,7 @@
 ; ····························· by Tristano Ajmone ·····························
 ; ··············································································
 ; ··············································································
-; "butler-mod_txt.pbi" | PureBASIC 5.60
+; "butler-mod_txt.pbi" | PureBASIC 5.61
 
 ; Text formatting helper functions
 
@@ -41,6 +41,7 @@ DeclareModule msg
   Declare.s ButlerStatus()
   Declare.s ListStatusErrors()
   Declare   PrintHelp()
+  Declare   Abort(errMsg.s)
 EndDeclareModule
 
 Module msg
@@ -181,6 +182,17 @@ Module msg
   Procedure PrintHelp()
     PrintN( PeekS( ?HelpText +2 ) ) ; <= `+2` skips over BOM!
   EndProcedure
+  
+  ; ******************************************************************************
+  ; *                           Print Error and Abort                            *
+  ; ******************************************************************************
+  ; FIXME: Abort() proc -- Remove all calls and delete!
+  Procedure Abort(errMsg.s)
+    ConsoleError("ERROR: "+ errMsg)
+    ConsoleError("Aborting all operations ...")
+    End 1 ; Exit with Exit Code set to Error (generic)
+  EndProcedure
+  
   ;}******************************************************************************
   ; *                                                                            *
   ; *                               EMBEDDED TEXT                                *
@@ -203,7 +215,7 @@ Module msg
   ;       copies of the repo downloaded from GitHub via the download button.
   ;       They should, but it's worth testing. See:
   ;       https://stackoverflow.com/questions/17347611/downloading-a-zip-from-github-removes-newlines-from-text-files
- 
+  
   
   #Null_Termination = $00 + $00
   

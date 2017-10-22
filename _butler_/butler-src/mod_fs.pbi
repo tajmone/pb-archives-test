@@ -5,7 +5,7 @@
 ; ····························· by Tristano Ajmone ·····························
 ; ··············································································
 ; ··············································································
-; "mod_fs.pbi" | PureBASIC 5.60
+; "mod_fs.pbi" | PureBASIC 5.61
 
 ; Some helper procedures and constants for cross-platform handling of paths.
 
@@ -46,7 +46,7 @@ EndDeclareModule
 Module FS
   
   IncludeFile "mod_fs.pbhgen.pbi" ; <= PBHGEN-X
-
+  
   ; ******************************************************************************
   ; *                          Sanitize Directory Path                           *
   ; ******************************************************************************
@@ -77,5 +77,5 @@ Module FS
     ProcedureReturn PathStr$
     
   EndProcedure
-
+  
 EndModule

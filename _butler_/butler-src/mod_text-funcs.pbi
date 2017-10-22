@@ -5,7 +5,7 @@
 ; ····························· by Tristano Ajmone ·····························
 ; ··············································································
 ; ··············································································
-; "mod_text-funcs.pbi" | PureBASIC 5.60
+; "mod_text-funcs.pbi" | PureBASIC 5.61
 
 ; A module for formatting text strings.
 
@@ -25,8 +25,8 @@ DeclareModule txt
   
   Declare.s FixLineEndings(StrToFix$)
   Declare.s FrameText(text$)
-   Declare.s QuoteText(text$)
- 
+  Declare.s QuoteText(text$)
+  
   
   ; ==============================================================================
   ;                            Cross-Platform Settings                            
@@ -34,7 +34,7 @@ DeclareModule txt
   CompilerIf #PB_Compiler_OS = #PB_OS_Windows
     ; ================================= Windows OS ===============================
     #EOL$ = #CRLF$ ; Line ending is CR+LF sequence.
-                  ; NOTE: Bash for Windows can handle correctly CR+LF line ends!
+                   ; NOTE: Bash for Windows can handle correctly CR+LF line ends!
     #EOL_WRONG$ = #LF$
   CompilerElse
     ; ================================ Linux/macOS ===============================
