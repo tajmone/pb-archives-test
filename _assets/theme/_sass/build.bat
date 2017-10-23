@@ -11,10 +11,6 @@ SET _SMAP=auto
 SET "_OPTS=./:../css --sourcemap=%_SMAP% --style=%_STYLE%"
 ECHO SASS OPTIONS:
 ECHO    %_OPTS%
-:: Add required libraries paths to SASS Load Path env-var:
-SET "SASS_PATH=%~dp0vendors\normalize-scss"
-ECHO SASS LOAD PATHS (%%SASS_PATH%%):
-ECHO    %SASS_PATH%
 ECHO --------------------------------------------------
 ECHO Force building SASS project...
 ECHO.

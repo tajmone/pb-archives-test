@@ -62,5 +62,20 @@ List of changes:
         -   The example file [`styles.scss`](https://github.com/JohnAlbin/normalize-scss/blob/7.0.0/fork-versions/typey-chroma-kss/styles.scss) was renamed to [`___styles.scss`](./___styles.scss) to prevent Sass from building it to CSS.
     -   The original [`README.md`](https://github.com/JohnAlbin/normalize-scss/blob/7.0.0/README.md) file from the repo’s root folder was also copied here (contents unchanged), and renamed as [`README_NORMALIZE-SCSS.md`](./README_NORMALIZE-SCSS.md);
     -   The [`LICENSE.md`](https://github.com/JohnAlbin/normalize-scss/blob/7.0.0/LICENSE.md) file from the repo’s root folder was also copied here (contents unchanged), and renamed as [`LICENSE`](./LICENSE).
+-   Since we’re using the module without installing it, some `@import` paths had to be fixed:
+    -   `/vendors/normalize-scss/base/grouping/_grouping.scss` (Line 2):
+
+        ``` scss
+        @import '../../components/divider/divider'; // <= Relative path changed!
+        // @import 'components/divider/divider';
+        ```
+
+    -   `vendors/normalize-scss/base/forms/_forms.scss` (Line 94):
+
+        ``` scss
+        @import '../../forms/button/button'; // <= Relative path changed!
+        // @import 'forms/button/button';
+        ```
+
 -   This `README.md` file (the one you’re reading) was added to state changes.
 

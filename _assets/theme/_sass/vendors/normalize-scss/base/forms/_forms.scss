@@ -91,7 +91,8 @@ input {
 //
 // Style guide: forms.base.button
 
-@import 'forms/button/button';
+@import '../../forms/button/button'; // <= Relative path changed!
+// @import 'forms/button/button';
 
 // The %text-form-element can be used to style `<input>` text types and
 // `<textarea>` elements at the same time.
