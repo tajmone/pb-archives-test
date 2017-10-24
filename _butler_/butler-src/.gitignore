@@ -1,0 +1,13 @@
+# ==============================================================================
+#                     PureBASIC Project Files VCS Nightmare                     
+# ==============================================================================
+# Because PureBASIC changes the project files at each end-of-session, version
+# controlling "*.pbp" files is a nightmare.
+# We set Git to ignore all project files in this folder:
+
+*.pbp
+
+# And then set as exceptions some project template files which users can copy
+# and use as their working project files:
+
+!_Butler-Windows__proj-template.pbp
