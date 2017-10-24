@@ -1,17 +1,17 @@
 !comment(   "Verbatim" pp-macros set   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"Verbatim.pp" v0.1 (2017-10-20) Alpha
+"Verbatim.pp" v0.1.1 (2017-10-23) Alpha
 
 A set of macros for handling verbatim text:
 
 -- Preformatted blocks (<pre>)
 -- Code blocks with custom classes for non syntax-higlighted coloring
    (<pre><code class="someclass">)
--- Inline code with custom classes for non syntax-higlighted coloring
-   (<code class="someclass">)
+
 ------------------------------------------------------------------------------
 MACROS LIST:
 
+-- !Pre
 -- !Code
 -- !CodeSmall
 -- !CMD
@@ -23,6 +23,29 @@ REQUIREMENTS: Custom classes must be defined in CSS.
 ------------------------------------------------------------------------------
 (c) Tristano Ajmone 2017, MIT License.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+!comment(   Pre   )
+``````````````````````````````````````````````````````````````````````````````
+DECRIPTION: Wraps the parameter's block of text in  in a <pre> block.
+
+USAGE:
+
+    !Pre
+    ~~~~~~~~~~~~~~~~~~~
+    BLOCK OF SOURCECODE
+    ~~~~~~~~~~~~~~~~~~~
+
+``````````````````````````````````````````````````````````````````````````````
+!define(   Pre   )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<pre>\1</pre>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 !comment(   Code   )
