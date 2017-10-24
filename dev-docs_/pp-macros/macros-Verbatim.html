@@ -1,0 +1,161 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Verbatim.pp</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>pp-macros</a></li>
+</ol>
+
+				</nav>
+
+				<div id="document">
+
+					<h1 class="title">Verbatim PP-Macros Set</h1>
+
+<p>“<strong>Verbatim</strong>” is a set of PP-macros for handling various types of verbatim text:</p>
+<ul>
+<li>Preformatted blocks (<code>&lt;pre&gt;</code>)</li>
+<li>Code blocks with custom classes for non syntax-higlighted coloring (<code>&lt;pre&gt;&lt;code class=&quot;someclass&quot;&gt;</code>)</li>
+</ul>
+<div class="alert-messages">
+<div class="alert alert-note">
+<p>It looks like I could without the <code>!Code</code> and <code>!CodeSmall</code> macros, and use pandoc’s support for <code>{.class}</code> syntax in fenced blocks (as well as inline code).</p>
+<p>But I must check the CSS stylesheets, because pandoc will only put the class on the <code>&lt;pre&gt;</code> tag, and nothing on the <code>&lt;code&gt;</code> tag! If I can fix the CSS to cover nicely both syntax highlighting and preformatted blocks, it would be better to do without these macros.</p>
+<p>See: <a href="#pandoc-markdown-alternative">Pandoc Markdown Alternative</a> for examples and test.</p>
+</div>
+</div>
+<h1 id="macros-list">Macros List</h1>
+<ul>
+<li><code>!Pre</code></li>
+<li><code>!Code</code></li>
+<li><code>!CodeSmall</code></li>
+<li><code>!CMD</code></li>
+<li><code>!DOS</code></li>
+</ul>
+<h1 id="preformatted-blocks">Preformatted Blocks</h1>
+<p>Thre preformatted blocks macros were devised because markdown doesn’t have a syntax for wrapping text so that in the final HTML docs they will be wrapped in <code>&lt;pre&gt;</code> tags (without <code>&lt;code&gt;</code> tags inside).</p>
+<h2 id="markdown-lacks-a-syntax-for-preformatted-blocks">Markdown Lacks a Syntax for Preformatted Blocks</h2>
+<p>Markdown has no syntax to define verbatim text that will output as preformatted block only (<code>&lt;pre&gt;</code>) — ie: it only allows for <code>&lt;pre&gt;&lt;code&gt;</code> blocks.</p>
+<p>There is the four-spaces indentantion syntax for “<a href="http://pandoc.org/MANUAL.html#indented-code-blocks">indented code blocks</a>”, which will wrap the text in <code>&lt;pre&gt;&lt;code&gt;</code> tags:</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre><code>A block of text indented four spaces (or one tab) is treated as verbatim text:
+
+    Some verbatim text.
+      Whitespace preserved!</code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;p&gt;</span>A block of text indented four spaces (or one tab) is treated as verbatim text:<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;pre&gt;&lt;code&gt;</span>Some verbatim text.
+  Whitespace preserved!<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<p>A block of text indented four spaces (or one tab) is treated as verbatim text:</p>
+<pre><code>Some verbatim text.
+  Whitespace preserved!</code></pre>
+<p>… which is just like using the “<a href="http://pandoc.org/MANUAL.html#fenced-code-blocks">fenced code blocks</a>” syntax without a language specification:</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre><code>```
+Some verbatim text.
+  Whitespace preserved!
+```</code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>Some verbatim text.
+  Whitespace preserved!<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<pre><code>Some verbatim text.
+  Whitespace preserved!</code></pre>
+<h2 id="the-pre-macro">The <code>!Pre</code> Macro</h2>
+<p>The <code>!Pre</code> macro will wrap the text block within <code>&lt;pre&gt;</code> tags.</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre><code>!Pre
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Some verbatim text.
+  Whitespace preserved!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;</span>Some verbatim text.
+  Whitespace preserved!
+<span class="kw">&lt;/pre&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<pre>Some verbatim text.
+  Whitespace preserved!
+</pre>
+<h1 id="code-blocks-macros">Code Blocks Macros</h1>
+<h2 id="pandoc-markdown-alternative">Pandoc Markdown Alternative</h2>
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html#extension-fenced_code_blocks" class="uri">http://pandoc.org/MANUAL.html#extension-fenced_code_blocks</a></li>
+</ul>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre><code>```{.someclass}
+// Some pseudo-code
+if x &gt; 10 Then
+    do something
+```</code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">&quot;someclass&quot;</span><span class="kw">&gt;&lt;code&gt;</span>// Some pseudo-code
+if x <span class="dv">&amp;gt;</span> 10 Then
+    do something<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<pre class="someclass"><code>// Some pseudo-code
+if x &gt; 10 Then
+    do something</code></pre>
+<p>Using the <code>small</code> class:</p>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre><code>```{.small}
+// Some pseudo-code
+if x &gt; 10 Then
+    do something
+```</code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">&quot;small&quot;</span><span class="kw">&gt;&lt;code&gt;</span>// Some pseudo-code
+if x <span class="dv">&amp;gt;</span> 10 Then
+    do something<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<p><strong>VISUAL RESULT:</strong></p>
+<pre class="small"><code>// Some pseudo-code
+if x &gt; 10 Then
+    do something</code></pre>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#macros-list">Macros List</a></li>
+<li><a href="#preformatted-blocks">Preformatted Blocks</a><ul>
+<li><a href="#markdown-lacks-a-syntax-for-preformatted-blocks">Markdown Lacks a Syntax for Preformatted Blocks</a></li>
+<li><a href="#the-pre-macro">The <code>!Pre</code> Macro</a></li>
+</ul></li>
+<li><a href="#code-blocks-macros">Code Blocks Macros</a><ul>
+<li><a href="#pandoc-markdown-alternative">Pandoc Markdown Alternative</a></li>
+</ul></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+
+	</body>
+</html>

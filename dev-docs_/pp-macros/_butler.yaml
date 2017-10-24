@@ -4,3 +4,20 @@
 title: "PP Macros Documentation"
 ---
 
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         REFERENCE LINKS DEFINITIONS                          
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!comment{ ================= PP Macros Definition Files ================= }
+
+[macros folder]: ../../_butler_/macros/ "Go to the PP macros definitions folder "
+
+[Alerts.pp]: ../../_butler_/macros/Alerts.pp "View the source of 'Alerts.pp' PP macros definition file"
+[BlockFormatting.pp]: ../../_butler_/macros/BlockFormatting.pp "View the source of 'BlockFormatting.pp' PP macros definition file"
+[GFM-TaskList.pp]: ../../_butler_/macros/GFM-TaskList.pp "View the source of 'GFM-TaskList.pp' PP macros definition file"
+[Highlight.pp]: ../../_butler_/macros/Highlight.pp "View the source of 'Highlight.pp' PP macros definition file"
+[InlineFormatting.pp]: ../../_butler_/macros/InlineFormatting.pp "View the source of 'InlineFormatting.pp' PP macros definition file"
+[LinkingHelpers.pp]: ../../_butler_/macros/LinkingHelpers.pp "View the source of 'LinkingHelpers.pp' PP macros definition file"
+[macros.pp]: ../../_butler_/macros/macros.pp "View the source of 'macros.pp' PP macros definition file"
+[Verbatim.pp]: ../../_butler_/macros/Verbatim.pp "View the source of 'Verbatim.pp' PP macros definition file"
