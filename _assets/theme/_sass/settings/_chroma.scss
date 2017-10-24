@@ -61,6 +61,7 @@ $chroma: define-default-color-scheme('theme-palette', 'Colors palette of the web
 // Load the modules that define the color palettes ...
 
 @import 'color-schemes/purebasic-palette'; // PureBASIC palette
+@import 'color-schemes/base16-monokai';    // Base16 "Monokai" palette for default highlighting
 @import 'color-schemes/base16-eighties';   // Base16 "Eighties" palette for FASM
 @import 'color-schemes/primercss-palette'; // GitHub color palette (Primer CSS)
 @import 'color-schemes/theme-palette';     // Theme palette
