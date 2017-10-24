@@ -1,40 +1,44 @@
 // ******************************************************************************
 // *                                                                            *
-// *                             BASE16 — Eighties                              *
+// *                              BASE16 — Monokai                              *
 // *                                                                            *
 // ******************************************************************************
-// Color scheme "Eighties", ported from YAML to SCSS by Tristano Ajmone, based on
-// Chris Kempson's source file from the Base16 project (MIT License):
+// Color scheme "Monokai" by Wimer Hazenberg:
 // 
-//  -- https://github.com/chriskempson/base16-builder/blob/master/schemes/eighties.yml
+//  -- http://www.monokai.nl
+// 
+// Ported from YAML to SCSS by Tristano Ajmone, based on the source file from
+// Chris Kempson's Base16 project (MIT License):
+// 
+//  -- https://github.com/chriskempson/base16-builder/blob/master/schemes/monokai.yml
 
-$chroma: define-color-scheme('b16-Eighties', 'Base16 "Bright" scheme for FASM.');
+$chroma: define-color-scheme('b16-Monokai', 'Base16 "Monokai" scheme.');
 
 
-$chroma: add-colors('b16-Eighties', (
-	base00: #2d2d2d, // Mine Shaft ( black )
-	base01: #393939, // Tuatara ( almost black )
-	base02: #515151, // Fuscous Gray
-	base03: #747369, // Flint ( dark gray )
-	base04: #a09f93, // Lemon Grass ( mid grayish )
-	base05: #d3d0c8, // Timberwolf ( gray )
-	base06: #e8e6df, // Cararra ( light gray )
-	base07: #f2f0ec, // Pampas ( light gray )
-	base08: #f2777a, // Froly ( red )
-	base09: #f99157, // Atomic Tangerine ( orange )
-	base0A: #ffcc66, // Golden Tainoi ( yellow )
-	base0B: #99cc99, // Moss Green
-	base0C: #66cccc, // Downy ( cyan )
-	base0D: #6699cc, // Danube ( blue )
-	base0E: #cc99cc, // Lilac ( purple )
-	base0F: #d27b53, // Raw Sienna ( brownish )
-
+$chroma: add-colors('b16-Monokai', (
+	base00: #272822, // Rangoon Green ( almost black )
+	base01: #383830, // Armadillo ( almost black )
+	base02: #49483e, // Fuscous Gray ( blackboard-like brown )
+	base03: #75715e, // Crocodile
+	base04: #a59f85, // Tallow
+	base05: #f8f8f2, // Bianca
+	base06: #f5f4f1, // Pampas
+	base07: #f9f8f5, // Desert Storm
+	base08: #f92672, // Rose ( red )
+	base09: #fd971f, // West Side  ( intense orange )
+	base0A: #f4bf75, // Rajah  ( orange )
+	base0B: #a6e22e, // Inch Worm ( green )
+	base0C: #a1efe4, // Water Leaf ( cyan/turquoise )
+	base0D: #66d9ef, // Sky Blue
+	base0E: #ae81ff, // Lavender ( purple )
+	base0F: #cc6633, // Piper ( bick red )
 ));
 
 // ==============================================================================
 //                                The MIT License                                
 // ==============================================================================
 // Copyright (c) 2017 Tristano Ajmone <tajmone@gmail.com>
+// Copyright (c) 2012 Wimer Hazenberg
 // Copyright (c) 2012 Chris Kempson
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
