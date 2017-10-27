@@ -118,6 +118,15 @@ Module msg
     
     cnt = 0
     ; ------------------------------------------------------------------------------
+    ;                            Windows: Is Bash/Shell?                            
+    ; ------------------------------------------------------------------------------
+    CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+      If ini::StatusErr & ini::#SERR_Win_NotShell
+        cnt +1
+        tmp$ + cntStr(cnt) + "Butler not invoked from Bash/Shell." + #EOL$
+      EndIf
+    CompilerEndIf
+    ; ------------------------------------------------------------------------------
     ;                                BUTLER_PATH Set?                               
     ; ------------------------------------------------------------------------------
     If ini::StatusErr & ini::#SERR_Missing_BUTLER_PATH

@@ -19,6 +19,15 @@
 
 ; This module manages Butler's project settings from/to file and memory.
 
+; TODO DRY: Every time I set a status error I also set operativeStatus to #False:
+; 
+;         StatusErr | #SERR_Win_NotShell
+;         operativeStatus = #False
+;
+;     I could just set operativeStatus once, before exiting Init(), by checking
+;     if StatusErr > 0! 
+;     PS: Do I really need operativeStatus var?
+
 ; TODO: Add Check and Var for Win Bash (ie: if currently in Bash or CMD)
 
 ; TODO: Move Here checking if CurrFolder is within Butler Path!!
@@ -104,6 +113,7 @@ DeclareModule ini
   Define StatusErr
   
   EnumerationBinary
+    #SERR_Win_NotShell
     #SERR_Missing_BUTLER_PATH
     #SERR_Missing_Ini_File
     #SERR_PP_Not_Found
@@ -146,6 +156,21 @@ Module ini
     Shared Proj
     Shared UserOpts, StatusErr
     
+    ; ------------------------------------------------------------------------------
+    ;-                           Windows: Is Bash/Shell?                            
+    ; ------------------------------------------------------------------------------
+    ; If OS is Win, make sure Butler is invoked from Bash (Git Bash).
+    ; This is done by checking for the presence of the SHELL env var.     
+    ;------------------------------------------------------------------------------
+    CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+      If GetEnvironmentVariable("SHELL") = #Null$
+        StatusErr | #SERR_Win_NotShell
+        operativeStatus = #False
+        PrintN("$$$ Win Shell = FALSE $$$") ; DELME Debug Win Shell
+      Else
+        PrintN("$$$ Win Shell = TRUE $$$")  ; DELME Debug Win Shell
+      EndIf
+    CompilerEndIf
     ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ;                          PARSE COMMAND LINE ARGUMENTS?                         
     ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
