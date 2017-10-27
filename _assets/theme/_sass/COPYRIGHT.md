@@ -117,17 +117,42 @@ HTML elements (more details can be found in the SCSS source files comments).
 
 --------------------------------------------------------------------------------
 
+Base16 Color Schemes
+====================
+
+The following color schemes were created by porting from YAML to SCSS color
+schemes found in Chris Kempson's **base16-builder** project:
+
+-   <https://github.com/chriskempson/base16-builder>
+
 Base16 Eighties
-===============
+---------------
 
--   [./color-schemes/\_base16-eighties.scss]
+-   [./color-schemes/_base16-eighties.scss]
 
-The color scheme adopted for syntax highlighting Fasm code was created by
-converting to SCSS the YAML source of the “Eighties” color scheme by Chris
-Kempson:.
+The color scheme adopted for syntax highlighting Fasm code; based on the
+“Eighties” color scheme by Chris Kempson:
 
 -   <https://github.com/chriskempson/base16-builder/blob/master/schemes/eighties.yml>
 
+> Copyright © 2012 Chris Kempson
+>
+> Released under the MIT License.
+
+(Full text of the [MIT License] available at the end of the document)
+
+Base16 Monokai
+--------------
+
+-   [./color-schemes/_base16-monokai.scss]
+
+The default fallback color scheme adopted for syntax highlighting code for which
+there is no specific theme; based on the “Eighties” color scheme by Wimer Hazenberg:
+
+-   <https://github.com/chriskempson/base16-builder/blob/master/schemes/monokai.yml>
+
+> Copyright © 2012 Wimer Hazenberg
+> 
 > Copyright © 2012 Chris Kempson
 >
 > Released under the MIT License.
@@ -172,4 +197,5 @@ The MIT License
   [./vendors/font-awesome/]: ./vendors/font-awesome/
   [./vendors/font-awesome/LICENSE]: ./vendors/font-awesome/LICENSE
   [MIT License]: #the-mit-license
-  [./color-schemes/\_base16-eighties.scss]: ./color-schemes/_base16-eighties.scss
+  [./color-schemes/_base16-eighties.scss]: ./color-schemes/_base16-eighties.scss
+  [./color-schemes/_base16-monokai.scss]: ./color-schemes/_base16-monokai.scss

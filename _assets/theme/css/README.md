@@ -16,6 +16,7 @@ PureBASIC Archives Theme (CSS)
     -   [Color Schemes](#color-schemes)
         -   [PureBASIC](#purebasic)
         -   [Base16 Eighties](#base16-eighties)
+        -   [Base16 Monokai](#base16-monokai)
     -   [Third Party Tools](#third-party-tools)
         -   [Typey](#typey)
         -   [Chroma](#chroma)
@@ -119,6 +120,18 @@ PureBasic IDE was build by Frédéric Laboureur, aka «Fred».
     Copyright (c) 2012 Chris Kempson
 
 The color scheme adopted for syntax highlighting Fasm code was created by converting to SCSS the YAML source of the “Eighties” color scheme by Chris Kempson (<http://chriskempson.com>).
+
+### Base16 Monokai
+
+-   <https://github.com/chriskempson/base16-builder/blob/master/schemes/monokai.yml>
+
+<!-- -->
+    MIT License
+
+    Copyright (c) 2012 Wimer Hazenberg
+    Copyright (c) 2012 Chris Kempson
+
+The default syntax highlighting color scheme (adopted for code for which there is no specific theme) was created by converting to SCSS the YAML source of the “Monokai” color scheme by Wimer Hazenberg (<http://www.monokai.nl>).
 
 Third Party Tools
 -----------------
