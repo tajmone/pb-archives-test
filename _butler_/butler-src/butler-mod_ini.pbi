@@ -71,10 +71,7 @@ DeclareModule ini
   ;-                            Project's Data & Info                             
   ; ------------------------------------------------------------------------------
   ; Strcutured vars with data and info on current project and its requirements...
-  ; ------------------------------------------------------------------------------
-  ; FIXME: Convert to Structure? ie: hold all proj setting (eg: PP req ver, etc)
-  ;   Define ProjRoot$
-  
+  ; ------------------------------------------------------------------------------ 
   Structure projectinfo
     Root$             ; Absolute path to project's root.
     ButlerVersion$    ; Butler version reuired by project.
