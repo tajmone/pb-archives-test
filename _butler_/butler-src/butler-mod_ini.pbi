@@ -19,14 +19,6 @@
 
 ; This module manages Butler's project settings from/to file and memory.
 
-; TODO DRY: Every time I set a status error I also set operativeStatus to #False:
-; 
-;         StatusErr | #SERR_Win_NotShell
-;         operativeStatus = #False
-;
-;     I could just set operativeStatus once, before exiting Init(), by checking
-;     if StatusErr > 0! 
-;     PS: Do I really need operativeStatus var?
 
 ; TODO: Add Check and Var for Win Bash (ie: if currently in Bash or CMD)
 
@@ -150,7 +142,6 @@ Module ini
     ConsoleError("******************************************************************************"); DELME Debugging
     ConsoleError("ini::Init() >> ENTER")                                                          ; DELME Debugging
     
-    operativeStatus = #True ; Assume true until some problems are found!
     
     Shared Butler, Env
     Shared Proj
@@ -165,7 +156,6 @@ Module ini
     CompilerIf #PB_Compiler_OS = #PB_OS_Windows
       If GetEnvironmentVariable("SHELL") = #Null$
         StatusErr | #SERR_Win_NotShell
-        operativeStatus = #False
         PrintN("$$$ Win Shell = FALSE $$$") ; DELME Debug Win Shell
       Else
         PrintN("$$$ Win Shell = TRUE $$$")  ; DELME Debug Win Shell
@@ -195,7 +185,6 @@ Module ini
     If Env\PPVersion$ = #Null$
       PrintN("$$$ PP NOT FOUND!! $$$") ; DELME Debug PPVersion$
       StatusErr | #SERR_PP_Not_Found
-      operativeStatus = #False
     Else
       PrintN("$$$ PP Version found: '"+ Env\PPVersion$ +"' $$$") ; DELME Debug PPVersion$
     EndIf
@@ -203,7 +192,6 @@ Module ini
     If Env\PandocVersion$ = #Null$
       PrintN("$$$ Pandoc NOT FOUND!! $$$") ; DELME Debug PPVersion$
       StatusErr | #SERR_Pandoc_Not_Found
-      operativeStatus = #False
     Else
       PrintN("$$$ Pandoc Version found: '"+ Env\PandocVersion$ +"' $$$") ; DELME Debug PandocVersion$
     EndIf
@@ -215,7 +203,6 @@ Module ini
     If Butler\Path$ = #Null$
       ;       ConsoleError("BUTLER_PATH env var not found!!!")  ; DELME -- BUTLER_PATH env var not found
       StatusErr | #SERR_Missing_BUTLER_PATH
-      operativeStatus = #False
     Else
       ; If BUTLER_PATH en var was found ...
       ; ------------------------------- Sanitize Path --------------------------------
@@ -247,11 +234,10 @@ Module ini
       PrintN("INI FILE > " + Butler\Path$ + "butler.ini") ; DELME
       If FileSize(Butler\Path$ + "butler.ini") > 0
         PrintN("!!! Butler.ini found !!!") ; DELME
-        operativeStatus & ReadSettingsFile() ; <= Result is ANDed with operativeStatus
+        ReadSettingsFile()
       Else
         ; TODO: Implement Missing "butler.ini" Error !
         StatusErr | #SERR_Missing_Ini_File
-        operativeStatus = #False
         PrintN("!!! Butler.ini NOT found !!!") ; DELME
       EndIf 
     EndIf 
@@ -274,8 +260,16 @@ Module ini
     
     ConsoleError("ini::Init() << LEAVE")
     ConsoleError("******************************************************************************")
-    ProcedureReturn operativeStatus
     
+    ; ==============================================================================
+    ;-                           Return Operative Status                            
+    ; ==============================================================================
+    If StatusErr
+      ProcedureReturn #False ; operativeStatus = False
+    Else
+      ProcedureReturn #True  ; operativeStatus = True
+    EndIf
+  
   EndProcedure
   ; ******************************************************************************
   ; *                                                                            *
@@ -479,23 +473,14 @@ Module ini
   ; ******************************************************************************
   Procedure ReadSettingsFile()
     ConsoleError(">>>>>> ini::ReadSettingsFile() >> ENTER") ; DELME Debugging
-    
-    ; TODO: IMPORTANT!!! Find a way to set operativeStatus = #False in case of
-    ;       errors!!! ie: operativeStatus is a var local to Init(), so I either
-    ;       make it global, or use a ProcedureReturn here to set its value!
-    
-    ; This local operativeStatus will be returned to the calling procedure, so it
-    ; can be ANDed with its counterpart:
-    operativeStatus = #True ; Assume true until some problems are found!
-    
-    
+   
     Shared Butler, Proj, Env
     Shared StatusErr
     
     If Not OpenPreferences(Butler\Path$ + "butler.ini")
       ; FIXME: Can't open "butler.ini" Error report
       ConsoleError(~"ERROR: Couldn't open \"butler.ini\" file!")
-      ProcedureReturn #False ; <= operativeStatus = #False
+      ProcedureReturn #False ; <= operativeStatus = False
     EndIf
     ; ------------------------------------------------------------------------------
     ;                            Required Butler Version                            
@@ -505,13 +490,11 @@ Module ini
     If Proj\ButlerVersion$ = #Null$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Butler_Version
-      operativeStatus = #False
       ConsoleError("!!! ButlerVersion$ not set in butler.ini !!!") ; DELME Debugging
     EndIf
     
     If Proj\ButlerVersion$ <> Butler\Version$
       StatusErr | #SERR_Mismatched_Butler_Version
-      operativeStatus = #False
       ConsoleError("!!! ButlerVersion$ <> Butler\Version$: " + 
                    Proj\ButlerVersion$ + " <> " + Butler\Version$ ) ; DELME Debugging
     Else                                                            ; DELME Debugging
@@ -525,14 +508,12 @@ Module ini
     If Proj\PPVersion$ = #Null$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_PP_Version
-      operativeStatus = #False
       ConsoleError("!!! PPVersion$ not set in butler.ini !!!") ; DELME Debugging
     EndIf
     
     If Not ( StatusErr & #SERR_PP_Not_Found )
       If Proj\PPVersion$ <> Env\PPVersion$
         StatusErr | #SERR_Mismatched_PP_Version
-        operativeStatus = #False
         ConsoleError("!!! PPVersion$ <> Env\PPVersion$: " + Proj\PPVersion$ + " <> " + Env\PPVersion$ ) ; DELME Debugging
       Else                                                                                              ; DELME Debugging
         ConsoleError("!!! PPVersion$ == Env\PPVersion$ !!!")                                            ; DELME Debugging
@@ -546,14 +527,12 @@ Module ini
     If Proj\PandocVersion$ = #Null$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Pandoc_Version
-      operativeStatus = #False
       ConsoleError("!!! PandocVersion$ not set in butler.ini !!!") ; DELME Debugging
     EndIf
     
     If Not ( StatusErr & #SERR_Pandoc_Not_Found )
       If Proj\PandocVersion$ <> Env\PandocVersion$
         StatusErr | #SERR_Mismatched_Pandoc_Version
-        operativeStatus = #False
         ConsoleError("!!! PandocVersion$ <> Env\PandocVersion$: " + Proj\PandocVersion$ + " <> " + Env\PandocVersion$ ) ; DELME Debugging
       Else                                                                                                              ; DELME Debugging
         ConsoleError("!!! PandocVersion$ == Env\PandocVersion$ !!!")                                                    ; DELME Debugging
@@ -563,9 +542,7 @@ Module ini
     
     
     ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
-    
-    ProcedureReturn operativeStatus
-    
+        
   EndProcedure
   
 EndModule
