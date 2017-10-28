@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 3 ; v0.1.3 ( 2017/10/27 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 4 ; v0.1.4 ( 2017/10/28 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -150,7 +150,7 @@ Else
   msg::PrintTasksList()
   If Not operativeStatus
     ; ------------------------------------------------------------------------------
-    ;                         Butler Not in Operative Status                        
+    ;-                        Butler Not in Operative Status                        
     ; ------------------------------------------------------------------------------
     ; Some proj processing tasks were requested but Butler's initialization didn't
     ; meet all requirements ...

@@ -34,7 +34,6 @@
 ;      -- If no .ini specs found, or versions differ, propose altering .ini vals
 ;         to those of the version of PP/Pandoc present on system.
 
-IncludeFile "butler-mod_ini.pbhgen.pbi" ; <= PBHGEN-X
 
 ; ******************************************************************************
 ; *                                                                            *
@@ -63,8 +62,9 @@ DeclareModule ini
   ;                            Environment Data & Info                            
   ; ------------------------------------------------------------------------------
   Structure envinfo
-    PPVersion$     ; Version of actual PP found.
-    PandocVersion$ ; Version of actual Pandoc found.
+    PPVersion$        ; Actual PP Version found in system.
+    PandocVersion$    ; Actual Pandoc Version found in system.
+    HighlightVersion$ ; Actual Highlight Version found in system.
   EndStructure
   
   Env.envinfo
@@ -75,9 +75,10 @@ DeclareModule ini
   ; ------------------------------------------------------------------------------ 
   Structure projectinfo
     Root$             ; Absolute path to project's root.
-    ButlerVersion$    ; Butler version reuired by project.
-    PPVersion$        ; PP version reuired by project.
-    PandocVersion$    ; Pandoc version reuired by project.
+    ButlerVersion$    ; Butler version reuired by project (exact).
+    PPVersion$        ; PP version reuired by project (exact).
+    PandocVersion$    ; Pandoc version reuired by project (exact).
+    HighlightVersion$ ; Highlight min-version reuired by project.
   EndStructure
   
   Proj.projectinfo
@@ -110,12 +111,15 @@ DeclareModule ini
     #SERR_Missing_Ini_File
     #SERR_PP_Not_Found
     #SERR_Pandoc_Not_Found
+    #SERR_Highlight_Not_Found
     #SERR_Unspecified_Butler_Version
     #SERR_Unspecified_PP_Version
     #SERR_Unspecified_Pandoc_Version
+    #SERR_Unspecified_Highlight_Version
     #SERR_Mismatched_Butler_Version
     #SERR_Mismatched_PP_Version
     #SERR_Mismatched_Pandoc_Version
+    #SERR_Mismatched_Highlight_Version
   EndEnumeration
   ; ==============================================================================
   ;                         PUBLIC PROCEDURES DECLARATION                         
@@ -124,11 +128,13 @@ DeclareModule ini
 EndDeclareModule
 
 Module ini
+  IncludeFile "butler-mod_ini.pbhgen.pbi" ; <= PBHGEN-X
   ; ==============================================================================
   ;                         PRIVATE PROCEDURES DECLARATION                        
   ; ==============================================================================
-  Declare ParseCLIArgs(numParams)
-  Declare ReadSettingsFile()
+  Declare   ParseCLIArgs(numParams)
+  Declare   ReadSettingsFile()
+  Declare.s GetHighlightVersion()
   ; ******************************************************************************
   ; *                                                                            *
   ; *                             PUBLIC PROCEDURES                              *
@@ -195,7 +201,17 @@ Module ini
     Else
       PrintN("$$$ Pandoc Version found: '"+ Env\PandocVersion$ +"' $$$") ; DELME Debug PandocVersion$
     EndIf
-    
+    ; ------------------------------------------------------------------------------
+    ;-                             Get Highlight Version                             
+    ; ------------------------------------------------------------------------------
+    Env\HighlightVersion$ = GetHighlightVersion()
+        ; ===> Check if Highlight was found: ==================================================
+    If Env\HighlightVersion$ = #Null$
+      PrintN("$$$ HIGHLIGHT NOT FOUND!! $$$") ; DELME Debug HighlightVersion$
+      StatusErr | #SERR_Highlight_Not_Found
+    Else
+      PrintN("$$$ HighlightVersion$ Version found: '"+ Env\HighlightVersion$ +"' $$$") ; DELME Debug HighlightVersion$
+    EndIf
     ; ------------------------------------------------------------------------------
     ;                   Get Butler's Path from BUTLER_PATH Env Var                  
     ;{------------------------------------------------------------------------------
@@ -538,11 +554,78 @@ Module ini
         ConsoleError("!!! PandocVersion$ == Env\PandocVersion$ !!!")                                                    ; DELME Debugging
       EndIf
     EndIf
+    ; ------------------------------------------------------------------------------
+    ;-                          Required Highlight Version                          
+    ; ------------------------------------------------------------------------------
+    ; Highlight version has syntax `MAJ.MIN` (eg: v3.40)
+    Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Null$)
     
+    If Proj\HighlightVersion$ = #Null$
+      ; Either the Key is not present or it has empty value...
+      StatusErr | #SERR_Unspecified_Highlight_Version
+      ConsoleError("!!! HighlightVersion$ not set in butler.ini !!!") ; DELME Debugging
+    EndIf
     
-    
+    If Not ( StatusErr & #SERR_Highlight_Not_Found )
+      ; =====================================
+      ; Minimum Version Constraint Comparison
+      ; =====================================
+      ; Check that found HL ver is >= required version (but same MAJ):
+      ; -- MAJOR version must but the same
+      ; -- MINOR version found must be >= req.ver
+      If Not CreateRegularExpression(0, "(\d+)\.(\d+)")
+        ; FIXME: Butler Internal Error (use custom msg:: proc)
+        ConsoleError("BUTLER INTERNAL ERROR -- ini::ReadSettingsFile() RegEx creation failed!") 
+        End 1
+      EndIf 
+      ; ------------------------------------------------------------------------------
+      ; Get HL Found Ver MAJ & MIN Vals                            
+      ; ------------------------------------------------------------------------------
+      If MatchRegularExpression(0, Env\HighlightVersion$)
+        If ExamineRegularExpression(0, Env\HighlightVersion$)
+          NextRegularExpressionMatch(0)
+          HLFound_MAJ = Val( RegularExpressionGroup(0, 1) )
+          HLFound_MIN = Val( RegularExpressionGroup(0, 2) )
+        EndIf
+      EndIf
+      ; ------------------------------------------------------------------------------
+      ; Get HL Required Ver MAJ & MIN Vals                            
+      ; ------------------------------------------------------------------------------
+      If MatchRegularExpression(0, proj\HighlightVersion$)
+        If ExamineRegularExpression(0, proj\HighlightVersion$)
+          NextRegularExpressionMatch(0)
+          HLReq_MAJ = Val( RegularExpressionGroup(0, 1) )
+          HLReq_MIN = Val( RegularExpressionGroup(0, 2) )
+        EndIf
+      EndIf
+      ; ------------------------------------------------------------------------------
+      ConsoleError("~> Highlight Found MAJ = "+ Str(HLFound_MAJ) +" | MIN = "+ Str(HLFound_MIN)) ; DELME HL-Ver Debugging
+      ConsoleError("~> Highlight Req.  MAJ = "+ Str(HLReq_MAJ)   +" | MIN = "+ Str(HLReq_MIN))   ; DELME HL-Ver Debugging
+      ; ------------------------------------------------------------------------------
+      FreeRegularExpression(0)
+      
+      If HLFound_MAJ <> HLReq_MAJ Or HLFound_MIN < HLReq_MIN
+        StatusErr | #SERR_Mismatched_Highlight_Version
+        ConsoleError("!!! HighlightVersion$ <> Env\HighlightVersion$: " + Proj\HighlightVersion$ + " <> " + Env\HighlightVersion$ ) ; DELME Debugging
+      Else                                                                                                                          ; DELME Debugging
+        If HLReq_MIN = HLFound_MIN 
+          ConsoleError("!!! HighlightVersion$ == Env\HighlightVersion$ !!!")                                                          ; DELME Debugging
+        Else
+          ConsoleError("!!! HighlightVersion$ <  Env\HighlightVersion$ !!!")                                                          ; DELME Debugging
+        EndIf
+      EndIf
+    EndIf   
+    ; ------------------------------------------------------------------------------    
     ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
         
   EndProcedure
+  ; ******************************************************************************
+  ; *                           Get Highlight Version                            *
+  ; ******************************************************************************
+  Procedure.s GetHighlightVersion()
+    ; We reuse mod PPP's PPP::GetAppVersion() procedure!
+    ProcedureReturn PPP::GetAppVersion("highlight", "--version")
+  EndProcedure
+  
   
 EndModule

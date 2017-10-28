@@ -195,7 +195,8 @@ Module PPP
     ; ------------------------------------------------------------------------------
     ; This RegEx is flexible: it captures both SemVer 2.0 strings and the more common
     ; digits-only version strings (eg: 1.1.1.1).
-    Rex$ = "(?i)^.*?v?("+                        ; (case insensitive mode) [...anything...] "v" (optional)
+    Rex$ = "(?is)"+                              ; (set mode: case insensitive + single line)
+           "^.*?v?("+                            ; [...anything...] "v" (optional)
            "(?:0|[1-9]\d*)"+                     ; Num-ID (mandatory) = MAJ
            "(?:\.(?:0|[1-9]\d*)){1,3}"+          ; .Num-ID (1 mandatory + 2 optional) = .MIN [.PATCH .BUILD]
            "(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?"+  ; -PRERELEASE (optional)     = SemVer specific

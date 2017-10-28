@@ -127,11 +127,29 @@ Module msg
       EndIf
     CompilerEndIf
     ; ------------------------------------------------------------------------------
+    ;                              Missing Dependencies                             
+    ; ------------------------------------------------------------------------------
+    ; ~~~~~ PP Not found ~~~~~
+    If ini::StatusErr & ini::#SERR_PP_Not_Found
+      cnt +1
+      tmp$ + cntStr(cnt) + "PP Not found on system." + #EOL$
+    EndIf  
+    ; ~~~~~ Pandoc Not found ~~~~~
+    If ini::StatusErr & ini::#SERR_Pandoc_Not_Found
+      cnt +1
+      tmp$ + cntStr(cnt) + "Pandoc Not found on system." + #EOL$
+    EndIf  
+    ; ~~~~~ Highlight Not found ~~~~~
+    If ini::StatusErr & ini::#SERR_Highlight_Not_Found
+      cnt +1
+      tmp$ + cntStr(cnt) + "Highlight Not found on system." + #EOL$
+    EndIf  
+    ; ------------------------------------------------------------------------------
     ;                                BUTLER_PATH Set?                               
     ; ------------------------------------------------------------------------------
     If ini::StatusErr & ini::#SERR_Missing_BUTLER_PATH
       cnt +1
-      tmp$ + cntStr(cnt) + "Env var BUTLER_PATH not set."
+      tmp$ + cntStr(cnt) + "Env var BUTLER_PATH not set." + #EOL$
     Else
       ; These status errors should be considered only if BUTLER_PATH is set ...
       ; ------------------------------------------------------------------------------
@@ -175,6 +193,18 @@ Module msg
           cnt +1
           tmp$ + cntStr(cnt) + ~"Pandoc version error: Required v" + ini::Proj\PandocVersion$ +
                  " | Found v" + ini::Env\PandocVersion$ + #EOL$
+        EndIf
+        ; ------------------------------------------------------------------------------
+        ;                                Highlight Errors...                               
+        ; ------------------------------------------------------------------------------
+        ; Mutually-exclusive errors...
+        If ini::StatusErr & ini::#SERR_Unspecified_Highlight_Version
+          cnt +1
+          tmp$ + cntStr(cnt) + ~"\"butler.ini\" file: missing \"HighlightVersion\"." + #EOL$
+        ElseIf ini::StatusErr & ini::#SERR_Mismatched_Highlight_Version
+          cnt +1
+          tmp$ + cntStr(cnt) + ~"Highlight version error: Required v" + ini::Proj\HighlightVersion$ +
+                 " | Found v" + ini::Env\HighlightVersion$ + #EOL$
         EndIf
         ; ...........
       EndIf

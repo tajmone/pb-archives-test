@@ -11,9 +11,10 @@
 ; ==============================================================================
 ; Assign to these constants the default settings that should go in the template:
 
-#ButlerVersion = "0.1.3"    ; Strict match!
-#PPVersion =     "1.11"     ; Strict match!
-#PandocVersion = "1.19.2.1" ; Strict match!
+#ButlerVersion =    "0.1.4"    ; Strict match!
+#PPVersion =        "1.11"     ; Strict match!
+#PandocVersion =    "1.19.2.1" ; Strict match!
+#HighlightVersion = "3.40"     ; MinVer match!
   
 ; ==============================================================================
 ;                               GENERATE TEMPLATE                               
@@ -23,13 +24,14 @@ DestFile$ = "___butler.ini" ; <= So we don't overwrite the exisiting ini file
 ;                          Define Keys and Descriptions                         
 ; ------------------------------------------------------------------------------
 DataSection
-  ;     +---------------+----------------+-------------------------------------+
-  ;     | Key$          | Val$           | Desc$                               |
-  ;     +---------------+----------------+-------------------------------------+
-  Data.s "ButlerVersion", #ButlerVersion , "exact version of Butler required"; |
-  Data.s "PPVersion"    , #PPVersion     , "exact version of PP required"    ; |
-  Data.s "PandocVersion", #PandocVersion , "exact version of Panodc required"; |
-  ;     +---------------+----------------+-------------------------------------+
+  ;     +------------------+-------------------+------------------------------------------+
+  ;     | Key$             | Val$              | Desc$                                    |
+  ;     +------------------+-------------------+------------------------------------------+
+  Data.s "ButlerVersion",    #ButlerVersion    , "exact version of Butler required";      |
+  Data.s "PPVersion"    ,    #PPVersion        , "exact version of PP required"    ;      |
+  Data.s "PandocVersion",    #PandocVersion    , "exact version of Panodc required";      |
+  Data.s "HighlightVersion", #HighlightVersion , "minimum version of Highlight required"; |
+  ;     +---------------+----------------+------------------------------------------------+
   Data.s "-" ; <= END of Data Marker
   ;   Data.s "", "", "" ;   |
   
