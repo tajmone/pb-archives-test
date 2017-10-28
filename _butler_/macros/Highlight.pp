@@ -1,6 +1,6 @@
 !comment(   "Highlight" pp-macros set   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"Highlight.pp" v0.1 (2017-10-20) Alpha
+"Highlight.pp" v0.2 (2017-10-28) Alpha
 
 A set of macros for integrating André Simon's Highlight (syntax highlighter)
 in pandoc documents:
@@ -31,21 +31,15 @@ Fasm:
 INTERNAL MACROS:
 -- !_TitlePB
 -- !_TitleFasm
--- !_conF
 ------------------------------------------------------------------------------
   OUT FORMAT: html
   OS SUPPORT: Win Bash + Linux + macOS
 REQUIREMENTS:
   -- Highlight cli tool must be available on system PATH.
-  -- HL_LANGS env var set to absolute path where custom lang def files reside. 
-------------------------------------------------------------------------------
-NOTES: Currently Highlight 3.39 for Windows doesn't support HIGHLIGHT_DATADIR
-       env var to override the location where to look for lang def files.
-       Untill the feature becomes available in Highlight for Win too, we'll be
-       resorting to the `--config-file=<file>` option (via the `!_conF` macro)
-       and HL_LANGS env var to enforce usage of custom language definitions.
-       For more details, see issue #24: 
-       -- https://github.com/andre-simon/highlight/issues/24:
+  -- HIGHLIGHT_DATADIR env var must point to custom Highight data folder (to
+     allow overriding Highlight's default langdefs, themes, and plugins with
+     custom versions of the same files, or to simply add new langs, themes and
+     plugins locally).
 ------------------------------------------------------------------------------
 (c) Tristano Ajmone 2017, MIT License.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,22 +64,6 @@ DECRIPTION: The default text for the title attribute of <code> & <pre> tags,
 !define(   _TitlePB     )(PureBASIC source code)
 !define(   _TitleFasm   )(Flat Assembler (Fasm) source code)
 !comment `````````````````````````````````` ``````````````````````````````````
-
-
-
-
-!comment(   _conF   )
-``````````````````````````````````````````````````````````````````````````````
-DECRIPTION: Sets Highlight `--config-file=<file>` option to use a custom
-            lang definition file. Requires that HL_LANGS env var is set to
-            the full absolute path where the lang defs files reside (HL_LANGS
-            is set by Butler).
-NOTES: This is a temporary solution until Highlight for Windows will support
-       the use of HIGHLIGHT_DATADIR env var override (see opening NOTES).
-``````````````````````````````````````````````````````````````````````````````
-!define(   _conF    )(--config-file="!env[HL_LANGS]\1.lang")
-!comment `````````````````````````````````` ``````````````````````````````````
-
 
 
 
@@ -126,10 +104,9 @@ NOTES: To disable Shell expansion of the sourcecode block (and errors when
 ``````````````````````````````````````````````````````````````````````````````
 !define(   Highlight   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 <pre class="!ifdef(3)(\1 \3)(\1)"!ifdef[4]~~~ title="\4"~~~><code class="!ifdef(3)(\1 \3)(\1)"!ifdef[4]~~~ title="\4"~~~>\sh
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-cat <<'EOF' | highlight -f -S \1 --no-trailing-nl --validate-input \2
+cat <<'EOF' | highlight -f -S \1 --no-trailing-nl --validate-input --data-dir=$HIGHLIGHT_DATADIR \2
 \5
 EOF
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
@@ -204,7 +181,7 @@ USAGE:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <pre class="!ifdef(4)(\2 \4)(\2)"!ifdef[5]~~~ title="\5"~~~><code class="!ifdef(4)(\2 \4)(\2)"!ifdef[5]~~~ title="\5"~~~>!exec
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-highlight -f -S \2 --no-trailing-nl --validate-input \3 -i \1
+highlight -f -S \2 --no-trailing-nl --validate-input --data-dir=$HIGHLIGHT_DATADIR \3 -i \1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -250,7 +227,7 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   PureBasic   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Highlight(purebasic)(!_conF[purebasic])()(!_TitlePB)(\1)
+!Highlight(purebasic)()()(!_TitlePB)(\1)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -273,7 +250,7 @@ USAGE:
 !define(   PureBasicLN   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Highlight(purebasic)(
--l !ifdef[1][-m \1] !ifdef[2][-j \2] !_conF[purebasic]
+-l !ifdef[1][-m \1] !ifdef[2][-j \2]
 )()(!_TitlePB)(\3)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -295,7 +272,7 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   PureBasicSmall   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!HighlightSmall(purebasic)(!_conF[purebasic])()(!_TitlePB)(\1)
+!HighlightSmall(purebasic)()()(!_TitlePB)(\1)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -316,7 +293,7 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   PureBasicEX   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Highlight(purebasic)(!_conF[purebasic] \1)(\2)(!ifne[\3][][\3][!_TitlePB])(\4)
+!Highlight(purebasic)(\1)(\2)(!ifne[\3][][\3][!_TitlePB])(\4)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -338,7 +315,7 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   PureBasicFile   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!HighlightFile(\1)(purebasic)(!_conF[purebasic] \2)(\3)(!ifne[\4][][\4][!_TitlePB])
+!HighlightFile(\1)(purebasic)(\2)(\3)(!ifne[\4][][\4][!_TitlePB])
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -371,7 +348,7 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   Fasm   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Highlight(fasm)(!_conF[fasm])()(!_TitleFasm)(\1)
+!Highlight(fasm)()()(!_TitleFasm)(\1)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -393,7 +370,7 @@ USAGE:
 !define(   FasmLN   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Highlight(fasm)(
--l !ifdef[1][-m \1] !ifdef[2][-j \2] !_conF[fasm]
+-l !ifdef[1][-m \1] !ifdef[2][-j \2]
 )()(!_TitleFasm)(\3)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -415,7 +392,7 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   FasmSmall   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!HighlightSmall(fasm)(!_conF[fasm])()(!_TitleFasm)(\1)
+!HighlightSmall(fasm)()()(!_TitleFasm)(\1)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -433,5 +410,5 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   FasmFile   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!HighlightFile(\1)(fasm)(!_conF[fasm])()(!_TitleFasm)
+!HighlightFile(\1)(fasm)()()(!_TitleFasm)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -231,17 +231,15 @@ Module ini
       ; ------------------------------------------------------------------------------
       ; The env var HIGHLIGHT_DATADIR overrides Highlight's default path for "langDefs"
       ; and "themes" definitions folders.
-      ; NOTE: Currently Highlight (3.39) for Windows doesn't support the HIGHLIGHT_DATADIR override.
-      ;       Untill implemented, we'll set the HL_LANGS env var and in the macros use
-      ;       the `--config-file=<file>` option instead. See issue #24: 
+      ; NOTE: With Highlight 3.40 still doesn't work, but now the `--data-dir` option 
+      ;       works, which is much better then the `--config-file` option used before.
+      ;       So I've now changed the macros to use --data-dir=$HIGHLIGHT_DATADIR
+      ; NOTE: On Windows supported only with Highlight >= 3.40. See issue #24: 
       ;       -- https://github.com/andre-simon/highlight/issues/24
-      HL_DATADIR$ = Butler\Path$ + "highlight-langs" + FS::#DIR_SEP$
-      
-      SetEnvironmentVariable("HL_LANGS", HL_DATADIR$)
-      ;       SetEnvironmentVariable("HIGHLIGHT_DATADIR", Butler\Path$ + "highlight-data" + FS::#DIR_SEP$) ; <= For future use!
+      HL_DATADIR$ = Butler\Path$ + "highlight-data" + FS::#DIR_SEP$
+      SetEnvironmentVariable("HIGHLIGHT_DATADIR", HL_DATADIR$)
       ; DEBUG IT:
-      HL_DATADIR$ = GetEnvironmentVariable("HL_LANGS")
-      PrintN("~ HL_LANGS: " + HL_DATADIR$) ; DBG
+      PrintN("~ HIGHLIGHT_DATADIR: " + GetEnvironmentVariable("HIGHLIGHT_DATADIR")) ; DBG
       
       ; ------------------------------------------------------------------------------
       ;                  Check "butler.ini" (Proj. Preferences File)                  

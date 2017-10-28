@@ -56,6 +56,17 @@ GFM-TaskList.pp
 Highlight.pp
 ============
 
+**`v0.2` (2017-10-28)**
+
+Newly released Highlight v3.40 now supports the `--data-dir` option override for Windows (see [Issue \#24](https://github.com/andre-simon/highlight/issues/24)):
+
+-   Removed hacks that used the `HL_LANGS` env var and `--config-file=<file>` option, and `!_conF` macro to override langdefs on a one-by-one basis.
+-   Implement `--data-dir=$HIGHLIGHT_DATADIR` option on Highlight invocations.
+
+Now langdefs are moved to `/_butler_/highlight-data/langDefs/` folder. Any langdef placed in this folder will take precedence over its counterpart in Highlight’s setup folder!
+
+Highlight v3.40 was supposed to allow using the `HIGHLIGHT_DATADIR` env var on Windows, without the need of the (deprecated) `--data-dir` option. Somehow I haven’t managed to make it work, so for now I’ll be using both the `HIGHLIGHT_DATADIR` env var and the `--data-dir` option.
+
 **`v0.1` (2017-10-20)**
 
 -   First Alpha Release.
