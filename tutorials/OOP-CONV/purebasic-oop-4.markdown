@@ -1,11 +1,14 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 4\. Interface Instruction
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       4\. Interface Instruction
+meta-title:     PureBasic OOP (4) Interface Instruction
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (4/9) — A closer look at the Interface instruction
+    and how to implement object classes and initialization via method tables
+    and procedure pointers.
+keywords:       PureBasic, OOP, object-oriented, programming, method table,
+                pointers, interface, tutorial, example
 baseliner: true
 ...
 
@@ -23,9 +26,9 @@ http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Inter
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][Fix links]
+!Task[x][Fix Ordered Lists (`. text`)]
+!Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][Fix links: NONE]
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,13 +160,13 @@ Object\Procedure2(30, 40)
 
 the `Object`’s `Procedure2()` function is called — i.e., `My_Procedure2()`.
 
-!Alert
+!AlertWarn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 When declaring elements of an `Interface`, it’s essential to initialize them before using their procedures. Therefore, it is strongly advisable to initialize elements at declaration time.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!Alert
+!AlertWarn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !anchor(admonition-on-structure-interface-symmetry)
 The **method table**’s `Structure` must reflect exactly the composition of its correlated `Interface`.
@@ -182,9 +185,3 @@ And its benefits are:
 
 * an object-oriented notation
 * an easy way to rename procedures
-
-!comment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                         REFERENCE LINKS DEFINITIONS                          
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-

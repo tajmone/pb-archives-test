@@ -1,11 +1,15 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 5\. Second Implementation
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       5\. Second Implementation
+meta-title:     PureBasic OOP (5) 
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (5/9) — Second implementation of Object-Oriented
+    paradigm in PureBasic: Object Instanciation, Constructor, Initialization,
+    Destructor, Inheritance, Get() and Set() object methods.
+keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
+                instanciation, initialization, constructor, destructor,
+                inheritance
 baseliner: true
 ...
 
@@ -23,9 +27,14 @@ http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Imple
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][Fix links]
+!Task[x][Fix Ordered Lists (`. text`)]
+!Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][Fix links (reference style):]
+~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][see previous remark]
+!Task[x][see previous note]
+!Task[x][See the Appendix]
+~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -177,7 +186,7 @@ Therefore, we have ascertained that:
 Thus the `Interface` instruction and the `New_Rect()` function perform the instanciation of a `Rect` object from the `Rectangle2` Class.
 The `New_Rect()` function is the *Constructor* for objects of the `Rectangle2` Class.
 
-!Alert
+!AlertWarn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 All the Methods implementations (`Procedure : EndProcedure` blocks) must contain, as first argument, the `*this` pointer of the object. On the other hand, the `*this` argument mustn’t appear at the `Interface` level. In fact, as this instruction allows to write `Rect\Draw()`, it knows that the `Draw()` method involves the `Rect` object: no ambiguity! Everything happens as if the object `Rect` was «aware» of its state.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -197,7 +206,7 @@ We’ve seen that after allocating the required memory area for an object, the C
 This operation can be isolated in a specific procedure, called by the Constructor.
 This precaution allows to make a distinction between an object’s memory allocation and its initialization. This approach will turn out to be very useful later on, when implementing the concept of Inheritance, because a single memory allocation is sufficient, but several initializations are required.
 
-In addition, initialization of methods and attributes are separated too — because the methods implementation depends on the class, while the attributes initialization depends on the object itself (see [previous remark](#admonition-constructor-parameters)).
+In addition, initialization of methods and attributes are separated too — because the methods implementation depends on the class, while the attributes initialization depends on the object itself (see [previous remark]).
 
 In our example, the two initialization procedures will be implemented as:
 
@@ -263,13 +272,13 @@ Free_Rect(Rect2)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!Alert
+!AlertNote
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The Destructor could be seen as a method of the object. But to avoid weighing down the object, and to preserve homogeneity with the Constructor, I have chosen to see it as a function of the Class.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!AlertWarn
+!Alert
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 To delete an object by its Destructor means releasing the memory area containing its information (the methods it uses, and the state of its attributes) but not deleting the object’s infrastructure.
 So, in our example, after doing a:
@@ -304,7 +313,7 @@ the life cycle of object `Rect2` follows the same rules that apply to variables 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!Alert
+!AlertNote
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Small reminder: the life cycle of a variable is linked to the life cycle of the program part where the variable is declared:
 
@@ -614,7 +623,7 @@ EndStructure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Remember that a correct interface initialization requires that this successsion of functions addresses appears in the same order within its `Interface` ([see previous note](#admonition-on-structure-interface-symmetry)).
+Remember that a correct interface initialization requires that this successsion of functions addresses appears in the same order within its `Interface` ([see previous note]).
 
 To solve this problem, we’ll just group all the methods into a specific `Structure`!
 The Class’s `Structure` will need just a pointer to this new `Structure`, as shown in the following example:
@@ -829,7 +838,7 @@ Since `Get()` and `Set()` methods exist only to allow the user to modify all (or
 
 !Alert
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-See the [Appendix](#appendix) of the tutorial for possible optimizations of `Get()`’s and `Set()`’s performance during execution.
+See the [Appendix] of the tutorial for possible optimizations of `Get()`’s and `Set()`’s performance during execution.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -838,3 +847,8 @@ See the [Appendix](#appendix) of the tutorial for possible optimizations of `Get
                          REFERENCE LINKS DEFINITIONS                          
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+[previous remark]: #admonition-constructor-parameters
+
+[see previous note]: purebasic-oop-4.html#admonition-on-structure-interface-symmetry
+
+[Appendix]: purebasic-oop-9.html

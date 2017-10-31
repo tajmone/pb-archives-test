@@ -3,9 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>PureBasic and Object-Oriented Programming</title>
+		<title>PureBasic OOP (3) First Implementation</title>
 		<meta name="generator" content="pandoc">
+		<meta name="description" content="PureBASIC OOP Tutorial (3/9) — First implementation of Object-Oriented paradigm in PureBasic: Concrete and Abstract classes, Instanciation, Encapsulation, Inheritance and Overloading.">
 		<meta name="author" content="Dräc">
+		<meta name="keywords" content="PureBasic, OOP, object-oriented, programming, tutorial, abstract classes, instanciation, encapsulation, inheritance, overloading">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -47,10 +49,15 @@
 <input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+<input type="checkbox" disabled=""checked=""> Add metadata (description, keywords, ecc)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix links
+<input type="checkbox" disabled=""checked=""> Fix links (reference style):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> (Second Implementation section)
+</li>
+</ul>
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
@@ -104,7 +111,7 @@ Rect1\y2 <span class="hl opt">=</span> <span class="hl num">20</span></code></pr
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">CallFunctionFast</span>(Rect1\Draw, &#64;Rect1)</code></pre>
 <h1 id="encapsulation">Encapsulation</h1>
 <p>In this implementation, encapsulation doesn’t exist, simply because there is no way to hide the attributes or the methods of such an object.</p>
-<p>By writing <code>Rect1\x1</code>, the user can access the <code>x1</code> attribute of the object. This is the way we used to initialize the object. The next implementation (&lt;<Second Implementation>&gt; section) will show how to fix this. Although significant, this feature is not essential in implementing OOP.</p>
+<p>By writing <code>Rect1\x1</code>, the user can access the <code>x1</code> attribute of the object. This is the way we used to initialize the object. The next implementation (<a href="purebasic-oop-5.html">Second Implementation</a> section) will show how to fix this. Although significant, this feature is not essential in implementing OOP.</p>
 <h1 id="inheritance">Inheritance</h1>
 <p>Now I want to create a new Class with the capability to Erase rectangles from the screen. I can implement this new <code>Rectangle2</code> Class by using the existing <code>Rectangle</code> Class and by providing it with a new method called <code>Erase()</code>.</p>
 <p>A Class being a <code>Structure</code>, let’s take advantage of the extension property of structures. So, the new Class <code>Rectangle2</code> could be:</p>

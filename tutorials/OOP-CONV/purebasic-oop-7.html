@@ -50,7 +50,35 @@
 <input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix links
+<input type="checkbox" disabled=""checked=""> Fix links (internal, using Header identifiers):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> I can’t wait!
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Show me now!
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> What?! I don’t remember!
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> Fix links (reference style):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> previous inheritance example
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> no, now!
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> presented in the Appendix
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> explained here
+</li>
+</ul>
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
@@ -111,7 +139,7 @@ EndFree</code></pre>
 <li>Destruction of the object via the <code>Free : EndFree</code> block.</li>
 </ul>
 <h1 id="second-code-example">Second Code-Example</h1>
-<p>Here is a header file cotaining the definition of this set of commands, along with a usage-example file (based on the [previous inheritance example][First Code-Example], so that you might compare them):</p>
+<p>Here is a header file cotaining the definition of this set of commands, along with a usage-example file (based on the <a href="purebasic-oop-6.html#first%20code-example">previous inheritance example</a>, so that you might compare them):</p>
 <ul>
 <li><a href="./OOP.pbi"><code>OOP.pbi</code></a></li>
 <li><a href="./OOP-Inheritance-Ex2.pb"><code>OOP-Inheritance-Ex2.pb</code></a></li>
@@ -194,7 +222,7 @@ EndFree</code></pre>
 <li>The first is a pointer typed by the interface which allows to call the object’s methods.</li>
 <li>The second is a pointer typed by the structure defining members. It helps accessing the object’s members.</li>
 </ol>
-<p>This design puts into practice the optimizations for <code>Get()</code> and <code>Set()</code> methods presented in the <a href="#optimisation-get-and-set-methods">Appendix</a>. The benefit of this choice is twofold:</p>
+<p>This design puts into practice the optimizations for <code>Get()</code> and <code>Set()</code> methods presented in the <a href="purebasic-oop-9.html">Appendix</a>. The benefit of this choice is twofold:</p>
 <ul>
 <li>It provides a seamless approach for reaching an object’s methods and members.</li>
 <li><p>To reach a method, write:</p></li>

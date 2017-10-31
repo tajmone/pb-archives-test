@@ -1,11 +1,13 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 6\. Synthesis and Notation
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       6\. Synthesis and Notation
+meta-title:     PureBasic OOP (6) Synthesis and Notation
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (6/9) — Synthetic resume, in formal notation,
+    on how to implement object classes and methods in PureBasic.
+keywords:       PureBasic, OOP, object-oriented, programming, reference,
+                implementation
 baseliner: true
 ...
 
@@ -23,9 +25,10 @@ http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Synth
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][Fix links]
+!Task[x][Fix Ordered Lists (`. text`)]
+!Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][Fix links: NONE]
+!Task[ ][Fix PB Source File links?]
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -130,15 +133,11 @@ EndProcedure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+!anchor(first code-example)
 !FakeH3(First Code-Example)
 
 
 Here is an example file of inheritance in action:
 
 * [`OOP-Inheritance-Ex1.pb`](./OOP-Inheritance-Ex1.pb)
-
-!comment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                         REFERENCE LINKS DEFINITIONS                          
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

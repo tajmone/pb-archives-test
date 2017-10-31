@@ -3,9 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>PureBasic OOP: Object Concepts</title>
+		<title>PureBasic OOP (2) Object Concepts</title>
 		<meta name="generator" content="pandoc">
+		<meta name="description" content="PureBASIC OOP Tutorial (2/9) — Analysis of the Object-Oriented Programming paradigm, its concepts and features.">
 		<meta name="author" content="Dräc">
+		<meta name="keywords" content="OOP, object-oriented, programming, paradigm, concepts">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -36,21 +38,26 @@
 					<p class="subtitle">2. Object Concepts</p>
 
 <div class="alert-messages">
-<div class="alert alert-warn">
-<h2 id="status-wip">STATUS: WIP</h2>
+<div class="alert alert-success">
+<h2 id="status-checked">STATUS: CHECKED</h2>
 <ul>
 <li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_ConceptObjet_en.htm">WWW ORIGINAL</a></li>
 </ul>
 <p><strong>TODOs LIST</strong>:</p>
 <ul class="task-list">
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+<input type="checkbox" disabled=""checked=""> Wrap <strong>Terminlogy</strong> in <code>Alert</code>
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+<input type="checkbox" disabled=""checked=""> Add metadata (description, keywords, ecc)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix links
+<input type="checkbox" disabled=""checked=""> Fix links (internal, using Header identifiers):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> … allow defining <a href="#the-notion-of-class">Object Classes</a>
+</li>
+</ul>
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
@@ -103,13 +110,15 @@
 <li><strong>Multiple inheritance</strong>: the new Class is defined from several existing Classes.</li>
 </ul>
 <p>Multiple inheritance is complex to implement, and it will not be covered here. Thus, this papers deals only with simple inheritance.</p>
-<p class="FakeH3">
-Terminology:
-</p>
+<div class="alert-messages">
+<div class="alert">
+<h3 id="terminology">Terminology:</h3>
 <ul>
 <li>The Class which inherits from another Class, is usually called <strong>Child Class</strong>.</li>
 <li>The Class which gives its inheritance to a Child Class is usually called <strong>Parent Class</strong>.</li>
 </ul>
+</div>
+</div>
 <h1 id="overloading">Overloading</h1>
 <p>A method is overloaded if it carries out different actions according to the nature of the target objects.</p>
 <p>Let us take an example:</p>
@@ -120,7 +129,7 @@ Terminology:
 <p>Instead of overloaded methods, we can also speak of polymorphic methods (having several forms).</p>
 <h1 id="the-notion-of-abstract-class">The Notion of Abstract Class</h1>
 <p>As we’ve seen, a Class includes the definition of both attributes and methods of an object. Let us suppose that we can’t provide the implementation of one of the Class methods. This method is just a name without code. We’re then speaking of an «<strong>abstract method</strong>». A Class containing at least one abstract method qualifies as an «<strong>abstract Class</strong>».</p>
-<p>You might wonder why an abstract class should exist at all, since objects of such a Class can’t be created. Abstract Classes allow defining &lt;<The Notion of Class,Object Classes>&gt;, which are considered — by opposition — as being «concrete». The transition from the former to the latter occurs through inheritance, where the concrete Class takes care of providing the missing implementations to the abstract methods inherited.</p>
+<p>You might wonder why an abstract class should exist at all, since objects of such a Class can’t be created. Abstract Classes allow defining <a href="#the-notion-of-class">Object Classes</a>, which are considered — by opposition — as being «concrete». The transition from the former to the latter occurs through inheritance, where the concrete Class takes care of providing the missing implementations to the abstract methods inherited.</p>
 <p>Thus, abstract Classes are a kind of interface, because they describe the generic specification of all the Classes which inherit from them.</p>
 				</div><!-- end document -->
 				<div id="sidebar">

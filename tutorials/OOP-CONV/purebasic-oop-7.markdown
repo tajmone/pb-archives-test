@@ -25,7 +25,19 @@ __TODOs LIST__:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[ ][Fix Ordered Lists (`. text`)]
 !Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][Fix links]
+!Task[x][Fix links (internal, using Header identifiers):]
+~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][I can’t wait!]
+!Task[x][Show me now!]
+!Task[x][What?! I don’t remember!]
+~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][Fix links (reference style):]
+~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][previous inheritance example]
+!Task[x][no, now!]
+!Task[x][presented in the Appendix]
+!Task[x][explained here]
+~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Add `subtitle` and fix header levels]
 !Task[ ][__Headers Levels__ need fixing! (h1 > h3)]
 !Task[x][Fix subtitle casing]
@@ -123,7 +135,7 @@ As shown, a PureBasic Class revolves around four main themes:
 
 # Second Code-Example
 
-Here is a header file cotaining the definition of this set of commands, along with a usage-example file (based on the [previous inheritance example][First Code-Example], so that you might compare them):
+Here is a header file cotaining the definition of this set of commands, along with a usage-example file (based on the [previous inheritance example], so that you might compare them):
 
 * [`OOP.pbi`](./OOP.pbi)
 * [`OOP-Inheritance-Ex2.pb`](./OOP-Inheritance-Ex2.pb)
@@ -225,10 +237,10 @@ EndMacro
 
 The keyword `Members` is more complicated than the two previous ones.
 
-It begins by closing the `Structure` definition previously opened by `Methods`. Then it declares the **method table**, using the freshly-built structure (as its type). For the moment this table is empty; it will be filled up a the end of `Method : EndMethod` statement. I’ll be discussing this further on ([I can’t wait!](#endmethod-keyword)).
+It begins by closing the `Structure` definition previously opened by `Methods`. Then it declares the **method table**, using the freshly-built structure (as its type). For the moment this table is empty; it will be filled up a the end of `Method : EndMethod` statement. I’ll be discussing this further on ([I can’t wait!][EndMethod keyword]).
 
 Finally `Members` ends by opening the `Structure` declaration which defines the object’s members. In first position — as expected — we find the pointer to the *method table* (i.e.: to the variable just mentioned above). Its assignment will be done later, by the Constructor.
-Then follows another pointer, which will contain the address of the object itself. I shall explain later the reasons for this new member ([no, now!](#admonition-on-object-being-a-pointer)).
+Then follows another pointer, which will contain the address of the object itself. I shall explain later the reasons for this new member ([no, now!]).
 
 !comment( TODO: SENTENCE BELOW NEEDS CHECKING )
 
@@ -273,7 +285,7 @@ This `Structure` is in fact the union of two elements:
 1.  The first is a pointer typed by the interface which allows to call the object’s methods.
 2.  The second is a pointer typed by the structure defining members. It helps accessing the object’s members.
 
-This design puts into practice the optimizations for `Get()` and `Set()` methods presented in the [Appendix](#optimisation-get-and-set-methods). The benefit of this choice is twofold:
+This design puts into practice the optimizations for `Get()` and `Set()` methods presented in the [Appendix]. The benefit of this choice is twofold:
 
 *   It provides a seamless approach for reaching an object’s methods and members.
 +
@@ -469,7 +481,7 @@ Then follows initialization of the object’s attributes via the `Init_Mbers` me
 
 Finally, `New` returns the object’s address.
 
-The trick in the `New` macro is that it ends with the `Init_Mbers` keyword. This way, what the user has to add inside the `New : EndNew` block is simply the attributes initialization. More on that in a moment though ([ Show me now!](#init_mbers-endinit_mbers-private-block)).
+The trick in the `New` macro is that it ends with the `Init_Mbers` keyword. This way, what the user has to add inside the `New : EndNew` block is simply the attributes initialization. More on that in a moment though ([Show me now!][Init_Mbers : EndInit_Mbers private block]).
 
 This arrangement is made possible by declaring the `Init_Mbers` method first in the macro.
 
@@ -529,7 +541,7 @@ Note that the constructor name is `New` followed by the Class’ name separated 
 !AlertNote
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !anchor(admonition-on-object-being-a-pointer)
-In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members ([What?! I don’t remember!](#endclass-keyword)).
+In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members ([What?! I don’t remember!][EndClass keyword]).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -782,7 +794,7 @@ Here is a list of the types used by a Class:
 
 !AlertWarn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!fa(warning) The `Mbrs_<ClassName>_` type wasn’t presented in this paper. It is an intermediate step used to build the `Mbrs_<ClassName>` structure of the members definition. This arrangement is required to achieve the `*this\Instance` feature [explained here](#admonition-about-this-instance).
+!fa(warning) The `Mbrs_<ClassName>_` type wasn’t presented in this paper. It is an intermediate step used to build the `Mbrs_<ClassName>` structure of the members definition. This arrangement is required to achieve the `*this\Instance` feature [explained here].
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -791,3 +803,10 @@ Here is a list of the types used by a Class:
                          REFERENCE LINKS DEFINITIONS                          
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+[previous inheritance example]: purebasic-oop-6.html#first code-example
+
+[no, now!]: #admonition-on-object-being-a-pointer
+
+[Appendix]: purebasic-oop-9.html
+
+[explained here]: #admonition-about-this-instance

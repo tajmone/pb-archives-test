@@ -25,7 +25,7 @@ __TODOs LIST__:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[ ][Fix Ordered Lists (`. text`)]
 !Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][Fix links]
+!Task[x][Fix links: NONE]
 !Task[ ][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

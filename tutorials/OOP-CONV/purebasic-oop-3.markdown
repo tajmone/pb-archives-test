@@ -1,11 +1,15 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 3\. First Implementation of the Concepts
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       3\. First Implementation of the Concepts
+meta-title:     PureBasic OOP (3) First Implementation
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (3/9) — First implementation of Object-Oriented
+    paradigm in PureBasic: Concrete and Abstract classes, Instanciation,
+    Encapsulation, Inheritance and Overloading.
+keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
+                abstract classes, instanciation, encapsulation, inheritance,
+                overloading
 baseliner: true
 ...
 
@@ -24,8 +28,11 @@ __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][Fix links]
+!Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][Fix links (reference style):]
+~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][(Second Implementation section)]
+~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -139,7 +146,7 @@ CallFunctionFast(Rect1\Draw, @Rect1)
 In this implementation, encapsulation doesn’t exist, simply because there is no way to hide the attributes or the methods of such an object.
 
 By writing `Rect1\x1`, the user can access the `x1` attribute of the object. This is the way we used to initialize the object.
-The next implementation (<<Second Implementation>> section) will show how to fix this.
+The next implementation ([Second Implementation] section) will show how to fix this.
 Although significant, this feature is not essential in implementing OOP.
 
 # Inheritance
@@ -268,4 +275,6 @@ We mainly just lay the foundations upon which we shall implement a more complete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                          REFERENCE LINKS DEFINITIONS                          
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[Second Implementation]: purebasic-oop-5.html
 

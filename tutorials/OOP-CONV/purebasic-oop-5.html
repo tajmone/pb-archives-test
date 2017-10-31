@@ -3,9 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>PureBasic and Object-Oriented Programming</title>
+		<title>PureBasic OOP (5)</title>
 		<meta name="generator" content="pandoc">
+		<meta name="description" content="PureBASIC OOP Tutorial (5/9) — Second implementation of Object-Oriented paradigm in PureBasic: Object Instanciation, Constructor, Initialization, Destructor, Inheritance, Get() and Set() object methods.">
 		<meta name="author" content="Dräc">
+		<meta name="keywords" content="PureBasic, OOP, object-oriented, programming, tutorial, instanciation, initialization, constructor, destructor, inheritance">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -44,13 +46,24 @@
 <p><strong>TODOs LIST</strong>:</p>
 <ul class="task-list">
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+<input type="checkbox" disabled=""checked=""> Fix Ordered Lists (<code>. text</code>)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+<input type="checkbox" disabled=""checked=""> Add metadata (description, keywords, ecc)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix links
+<input type="checkbox" disabled=""checked=""> Fix links (reference style):
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> see previous remark
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> see previous note
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> See the Appendix
+</li>
+</ul>
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
@@ -132,7 +145,7 @@ Rect\<span class="hl kwc">Erase</span>()</code></pre>
 </ul>
 <p>Thus the <code>Interface</code> instruction and the <code>New_Rect()</code> function perform the instanciation of a <code>Rect</code> object from the <code>Rectangle2</code> Class. The <code>New_Rect()</code> function is the <em>Constructor</em> for objects of the <code>Rectangle2</code> Class.</p>
 <div class="alert-messages">
-<div class="alert">
+<div class="alert alert-warn">
 <p>All the Methods implementations (<code>Procedure : EndProcedure</code> blocks) must contain, as first argument, the <code>*this</code> pointer of the object. On the other hand, the <code>*this</code> argument mustn’t appear at the <code>Interface</code> level. In fact, as this instruction allows to write <code>Rect\Draw()</code>, it knows that the <code>Draw()</code> method involves the <code>Rect</code> object: no ambiguity! Everything happens as if the object <code>Rect</code> was «aware» of its state.</p>
 </div>
 </div>
@@ -172,12 +185,12 @@ Rect\<span class="hl kwc">Erase</span>()</code></pre>
 <p>and can be used by:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect</span>(Rect2)</code></pre>
 <div class="alert-messages">
-<div class="alert">
+<div class="alert alert-note">
 <p>The Destructor could be seen as a method of the object. But to avoid weighing down the object, and to preserve homogeneity with the Constructor, I have chosen to see it as a function of the Class.</p>
 </div>
 </div>
 <div class="alert-messages">
-<div class="alert alert-warn">
+<div class="alert">
 <p>To delete an object by its Destructor means releasing the memory area containing its information (the methods it uses, and the state of its attributes) but not deleting the object’s infrastructure. So, in our example, after doing a:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect</span>(Rect2)</code></pre>
 <p><code>Rect2</code> can be reused without specify its type again:</p>
@@ -189,7 +202,7 @@ Rect2\<span class="hl kwc">Draw</span>()</code></pre>
 </div>
 </div>
 <div class="alert-messages">
-<div class="alert">
+<div class="alert alert-note">
 <p>Small reminder: the life cycle of a variable is linked to the life cycle of the program part where the variable is declared:</p>
 <ul>
 <li>If the variable is declared inside a procedure, its life cycle will be linked to that of the procedure — i.e., it’s equal to the function’s time of use.</li>
@@ -372,7 +385,7 @@ Constructor
   y1.l
   y2.l
 <span class="hl kwa">EndStructure</span></code></pre>
-<p>Remember that a correct interface initialization requires that this successsion of functions addresses appears in the same order within its <code>Interface</code> (<a href="#admonition-on-structure-interface-symmetry">see previous note</a>).</p>
+<p>Remember that a correct interface initialization requires that this successsion of functions addresses appears in the same order within its <code>Interface</code> (<a href="purebasic-oop-4.html#admonition-on-structure-interface-symmetry">see previous note</a>).</p>
 <p>To solve this problem, we’ll just group all the methods into a specific <code>Structure</code>! The Class’s <code>Structure</code> will need just a pointer to this new <code>Structure</code>, as shown in the following example:</p>
 <p class="caption">
 Interface
@@ -504,7 +517,7 @@ Constructor
 <p>Since <code>Get()</code> and <code>Set()</code> methods exist only to allow the user to modify all (or some) of the object’s attributes, they necessarily belong to the <code>Interface</code>.</p>
 <div class="alert-messages">
 <div class="alert">
-<p>See the <a href="#appendix">Appendix</a> of the tutorial for possible optimizations of <code>Get()</code>’s and <code>Set()</code>’s performance during execution.</p>
+<p>See the <a href="purebasic-oop-9.html">Appendix</a> of the tutorial for possible optimizations of <code>Get()</code>’s and <code>Set()</code>’s performance during execution.</p>
 </div>
 </div>
 				</div><!-- end document -->

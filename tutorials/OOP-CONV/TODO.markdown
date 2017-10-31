@@ -147,12 +147,12 @@ ORIGINAL TUTORIALS LINKS
 LOCAL TUTORIALS LINKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[OOP 1]: OOP-EN-01.html
-[OOP 2]: OOP-EN-02.html
-[OOP 3]: OOP-EN-03.html
-[OOP 4]: OOP-EN-04.html
-[OOP 5]: OOP-EN-05.html
-[OOP 6]: OOP-EN-06.html
-[OOP 7]: OOP-EN-07.html
-[OOP 8]: OOP-EN-08.html
-[OOP 9]: OOP-EN-09.html
+[OOP 1]: ./purebasic-oop-1.html
+[OOP 2]: ./purebasic-oop-2.html
+[OOP 3]: ./purebasic-oop-3.html
+[OOP 4]: ./purebasic-oop-4.html
+[OOP 5]: ./purebasic-oop-5.html
+[OOP 6]: ./purebasic-oop-6.html
+[OOP 7]: ./purebasic-oop-7.html
+[OOP 8]: ./purebasic-oop-8.html
+[OOP 9]: ./purebasic-oop-9.html

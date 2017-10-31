@@ -3,9 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>PureBasic and Object-Oriented Programming</title>
+		<title>PureBasic OOP (4) Interface Instruction</title>
 		<meta name="generator" content="pandoc">
+		<meta name="description" content="PureBASIC OOP Tutorial (4/9) — A closer look at the Interface instruction and how to implement object classes and initialization via method tables and procedure pointers.">
 		<meta name="author" content="Dräc">
+		<meta name="keywords" content="PureBasic, OOP, object-oriented, programming, method table, pointers, interface, tutorial, example">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -44,13 +46,13 @@
 <p><strong>TODOs LIST</strong>:</p>
 <ul class="task-list">
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+<input type="checkbox" disabled=""checked=""> Fix Ordered Lists (<code>. text</code>)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+<input type="checkbox" disabled=""checked=""> Add metadata (description, keywords, ecc)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix links
+<input type="checkbox" disabled=""checked=""> Fix links: NONE
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
@@ -111,12 +113,12 @@ Methods\Procedure2 <span class="hl opt">=</span> &#64;<span class="hl kwc">My_Pr
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Object\<span class="hl kwc">Procedure2</span>(<span class="hl num">30</span>, <span class="hl num">40</span>)</code></pre>
 <p>the <code>Object</code>’s <code>Procedure2()</code> function is called — i.e., <code>My_Procedure2()</code>.</p>
 <div class="alert-messages">
-<div class="alert">
+<div class="alert alert-warn">
 <p>When declaring elements of an <code>Interface</code>, it’s essential to initialize them before using their procedures. Therefore, it is strongly advisable to initialize elements at declaration time.</p>
 </div>
 </div>
 <div class="alert-messages">
-<div class="alert">
+<div class="alert alert-warn">
 <p><span id="admonition-on-structure-interface-symmetry"></span> The <strong>method table</strong>’s <code>Structure</code> must reflect exactly the composition of its correlated <code>Interface</code>. It must contain the same number of fields, and preserve their order, to ensure the correct assignation of each function’s name and address. It is only under these conditions that the element will be properly initialized.</p>
 </div>
 </div>

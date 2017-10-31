@@ -1,11 +1,12 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 2\. Object Concepts
-meta-title: "PureBasic OOP: Object Concepts"
+title:          PureBasic and Object-Oriented Programming
+subtitle:       2\. Object Concepts
+meta-title:     PureBasic OOP (2) Object Concepts
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (2/9) — Analysis of the Object-Oriented Programming
+    paradigm, its concepts and features. 
+keywords:       OOP, object-oriented, programming, paradigm, concepts
 baseliner: true
 ...
 
@@ -14,18 +15,21 @@ baseliner: true
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_ConceptObjet_en.htm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertWarn
+!AlertSuccess
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: WIP
+## STATUS: CHECKED
 
 - [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_ConceptObjet_en.htm)
 
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][Fix links]
+!Task[x][Wrap __Terminlogy__ in `Alert`]
+!Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][Fix links (internal, using Header identifiers):]
+~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][... allow defining [Object Classes][The Notion of Class]]
+~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,10 +114,13 @@ There are two kinds of inheritances:
 Multiple inheritance is complex to implement, and it will not be covered here.
 Thus, this papers deals only with simple inheritance.
 
-!FakeH3(Terminology:)
+!Alert
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Terminology:
 
 * The Class which inherits from another Class, is usually called **Child Class**.
 * The Class which gives its inheritance to a Child Class is usually called **Parent Class**.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Overloading
 
@@ -141,12 +148,7 @@ As we’ve seen, a Class includes the definition of both attributes and methods 
 Let us suppose that we can’t provide the implementation of one of the Class methods. This method is just a name without code. We’re then speaking of an «**abstract method**».
 A Class containing at least one abstract method qualifies as an «**abstract Class**».
 
-You might wonder why an abstract class should exist at all, since objects of such a Class can’t be created. Abstract Classes allow defining <<The Notion of Class,Object Classes>>, which are considered — by opposition — as being «concrete». The transition from the former to the latter occurs through inheritance, where the concrete Class takes care of providing the missing implementations to the abstract methods inherited.
+You might wonder why an abstract class should exist at all, since objects of such a Class can’t be created. Abstract Classes allow defining [Object Classes][The Notion of Class], which are considered — by opposition — as being «concrete». The transition from the former to the latter occurs through inheritance, where the concrete Class takes care of providing the missing implementations to the abstract methods inherited.
 
 Thus, abstract Classes are a kind of interface, because they describe the generic specification of all the Classes which inherit from them.
-
-!comment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                         REFERENCE LINKS DEFINITIONS                          
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

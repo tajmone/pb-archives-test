@@ -1,7 +1,12 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 1\. Why OOP in PureBasic?
+title:          PureBasic and Object-Oriented Programming
+subtitle:       1\. Why OOP in PureBasic?
+meta-title:     PureBasic OOP (1) Why OOP?
 author: Dräc
+description: >-
+    PureBASIC OOP Tutorial (1/9) — Introductiory remarks on implementing
+    object-oriented programming in PureBasic. 
+keywords:       PureBasic, OOP, object-oriented, programming, tutorial
 ...
 
 !comment{   ORIGINAL DOC URL   }
@@ -9,16 +14,16 @@ author: Dräc
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertWarn
+!AlertSuccess
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: WIP
+## STATUS: CHECKED
 
 - [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm)
 
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Add metadata (description, keywords, ecc)]
+!Task[x][Add metadata (description, keywords, ecc)]
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,9 +39,3 @@ Therefore, we can fully implement the OO paradigm in PureBasic, but we have to p
 Nevertheless, besides the possibility of programming in PureBasic according to the OO paradigm, implementing object-oriented concepts in PureBasic offers us the interesting chance to reveal some of the underlying mechanisms of OO languages keywords.
 
 This paper presents a programming technique that allows large projects to benefit from object oriented design. It is not intended as a course on OOP, and it assumes that the reader has good knowledge of PureBasic language.
-
-!comment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                         REFERENCE LINKS DEFINITIONS                          
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
