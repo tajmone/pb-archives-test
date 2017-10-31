@@ -3,9 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>PureBasic and Object-Oriented Programming</title>
+		<title>PureBasic OOP (7) PB Class</title>
 		<meta name="generator" content="pandoc">
+		<meta name="description" content="PureBASIC OOP Tutorial (7/9) — Implementing Classes in PureBASIC: the final source code for achieving Object-Oriented Programming, commented and explained with examples.">
 		<meta name="author" content="Dräc">
+		<meta name="keywords" content="PureBasic, OOP, object-oriented, programming, classes, implementation, example, library">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -44,10 +46,10 @@
 <p><strong>TODOs LIST</strong>:</p>
 <ul class="task-list">
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix Ordered Lists (<code>. text</code>)
+<input type="checkbox" disabled=""checked=""> Fix Ordered Lists (<code>. text</code>)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Add metadata (description, keywords, ecc)
+<input type="checkbox" disabled=""checked=""> Add metadata (description, keywords, ecc)
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Fix links (internal, using Header identifiers):
@@ -224,18 +226,12 @@ EndFree</code></pre>
 </ol>
 <p>This design puts into practice the optimizations for <code>Get()</code> and <code>Set()</code> methods presented in the <a href="purebasic-oop-9.html">Appendix</a>. The benefit of this choice is twofold:</p>
 <ul>
-<li>It provides a seamless approach for reaching an object’s methods and members.</li>
-<li><p>To reach a method, write:</p></li>
-<li></li>
-</ul>
+<li><p>It provides a seamless approach for reaching an object’s methods and members.</p>
+<p>To reach a method, write:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl opt">*</span>Rect\Md\<span class="hl kwc">Draw</span>()</code></pre>
-<ul>
-<li><p>To reach an attribute, write:</p></li>
-<li></li>
-</ul>
-<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl opt">*</span>Rect\Mb\var1</code></pre>
-<ul>
-<li>It prevents having to systematically declare an object’s <code>Get()</code> and <code>Set()</code> methods, when these are trivial. This saves time and it’s practical. At the same time, it reduces the number of objects’ methods (small optimization).</li>
+<p>To reach an attribute, write:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl opt">*</span>Rect\Mb\var1</code></pre></li>
+<li><p>It prevents having to systematically declare an object’s <code>Get()</code> and <code>Set()</code> methods, when these are trivial. This saves time and it’s practical. At the same time, it reduces the number of objects’ methods (small optimization).</p></li>
 </ul>
 <div class="alert-messages">
 <div class="alert alert-warn">
@@ -351,7 +347,7 @@ input\var2 <span class="hl opt">=</span> <span class="hl num">20</span>
 </div>
 </div>
 <div class="alert-messages">
-<div class="alert alert-warn">
+<div class="alert">
 <p><span id="admonition-about-this-instance"></span> The choice of <code>StructureUnion</code> requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here). This bivalence — which didn’t exist in the previous implementation — leads us to store information into the object itself. So, within the object’s methods you can access its members address through <code>*this</code>, and its instance’s address (method and members) through <code>*this\Instance</code>.</p>
 <p>An important feature ensues: the us of <code>*this\Instance</code> to call the object’s methods within its methods (<strong>No, I’m not drunk</strong>!). This is the best way to do it, because it hides the name of the procedure behind the method, which is an essential part of the inheritance process.</p>
 <p>For this purpose, a <code>Mtd</code> macro is present in the <a href="./OOP.pbi"><code>OOP.pbi</code></a> file.</p>
@@ -482,12 +478,8 @@ EndFree</code></pre>
 <ul>
 <li>The risk of an incorrect initialization of the object: one can forget to do it, but — more important — it’s no longer possible to automate the inheritance process: it’s up to the user to manage it!</li>
 <li>Strong class-interdependence of input parameters: as soon as the initialization method’s parameters of a parent class change, the user has to carry out this changes across all its children classes.</li>
-</ul></li>
-</ol>
-<ul>
-<li>In extreme — but it’s not advisable — we can imagine the user initializing all members, one after the other, by using mutators (setters). But members’ initialization doesn’t always boil down to mere assignment operations: it may involve more complex internal operations to reach its goal. If this is going to be repeated with each new object, it is strongly recommended to keep a dedicated method.</li>
 </ul>
-<ol start="4" type="1">
+<p>In extreme — but it’s not advisable — we can imagine the user initializing all members, one after the other, by using mutators (setters). But members’ initialization doesn’t always boil down to mere assignment operations: it may involve more complex internal operations to reach its goal. If this is going to be repeated with each new object, it is strongly recommended to keep a dedicated method.</p></li>
 <li><p>A destructor consistent with the constructor. It is not part of the interface, although it possibly could be. In this case, to free an object write <code>Objet\Md\Free()</code> instead of writing <code>Free_ClassName(object)</code>. This arrangement is easy to operate, and doesn’t alter the design of the object.</p></li>
 <li><p>I have not managed to automate the generation of the <code>method table</code>. It is important to remember why it was implemented with a <code>Structure</code>. Structures allow to create abstract classes — i.e.: classes whose methods are not implemented. It is a major notion of OOP’s concepts. Structures facilitate preserving the addresses’ order within the <em>method table</em> — whatever the implemented methods of the Class might be —, which in turn preserves the inheritance process! Using an array, a linked list, or a hash map as replacement for a Structure shall not provide this flexibility (at least I didn’t find such a solution).</p></li>
 </ol>

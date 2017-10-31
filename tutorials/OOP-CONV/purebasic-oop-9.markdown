@@ -1,11 +1,13 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: Appendix
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       9\. Appendix
+meta-title:     PureBasic OOP (9) Appendix
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (9/9) — Appendix: Considerations on how to improve
+    runtime performance of our PureBasic Object-Oriented implementation.
+keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
+                optimisations, runtime performance
 baseliner: true
 ...
 

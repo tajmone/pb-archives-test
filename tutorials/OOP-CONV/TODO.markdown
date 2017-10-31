@@ -30,13 +30,18 @@ __LOCAL — ORIGINAL__:
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Create PAGINATOR macro]
-!Task[ ][Fix Tables]
-!Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
-!Task[ ][After Splitting to multipart:]
+!Task[ ][Theme/Template:]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-  !Task[ ][Add Tutorial title to all pages, and chapter title as subtitle]
+!Task[ ][Add YAML var `title-size` for different sizes]
+!Task[ ][Add YAML var `subtitle-size` for different sizes]
+~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][Create PAGINATOR macro]
+!Task[x][Fix Tables]
+!Task[x][Fix Ordered Lists (`. text`)]
+!Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][After Splitting to multipart:]
+~~~~~~~~~~~~~~~~~~~~~~~~~
+  !Task[x][Add Tutorial title to all pages, and chapter title as subtitle]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

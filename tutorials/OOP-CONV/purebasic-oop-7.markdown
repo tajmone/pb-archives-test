@@ -1,11 +1,14 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 7\. PB Class
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       7\. PB Class
+meta-title:     PureBasic OOP (7) PB Class
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (7/9) — Implementing Classes in PureBASIC: the
+    final source code for achieving Object-Oriented Programming, commented
+    and explained with examples.
+keywords:       PureBasic, OOP, object-oriented, programming, classes,
+                implementation, example, library
 baseliner: true
 ...
 
@@ -23,8 +26,8 @@ http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Class
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
+!Task[x][Fix Ordered Lists (`. text`)]
+!Task[x][Add metadata (description, keywords, ecc)]
 !Task[x][Fix links (internal, using Header identifiers):]
 ~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][I can’t wait!]
@@ -287,26 +290,25 @@ This `Structure` is in fact the union of two elements:
 
 This design puts into practice the optimizations for `Get()` and `Set()` methods presented in the [Appendix]. The benefit of this choice is twofold:
 
-*   It provides a seamless approach for reaching an object’s methods and members.
-+
-To reach a method, write:
-!comment( Example N. 8.2-6 )
-+
+-   It provides a seamless approach for reaching an object’s methods and members.
 
-!PureBasic
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*Rect\Md\Draw()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    To reach a method, write:
 
-+
-To reach an attribute, write:
-!comment( Example N. 8.2-7 )
-+
+    !comment( Example N. 8.2-6 )
 
-!PureBasic
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*Rect\Mb\var1
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    !PureBasic
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    *Rect\Md\Draw()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    To reach an attribute, write:
+    
+    !comment( Example N. 8.2-7 )
+    
+    !PureBasic
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    *Rect\Mb\var1
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 *   It prevents having to systematically declare an object’s `Get()` and `Set()` methods, when these are trivial. This saves time and it’s practical.
@@ -545,7 +547,7 @@ In relation to what was studied up to now, the object will always be a pointer. 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!AlertWarn
+!Alert
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !anchor(admonition-about-this-instance)
 The choice of `StructureUnion` requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here).
@@ -771,10 +773,9 @@ We can envisage to split the process in two steps: step one, the user create an 
     *   The risk of an incorrect initialization of the object: one can forget to do it, but — more important — it’s no longer possible to automate the inheritance process: it’s up to the user to manage it!
     *   Strong class-interdependence of input parameters: as soon as the initialization method’s parameters of a parent class change, the user has to carry out this changes across all its children classes.
 
-+
-In extreme — but it’s not advisable — we can imagine the user initializing all members, one after the other, by using mutators (setters).
-But members’ initialization doesn’t always boil down to mere assignment operations: it may involve more complex internal operations to reach its goal.
-If this is going to be repeated with each new object, it is strongly recommended to keep a dedicated method.
+    In extreme — but it’s not advisable — we can imagine the user initializing all members, one after the other, by using mutators (setters).
+    But members’ initialization doesn’t always boil down to mere assignment operations: it may involve more complex internal operations to reach its goal.
+    If this is going to be repeated with each new object, it is strongly recommended to keep a dedicated method.
 
 4.  A destructor consistent with the constructor. It is not part of the interface, although it possibly could be. In this case, to free an object write `Objet\Md\Free()` instead of writing `Free_ClassName(object)`. This arrangement is easy to operate, and doesn’t alter the design of the object.
 

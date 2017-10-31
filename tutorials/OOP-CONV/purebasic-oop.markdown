@@ -1,12 +1,15 @@
 
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: — or «the OOP demystified» —
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       — or «the OOP demystified» —
+meta-title:     PureBasic OOP (Table of Contents)
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial — PureBasic and Object-Oriented Programming (aka
+    «the OOP demystified»), by Dräc. A multipart tutorial demonstrating how
+    to implement classes and Object-Oriented Programming in PureBasic.
+    Source code library and examples included.
+keywords:       PureBasic, OOP, object-oriented, programming, tutorial
 baseliner: true
 ...
 
@@ -31,13 +34,20 @@ v1.4, December 3, 2016: Reprinted and revised edition.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+!AlertSuccess
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PROGRESS: All tutorial pages revised, except this one.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 !AlertError
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-PROGRESS: Currently working on:
-
-- [Chapter 7][OOP 7] 
+FIX THIS PAGE:
+!TaskList
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][Fix Metadata]
+!Task[ ][Fix Tutorial Info (dates, version, adoc to MD porting, etc.)]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 
 
@@ -45,13 +55,13 @@ PROGRESS: Currently working on:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # About This Tutorial
 
-**CREDITS**: This is a reprint of «Dräc»’s multi-part tutorial __PureBasic and the Object-Oriented Programming__, also knwon as __the OOP demystified__, published in 2005  on [drac.site.chez-alice.fr](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm).
+**CREDITS**: This is a reprint of «Dräc»’s multi-part tutorial __PureBasic and the Object-Oriented Programming__, also knwon as __the OOP demystified__, published in 2005  on [drac.site.chez-alice.fr].
 
-**LICENSE**: It was reprinted with explicit permission of the author, who released the tutorial text and source codes under [Creative Commons Attribution](https://creativecommons.org/licenses/by/4.0/)  (CC BY 4.0) in response to the permission request to reproduce it inside the [PureBASIC Archives](https://github.com/tajmone/purebasic-archives).
+**LICENSE**: It was reprinted with explicit permission of the author, who released the tutorial text and source codes under [Creative Commons Attribution] (CC BY 4.0) in response to the permission request to reproduce it inside the [PureBASIC Archives].
 
-**CHANGES**: The tutorial was ported from HTML to AsciiDoc by [Tristano Ajmone](https://github.com/tajmone), who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the original [French tutorial](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm) as a reference) — and made minor changes to code examples (either aesthetic, or minor corrections, or to ensure compatibility with latest version of PureBASIC).
+**CHANGES**: The tutorial was ported from HTML to AsciiDoc and Markdown by [Tristano Ajmone], who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the [original French tutorial] as a reference) — and made minor changes to code examples (either aesthetic, or minor corrections, or to ensure compatibility with latest version of PureBASIC).
 
-First republished: 2016/11/18 — by [\@tajmone](https://github.com/tajmone).
+First republished: 2016/11/18 — by [\@tajmone][Tristano Ajmone].
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -83,3 +93,13 @@ First republished: 2016/11/18 — by [\@tajmone](https://github.com/tajmone).
 [OOP 7]: ./purebasic-oop-7.html
 [OOP 8]: ./purebasic-oop-8.html
 [OOP 9]: ./purebasic-oop-9.html
+
+[drac.site.chez-alice.fr]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm "View Dräc's original OOP tutorial, English version"
+
+[original French tutorial]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm "View Dräc's original OOP tutorial, French version"
+
+[Tristano Ajmone]: https://github.com/tajmone "Visit Tristano Ajmone's GitHub profile"
+
+[Creative Commons Attribution]: https://creativecommons.org/licenses/by/4.0/ "Visit the webpage of the Creative Commons Attribution 4.0 International (CC BY 4.0) license"
+
+[PureBASIC Archives]: https://github.com/tajmone/purebasic-archives "Visit the PureBASIC Archives repository on GitHub"

@@ -1,11 +1,12 @@
 ---
-title:    PureBasic and Object-Oriented Programming
-subtitle: 8\. Conclusion
-# meta-title: TITLE_SHOWN_IN_BROWSER_BAR
+title:          PureBasic and Object-Oriented Programming
+subtitle:       8\. Conclusion
+meta-title:     PureBasic OOP (8) Conclusion
 author: Dräc
-# date: YYMMDD
-# description: METADATA_DESCRIPTION
-# keywords: METADATA_KEYWORDS_LIST
+description: >-
+    PureBASIC OOP Tutorial (8/9) — Conclusion remarks on implementing and
+    using Object-Oriented Programming in PureBasic.
+keywords:       PureBasic, OOP, object-oriented, programming, tutorial
 baseliner: true
 ...
 
@@ -23,8 +24,8 @@ http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Concl
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Fix Ordered Lists (`. text`)]
-!Task[ ][Add metadata (description, keywords, ecc)]
+!Task[x][Fix Ordered Lists (`. text`)]
+!Task[x][Add metadata (description, keywords, ecc)]
 !Task[x][Fix links: NONE]
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
