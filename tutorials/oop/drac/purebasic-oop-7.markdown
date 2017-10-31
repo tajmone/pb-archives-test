@@ -28,6 +28,7 @@ __TODOs LIST__:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Fix Ordered Lists (`. text`)]
 !Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][PB Source File reference links (defined in `_butler.yaml`)]
 !Task[x][Fix links (internal, using Header identifiers):]
 ~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][I can’t wait!]
@@ -140,8 +141,8 @@ As shown, a PureBasic Class revolves around four main themes:
 
 Here is a header file cotaining the definition of this set of commands, along with a usage-example file (based on the [previous inheritance example], so that you might compare them):
 
-* [`OOP.pbi`](./OOP.pbi)
-* [`OOP-Inheritance-Ex2.pb`](./OOP-Inheritance-Ex2.pb)
+* [`OOP.pbi`]
+* [`OOP-Inheritance-Ex2.pb`]
 
 !AlertNote
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -555,7 +556,7 @@ This bivalence — which didn’t exist in the previous implementation — leads
 
 An important feature ensues: the us of `*this\Instance` to call the object’s methods within its methods (__No, I’m not drunk__!). This is the best way to do it, because it hides the name of the procedure behind the method, which is an essential part of the inheritance process.
 
-For this purpose, a `Mtd` macro is present in the [`OOP.pbi`](./OOP.pbi) file.
+For this purpose, a `Mtd` macro is present in the [`OOP.pbi`] file.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -746,7 +747,7 @@ For each new keyword, in addition to the current class’ name, its parent class
 
 The operation is simple enough for the end user, making the process of inheritance easily accessible.
 
-In order to save space, I won’t review here the code of the new keywords; but it might be a good idea to check out [`OOP.pbi`](./OOP.pbi) in your IDE to get a feel of it.
+In order to save space, I won’t review here the code of the new keywords; but it might be a good idea to check out [`OOP.pbi`] in your IDE to get a feel of it.
 
 # Discussion
 
@@ -802,6 +803,8 @@ Here is a list of the types used by a Class:
 !comment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                          REFERENCE LINKS DEFINITIONS                          
+
+NOTE: More ref.links are defined in "_butler.yaml"!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [previous inheritance example]: purebasic-oop-6.html#first code-example

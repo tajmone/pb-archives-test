@@ -10,7 +10,6 @@ description: >-
     to implement classes and Object-Oriented Programming in PureBasic.
     Source code library and examples included.
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial
-baseliner: true
 ...
 
 !comment
@@ -55,11 +54,11 @@ FIX THIS PAGE:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # About This Tutorial
 
-**CREDITS**: This is a reprint of «Dräc»’s multi-part tutorial __PureBasic and the Object-Oriented Programming__, also knwon as __the OOP demystified__, published in 2005  on [drac.site.chez-alice.fr].
+**CREDITS**: This is a reprint of «Dräc»’s multi-part tutorial __PureBasic and the Object-Oriented Programming__, also knwon as __the OOP demystified__, published in 2005 on [drac.site.chez-alice.fr][ext OOP EN].
 
-**LICENSE**: It was reprinted with explicit permission of the author, who released the tutorial text and source codes under [Creative Commons Attribution] (CC BY 4.0) in response to the permission request to reproduce it inside the [PureBASIC Archives].
+**LICENSE**: It was reprinted with explicit permission of the author, who released the tutorial text and source codes under [Creative Commons Attribution][CC BY 4.0] (CC BY 4.0) in response to the permission request to reproduce it inside the [PureBASIC Archives].
 
-**CHANGES**: The tutorial was ported from HTML to AsciiDoc and Markdown by [Tristano Ajmone], who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the [original French tutorial] as a reference) — and made minor changes to code examples (either aesthetic, or minor corrections, or to ensure compatibility with latest version of PureBASIC).
+**CHANGES**: The tutorial was ported from HTML to AsciiDoc and Markdown by [Tristano Ajmone], who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the [original French tutorial][ext OOP FR] as a reference) — and made minor changes to code examples (either aesthetic, or minor corrections, or to ensure compatibility with latest version of PureBASIC).
 
 First republished: 2016/11/18 — by [\@tajmone][Tristano Ajmone].
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,25 +80,10 @@ First republished: 2016/11/18 — by [\@tajmone][Tristano Ajmone].
 !comment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                          REFERENCE LINKS DEFINITIONS                          
+
+NOTE: More ref.links are defined in "_butler.yaml"!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-[OOP 1]: ./purebasic-oop-1.html
-[OOP 2]: ./purebasic-oop-2.html
-[OOP 3]: ./purebasic-oop-3.html
-[OOP 4]: ./purebasic-oop-4.html
-[OOP 5]: ./purebasic-oop-5.html
-[OOP 6]: ./purebasic-oop-6.html
-[OOP 7]: ./purebasic-oop-7.html
-[OOP 8]: ./purebasic-oop-8.html
-[OOP 9]: ./purebasic-oop-9.html
 
-[drac.site.chez-alice.fr]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm "View Dräc's original OOP tutorial, English version"
 
-[original French tutorial]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm "View Dräc's original OOP tutorial, French version"
-
-[Tristano Ajmone]: https://github.com/tajmone "Visit Tristano Ajmone's GitHub profile"
-
-[Creative Commons Attribution]: https://creativecommons.org/licenses/by/4.0/ "Visit the webpage of the Creative Commons Attribution 4.0 International (CC BY 4.0) license"
-
-[PureBASIC Archives]: https://github.com/tajmone/purebasic-archives "Visit the PureBASIC Archives repository on GitHub"

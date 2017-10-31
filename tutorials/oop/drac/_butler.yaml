@@ -1,0 +1,52 @@
+
+---
+baseliner: true
+...
+
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         REFERENCE LINKS DEFINITIONS                          
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[PureBASIC Archives]: https://github.com/tajmone/purebasic-archives "Visit the PureBASIC Archives repository on GitHub"
+
+[Tristano Ajmone]: https://github.com/tajmone "Visit Tristano Ajmone's GitHub profile"
+
+[CC BY 4.0]: https://creativecommons.org/licenses/by/4.0/ "Visit the webpage of the Creative Commons Attribution 4.0 International (CC BY 4.0) license"
+
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Links to OOP Tutorial pages:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[OOP 0]: ./purebasic-oop.html   "Table of Contents"
+[OOP 1]: ./purebasic-oop-1.html "1. Why OOP in PureBasic?"
+[OOP 2]: ./purebasic-oop-2.html "2. Object Concepts"
+[OOP 3]: ./purebasic-oop-3.html "3. First Implementation of the Concepts"
+[OOP 4]: ./purebasic-oop-4.html "4. Interface Instruction"
+[OOP 5]: ./purebasic-oop-5.html "5. Second Implementation of the Concepts"
+[OOP 6]: ./purebasic-oop-6.html "6. Synthesis and Notation"
+[OOP 7]: ./purebasic-oop-7.html "7. PureBasic Class"
+[OOP 8]: ./purebasic-oop-8.html "8. Conclusion"
+[OOP 9]: ./purebasic-oop-9.html "9. Appendix"
+
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Links to OOP source code files:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[`OOP.pbi`]: ./OOP.pbi
+[`OOP-Inheritance-Ex1.pb`]: ./OOP-Inheritance-Ex1.pb
+[`OOP-Inheritance-Ex2.pb`]: ./OOP-Inheritance-Ex2.pb
+[`OOP-Inheritance-Ex2_preprocessed.pb`]: ./OOP-Inheritance-Ex2_preprocessed.pb
+
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Links Dräc’s website:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[Drac Site]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/indexTutorials_en.htm "Visit Dräc’s PureBASIC tutorials website"
+
+[ext OOP EN]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm "View Dräc's original OOP tutorial, English version"
+
+[ext OOP FR]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm "View Dräc's original OOP tutorial, French version"

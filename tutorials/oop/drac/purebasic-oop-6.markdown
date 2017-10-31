@@ -28,7 +28,7 @@ __TODOs LIST__:
 !Task[x][Fix Ordered Lists (`. text`)]
 !Task[x][Add metadata (description, keywords, ecc)]
 !Task[x][Fix links: NONE]
-!Task[ ][Fix PB Source File links?]
+!Task[x][PB Source File reference links (defined in `_butler.yaml`)]
 !Task[x][Add `subtitle` and fix header levels]
 !Task[x][Fix subtitle casing]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -139,5 +139,6 @@ EndProcedure
 
 Here is an example file of inheritance in action:
 
-* [`OOP-Inheritance-Ex1.pb`](./OOP-Inheritance-Ex1.pb)
+* [`OOP-Inheritance-Ex1.pb`]
+
 

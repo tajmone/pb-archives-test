@@ -27,7 +27,7 @@ http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Imple
 __TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Fix Ordered Lists (`. text`)]
+!Task[x][Fix Ordered Lists (`. text`)]
 !Task[x][Add metadata (description, keywords, ecc)]
 !Task[x][Fix links (reference style):]
 ~~~~~~~~~~~~~~~~~~~~~~~

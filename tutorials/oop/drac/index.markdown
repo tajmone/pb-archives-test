@@ -1,9 +1,10 @@
 ---
-title:    Dräc’s *PureBasic and OOP*
-# subtitle:
+title:          Dräc’s *PureBasic and OOP* Tutorial
+subtitle:       — aka «the OOP demystified» —
+meta-title:     \"PureBasic and OOP\" Tutorial, by Dräc
 ...
 
-By «Dräc,» © 2005, license: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+By «Dräc,» © 2005, license: [CC BY 4.0].
 
 
 !AlertWarn
@@ -11,39 +12,82 @@ By «Dräc,» © 2005, license: [CC BY 4.0](https://creativecommons.org/licenses
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][Add a `README.md` file for GH preview]
 !Task[ ][Fix links to `index.html`]
+!Task[ ][Finish clean up text in this INDEX page]
 !Task[ ][Fix Asciidoc References]
+!Task[ ][Asciidoc Files:]
+~~~~~~~~~~~~~~~~~~~~~~~~~
+  !Task[ ][Fix typos listed in [`ASCIIDOC TODO.txt`](./ASCIIDOC TODO.txt)]
+  !Task[ ][Find a way to organize adoc EN/FR tutorials]
+  !Task[ ][Fix links to source files (FR PB files in different folder)]
+  !Task[ ][Fix resources links and Rebuild with AsciidocFX]
+  !Task[ ][Add AsciidocFX usage notes in `README.md`]
+~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x]Remove gfmtoc]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-------------------------------------------------------------------------
 
-**TUTORIAL HTML-PREVIEW LINKS:**
+Tutorial Index
+==============
 
--   English version: ( [local preview](./en/OOP-Demystified.html) | [live preview](http://htmlpreview.github.io/?https://github.com/tajmone/purebasic-archives/blob/master/tutorials/oop/drac/en/OOP-Demystified.html) )
+- [Table of Contents][OOP 0]
+1. [Why OOP in PureBasic?][OOP 1]
+2. [Object Concepts][OOP 2]
+3. [First Implementation of the Concepts][OOP 3]
+4. [Interface Instruction][OOP 4]
+5. [Second Implementation of the Concepts][OOP 5]
+6. [Synthesis and Notation][OOP 6]
+7. [PureBasic Class][OOP 7]
+8. [Conclusion][OOP 8]
+9. [Appendix][OOP 9]
 
--   French version: ( [local preview](./fr/POO-Demystifiee.html) | [live preview](http://htmlpreview.github.io/?https://github.com/tajmone/purebasic-archives/blob/master/tutorials/oop/drac/fr/POO-Demystifiee.html) )
 
-**NOTE**: If you are viewing this page on GitHub, you’ll need to click the `live preview` links in order to view the tutorial in HTML.
+About Dräc’s OOP Tutorial
+=========================
 
-About This Article
-==================
-
-This long tutorials shows, step by step, how to implement the OOP paradigm in PureBASIC. Two approaches to OOP implementation are presented, in order of complexity, with detailed explanations and in-document code examples. Along with the tutorial are provided the fully functional source codes of the two OOP implementations, along with a `*.pbi` OOP resource reusable in other projects.
+This long multipart tutorial shows, step by step, how to implement the OOP paradigm in PureBASIC. Two approaches to OOP implementation are presented, in order of complexity, with detailed explanations and in-document code examples. Along with the tutorial are provided the fully functional source codes of the two OOP implementations, along with a `*.pbi` OOP resource reusable in other projects.
 
 Reprint And Changes
 -------------------
 
-This is a reprint of «Dräc»’s multi-part tutorial *PureBasic and the Object-Oriented Programming* (French title: *PureBasic et la Programmation Orientée Objet*) also knwon as *the OOP demystified*, published in 2005 on [drac.site.chez-alice.fr](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/indexTutorials_en.htm):
+This is a reprint of «Dräc»’s multi-part tutorial *PureBasic and the Object-Oriented Programming* (French title: *PureBasic et la Programmation Orientée Objet*) also knwon as *the OOP demystified*, published in 2005 on [drac.site.chez-alice.fr][Drac Site]:
 
--   [Original French article](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm)
--   [Original English article](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm)
+-   [Original French article][ext OOP EN]
+-   [Original English article][ext OOP FR]
 
-It was reprinted with explicit permission of the author, who released the tutorial text and source codes under Creative Commons Attribution (CC BY 4.0) in response to the permission request to reproduce it inside the [**PureBASIC Archives**](https://github.com/tajmone/purebasic-archives).
+It was reprinted with explicit permission of the author, who released the tutorial text and source codes under Creative Commons Attribution (CC BY 4.0) in response to the permission request to reproduce it inside the __[PureBASIC Archives]__.
 
-The tutorial was ported from HTML to AsciiDoc by Tristano Ajmone, who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the original French tutorial as a reference) — and made minor changes to code examples (either aesthetic or to ensure compatibility with latest version of PureBASIC).
+The tutorial was ported from HTML to AsciiDoc by [Tristano Ajmone], who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the original French tutorial as a reference) — and made minor changes to code examples (either aesthetic or to ensure compatibility with latest version of PureBASIC).
+
+Source Code Files List
+======================
+
+English Tutorial Files
+----------------------
+
+-   [`OOP-Inheritance-Ex1.pb`] – PureBASIC source of First Example of OOP implementation (English comments and naming convention).
+-   [`OOP-Inheritance-Ex2.pb`] – PureBASIC source of Second Example of OOP implementation (EN ver.).
+-   [`OOP-Inheritance-Ex2_preprocessed.pb`] – The preprocessed version of `OOP-Inheritance-Ex2.pb`: contains all included external code, and macros are expanded (orignal macros are kept as comments next to their expanded code), comments are preserved. Included by Tristano Ajmone to simplify analysis of source code.
+-   [`OOP.pbi`] – PureBASIC include file, imported by Second Example, and reusable in custom OOP-projects (EN ver.).
+
+AsciiDoc Version
+======================
+
+-   [`/en/OOP-Demystified.asciidoc`](./en/OOP-Demystified.asciidoc) – AsciiDoc source of English article.
+-   [`/en/OOP-Demystified.html`](./en/OOP-Demystified.html) – HTML output of English article.
+
+------------------------------------------------------------------------
+
+# OLD README.md LEFT OVER TEXT
+
+!AlertError
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+__ADAPT AND REMOVE__ — The text below is left over from the original `README` file. Adapt it to new format, and/or delete what is not needed.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 AsciiDoc Format
 ---------------
@@ -112,4 +156,14 @@ The following files need checking their French, and translation of some parts in
 -   [`/en/OOP-Inheritance-Ex2.pb`](./en/OOP-Inheritance-Ex2.pb) (translation of header comments)
 -   [`/fr/POO.pbi`](./fr/POO.pbi) (translation of comments)
 -   [`/work/ppFrEx2_header`](./work/ppEnEx2_header) (translation of header comments text)
+
+--------------------------------------
+
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         REFERENCE LINKS DEFINITIONS                          
+
+NOTE: More ref.links are defined in "_butler.yaml"!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 

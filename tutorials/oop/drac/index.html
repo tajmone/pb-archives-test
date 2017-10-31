@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>Dräc’s <em>PureBasic and OOP</em></title>
+		<title>&quot;PureBasic and OOP&quot; Tutorial, by Dräc</title>
 		<meta name="generator" content="pandoc">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,18 +32,45 @@
 
 				<div id="document">
 
-					<h1 class="title">Dräc’s <em>PureBasic and OOP</em></h1>
+					<h1 class="title">Dräc’s <em>PureBasic and OOP</em> Tutorial</h1>
+					<p class="subtitle">— aka «the OOP demystified» —</p>
 
-<p>By «Dräc,» © 2005, license: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+<p>By «Dräc,» © 2005, license: <a href="https://creativecommons.org/licenses/by/4.0/" title="Visit the webpage of the Creative Commons Attribution 4.0 International (CC BY 4.0) license">CC BY 4.0</a>.</p>
 <div class="alert-messages">
 <div class="alert alert-warn">
 <p><strong>WIP TODOs LIST</strong>:</p>
 <ul class="task-list">
 <li class="task-list-item">
+<input type="checkbox" disabled=""> Add a <code>README.md</code> file for GH preview
+</li>
+<li class="task-list-item">
 <input type="checkbox" disabled=""> Fix links to <code>index.html</code>
 </li>
 <li class="task-list-item">
+<input type="checkbox" disabled=""> Finish clean up text in this INDEX page
+</li>
+<li class="task-list-item">
 <input type="checkbox" disabled=""> Fix Asciidoc References
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Asciidoc Files:
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix typos listed in <a href="./ASCIIDOC%20TODO.txt"><code>ASCIIDOC TODO.txt</code></a>
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Find a way to organize adoc EN/FR tutorials
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix links to source files (FR PB files in different folder)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Fix resources links and Rebuild with AsciidocFX
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Add AsciidocFX usage notes in <code>README.md</code>
+</li>
+</ul>
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> 
@@ -52,28 +79,56 @@
 </ul>
 </div>
 </div>
-<hr />
-<p><strong>TUTORIAL HTML-PREVIEW LINKS:</strong></p>
+<h1 id="tutorial-index">Tutorial Index</h1>
 <ul>
-<li><p>English version: ( <a href="./en/OOP-Demystified.html">local preview</a> | <a href="http://htmlpreview.github.io/?https://github.com/tajmone/purebasic-archives/blob/master/tutorials/oop/drac/en/OOP-Demystified.html">live preview</a> )</p></li>
-<li><p>French version: ( <a href="./fr/POO-Demystifiee.html">local preview</a> | <a href="http://htmlpreview.github.io/?https://github.com/tajmone/purebasic-archives/blob/master/tutorials/oop/drac/fr/POO-Demystifiee.html">live preview</a> )</p></li>
+<li><a href="./purebasic-oop.html" title="Table of Contents">Table of Contents</a></li>
 </ul>
-<p><strong>NOTE</strong>: If you are viewing this page on GitHub, you’ll need to click the <code>live preview</code> links in order to view the tutorial in HTML.</p>
-<h1 id="about-this-article">About This Article</h1>
-<p>This long tutorials shows, step by step, how to implement the OOP paradigm in PureBASIC. Two approaches to OOP implementation are presented, in order of complexity, with detailed explanations and in-document code examples. Along with the tutorial are provided the fully functional source codes of the two OOP implementations, along with a <code>*.pbi</code> OOP resource reusable in other projects.</p>
+<ol type="1">
+<li><a href="./purebasic-oop-1.html" title="1. Why OOP in PureBasic?">Why OOP in PureBasic?</a></li>
+<li><a href="./purebasic-oop-2.html" title="2. Object Concepts">Object Concepts</a></li>
+<li><a href="./purebasic-oop-3.html" title="3. First Implementation of the Concepts">First Implementation of the Concepts</a></li>
+<li><a href="./purebasic-oop-4.html" title="4. Interface Instruction">Interface Instruction</a></li>
+<li><a href="./purebasic-oop-5.html" title="5. Second Implementation of the Concepts">Second Implementation of the Concepts</a></li>
+<li><a href="./purebasic-oop-6.html" title="6. Synthesis and Notation">Synthesis and Notation</a></li>
+<li><a href="./purebasic-oop-7.html" title="7. PureBasic Class">PureBasic Class</a></li>
+<li><a href="./purebasic-oop-8.html" title="8. Conclusion">Conclusion</a></li>
+<li><a href="./purebasic-oop-9.html" title="9. Appendix">Appendix</a></li>
+</ol>
+<h1 id="about-dräcs-oop-tutorial">About Dräc’s OOP Tutorial</h1>
+<p>This long multipart tutorial shows, step by step, how to implement the OOP paradigm in PureBASIC. Two approaches to OOP implementation are presented, in order of complexity, with detailed explanations and in-document code examples. Along with the tutorial are provided the fully functional source codes of the two OOP implementations, along with a <code>*.pbi</code> OOP resource reusable in other projects.</p>
 <h2 id="reprint-and-changes">Reprint And Changes</h2>
-<p>This is a reprint of «Dräc»’s multi-part tutorial <em>PureBasic and the Object-Oriented Programming</em> (French title: <em>PureBasic et la Programmation Orientée Objet</em>) also knwon as <em>the OOP demystified</em>, published in 2005 on <a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/indexTutorials_en.htm">drac.site.chez-alice.fr</a>:</p>
+<p>This is a reprint of «Dräc»’s multi-part tutorial <em>PureBasic and the Object-Oriented Programming</em> (French title: <em>PureBasic et la Programmation Orientée Objet</em>) also knwon as <em>the OOP demystified</em>, published in 2005 on <a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/indexTutorials_en.htm" title="Visit Dräc’s PureBASIC tutorials website">drac.site.chez-alice.fr</a>:</p>
 <ul>
-<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm">Original French article</a></li>
-<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm">Original English article</a></li>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm" title="View Dräc&#39;s original OOP tutorial, English version">Original French article</a></li>
+<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi.htm" title="View Dräc&#39;s original OOP tutorial, French version">Original English article</a></li>
 </ul>
-<p>It was reprinted with explicit permission of the author, who released the tutorial text and source codes under Creative Commons Attribution (CC BY 4.0) in response to the permission request to reproduce it inside the <a href="https://github.com/tajmone/purebasic-archives"><strong>PureBASIC Archives</strong></a>.</p>
-<p>The tutorial was ported from HTML to AsciiDoc by Tristano Ajmone, who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the original French tutorial as a reference) — and made minor changes to code examples (either aesthetic or to ensure compatibility with latest version of PureBASIC).</p>
+<p>It was reprinted with explicit permission of the author, who released the tutorial text and source codes under Creative Commons Attribution (CC BY 4.0) in response to the permission request to reproduce it inside the <strong><a href="https://github.com/tajmone/purebasic-archives" title="Visit the PureBASIC Archives repository on GitHub">PureBASIC Archives</a></strong>.</p>
+<p>The tutorial was ported from HTML to AsciiDoc by <a href="https://github.com/tajmone" title="Visit Tristano Ajmone&#39;s GitHub profile">Tristano Ajmone</a>, who also polsihed the English text — introducing slight adjustments in line with the tutorial aims (using the original French tutorial as a reference) — and made minor changes to code examples (either aesthetic or to ensure compatibility with latest version of PureBASIC).</p>
+<h1 id="source-code-files-list">Source Code Files List</h1>
+<h2 id="english-tutorial-files">English Tutorial Files</h2>
+<ul>
+<li><a href="./OOP-Inheritance-Ex1.pb"><code>OOP-Inheritance-Ex1.pb</code></a> – PureBASIC source of First Example of OOP implementation (English comments and naming convention).</li>
+<li><a href="./OOP-Inheritance-Ex2.pb"><code>OOP-Inheritance-Ex2.pb</code></a> – PureBASIC source of Second Example of OOP implementation (EN ver.).</li>
+<li><a href="./OOP-Inheritance-Ex2_preprocessed.pb"><code>OOP-Inheritance-Ex2_preprocessed.pb</code></a> – The preprocessed version of <code>OOP-Inheritance-Ex2.pb</code>: contains all included external code, and macros are expanded (orignal macros are kept as comments next to their expanded code), comments are preserved. Included by Tristano Ajmone to simplify analysis of source code.</li>
+<li><a href="./OOP.pbi"><code>OOP.pbi</code></a> – PureBASIC include file, imported by Second Example, and reusable in custom OOP-projects (EN ver.).</li>
+</ul>
+<h1 id="asciidoc-version">AsciiDoc Version</h1>
+<ul>
+<li><a href="./en/OOP-Demystified.asciidoc"><code>/en/OOP-Demystified.asciidoc</code></a> – AsciiDoc source of English article.</li>
+<li><a href="./en/OOP-Demystified.html"><code>/en/OOP-Demystified.html</code></a> – HTML output of English article.</li>
+</ul>
+<hr />
+<h1 id="old-readme.md-left-over-text">OLD README.md LEFT OVER TEXT</h1>
+<div class="alert-messages">
+<div class="alert alert-error">
+<p><strong>ADAPT AND REMOVE</strong> — The text below is left over from the original <code>README</code> file. Adapt it to new format, and/or delete what is not needed.</p>
+</div>
+</div>
 <h2 id="asciidoc-format">AsciiDoc Format</h2>
 <p>The text was recreated in <a href="http://asciidoc.org/">AsciiDoc</a> format using the <a href="http://www.asciidocfx.com/">AsciidocFX</a> free editor.</p>
 <p>If you wish to edit the AsciiDoc source, and/or compile it to HTML, you might do so with AsciidocFX: it’s a cross-platform, self-contanied and standalone toolchain that doesn’t require installation of Python AsciiDoc or Ruby Asciidoctor.</p>
 <h1 id="files-list">Files List</h1>
-<h2 id="english-tutorial-files">English Tutorial Files</h2>
+<h2 id="english-tutorial-files-1">English Tutorial Files</h2>
 <ul>
 <li><a href="./en/"><code>/en/</code></a> – Folder of English article.</li>
 <li><a href="./en/OOP-Demystified.asciidoc"><code>/en/OOP-Demystified.asciidoc</code></a> – AsciiDoc source of English article.</li>
@@ -123,6 +178,7 @@
 <li><a href="./fr/POO.pbi"><code>/fr/POO.pbi</code></a> (translation of comments)</li>
 <li><a href="./work/ppEnEx2_header"><code>/work/ppFrEx2_header</code></a> (translation of header comments text)</li>
 </ul>
+<hr />
 				</div><!-- end document -->
 				<div id="sidebar">
 					<nav>
@@ -130,12 +186,19 @@
 						<h2>Page Contents</h2>
 
 <ul>
-<li><a href="#about-this-article">About This Article</a><ul>
+<li><a href="#tutorial-index">Tutorial Index</a></li>
+<li><a href="#about-dräcs-oop-tutorial">About Dräc’s OOP Tutorial</a><ul>
 <li><a href="#reprint-and-changes">Reprint And Changes</a></li>
+</ul></li>
+<li><a href="#source-code-files-list">Source Code Files List</a><ul>
+<li><a href="#english-tutorial-files">English Tutorial Files</a></li>
+</ul></li>
+<li><a href="#asciidoc-version">AsciiDoc Version</a></li>
+<li><a href="#old-readme.md-left-over-text">OLD README.md LEFT OVER TEXT</a><ul>
 <li><a href="#asciidoc-format">AsciiDoc Format</a></li>
 </ul></li>
 <li><a href="#files-list">Files List</a><ul>
-<li><a href="#english-tutorial-files">English Tutorial Files</a></li>
+<li><a href="#english-tutorial-files-1">English Tutorial Files</a></li>
 <li><a href="#french-tutorial-files">French Tutorial Files</a></li>
 <li><a href="#shared-files">Shared Files</a></li>
 <li><a href="#dev-files">Dev-Files</a></li>
@@ -149,6 +212,19 @@
 			</div><!-- end row -->
 		</div><!-- end container -->
 
+		<!-- baseliner -->
+		<script src="../../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
 
 	</body>
 </html>

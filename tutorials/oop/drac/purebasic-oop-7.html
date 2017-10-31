@@ -13,7 +13,7 @@
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
 		<!-- Place favicon.ico in the root directory -->
 
-		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+		<link rel="stylesheet" href="../../../_assets/theme/css/styles.css">
 	</head>
 	<body>
 
@@ -25,9 +25,10 @@
 				<nav id="breadcrumbs">
 
 <ol>
-	<li><a href='../../index.html'>Home</a></li>
-	<li><a href='../index.html'>tutorials</a></li>
-	<li><a href='index.html'>OOP-CONV</a></li>
+	<li><a href='../../../index.html'>Home</a></li>
+	<li><a href='../../index.html'>tutorials</a></li>
+	<li><a href='../index.html'>oop</a></li>
+	<li><a href='index.html'>drac</a></li>
 </ol>
 
 				</nav>
@@ -50,6 +51,9 @@
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Add metadata (description, keywords, ecc)
+</li>
+<li class="task-list-item">
+<input type="checkbox" disabled=""checked=""> PB Source File reference links (defined in <code>_butler.yaml</code>)
 </li>
 <li class="task-list-item">
 <input type="checkbox" disabled=""checked=""> Fix links (internal, using Header identifiers):
@@ -523,9 +527,11 @@ EndFree</code></pre>
 </table>
 <div class="alert-messages">
 <div class="alert alert-warn">
-<p><i class="fa fa-warning"></i> The <code>Mbrs_&lt;ClassName&gt;_</code> type wasn’t presented in this paper. It is an intermediate step used to build the <code>Mbrs_&lt;ClassName&gt;</code> structure of the members definition. This arrangement is required to achieve the <code>*this\Instance</code> feature <a href="#admonition-about-this-instance">explained here</a>.</p>
+<p><i class="fa fa-warning"></i> The <code>Mbrs_&lt;ClassName&gt;_</code> type wasn’t presented in this paper. It is an intermediate step used to build the <code>Mbrs_&lt;ClassName&gt;</code> structure of the members definition. This arrangement is required to achieve the <code>*this\Instance</code> feature [explained here].</p>
 </div>
 </div>
+<h2 id="explained-here-admonition-about-this-instance">[explained here]: #admonition-about-this-instance</h2>
+<p>baseliner: true …</p>
 				</div><!-- end document -->
 				<div id="sidebar">
 					<nav>
@@ -541,7 +547,9 @@ EndFree</code></pre>
 <li><a href="#object-destructor">Object destructor</a></li>
 <li><a href="#inheritance">Inheritance</a></li>
 <li><a href="#discussion">Discussion</a></li>
-<li><a href="#reminder-of-types">Reminder of Types</a></li>
+<li><a href="#reminder-of-types">Reminder of Types</a><ul>
+<li><a href="#explained-here-admonition-about-this-instance">[explained here]: #admonition-about-this-instance</a></li>
+</ul></li>
 </ul>
 					   <!--TOC-END-->
 					</nav>
@@ -551,7 +559,7 @@ EndFree</code></pre>
 		</div><!-- end container -->
 
 		<!-- baseliner -->
-		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script src="../../../_assets/theme/js/baseliner.js"></script>
 		<script>
 		window.onload = function() {
 			baseliner = new Baseliner({

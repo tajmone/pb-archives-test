@@ -10,6 +10,8 @@ meta-title: OOP TODOs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 __LOCAL — ORIGINAL__:
 
+- [TOC][OOP 0]
+
 1. [OOP 1] — [Why OOP in PureBasic ?][DRAC1]
 2. [OOP 2] — [Object concepts][DRAC2]
 3. [OOP 3] — [First Implementation of the concepts][DRAC3]
@@ -130,6 +132,8 @@ __IDEAS THAT COULD BE IMPLEMENTED__:
 !comment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                          REFERENCE LINKS DEFINITIONS                          
+
+NOTE: More ref.links are defined in "_butler.yaml"!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 !comment
@@ -147,17 +151,3 @@ ORIGINAL TUTORIALS LINKS
 [DRAC8]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Conclusion_en.htm
 [DRAC9]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Annexes_en.htm
 
-!comment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-LOCAL TUTORIALS LINKS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-[OOP 1]: ./purebasic-oop-1.html
-[OOP 2]: ./purebasic-oop-2.html
-[OOP 3]: ./purebasic-oop-3.html
-[OOP 4]: ./purebasic-oop-4.html
-[OOP 5]: ./purebasic-oop-5.html
-[OOP 6]: ./purebasic-oop-6.html
-[OOP 7]: ./purebasic-oop-7.html
-[OOP 8]: ./purebasic-oop-8.html
-[OOP 9]: ./purebasic-oop-9.html
