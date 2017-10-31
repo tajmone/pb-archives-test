@@ -10,32 +10,11 @@ description: >-
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
                 abstract classes, instanciation, encapsulation, inheritance,
                 overloading
-baseliner: true
 ...
 
 !comment{   ORIGINAL DOC URL   }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Implementation1_en.htm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: WIP
-
-- [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Implementation1_en.htm)
-
-__TODOs LIST__:
-!TaskList
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Fix Ordered Lists (`. text`)]
-!Task[x][Add metadata (description, keywords, ecc)]
-!Task[x][Fix links (reference style):]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][(Second Implementation section)]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Add `subtitle` and fix header levels]
-!Task[x][Fix subtitle casing]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

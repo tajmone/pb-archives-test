@@ -17,9 +17,12 @@ baseliner: true
 !comment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Links to OOP Tutorial pages:
+
+PREVIOUS TOC LINK:
+[OOP 0]: ./purebasic-oop.html   "Table of Contents"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[OOP 0]: ./purebasic-oop.html   "Table of Contents"
+[OOP 0]: ./index.html   "Table of Contents"
 [OOP 1]: ./purebasic-oop-1.html "1. Why OOP in PureBasic?"
 [OOP 2]: ./purebasic-oop-2.html "2. Object Concepts"
 [OOP 3]: ./purebasic-oop-3.html "3. First Implementation of the Concepts"

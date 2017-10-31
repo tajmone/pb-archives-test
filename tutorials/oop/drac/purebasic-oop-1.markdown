@@ -14,21 +14,6 @@ keywords:       PureBasic, OOP, object-oriented, programming, tutorial
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertSuccess
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: CHECKED
-
-- [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm)
-
-__TODOs LIST__:
-!TaskList
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Add metadata (description, keywords, ecc)]
-!Task[x][Add `subtitle` and fix header levels]
-!Task[x][Fix subtitle casing]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Since many object-oriented languages already exist, trying to achive OOP in PureBasic — which is a procedural language — might come as a surprise.
 
 The fact that some languages are defined «Object-Oriented», while others are not, is merely indicating the presence of specific keywords which facilitate writing code according to the OOP paradigm.

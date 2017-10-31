@@ -38,66 +38,6 @@
 					<h1 class="title">PureBasic and Object-Oriented Programming</h1>
 					<p class="subtitle">7. PB Class</p>
 
-<div class="alert-messages">
-<div class="alert alert-warn">
-<h2 id="status-wip">STATUS: WIP</h2>
-<ul>
-<li><a href="http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Classes_PB_en.htm">WWW ORIGINAL</a></li>
-</ul>
-<p><strong>TODOs LIST</strong>:</p>
-<ul class="task-list">
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Fix Ordered Lists (<code>. text</code>)
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Add metadata (description, keywords, ecc)
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> PB Source File reference links (defined in <code>_butler.yaml</code>)
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Fix links (internal, using Header identifiers):
-<ul class="task-list">
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> I can’t wait!
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Show me now!
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> What?! I don’t remember!
-</li>
-</ul>
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Fix links (reference style):
-<ul class="task-list">
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> previous inheritance example
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> no, now!
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> presented in the Appendix
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> explained here
-</li>
-</ul>
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Add <code>subtitle</code> and fix header levels
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""> <strong>Headers Levels</strong> need fixing! (h1 &gt; h3)
-</li>
-<li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Fix subtitle casing
-</li>
-</ul>
-</div>
-</div>
 <p>Now that we’ve explored OOP concepts and their possible implementations in PureBasic, it’s time to establish an implementation.</p>
 <p>Here I shall present an implementation which I deem, to the best of my current knowledge, as the one best fitting OOP programming in PureBasic.</p>
 <p>It is based on all the previously exposed work, as well as on my personal practical experience with the subject matter at hand. Another goal here is to simplify the use of object concepts, through clear commands and by automating operations as much as possible. During this step, macros are going to play a decisive role. Greatly facilitated by the <code>Interface</code> and <code>Macro</code> commands, the proposed implementation remains naturally limited by the language itself.</p>
@@ -527,11 +467,9 @@ EndFree</code></pre>
 </table>
 <div class="alert-messages">
 <div class="alert alert-warn">
-<p><i class="fa fa-warning"></i> The <code>Mbrs_&lt;ClassName&gt;_</code> type wasn’t presented in this paper. It is an intermediate step used to build the <code>Mbrs_&lt;ClassName&gt;</code> structure of the members definition. This arrangement is required to achieve the <code>*this\Instance</code> feature [explained here].</p>
+<p><i class="fa fa-warning"></i> The <code>Mbrs_&lt;ClassName&gt;_</code> type wasn’t presented in this paper. It is an intermediate step used to build the <code>Mbrs_&lt;ClassName&gt;</code> structure of the members definition. This arrangement is required to achieve the <code>*this\Instance</code> feature <a href="#admonition-about-this-instance">explained here</a>.</p>
 </div>
 </div>
-<h2 id="explained-here-admonition-about-this-instance">[explained here]: #admonition-about-this-instance</h2>
-<p>baseliner: true …</p>
 				</div><!-- end document -->
 				<div id="sidebar">
 					<nav>
@@ -547,9 +485,7 @@ EndFree</code></pre>
 <li><a href="#object-destructor">Object destructor</a></li>
 <li><a href="#inheritance">Inheritance</a></li>
 <li><a href="#discussion">Discussion</a></li>
-<li><a href="#reminder-of-types">Reminder of Types</a><ul>
-<li><a href="#explained-here-admonition-about-this-instance">[explained here]: #admonition-about-this-instance</a></li>
-</ul></li>
+<li><a href="#reminder-of-types">Reminder of Types</a></li>
 </ul>
 					   <!--TOC-END-->
 					</nav>

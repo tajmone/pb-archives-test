@@ -10,36 +10,12 @@ description: >-
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
                 instanciation, initialization, constructor, destructor,
                 inheritance
-baseliner: true
 ...
 
 !comment{   ORIGINAL DOC URL   }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Implementation2_en.htm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: WIP
-
-- [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Implementation2_en.htm)
-
-__TODOs LIST__:
-!TaskList
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Fix Ordered Lists (`. text`)]
-!Task[x][Add metadata (description, keywords, ecc)]
-!Task[x][Fix links (reference style):]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][see previous remark]
-!Task[x][see previous note]
-!Task[x][See the Appendix]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Add `subtitle` and fix header levels]
-!Task[x][Fix subtitle casing]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 In our first implementation, object concepts were adapted in a more or less extended way.
 Now, it’s time to improve this first implementation thanks to the use of the `Interface` instruction.
@@ -852,3 +828,4 @@ See the [Appendix] of the tutorial for possible optimizations of `Get()`’s and
 [see previous note]: purebasic-oop-4.html#admonition-on-structure-interface-symmetry
 
 [Appendix]: purebasic-oop-9.html
+

@@ -7,32 +7,11 @@ description: >-
     PureBASIC OOP Tutorial (2/9) — Analysis of the Object-Oriented Programming
     paradigm, its concepts and features. 
 keywords:       OOP, object-oriented, programming, paradigm, concepts
-baseliner: true
 ...
 
 !comment{   ORIGINAL DOC URL   }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_ConceptObjet_en.htm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-!AlertSuccess
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: CHECKED
-
-- [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_ConceptObjet_en.htm)
-
-__TODOs LIST__:
-!TaskList
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Wrap __Terminlogy__ in `Alert`]
-!Task[x][Add metadata (description, keywords, ecc)]
-!Task[x][Fix links (internal, using Header identifiers):]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][... allow defining [Object Classes][The Notion of Class]]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Add `subtitle` and fix header levels]
-!Task[x][Fix subtitle casing]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Object-Oriented Programming paradigm introduces concepts like: objects,  inheritance and polymorphism.

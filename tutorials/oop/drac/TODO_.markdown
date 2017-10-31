@@ -10,8 +10,7 @@ meta-title: OOP TODOs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 __LOCAL — ORIGINAL__:
 
-- [TOC][OOP 0]
-
+0. [TOC][OOP 0] — [Table of Contents][DRAC0]
 1. [OOP 1] — [Why OOP in PureBasic ?][DRAC1]
 2. [OOP 2] — [Object concepts][DRAC2]
 3. [OOP 3] — [First Implementation of the concepts][DRAC3]
@@ -38,12 +37,14 @@ __WIP TODOs LIST__:
 !Task[ ][Add YAML var `subtitle-size` for different sizes]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[ ][Create PAGINATOR macro]
-!Task[x][Fix Tables]
-!Task[x][Fix Ordered Lists (`. text`)]
-!Task[x][Add metadata (description, keywords, ecc)]
-!Task[x][After Splitting to multipart:]
+!Task[ ][Add a `README.md` file for GH preview]
+!Task[ ][Asciidoc Files:]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-  !Task[x][Add Tutorial title to all pages, and chapter title as subtitle]
+  !Task[ ][Fix typos listed in [`ASCIIDOC TODO.txt`](./ASCIIDOC TODO.txt)]
+  !Task[ ][Find a way to organize adoc EN/FR tutorials]
+  !Task[ ][Fix links to source files (FR PB files in different folder)]
+  !Task[ ][Fix resources links and Rebuild with AsciidocFX]
+  !Task[ ][Add AsciidocFX usage notes in `README.md`]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,6 +62,13 @@ __WIP TODOs LIST__:
 __ACOMPLISHED TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][Fix Tables]
+!Task[x][Fix Ordered Lists (`. text`)]
+!Task[x][Add metadata (description, keywords, ecc)]
+!Task[x][After Splitting to multipart:]
+~~~~~~~~~~~~~~~~~~~~~~~~~
+  !Task[x][Add Tutorial title to all pages, and chapter title as subtitle]
+~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Fix Adoc comments (single line)]
 !Task[x][Fix Adoc comments (multi line)]
 !Task[x][Fix Adoc icons (eg: `icon:warning`) with FA macro]
@@ -141,6 +149,7 @@ NOTE: More ref.links are defined in "_butler.yaml"!
 ORIGINAL TUTORIALS LINKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+[DRAC0]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/indexTutorials_en.htm#POO
 [DRAC1]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Pourquoi_en.htm
 [DRAC2]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_ConceptObjet_en.htm
 [DRAC3]: http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Implementation1_en.htm
