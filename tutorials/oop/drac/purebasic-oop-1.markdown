@@ -7,6 +7,16 @@ description: >-
     PureBASIC OOP Tutorial (1/9) — Introductiory remarks on implementing
     object-oriented programming in PureBasic. 
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial
+pagination:
+    - text: PREV
+      link: index.html
+      alt:  Go to previous page
+    - text: TOC
+      link: index.html
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link: purebasic-oop-2.html
+      alt:  Go to next page
 ...
 
 !comment{   ORIGINAL DOC URL   }

@@ -9,6 +9,16 @@ description: >-
     and procedure pointers.
 keywords:       PureBasic, OOP, object-oriented, programming, method table,
                 pointers, interface, tutorial, example
+pagination:
+    - text: PREV
+      link: purebasic-oop-3.html
+      alt:  Go to previous page
+    - text: TOC
+      link: index.html
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link: purebasic-oop-5.html
+      alt:  Go to next page
 ...
 
 !comment{   ORIGINAL DOC URL   }

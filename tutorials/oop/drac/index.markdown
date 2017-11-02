@@ -1,4 +1,3 @@
-
 ---
 title:          PureBasic and Object-Oriented Programming
 subtitle:       — or «the OOP demystified» —
@@ -10,6 +9,16 @@ description: >-
     to implement classes and Object-Oriented Programming in PureBasic.
     Source code library and examples included.
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial
+pagination:
+    - text: PREV
+      link:
+      alt:  Go to previous page
+    - text: TOC
+      link:
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link: purebasic-oop-1.html
+      alt:  Go to next page
 ...
 
 !comment

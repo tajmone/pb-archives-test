@@ -8,6 +8,16 @@ description: >-
     on how to implement object classes and methods in PureBasic.
 keywords:       PureBasic, OOP, object-oriented, programming, reference,
                 implementation
+pagination:
+    - text: PREV
+      link: purebasic-oop-5.html
+      alt:  Go to previous page
+    - text: TOC
+      link: index.html
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link: purebasic-oop-7.html
+      alt:  Go to next page
 ...
 
 !comment{   ORIGINAL DOC URL   }

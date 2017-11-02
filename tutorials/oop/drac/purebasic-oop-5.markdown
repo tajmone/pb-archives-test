@@ -10,6 +10,16 @@ description: >-
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
                 instanciation, initialization, constructor, destructor,
                 inheritance
+pagination:
+    - text: PREV
+      link: purebasic-oop-4.html
+      alt:  Go to previous page
+    - text: TOC
+      link: index.html
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link: purebasic-oop-6.html
+      alt:  Go to next page
 ...
 
 !comment{   ORIGINAL DOC URL   }

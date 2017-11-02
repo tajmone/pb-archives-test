@@ -39,14 +39,35 @@ $breadcrumbs$
 
 				</nav>
 
+$if(pagination)$
+<div class="pagination">
+$for(pagination)$
+<span>
+$if(pagination.link)$
+<a href="$pagination.link$"
+$if(pagination.alt)$
+ title="$pagination.alt$"
+$endif$
+>
+$endif$
+$pagination.text$
+$if(pagination.link)$
+</a>
+$endif$
+</span>
+$endfor$
+</div>
+$endif$	   
+
+
 				<div id="document">
 
 $if(title)$
 					<h1 class="title">$title$</h1>
 $if(subtitle)$
 					<p class="subtitle">$subtitle$</p>
-$endif$				   
-$endif$				   
+$endif$
+$endif$
 
 $body$
 				</div><!-- end document -->

@@ -470,7 +470,8 @@ div.gridle-row:after {
 div.gridle-row {
   zoom: 1; }
 
-#siteheader, #breadcrumbs, #document, #sidebar {
+#siteheader, #breadcrumbs, #document,
+.pagination, #sidebar {
   display: inline-block;
   min-height: 1px;
   float: left;
@@ -512,11 +513,36 @@ div.gidle-row {
   font-size: 14px;
   padding: 12px; }
 
-#document {
+#document,
+.pagination {
   width: 75%; }
 
 #sidebar {
   width: 25%; }
+
+.pagination {
+  margin: 12px 0;
+  font-size: 10px;
+  line-height: 24px;
+  background-color: #D0D2D6;
+  border-radius: 4px; }
+  .pagination span {
+    line-height: 16px;
+    display: inline-block;
+    border-width: 0 1px 0 0;
+    border-color: #9a9ea6;
+    border-style: solid;
+    text-align: center;
+    padding: 0 1em;
+    color: #9C9DA0;
+    letter-spacing: 0.1em; }
+    .pagination span:last-child {
+      float: right;
+      margin-top: 4px;
+      border-width: 0 0 0 1px; }
+    .pagination span a {
+      text-decoration: none;
+      color: #48556A; }
 
 /* breadcrumbs */
 #breadcrumbs::after {

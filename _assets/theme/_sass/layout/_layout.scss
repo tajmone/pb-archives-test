@@ -96,7 +96,8 @@ div.gidle-row {
   @include padding(0.5);                // <= 12px 
 }
 
-#document {
+#document,
+.pagination {
   @include gridle_grid ( 9 );
 	// border-right: 2px solid #000;
 }
@@ -106,6 +107,39 @@ div.gidle-row {
 	// background-color: rgba(255,0,0,0.1);
 }
 
+// ==============================================================================
+//                                   PAGINATION                                  
+// ==============================================================================
+// Height: 24px;
+.pagination {
+  @include margin(0.5 0);
+  @include type-layout(xs, 1); // <= font-size: 10px
+  background-color: color(Pagination-BG);
+  border-radius: 4px;
+
+  & span {
+    line-height: 16px; // <= So the separator border is not too High!
+    display: inline-block;
+    border-width: 0 1px 0 0;
+    border-color: color(Pagination-Separator);
+    border-style: solid;
+    text-align: center;
+    padding: 0 1em;
+    color:  color(Pagination-Text); // <= Inactive Links color
+    letter-spacing: calculate-em-px(1px, xs); // = 0.1em
+  
+    &:last-child {
+      float: right;
+      margin-top: 4px; // <= ie: (24px - 16x) / 2 
+      border-width: 0 0 0 1px;
+    }
+    
+    & a {
+      text-decoration: none;
+      color: color(Pagination-Link);
+    }
+  }
+}
 // ==============================================================================
 //                                  BREAD CRUMBS                                 
 // ==============================================================================

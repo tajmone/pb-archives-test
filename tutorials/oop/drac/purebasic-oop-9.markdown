@@ -8,6 +8,16 @@ description: >-
     runtime performance of our PureBasic Object-Oriented implementation.
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
                 optimisations, runtime performance
+pagination:
+    - text: PREV
+      link: purebasic-oop-8.html
+      alt:  Go to previous page
+    - text: TOC
+      link: index.html
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link:
+      alt:  Go to next page
 ...
 
 !comment{   ORIGINAL DOC URL   }
