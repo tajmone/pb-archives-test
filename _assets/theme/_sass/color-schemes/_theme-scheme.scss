@@ -51,9 +51,9 @@ $chroma: add-colors('theme', (
 	// ==============================================================================
 	// Color scheme for multi-part documents.
 	// We reuse the Header's colors...
-	Pagination-BG:			Lower-Header-BG,
+	Pagination-BG:			Header-BG,
 	Pagination-Separator:	(Pagination-BG darken 20%),
-	Pagination-Text:		Lower-Header-BG-Darker, // <= Inactive Links
+	Pagination-Text:		(Pagination-BG darken 15%), // <= Inactive Links
 	Pagination-Link:		LogoRight-BG,			// (same as "PureBASIC" Text in Header)
 	// ==============================================================================
 	//                                     ALERTS                                    

@@ -40,23 +40,11 @@ $breadcrumbs$
 				</nav>
 
 $if(pagination)$
-<div class="pagination">
+				<div class="pagination">
 $for(pagination)$
-<span>
-$if(pagination.link)$
-<a href="$pagination.link$"
-$if(pagination.alt)$
- title="$pagination.alt$"
-$endif$
->
-$endif$
-$pagination.text$
-$if(pagination.link)$
-</a>
-$endif$
-</span>
+					<span>$if(pagination.link)$<a href="$pagination.link$"$if(pagination.alt)$ title="$pagination.alt$"$endif$>$endif$$pagination.text$$if(pagination.link)$</a>$endif$</span>
 $endfor$
-</div>
+				</div>
 $endif$	   
 
 
@@ -84,6 +72,15 @@ $endif$
 			 </div><!-- end sidebar -->
 
 			</div><!-- end row -->
+
+$if(pagination)$
+				<div class="pagination">
+$for(pagination)$
+					<span>$if(pagination.link)$<a href="$pagination.link$"$if(pagination.alt)$ title="$pagination.alt$"$endif$>$endif$$pagination.text$$if(pagination.link)$</a>$endif$</span>
+$endfor$
+				</div>
+$endif$	
+
 		</div><!-- end container -->
 
 $if(baseliner)$
