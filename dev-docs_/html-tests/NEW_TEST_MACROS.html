@@ -56,7 +56,7 @@
 INLINE CODE: \`inline code\` END.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
 <p><strong>BECOMES:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;p&gt;</span>INLINE CODE: <span class="kw">&lt;code&gt;</span>inline code<span class="kw">&lt;/code&gt;</span> END.<span class="kw">&lt;/p&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;p&gt;</span>INLINE CODE: <span class="kw">&lt;code&gt;</span>inline code<span class="kw">&lt;/code&gt;</span> END.<span class="kw">&lt;/p&gt;</span></div></code></pre>
 <hr />
 <pre><code>!md2html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,21 +67,21 @@ EndIf
 \`\`\`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
 <p><strong>BECOMES:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>If X = 1
-    printN(<span class="dv">&amp;quot;</span>xxx<span class="dv">&amp;quot;</span>)
-EndIf<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>If X = 1</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">    printN(<span class="dv">&amp;quot;</span>xxx<span class="dv">&amp;quot;</span>)</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">EndIf<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
 <hr />
 <h1 id="double-tests">Double Tests</h1>
 <h2 id="doubletest">DoubleTest</h2>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">| The _limerick packs_ laughs anatomical
-| In space that is quite economical.
-|    But the good ones I&#39;ve seen
-|    So seldom are __clean__
-| And the clean ones so seldom are <span class="bn">`comical`</span>.
-</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">| The _limerick packs_ laughs anatomical</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">| In space that is quite economical.</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">|    But the good ones I&#39;ve seen</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">|    So seldom are __clean__</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">| And the clean ones so seldom are <span class="bn">`comical`</span>.</div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6"></div></code></pre>
 <p><strong>VISUAL RESULT:</strong></p>
-<div style="white-space: pre-line;">The <em>limerick packs</em> laughs anatomical
+<div class="line-block">The <em>limerick packs</em> laughs anatomical
 In space that is quite economical.
    But the good ones I’ve seen
    So seldom are <strong>clean</strong>
@@ -89,12 +89,12 @@ And the clean ones so seldom are <code>comical</code>.</div>
 <p><br /></p>
 <hr />
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
-If X = 1
-<span class="bn">    printN(&quot;xxx&quot;)</span>
-EndIf
-```
-</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">```</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">If X = 1</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="bn">    printN(&quot;xxx&quot;)</span></div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">EndIf</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">```</div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6"></div></code></pre>
 <p><strong>VISUAL RESULT:</strong></p>
 <pre><code>If X = 1
     printN(&quot;xxx&quot;)
@@ -103,20 +103,20 @@ EndIf</code></pre>
 <h1 id="triple-tests">Triple Tests</h1>
 <h2 id="tripletest">TripleTest</h2>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">| The _limerick packs_ laughs anatomical
-| In space that is quite economical.
-|    But the good ones I&#39;ve seen
-|    So seldom are __clean__
-| And the clean ones so seldom are <span class="bn">`comical`</span>.
-</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">| The _limerick packs_ laughs anatomical</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">| In space that is quite economical.</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">|    But the good ones I&#39;ve seen</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">|    So seldom are __clean__</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">| And the clean ones so seldom are <span class="bn">`comical`</span>.</div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6"></div></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> style=</span><span class="st">&quot;white-space: pre-line;&quot;</span><span class="kw">&gt;</span>The <span class="kw">&lt;em&gt;</span>limerick packs<span class="kw">&lt;/em&gt;</span> laughs anatomical
-In space that is quite economical.
-   But the good ones I&#39;ve seen
-   So seldom are <span class="kw">&lt;strong&gt;</span>clean<span class="kw">&lt;/strong&gt;</span>
-And the clean ones so seldom are <span class="kw">&lt;code&gt;</span>comical<span class="kw">&lt;/code&gt;</span>.<span class="kw">&lt;/div&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;line-block&quot;</span><span class="kw">&gt;</span>The <span class="kw">&lt;em&gt;</span>limerick packs<span class="kw">&lt;/em&gt;</span> laughs anatomical</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">In space that is quite economical.</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">   But the good ones I’ve seen</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">   So seldom are <span class="kw">&lt;strong&gt;</span>clean<span class="kw">&lt;/strong&gt;</span></div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">And the clean ones so seldom are <span class="kw">&lt;code&gt;</span>comical<span class="kw">&lt;/code&gt;</span>.<span class="kw">&lt;/div&gt;</span></div></code></pre>
 <p><strong>VISUAL RESULT:</strong></p>
-<div style="white-space: pre-line;">The <em>limerick packs</em> laughs anatomical
+<div class="line-block">The <em>limerick packs</em> laughs anatomical
 In space that is quite economical.
    But the good ones I’ve seen
    So seldom are <strong>clean</strong>
@@ -124,16 +124,16 @@ And the clean ones so seldom are <code>comical</code>.</div>
 <p><br /></p>
 <hr />
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
-If X = 1
-<span class="bn">    printN(&quot;xxx&quot;)</span>
-EndIf
-```
-</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">```</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">If X = 1</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="bn">    printN(&quot;xxx&quot;)</span></div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">EndIf</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">```</div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6"></div></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>If X = 1
-    printN(<span class="dv">&amp;quot;</span>xxx<span class="dv">&amp;quot;</span>)
-EndIf<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>If X = 1</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">    printN(<span class="dv">&amp;quot;</span>xxx<span class="dv">&amp;quot;</span>)</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">EndIf<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
 <p><strong>VISUAL RESULT:</strong></p>
 <pre><code>If X = 1
     printN(&quot;xxx&quot;)

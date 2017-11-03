@@ -87,32 +87,34 @@ Next"></code></pre>
 <h1 id="code-and-verbatim">Code and Verbatim</h1>
 <p>Some tests for code, syntax highlighting and preformatted blocks.</p>
 <ul>
-<li><a href="http://pandoc.org/MANUAL.html">Pandoc Documentation</a>:</li>
+<li><a href="http://pandoc.org/MANUAL.html">Pandoc Documentation</a>:
+<ul>
 <li><a href="http://pandoc.org/MANUAL.html#verbatim-code-blocks">Verbatim (code) blocks</a></li>
+</ul></li>
 </ul>
 <h1 id="preformatted-blocks">Preformatted Blocks</h1>
 <p>In order to achieve a simple <code>&lt;pre&gt;</code> block (not followed by the <code>&lt;code&gt;</code> code) you have to resort to raw HTML tags inside markdown — ie: there is no way to achived it in pure markdown.</p>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></div></code></pre>
 <p><strong>HTML RESULT:</strong></p>
 <pre>I'm a preformatted block, no code inside</pre>
 <h1 id="non-highlighted-code-blocks">Non-Highlighted Code Blocks</h1>
 <p>To define a code block without any highlighting, just enclosed it in tildas or backticks (fenced code), or use indentation (4 spaces or one Tab).</p>
 <p><strong>MARKDOWN SOURCE:</strong></p>
 <p>fenced (backticks):</p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
-For i=1 To 10
-  Debug(&quot;Counting &quot; + Str(i))
-Next
-```</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">```</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">For i=1 To 10</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">  Debug(&quot;Counting &quot; + Str(i))</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">Next</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">```</div></code></pre>
 <p>identented (4 spaces):</p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">    For i=1 To 10</span>
-<span class="bn">      Debug(&quot;Counting &quot; + Str(i))</span>
-<span class="bn">    Next</span></code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="bn">    For i=1 To 10</span></div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="bn">      Debug(&quot;Counting &quot; + Str(i))</span></div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="bn">    Next</span></div></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10
-  Debug(&quot;Counting &quot; + Str(i))
-Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">  Debug(&quot;Counting &quot; + Str(i))</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
 <p><strong>HTML RESULT:</strong></p>
 <pre><code>For i=1 To 10
   Debug(&quot;Counting &quot; + Str(i))
@@ -120,256 +122,138 @@ Next</code></pre>
 <h1 id="pandoc-highlighting">Pandoc Highlighting</h1>
 <h2 id="line-numbers">Line Numbers</h2>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}
-qsort []     = []
-qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
-<span class="bn">               qsort (filter (&gt;= x) xs)</span>
-~~~~</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">qsort []     = []</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="bn">               qsort (filter (&gt;= x) xs)</span></div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">~~~~</div></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> startfrom=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;table</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell numberLines&quot;</span><span class="kw">&gt;&lt;tbody&gt;&lt;tr</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;lineNumbers&quot;</span><span class="kw">&gt;&lt;pre&gt;</span>100
-101
-102
-<span class="kw">&lt;/pre&gt;&lt;/td&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell&quot;</span><span class="kw">&gt;</span>qsort []     <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> []
-qsort (x<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>:<span class="kw">&lt;/span&gt;</span>xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;lt;</span><span class="kw">&lt;/span&gt;</span> x) xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span> [x] <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span>
-               qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;gt;</span>=<span class="kw">&lt;/span&gt;</span> x) xs)<span class="kw">&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> startfrom=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;table</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell numberLines&quot;</span><span class="kw">&gt;&lt;tbody&gt;&lt;tr</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;lineNumbers&quot;</span><span class="kw">&gt;&lt;pre&gt;</span>100</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">101</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">102</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="kw">&lt;/pre&gt;&lt;/td&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell&quot;</span><span class="kw">&gt;</span>qsort []     <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> []</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">qsort (x<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>:<span class="kw">&lt;/span&gt;</span>xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;lt;</span><span class="kw">&lt;/span&gt;</span> x) xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span> [x] <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span></div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6">               qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;gt;</span>=<span class="kw">&lt;/span&gt;</span> x) xs)<span class="kw">&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</span></div></code></pre>
 <p><strong>HTML RESULT:</strong></p>
-<div class="sourceCode" id="mycode" startFrom="100"><table class="sourceCode haskell numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>100
-101
-102
-</pre></td><td class="sourceCode"><pre><code class="sourceCode haskell">qsort []     <span class="fu">=</span> []
-qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span>
-               qsort (filter (<span class="fu">&gt;=</span> x) xs)</code></pre></td></tr></table></div>
+<pre class="sourceCode numberSource haskell numberLines" id="mycode" data-startFrom="100"><code class="sourceCode haskell"><div class="sourceLine" id="100" href="#100" data-line-number="100">qsort []     <span class="fu">=</span> []</div>
+<div class="sourceLine" id="101" href="#101" data-line-number="101">qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span></div>
+<div class="sourceLine" id="102" href="#102" data-line-number="102">               qsort (filter (<span class="fu">&gt;=</span> x) xs)</div></code></pre>
 <h3 id="test-line-numbers">Test line numbers…</h3>
-<div class="sourceCode" id="mycode" startFrom="1"><table class="sourceCode python numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-</pre></td><td class="sourceCode"><pre><code class="sourceCode python"><span class="im">from</span> appium <span class="im">import</span> webdriver
-<span class="im">from</span> appium <span class="im">import</span> SauceTestCase, on_platforms
-<span class="im">from</span> appium.webdriver.common.touch_action <span class="im">import</span> TouchAction
-<span class="im">from</span> appium.webdriver.common.multi_action <span class="im">import</span> MultiAction
-
-<span class="im">from</span> time <span class="im">import</span> sleep
-
-app <span class="op">=</span> <span class="st">&quot;http://appium.github.io/appium/assets/ApiDemos-debug.apk&quot;</span>
-platforms <span class="op">=</span> [{
-                <span class="st">&quot;platformName&quot;</span>: <span class="st">&quot;Android&quot;</span>,
-                <span class="st">&quot;platformVersion&quot;</span>: <span class="st">&quot;4.4&quot;</span>,
-                <span class="st">&quot;deviceName&quot;</span>: <span class="st">&quot;Android Emulator&quot;</span>,
-                <span class="st">&quot;appActivity&quot;</span>: <span class="st">&quot;.graphics.TouchPaint&quot;</span>,
-                <span class="st">&quot;app&quot;</span>: app,
-                <span class="st">&quot;appiumVersion&quot;</span>: <span class="st">&quot;1.3.4&quot;</span>
-            }]
-
-
-<span class="at">@on_platforms</span>(platforms)
-<span class="kw">class</span> AndroidGesturesSauceTests(SauceTestCase):
-
-    <span class="kw">def</span> test_drag_and_drop(<span class="va">self</span>):
-        <span class="co"># first get to the right activity</span>
-        <span class="va">self</span>.driver.start_activity(<span class="st">&quot;io.appium.android.apis&quot;</span>, <span class="st">&quot;.view.DragAndDropDemo&quot;</span>)
-
-        start <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_dot_3&quot;</span>)
-        end <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_dot_2&quot;</span>)
-
-        action <span class="op">=</span> TouchAction(<span class="va">self</span>.driver)<span class="op">;</span>
-        action.long_press(start).move_to(end).release().perform()
-
-        sleep(.<span class="dv">5</span>)
-
-        text <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_result_text&quot;</span>).text
-        <span class="va">self</span>.assertEqual(text, <span class="st">&quot;Dropped!&quot;</span>)
-
-
-    <span class="kw">def</span> test_smiley_face(<span class="va">self</span>):
-        <span class="co"># just for the fun of it.</span>
-        <span class="co"># this doesn&#39;t really assert anything.</span>
-        <span class="co"># paint</span>
-        eye1 <span class="op">=</span> TouchAction()
-        eye1.press(x<span class="op">=</span><span class="dv">150</span>, y<span class="op">=</span><span class="dv">100</span>).release()
-
-        eye2 <span class="op">=</span> TouchAction()
-        eye2.press(x<span class="op">=</span><span class="dv">250</span>, y<span class="op">=</span><span class="dv">100</span>).release()
-
-        smile <span class="op">=</span> TouchAction()
-        smile.press(x<span class="op">=</span><span class="dv">110</span>, y<span class="op">=</span><span class="dv">200</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span>
-            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>)
-        smile.release()
-
-        ma <span class="op">=</span> MultiAction(<span class="va">self</span>.driver)
-        ma.add(eye1, eye2, smile)
-        ma.perform()
-
-        <span class="co"># so you can see it</span>
-        sleep(<span class="dv">10</span>)</code></pre></td></tr></table></div>
+<pre class="sourceCode numberSource python numberLines" id="mycode" data-startFrom="1"><code class="sourceCode python"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="im">from</span> appium <span class="im">import</span> webdriver</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="im">from</span> appium <span class="im">import</span> SauceTestCase, on_platforms</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="im">from</span> appium.webdriver.common.touch_action <span class="im">import</span> TouchAction</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="im">from</span> appium.webdriver.common.multi_action <span class="im">import</span> MultiAction</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5"></div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6"><span class="im">from</span> time <span class="im">import</span> sleep</div>
+<div class="sourceLine" id="7" href="#7" data-line-number="7"></div>
+<div class="sourceLine" id="8" href="#8" data-line-number="8">app <span class="op">=</span> <span class="st">&quot;http://appium.github.io/appium/assets/ApiDemos-debug.apk&quot;</span></div>
+<div class="sourceLine" id="9" href="#9" data-line-number="9">platforms <span class="op">=</span> [{</div>
+<div class="sourceLine" id="10" href="#10" data-line-number="10">                <span class="st">&quot;platformName&quot;</span>: <span class="st">&quot;Android&quot;</span>,</div>
+<div class="sourceLine" id="11" href="#11" data-line-number="11">                <span class="st">&quot;platformVersion&quot;</span>: <span class="st">&quot;4.4&quot;</span>,</div>
+<div class="sourceLine" id="12" href="#12" data-line-number="12">                <span class="st">&quot;deviceName&quot;</span>: <span class="st">&quot;Android Emulator&quot;</span>,</div>
+<div class="sourceLine" id="13" href="#13" data-line-number="13">                <span class="st">&quot;appActivity&quot;</span>: <span class="st">&quot;.graphics.TouchPaint&quot;</span>,</div>
+<div class="sourceLine" id="14" href="#14" data-line-number="14">                <span class="st">&quot;app&quot;</span>: app,</div>
+<div class="sourceLine" id="15" href="#15" data-line-number="15">                <span class="st">&quot;appiumVersion&quot;</span>: <span class="st">&quot;1.3.4&quot;</span></div>
+<div class="sourceLine" id="16" href="#16" data-line-number="16">            }]</div>
+<div class="sourceLine" id="17" href="#17" data-line-number="17"></div>
+<div class="sourceLine" id="18" href="#18" data-line-number="18"></div>
+<div class="sourceLine" id="19" href="#19" data-line-number="19"><span class="at">@on_platforms</span>(platforms)</div>
+<div class="sourceLine" id="20" href="#20" data-line-number="20"><span class="kw">class</span> AndroidGesturesSauceTests(SauceTestCase):</div>
+<div class="sourceLine" id="21" href="#21" data-line-number="21"></div>
+<div class="sourceLine" id="22" href="#22" data-line-number="22">    <span class="kw">def</span> test_drag_and_drop(<span class="va">self</span>):</div>
+<div class="sourceLine" id="23" href="#23" data-line-number="23">        <span class="co"># first get to the right activity</span></div>
+<div class="sourceLine" id="24" href="#24" data-line-number="24">        <span class="va">self</span>.driver.start_activity(<span class="st">&quot;io.appium.android.apis&quot;</span>, <span class="st">&quot;.view.DragAndDropDemo&quot;</span>)</div>
+<div class="sourceLine" id="25" href="#25" data-line-number="25"></div>
+<div class="sourceLine" id="26" href="#26" data-line-number="26">        start <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_dot_3&quot;</span>)</div>
+<div class="sourceLine" id="27" href="#27" data-line-number="27">        end <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_dot_2&quot;</span>)</div>
+<div class="sourceLine" id="28" href="#28" data-line-number="28"></div>
+<div class="sourceLine" id="29" href="#29" data-line-number="29">        action <span class="op">=</span> TouchAction(<span class="va">self</span>.driver)<span class="op">;</span></div>
+<div class="sourceLine" id="30" href="#30" data-line-number="30">        action.long_press(start).move_to(end).release().perform()</div>
+<div class="sourceLine" id="31" href="#31" data-line-number="31"></div>
+<div class="sourceLine" id="32" href="#32" data-line-number="32">        sleep(.<span class="dv">5</span>)</div>
+<div class="sourceLine" id="33" href="#33" data-line-number="33"></div>
+<div class="sourceLine" id="34" href="#34" data-line-number="34">        text <span class="op">=</span> <span class="va">self</span>.driver.find_element_by_id(<span class="st">&quot;io.appium.android.apis:id/drag_result_text&quot;</span>).text</div>
+<div class="sourceLine" id="35" href="#35" data-line-number="35">        <span class="va">self</span>.assertEqual(text, <span class="st">&quot;Dropped!&quot;</span>)</div>
+<div class="sourceLine" id="36" href="#36" data-line-number="36"></div>
+<div class="sourceLine" id="37" href="#37" data-line-number="37"></div>
+<div class="sourceLine" id="38" href="#38" data-line-number="38">    <span class="kw">def</span> test_smiley_face(<span class="va">self</span>):</div>
+<div class="sourceLine" id="39" href="#39" data-line-number="39">        <span class="co"># just for the fun of it.</span></div>
+<div class="sourceLine" id="40" href="#40" data-line-number="40">        <span class="co"># this doesn&#39;t really assert anything.</span></div>
+<div class="sourceLine" id="41" href="#41" data-line-number="41">        <span class="co"># paint</span></div>
+<div class="sourceLine" id="42" href="#42" data-line-number="42">        eye1 <span class="op">=</span> TouchAction()</div>
+<div class="sourceLine" id="43" href="#43" data-line-number="43">        eye1.press(x<span class="op">=</span><span class="dv">150</span>, y<span class="op">=</span><span class="dv">100</span>).release()</div>
+<div class="sourceLine" id="44" href="#44" data-line-number="44"></div>
+<div class="sourceLine" id="45" href="#45" data-line-number="45">        eye2 <span class="op">=</span> TouchAction()</div>
+<div class="sourceLine" id="46" href="#46" data-line-number="46">        eye2.press(x<span class="op">=</span><span class="dv">250</span>, y<span class="op">=</span><span class="dv">100</span>).release()</div>
+<div class="sourceLine" id="47" href="#47" data-line-number="47"></div>
+<div class="sourceLine" id="48" href="#48" data-line-number="48">        smile <span class="op">=</span> TouchAction()</div>
+<div class="sourceLine" id="49" href="#49" data-line-number="49">        smile.press(x<span class="op">=</span><span class="dv">110</span>, y<span class="op">=</span><span class="dv">200</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="50" href="#50" data-line-number="50">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="51" href="#51" data-line-number="51">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="52" href="#52" data-line-number="52">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="53" href="#53" data-line-number="53">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="54" href="#54" data-line-number="54">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="55" href="#55" data-line-number="55">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="56" href="#56" data-line-number="56">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="57" href="#57" data-line-number="57">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="58" href="#58" data-line-number="58">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="59" href="#59" data-line-number="59">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="60" href="#60" data-line-number="60">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="61" href="#61" data-line-number="61">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="62" href="#62" data-line-number="62">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="63" href="#63" data-line-number="63">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="64" href="#64" data-line-number="64">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="65" href="#65" data-line-number="65">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="66" href="#66" data-line-number="66">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="67" href="#67" data-line-number="67">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="68" href="#68" data-line-number="68">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="69" href="#69" data-line-number="69">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="70" href="#70" data-line-number="70">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="71" href="#71" data-line-number="71">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="72" href="#72" data-line-number="72">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="73" href="#73" data-line-number="73">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="74" href="#74" data-line-number="74">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="75" href="#75" data-line-number="75">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="76" href="#76" data-line-number="76">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="77" href="#77" data-line-number="77">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="78" href="#78" data-line-number="78">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="79" href="#79" data-line-number="79">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="80" href="#80" data-line-number="80">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="81" href="#81" data-line-number="81">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="82" href="#82" data-line-number="82">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=</span><span class="dv">0</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="83" href="#83" data-line-number="83">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="84" href="#84" data-line-number="84">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="85" href="#85" data-line-number="85">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="86" href="#86" data-line-number="86">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="87" href="#87" data-line-number="87">            .move_to(x<span class="op">=</span><span class="dv">5</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="88" href="#88" data-line-number="88">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="89" href="#89" data-line-number="89">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="90" href="#90" data-line-number="90">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="91" href="#91" data-line-number="91">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="92" href="#92" data-line-number="92">            .move_to(x<span class="op">=</span><span class="dv">4</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="93" href="#93" data-line-number="93">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="94" href="#94" data-line-number="94">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="95" href="#95" data-line-number="95">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="96" href="#96" data-line-number="96">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="97" href="#97" data-line-number="97">            .move_to(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="98" href="#98" data-line-number="98">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="99" href="#99" data-line-number="99">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="100" href="#100" data-line-number="100">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="101" href="#101" data-line-number="101">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="102" href="#102" data-line-number="102">            .move_to(x<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="103" href="#103" data-line-number="103">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="104" href="#104" data-line-number="104">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="105" href="#105" data-line-number="105">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="106" href="#106" data-line-number="106">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>) <span class="op">\</span></div>
+<div class="sourceLine" id="107" href="#107" data-line-number="107">            .move_to(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=-</span><span class="dv">1</span>)</div>
+<div class="sourceLine" id="108" href="#108" data-line-number="108">        smile.release()</div>
+<div class="sourceLine" id="109" href="#109" data-line-number="109"></div>
+<div class="sourceLine" id="110" href="#110" data-line-number="110">        ma <span class="op">=</span> MultiAction(<span class="va">self</span>.driver)</div>
+<div class="sourceLine" id="111" href="#111" data-line-number="111">        ma.add(eye1, eye2, smile)</div>
+<div class="sourceLine" id="112" href="#112" data-line-number="112">        ma.perform()</div>
+<div class="sourceLine" id="113" href="#113" data-line-number="113"></div>
+<div class="sourceLine" id="114" href="#114" data-line-number="114">        <span class="co"># so you can see it</span></div>
+<div class="sourceLine" id="115" href="#115" data-line-number="115">        sleep(<span class="dv">10</span>)</div></code></pre>
 <hr />
 <h1 id="highlight">Highlight</h1>
 <h2 id="block-simple">Block Simple</h2>
@@ -404,7 +288,7 @@ Next
 </code></pre>
 <p>… which produces (horizontal rulers added):</p>
 <hr />
-<div style="white-space: pre-line;">The limerick packs laughs anatomical
+<div class="line-block">The limerick packs laughs anatomical
 In space that is quite economical.
    But the good ones I’ve seen
    So seldom are clean
@@ -419,7 +303,7 @@ And the clean ones so seldom are comical</div>
 </code></pre>
 <p>… which produces (horizontal rulers added):</p>
 <hr />
-<div style="white-space: pre-line;">The Right Honorable Most Venerable and Righteous Samuel L. Constable, Jr.
+<div class="line-block">The Right Honorable Most Venerable and Righteous Samuel L. Constable, Jr.
 200 Main St.
 Berkeley, CA 94718</div>
 <hr />
@@ -428,13 +312,13 @@ Berkeley, CA 94718</div>
 </code></pre>
 <p>… which produces (horizontal rulers added):</p>
 <hr />
-<div style="white-space: pre-line;">A very lengthy and overly-verbose line of text that will surely exceed its container’s width by an abundant measure and force wrapping!</div>
+<div class="line-block">A very lengthy and overly-verbose line of text that will surely exceed its container’s width by an abundant measure and force wrapping!</div>
 <hr />
 <h1 id="snippets">SNIPPETS</h1>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"></code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"></code></pre>
 <p><strong>HTML RESULT:</strong></p>
 				</div><!-- end document -->
 				<div id="sidebar">

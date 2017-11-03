@@ -36,8 +36,10 @@
 <h1 id="code-and-verbatim">Code and Verbatim</h1>
 <p>Some tests for code, syntax highlighting and preformatted blocks.</p>
 <ul>
-<li><a href="http://pandoc.org/MANUAL.html">Pandoc Documentation</a>:</li>
+<li><a href="http://pandoc.org/MANUAL.html">Pandoc Documentation</a>:
+<ul>
 <li><a href="http://pandoc.org/MANUAL.html#verbatim-code-blocks">Verbatim (code) blocks</a></li>
+</ul></li>
 </ul>
 <hr />
 <h1 id="columns-ruler">80 Columns Ruler</h1>
@@ -76,33 +78,33 @@
 <p><strong>MARKDOWN SOURCE:</strong></p>
 <pre><code>Inline Python: `s = &#39;The value of x is &#39; + repr(x)`{.python}.</code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;p&gt;</span>Inline Python: <span class="kw">&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode python&quot;</span><span class="kw">&gt;</span>s <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;op&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;st&quot;</span><span class="kw">&gt;</span>&#39;The value of x is &#39;<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;op&quot;</span><span class="kw">&gt;</span>+<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;bu&quot;</span><span class="kw">&gt;</span>repr<span class="kw">&lt;/span&gt;</span>(x)<span class="kw">&lt;/code&gt;</span>.<span class="kw">&lt;/p&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;p&gt;</span>Inline Python: <span class="kw">&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode python&quot;</span><span class="kw">&gt;</span>s <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;op&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;st&quot;</span><span class="kw">&gt;</span>&#39;The value of x is &#39;<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;op&quot;</span><span class="kw">&gt;</span>+<span class="kw">&lt;/span&gt;</span> <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;bu&quot;</span><span class="kw">&gt;</span>repr<span class="kw">&lt;/span&gt;</span>(x)<span class="kw">&lt;/code&gt;</span>.<span class="kw">&lt;/p&gt;</span></div></code></pre>
 <p>… come vedi, ha eseguito il syntax highlighting dell’inline-code!!</p>
 <p><strong>HTML RESULT:</strong></p>
 <p>Inline Python: <code class="sourceCode python">s <span class="op">=</span> <span class="st">&#39;The value of x is &#39;</span> <span class="op">+</span> <span class="bu">repr</span>(x)</code>.</p>
 <h1 id="preformatted-blocks">Preformatted Blocks</h1>
 <p>In order to achieve a simple <code>&lt;pre&gt;</code> block (not followed by <code>&lt;code&gt;</code>)…</p>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></div></code></pre>
 <p><strong>HTML RESULT:</strong></p>
 <pre>I'm a preformatted block, no code inside</pre>
 <h1 id="non-highlighted-code-blocks">Non-Highlighted Code Blocks</h1>
 <p>To define a code block without any highlighting, just enclosed it in tildas or backticks (fenced code), or use indentation (4 spaces or one Tab).</p>
 <p><strong>MARKDOWN SOURCE:</strong></p>
 <p>fenced (backticks):</p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">```
-For i=1 To 10
-  Debug(&quot;Counting &quot; + Str(i))
-Next
-```</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">```</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">For i=1 To 10</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">  Debug(&quot;Counting &quot; + Str(i))</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">Next</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">```</div></code></pre>
 <p>identented (4 spaces):</p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">    For i=1 To 10</span>
-<span class="bn">      Debug(&quot;Counting &quot; + Str(i))</span>
-<span class="bn">    Next</span></code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="bn">    For i=1 To 10</span></div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="bn">      Debug(&quot;Counting &quot; + Str(i))</span></div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="bn">    Next</span></div></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10
-  Debug(&quot;Counting &quot; + Str(i))
-Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">  Debug(&quot;Counting &quot; + Str(i))</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
 <p><strong>HTML RESULT:</strong></p>
 <pre><code>For i=1 To 10
   Debug(&quot;Counting &quot; + Str(i))
@@ -110,25 +112,22 @@ Next</code></pre>
 <h1 id="pandoc-highlighting">Pandoc Highlighting</h1>
 <h2 id="line-numbers">Line Numbers</h2>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}
-qsort []     = []
-qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
-<span class="bn">               qsort (filter (&gt;= x) xs)</span>
-~~~~</code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><div class="sourceLine" id="1" href="#1" data-line-number="1">~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">qsort []     = []</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="bn">               qsort (filter (&gt;= x) xs)</span></div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">~~~~</div></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> startfrom=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;table</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell numberLines&quot;</span><span class="kw">&gt;&lt;tbody&gt;&lt;tr</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;lineNumbers&quot;</span><span class="kw">&gt;&lt;pre&gt;</span>100
-101
-102
-<span class="kw">&lt;/pre&gt;&lt;/td&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell&quot;</span><span class="kw">&gt;</span>qsort []     <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> []
-qsort (x<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>:<span class="kw">&lt;/span&gt;</span>xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;lt;</span><span class="kw">&lt;/span&gt;</span> x) xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span> [x] <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span>
-               qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;gt;</span>=<span class="kw">&lt;/span&gt;</span> x) xs)<span class="kw">&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</span></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> startfrom=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;table</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell numberLines&quot;</span><span class="kw">&gt;&lt;tbody&gt;&lt;tr</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;lineNumbers&quot;</span><span class="kw">&gt;&lt;pre&gt;</span>100</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">101</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">102</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="kw">&lt;/pre&gt;&lt;/td&gt;&lt;td</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;&lt;pre&gt;&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode haskell&quot;</span><span class="kw">&gt;</span>qsort []     <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> []</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5">qsort (x<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>:<span class="kw">&lt;/span&gt;</span>xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>=<span class="kw">&lt;/span&gt;</span> qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;lt;</span><span class="kw">&lt;/span&gt;</span> x) xs) <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span> [x] <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span>++<span class="kw">&lt;/span&gt;</span></div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6">               qsort (filter (<span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fu&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;gt;</span>=<span class="kw">&lt;/span&gt;</span> x) xs)<span class="kw">&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</span></div></code></pre>
 <p><strong>HTML RESULT:</strong></p>
-<div class="sourceCode" id="mycode" startFrom="100"><table class="sourceCode haskell numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>100
-101
-102
-</pre></td><td class="sourceCode"><pre><code class="sourceCode haskell">qsort []     <span class="fu">=</span> []
-qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span>
-               qsort (filter (<span class="fu">&gt;=</span> x) xs)</code></pre></td></tr></table></div>
+<pre class="sourceCode numberSource haskell numberLines" id="mycode" data-startFrom="100"><code class="sourceCode haskell"><div class="sourceLine" id="100" href="#100" data-line-number="100">qsort []     <span class="fu">=</span> []</div>
+<div class="sourceLine" id="101" href="#101" data-line-number="101">qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span></div>
+<div class="sourceLine" id="102" href="#102" data-line-number="102">               qsort (filter (<span class="fu">&gt;=</span> x) xs)</div></code></pre>
 <hr />
 <h1 id="highlight">Highlight</h1>
 <h2 id="block-simple">Block Simple</h2>
@@ -154,9 +153,9 @@ Next
 <hr />
 <h1 id="snippets">SNIPPETS</h1>
 <p><strong>MARKDOWN SOURCE:</strong></p>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown"></code></pre></div>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"></code></pre>
 <p><strong>HTML OUTPUT:</strong></p>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"></code></pre></div>
+<pre class="sourceCode html"><code class="sourceCode html"></code></pre>
 <p><strong>HTML RESULT:</strong></p>
 				</div><!-- end document -->
 				<div id="sidebar">
