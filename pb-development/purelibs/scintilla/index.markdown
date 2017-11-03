@@ -95,9 +95,18 @@ About Scintilla
 
 In PureBASIC for Windows the Scintilla component comes as a shared library (DLL) which has to be distributed with the final application — it’s named `Scintilla.dll` and can be found inside PureBASIC’s `/compilers/` subfolder, usually at this path:
 
-``` nohighlight
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+the code below is wrapped in !raw macros because the "\PureBasic" string is mistaken for a macro! This won't happen with PP > 2.0.
+REMOVE !raw BLOCK WHEN PORTED TO PP 2.0!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!raw
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 C:\Program Files\PureBasic\compilers\Scintilla.dll
 ```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In PureBASIC for Linux and Mac it comes as a static library that is automatically linked with the final compiled binary application, and no additioanl files need to be distributed with your app.
 
