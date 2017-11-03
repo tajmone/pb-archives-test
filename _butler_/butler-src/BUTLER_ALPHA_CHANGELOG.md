@@ -3,6 +3,13 @@ Butler Alpha Changelog
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+-   `v0.1.6` (2017/11/03)
+    -   Now Butler looks for a “`_butler.pp`” file in each folder: if present, it is added to PP invocation (as `-import`) *before* the markdown source document (unlike “`_butler.yaml`”, which is added _after_ the MD source file).
+
+        This allows to define folder-wide PP macros, available to all docs.
+
+        The reason this feature was added was because even though macros could be defined inside “`_butler.yaml`”, in order to allow vars defined in YAML of source docs to override those in “`_butler.yaml`”, the latter had to be loaded *after* the source doc — because pandoc will ignore variables defined more than once (only 1st def is retained). Since folder-wide macros need to be defined _before_ their actual occurence in a doc (PP is a single-pass parser), I needed a folder-wide common file that could be loaded before the MD source file.
+
 -   `v0.1.5` (2017/10/28)
     -   Now Highlight.pp uses the `--data-dir=$HIGHLIGHT_DATADIR` option to find custom langdefs overrides folder-wide. No longer uses the `--config-file` opt to override each langdef individually.
     -   Langdefs moved to `/_butler_/highlight-data/langDefs/` folder.

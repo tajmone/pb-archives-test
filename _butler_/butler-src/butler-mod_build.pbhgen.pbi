@@ -13,7 +13,7 @@ Declare init()
 Declare BuildFolder(dirPath$, recursive = #False)
 Declare FileIsBuildEligible(fileName$, List mdFilesReportL.s())
 Declare FolderIsBuildEligible(folderName$, List foldersReportL.s())
-Declare ConvertToHTML(MDsourceFile$, folderYAML)
+Declare ConvertToHTML(MDsourceFile$, folderYAML, folderPP)
 CompilerEndIf
 CompilerIf #PB_Compiler_Module = ""
 CompilerEndIf
