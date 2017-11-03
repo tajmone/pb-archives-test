@@ -11,9 +11,9 @@
 ; ==============================================================================
 ; Assign to these constants the default settings that should go in the template:
 
-#ButlerVersion =    "0.1.7"    ; Strict match!
+#ButlerVersion =    "0.1.8"    ; Strict match!
 #PPVersion =        "1.11"     ; Strict match!
-#PandocVersion =    "1.19.2.1" ; Strict match!
+#PandocVersion =    "2.0.1"    ; Strict match!
 #HighlightVersion = "3.40"     ; MinVer match!
   
 ; ==============================================================================
