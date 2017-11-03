@@ -8,16 +8,17 @@ description: >-
     runtime performance of our PureBasic Object-Oriented implementation.
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial,
                 optimisations, runtime performance
+# Pagination Alt text macros defined in "_bulter.pp":
 pagination:
     - text: PREV
       link: purebasic-oop-8.html
-      alt:  Go to previous page
+      alt:  !PREV
     - text: TOC
       link: index.html
-      alt:  Tutorial's Table of Contents 
+      alt:  !TOC 
     - text: NEXT
       link:
-      alt:  Go to next page
+      alt:  !NEXT
 ...
 
 !comment{   ORIGINAL DOC URL   }

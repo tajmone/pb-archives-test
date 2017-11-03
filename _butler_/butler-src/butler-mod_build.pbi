@@ -109,7 +109,16 @@ Module build
     ; NOTE: I could move 'path2root$' definition back into main body and then
     ;       add it to the "Shared" vars, and reset it at each procedure call.
     ;       This could help if its needed inside some procedures!
-    
+    ; ------------------------------------------------------------------------------
+    ;-                    CHECK IF FOLDER HAS "_butler.pp" FILE                     
+    ; ------------------------------------------------------------------------------
+    Print(~"\"_butler.pp\" FILE: ")
+    If FileSize(dirPath$ + "_butler.pp") > 0
+      folderPP = #True
+      PrintN(~"FOUND!\n")      ; BDG "_butler.pp"
+    Else
+      PrintN(~"NOT FOUND!\n")  ; BDG "_butler.pp"
+    EndIf  
     ; ------------------------------------------------------------------------------
     ;                 CHECK IF FOLDER HAS "_butler.yaml" DEFAULT FILE                
     ; ------------------------------------------------------------------------------
@@ -286,7 +295,7 @@ Module build
         PrintN("  " + cntCurr$ + "/" + cntTot$ + " - " + 
                FS::#DIR_SEP$ + subPath$ +mdFilesL()) ; Print file info
                                                      ; 
-        ConvertToHTML(mdFilesL(), folderYAML)
+        ConvertToHTML(mdFilesL(), folderYAML, folderPP)
         ; =======================================
         cnt + 1 
       Next
@@ -353,7 +362,7 @@ Module build
   ;                                Convert to HTML                                
   ; ==============================================================================
   
-  Procedure ConvertToHTML(MDsourceFile$, folderYAML)
+  Procedure ConvertToHTML(MDsourceFile$, folderYAML, folderPP)
     ; MDsourceFile$ = The Markdown file to convert to HTML
     ; folderYAML    = A boolean indicating if current folder has a "_butler.yaml" 
     ;                 settings file (to be appended to source files list).
@@ -363,15 +372,28 @@ Module build
     Shared argsPandoc$       ; Pandoc args  (good to go)
     
     ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    ;                                    PP SETUP                                   
+    ;-                                   PP SETUP                                   
     ;{//////////////////////////////////////////////////////////////////////////////
-    argsPP$ = PP_MACROS_IMPORT$ + MDsourceFile$
-    
-    If folderYAML ; Current folder contains a "_butler.yaml" settings file... 
-      argsPP$ + " _butler.yaml" ; <= add it to PP's command line args.
+    argsPP$ = PP_MACROS_IMPORT$    
+    ; NOTE: "_butler.pp" is passed to PP before the MD source file, because it will
+    ;        contain macro definition shared by multiple docs (and macros must be
+    ;        defined before their actual occurence!).
+    If folderPP ; Current folder contains a "_butler.pp" settings file... 
+      argsPP$ + "-import=_butler.pp " ; <= add it to PP's command line args.
     EndIf
     
-    If #False ; Don't show. (might keep it for verbose option)
+    
+    argsPP$ + MDsourceFile$
+    
+    ; NOTE: "_butler.yaml" file is passed to PP after the MD source file because
+    ;       when a YAML var is defined twice pandoc will stick to the 1st definition,
+    ;       and we need to allow doc YAML to override definition in "_butler.yaml".
+    If folderYAML ; Current folder contains a "_butler.yaml" settings file... 
+      argsPP$ + " _butler.yaml " ; <= add it to PP's command line args.
+    EndIf
+    
+    
+    If #False ; Don't show. (might keep it for verbose option) #True | #False
       PrintN("argsPP$: "+ argsPP$) ; DBG PP Args
     EndIf
     ;}////// END :: PP SETUP ///////////////////////////////////////////////////////

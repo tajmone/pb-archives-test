@@ -7,16 +7,17 @@ description: >-
     PureBASIC OOP Tutorial (2/9) — Analysis of the Object-Oriented Programming
     paradigm, its concepts and features. 
 keywords:       OOP, object-oriented, programming, paradigm, concepts
+# Pagination Alt text macros defined in "_bulter.pp":
 pagination:
     - text: PREV
       link: purebasic-oop-1.html
-      alt:  Go to previous page
+      alt:  !PREV
     - text: TOC
       link: index.html
-      alt:  Tutorial's Table of Contents 
+      alt:  !TOC 
     - text: NEXT
       link: purebasic-oop-3.html
-      alt:  Go to next page
+      alt:  !NEXT
 ...
 
 !comment{   ORIGINAL DOC URL   }
