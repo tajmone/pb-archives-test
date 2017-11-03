@@ -47,6 +47,15 @@ $chroma: add-colors('theme', (
 	Breadcrumbs-Link: 		LogoRight-BG, 					  // ("Fiord" blue) 
 	Breadcrumbs-Link-Hover: Logo-Red-Left, 				  	  // ("Persian Red")
 	// ==============================================================================
+	//                                   PAGINATION                                  
+	// ==============================================================================
+	// Color scheme for multi-part documents.
+	// We reuse the Header's colors...
+	Pagination-BG:			Header-BG,
+	Pagination-Separator:	(Pagination-BG darken 20%),
+	Pagination-Text:		(Pagination-BG darken 15%), // <= Inactive Links
+	Pagination-Link:		LogoRight-BG,			// (same as "PureBASIC" Text in Header)
+	// ==============================================================================
 	//                                     ALERTS                                    
 	// ==============================================================================
 	// Alert (Default) » Blue

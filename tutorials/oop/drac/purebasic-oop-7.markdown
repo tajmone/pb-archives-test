@@ -9,43 +9,21 @@ description: >-
     and explained with examples.
 keywords:       PureBasic, OOP, object-oriented, programming, classes,
                 implementation, example, library
-baseliner: true
+pagination:
+    - text: PREV
+      link: purebasic-oop-6.html
+      alt:  Go to previous page
+    - text: TOC
+      link: index.html
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link: purebasic-oop-8.html
+      alt:  Go to next page
 ...
 
 !comment{   ORIGINAL DOC URL   }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Classes_PB_en.htm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: WIP
-
-- [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Classes_PB_en.htm)
-
-__TODOs LIST__:
-!TaskList
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Fix Ordered Lists (`. text`)]
-!Task[x][Add metadata (description, keywords, ecc)]
-!Task[x][PB Source File reference links (defined in `_butler.yaml`)]
-!Task[x][Fix links (internal, using Header identifiers):]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][I can’t wait!]
-!Task[x][Show me now!]
-!Task[x][What?! I don’t remember!]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Fix links (reference style):]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][previous inheritance example]
-!Task[x][no, now!]
-!Task[x][presented in the Appendix]
-!Task[x][explained here]
-~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Add `subtitle` and fix header levels]
-!Task[ ][__Headers Levels__ need fixing! (h1 > h3)]
-!Task[x][Fix subtitle casing]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

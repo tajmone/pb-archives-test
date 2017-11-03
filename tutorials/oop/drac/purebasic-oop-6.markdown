@@ -8,32 +8,22 @@ description: >-
     on how to implement object classes and methods in PureBasic.
 keywords:       PureBasic, OOP, object-oriented, programming, reference,
                 implementation
-baseliner: true
+pagination:
+    - text: PREV
+      link: purebasic-oop-5.html
+      alt:  Go to previous page
+    - text: TOC
+      link: index.html
+      alt:  Tutorial's Table of Contents 
+    - text: NEXT
+      link: purebasic-oop-7.html
+      alt:  Go to next page
 ...
 
 !comment{   ORIGINAL DOC URL   }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Synthese_en.htm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## STATUS: WIP
-
-- [WWW ORIGINAL](http://drac.site.chez-alice.fr/Tutorials%20Programming%20PureBasic/POO/POO_Synthese_en.htm)
-
-__TODOs LIST__:
-!TaskList
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[x][Fix Ordered Lists (`. text`)]
-!Task[x][Add metadata (description, keywords, ecc)]
-!Task[x][Fix links: NONE]
-!Task[x][PB Source File reference links (defined in `_butler.yaml`)]
-!Task[x][Add `subtitle` and fix header levels]
-!Task[x][Fix subtitle casing]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 Before presenting the final Class implementation, I’m going to spend some time summarizing in a formal notation the work made so far. Implementation of an object involved the following elements:
 
@@ -140,5 +130,4 @@ EndProcedure
 Here is an example file of inheritance in action:
 
 * [`OOP-Inheritance-Ex1.pb`]
-
 

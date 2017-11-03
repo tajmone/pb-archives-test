@@ -38,6 +38,16 @@ The following tasks must be fulfilled before publishing on GitHub:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+## Pagination
+
+!TaskList
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][Instead of using Gridle Rows, try to fit pagination bars inside document, and top bar below title/subtitle.]
+!Task[ ][If `_butler.yaml` file was loaded _before_ actual source document, macros could be defined to be injected in pagination's YAML header (as well as other useful places.)]
+!Task[ ][When implemented loading `_butler.yaml` before doc, use custom PP macros for pagination vars in OOP tutorial]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ---------------------------------------
 
 !inc(_TODO-inc_PP-Macros.markdown)

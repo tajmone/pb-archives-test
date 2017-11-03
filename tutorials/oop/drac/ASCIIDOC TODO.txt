@@ -23,3 +23,8 @@ SPELLING ERRORS:
 
 	itsattributes	=> its attributes
 ---------------------------
+who also polsihed the English text =>
+who also polished the English text
+---------------------------
+---------------------------
+---------------------------
