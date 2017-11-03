@@ -670,6 +670,9 @@ mark.blue {
   mark.blue::selection {
     background-color: #76f4ff; }
 
+div.line-block {
+  white-space: pre-line; }
+
 p.FakeH3 {
   font-size: 20px;
   line-height: 36px;

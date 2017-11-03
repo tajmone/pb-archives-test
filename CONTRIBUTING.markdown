@@ -1,11 +1,8 @@
 ---
-title: 
-description:
-keywords:
+title: Contributing to The PureBASIC Archives
+# description:
+# keywords:
 ---
-
-Contributing to PureBASIC Archives
-==================================
 
 Before contributing to this project you should read these guidelines,
 especially the [Licenses section](#licenses).

@@ -18,7 +18,6 @@
 			<div class="gidle-row">
 
 				<header id="siteheader"></header>
-
 				<nav id="breadcrumbs">
 
 <ol>
@@ -30,7 +29,6 @@
 </ol>
 
 				</nav>
-
 				<div id="document">
 
 					<h1 class="title">PBHGEN – PureBasic Header Generator</h1>
@@ -52,11 +50,11 @@
 <li>At <strong>Event to trigger the tool</strong> select “<strong>Sourcecode Saved</strong>”.</li>
 </ul>
 <p>Ensure you include your headers in the Source using:</p>
-<div class="sourceCode"><pre class="sourceCode purebasic"><code class="sourceCode purebasic"><span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;i&quot;</span> <span class="co">;- PBHGEN</span></code></pre></div>
+<pre class="sourceCode purebasic"><code class="sourceCode purebasic"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;i&quot;</span> <span class="co">;- PBHGEN</span></div></code></pre>
 <p>To use automatic header generation also in modules use:</p>
-<div class="sourceCode"><pre class="sourceCode purebasic"><code class="sourceCode purebasic"><span class="kw">Module</span> MyModule
-  <span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;.i&quot;</span> <span class="co">;- PBHGEN</span>
-<span class="kw">EndModule</span></code></pre></div>
+<pre class="sourceCode purebasic"><code class="sourceCode purebasic"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">Module</span> MyModule</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">  <span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;.i&quot;</span> <span class="co">;- PBHGEN</span></div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="kw">EndModule</span></div></code></pre>
 <h1 id="remarks">Remarks</h1>
 <p>At the moment if you wish to have a procedure with structured List/Array/Map arguments, you will have to put that procedure above the code where you call it from. This does not apply when using basic types and is a limitation of PureBasic.</p>
 <h1 id="motivation">Motivation</h1>
@@ -152,7 +150,6 @@
 
 			</div><!-- end row -->
 		</div><!-- end container -->
-
 
 	</body>
 </html>

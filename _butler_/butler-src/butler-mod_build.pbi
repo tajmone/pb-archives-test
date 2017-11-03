@@ -29,7 +29,7 @@ DeclareModule build
   ; ==============================================================================
   ;                               CORE USER OPTIONS                               
   ; ==============================================================================
-  #PANDOC_TEMPLATE$ = "custom.html5"
+  #PANDOC_TEMPLATE$ = "pandoc.html5"
   ; ==============================================================================
   ;                           SHARED VARS AND CONSTANTS                           
   ; ==============================================================================
@@ -75,8 +75,8 @@ Module build
     PP_MACROS_IMPORT$ = "-import=" + ini::Butler\Path$ + #PP_MACROS_FILE$ + " "
     ;                 PP CLI options for importing macros. Passed at each invocation.
     ; ------------------------------------------------------------------------------
-    PANDOC_BASE_ARGS$ = "-f markdown -t html5 --template=" + ini::Butler\Path$ + #PANDOC_TEMPLATE$ + " " +
-                        "--toc --toc-depth=2 --smart --normalize"
+    PANDOC_BASE_ARGS$ = "-f markdown+smart -t html5 --template=" + ini::Butler\Path$ + #PANDOC_TEMPLATE$ + " " +
+                        "--toc --toc-depth=2"
     
     
     ;}------------------------------------------------------------------------------

@@ -1,3 +1,15 @@
+$--| ==============================================================================
+$--|                     The PureBASIC Archives Pandoc Template                    
+$--| ==============================================================================
+$--| "pandoc.html5" v0.1 | 2017/11/03 | Pandoc v2.0.1
+$--|
+$--| Created by Tristano Ajmone for "The PureBASIC Archives" project:
+$--| -- https://github.com/tajmone/purebasic-archives
+$--| -- https://tajmone.github.io/purebasic-archives/
+$--|
+$--| Copyright (c) Tristano Ajmone, 2017; released under the MIT License:
+$--| -- https://opensource.org/licenses/MIT
+$--| ==============================================================================
 <!doctype html>
 <html class="no-js" lang="$if(lang)$$lang$$else$en$endif$"$if(dir)$ dir="$dir$"$endif$>
 	<head>
@@ -33,12 +45,16 @@ $endfor$
 			<div class="gidle-row">
 
 				<header id="siteheader"></header>
-
+$------------------------------------------------------------------------------
+$--                             BREADCRUMBS BAR                                
+$------------------------------------------------------------------------------
 				<nav id="breadcrumbs">
 $breadcrumbs$
 
 				</nav>
-
+$------------------------------------------------------------------------------
+$--                           UPPER PAGINATION BAR                             
+$------------------------------------------------------------------------------
 $if(pagination)$
 				<div class="pagination">
 $for(pagination)$
@@ -70,6 +86,9 @@ $endif$
 			 </div><!-- end sidebar -->
 
 			</div><!-- end row -->
+$------------------------------------------------------------------------------
+$--                           LOWER PAGINATION BAR
+$------------------------------------------------------------------------------
 $if(pagination)$
 				<div class="pagination">
 $for(pagination)$
@@ -77,8 +96,15 @@ $for(pagination)$
 $endfor$
 				</div>
 $endif$
+$------------------------------------------------------------------------------
 		</div><!-- end container -->
 
+$------------------------------------------------------------------------------
+$--                BASELINER: VERTICAL RYTHM VISUAL DEBUGGER
+$------------------------------------------------------------------------------
+$-- https://keyes.ie/things/baseliner/
+$-- https://github.com/jkeyes/baseline
+$--
 $if(baseliner)$
 		<!-- baseliner -->
 		<script src="$ROOT$_assets/theme/js/baseliner.js"></script>
@@ -94,6 +120,6 @@ $if(baseliner)$
 		</script>
 		<!-- end baseliner -->
 $endif$				   
-
+$------------------------------------------------------------------------------
 	</body>
 </html>
