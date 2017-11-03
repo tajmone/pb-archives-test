@@ -7,16 +7,17 @@ description: >-
     PureBASIC OOP Tutorial (8/9) — Conclusion remarks on implementing and
     using Object-Oriented Programming in PureBasic.
 keywords:       PureBasic, OOP, object-oriented, programming, tutorial
+# Pagination Alt text macros defined in "_bulter.pp":
 pagination:
     - text: PREV
       link: purebasic-oop-7.html
-      alt:  Go to previous page
+      alt:  !PREV
     - text: TOC
       link: index.html
-      alt:  Tutorial's Table of Contents 
+      alt:  !TOC 
     - text: NEXT
       link: purebasic-oop-9.html
-      alt:  Go to next page
+      alt:  !NEXT
 ...
 
 !comment{   ORIGINAL DOC URL   }

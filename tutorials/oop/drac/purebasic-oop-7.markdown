@@ -9,16 +9,17 @@ description: >-
     and explained with examples.
 keywords:       PureBasic, OOP, object-oriented, programming, classes,
                 implementation, example, library
+# Pagination Alt text macros defined in "_bulter.pp":
 pagination:
     - text: PREV
       link: purebasic-oop-6.html
-      alt:  Go to previous page
+      alt:  !PREV
     - text: TOC
       link: index.html
-      alt:  Tutorial's Table of Contents 
+      alt:  !TOC 
     - text: NEXT
       link: purebasic-oop-8.html
-      alt:  Go to next page
+      alt:  !NEXT
 ...
 
 !comment{   ORIGINAL DOC URL   }

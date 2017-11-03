@@ -8,16 +8,17 @@ description: >-
     on how to implement object classes and methods in PureBasic.
 keywords:       PureBasic, OOP, object-oriented, programming, reference,
                 implementation
+# Pagination Alt text macros defined in "_bulter.pp":
 pagination:
     - text: PREV
       link: purebasic-oop-5.html
-      alt:  Go to previous page
+      alt:  !PREV
     - text: TOC
       link: index.html
-      alt:  Tutorial's Table of Contents 
+      alt:  !TOC 
     - text: NEXT
       link: purebasic-oop-7.html
-      alt:  Go to next page
+      alt:  !NEXT
 ...
 
 !comment{   ORIGINAL DOC URL   }
