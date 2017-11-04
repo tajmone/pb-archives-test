@@ -89,10 +89,11 @@ Thus, the proposed `Structure` is completely adapted to the notion of Class:
 
 When a similar Class definition is followed by the implementations of its methods (in our example, `Draw_Rectangle()`’s `Procedure : EndProcedure` block statement), it becomes a concrete Class. Otherwise, it will be an abstract Class.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 `*this` always refers to the object on which the method must be applied. This notation can be seen in the previous example, within the `Draw_Rectangle()` method.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Instanciation
@@ -182,10 +183,11 @@ To use `Rect2`’s `Draw()` and `Erase()` methods, I shall proceed the same way 
 
 This demonstrates that the `Rectangle2` Class inherited the properties of the `Rectangle` Class.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 Inheritance is a category of polymorphism. The object `Rect2` can be also seen as an Object from the `Rectangle` Class —  just don’t use the `Erase()` method! By inheritance, the object carries several forms: those of the objects coming from the Parent Classes. It is called inheritance polymorphism.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Overloading

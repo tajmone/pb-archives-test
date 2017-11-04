@@ -37,8 +37,7 @@
 					<h1 class="title">FASM Preprocessor Guide</h1>
 					<p class="subtitle">An introductory tutorial — by Vid, 2004</p>
 
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p><strong>WIP TODOs LIST</strong>:</p>
 <ul class="task-list">
 <li class="task-list-item">
@@ -70,15 +69,13 @@
 </li>
 </ul>
 </div>
-</div>
 <pre><code>Current revision: 2017-01-26</code></pre>
 <p>This is a reprint of the <em>FASM Preprocessor Guide</em> by «<strong>Vid</strong>», from the <strong>TAJGA Team</strong>. License: <a href="#legal-stuff">unrestricted</a> public domain (confirmed by Vid via private messagging). Last edited by the author in 2004-12-23.</p>
 <p>Ported to Markdown, edited and reprinted by Tristano Ajmone <a href="https://github.com/tajmone"><strong><span class="citation" data-cites="tajmone">@tajmone</span></strong></a> (2017-01-26). Original file downloaded from:</p>
 <ul>
 <li><a href="http://bos.asmhackers.net/docs/FASM%20tutorial/preproc.html">http://bos.asmhackers.net/docs/FASM%20tutorial/preproc.html</a></li>
 </ul>
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p><strong>CHANGES</strong> — Some changes made to original text:</p>
 <ul>
 <li>English text polished to improve readability.</li>
@@ -90,11 +87,8 @@
 <li>Applied highlighter style to key passages.</li>
 </ul>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p><strong>NOTE</strong> — The original website of the <strong>TAJGA Team</strong> is now defunct (tajga.kallimagarden.com), but the team has now an <a href="https://github.com/tajga">organization profile</a> and a <a href="http://tajga.github.io/">website</a> on GitHub.</p>
-</div>
 </div>
 <h1 id="introduction">Introduction</h1>
 <p>I wrote this doc because I saw many people asking lots of questions on FASM board because they’re’ understanding the genarl idea of the preprocessor, or one of its specific features. (I’m not discouraging you from asking anything on the forum — failing to understand something is not a shame, and if your question isn’t too hard someone will surely answer it).</p>
@@ -117,15 +111,11 @@
 <pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">xor</span> <span class="hl kwa">eax</span><span class="hl opt">,</span><span class="hl kwa">eax</span>
 <span class="hl kwb">mov</span> <span class="hl kwa">ecx</span><span class="hl opt">,</span>100h<span class="hl opt">/</span><span class="hl num">4</span>
 <span class="hl kwb">rep stosd</span></code></pre>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p><strong>NOTE</strong>: <code>;</code> can be also understood as a preprocessor operator which deletes all text beyond it, up to the end of that line.</p>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p><strong>NOTE</strong>: A line containing only a comment won’t be deleted, like in my example. It will become an empty line. I’ve skipped empty lines because of the text structure. This point will turn out to be important in the next chapter.</p>
-</div>
 </div>
 <h2 id="line-break">2.2. Line Break <code>\</code></h2>
 <p>If a line seems too long for you, you can “break” it with a backslash (“<code>\</code>”) symbol (or preprocessor operator). When a line ends with a <code>\</code>, the next line will be appended to current line.</p>
@@ -165,10 +155,8 @@
 <span class="hl kwd">include</span> <span class="hl str">&apos;%SYSTEMROOT%\somefile.inc&apos;</span>
 <span class="hl kwd">include</span> <span class="hl str">&apos;%myproject%\headers\something.inc&apos;</span>
 <span class="hl kwd">include</span> <span class="hl str">&apos;C:\%myprojectdir%\headers\something.inc&apos;</span></code></pre>
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p><strong>TODO</strong>: 1.52 paths system (someone could describe it for me…)</p>
-</div>
 </div>
 <h2 id="strings-preprocessing">2.4. Strings Preprocessing</h2>
 <p>You might face problems including a <code>'</code> in a string declared using <code>'</code>s, or including a <code>&quot;</code> in a string declared using <code>&quot;</code>s. For this purpose you must place the character twice in the string; this won’t end the current string and begin a next one, as you may think, it will instead include the literal quote character in the string.</p>
@@ -1061,10 +1049,8 @@ y2 ymmud</code></pre>
 <pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">y1<span class="hl opt">.</span>member <span class="hl kwd">dd</span> <span class="hl num">0xACDC</span><span class="hl opt">+</span><span class="hl num">0</span>
 y2<span class="hl opt">.</span>member <span class="hl kwd">dd</span> <span class="hl opt">+</span><span class="hl num">0</span></code></pre>
 <p>As mentioned in 4.2, if an argument remain unspecified its value is blank inside macro/structure body. We also exploited the fact that <code>+</code> is both a binary (with two operands) and unary (with one operand) operator.</p>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p><strong>NOTE</strong>: You’ll often encounter a defined macro or structure called <code>struct</code> (not <code>struc</code>), which declares a structure or extends structure declaration. Don’t mistake that <code>struct</code> with <code>struc</code>.</p>
-</div>
 </div>
 <h1 id="fixes">9. Fixes</h1>
 <p>By the time FASM was evolving, it still missed one very useful feature: the ability to declare a macro inside a macro — ie: the result of unrolling the macro becomes a macro definition. Hypothetically, something like this:</p>
@@ -1163,10 +1149,8 @@ _% fix <span class="hl opt">}</span>
 a
 b</code></pre>
 <p>Because “<code>%_</code>” and “<code>_%</code>” will be fixed before loading macro “<code>a</code>”, so loading of the macro’s body will end at “<code>_%</code>” (by then, fixed to “<code>}</code>”) and the second “<code>}</code>” will remain there.</p>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p><strong>NOTE</strong>: Character “<code>%</code>” isn’t a special character for FASM’s preprocessor, so you use it just like any other normal character (eg: “<code>a</code>” or “<code>9</code>”). It has special meaning AFTER preprocessing, and only when it is the only char of a whole word (eg: “<code>%</code>” but not “<code>anything%anything</code>”).</p>
-</div>
 </div>
 <p>We also need to fix other macro-releated operators:</p>
 <pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code">%_ fix <span class="hl opt">{</span>

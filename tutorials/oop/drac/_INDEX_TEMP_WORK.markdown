@@ -7,8 +7,8 @@ meta-title:     \"PureBasic and OOP\" Tutorial, by Dräc
 By «Dräc,» © 2005, license: [CC BY 4.0].
 
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,7 +17,8 @@ __WIP TODOs LIST__:
 !Task[ ][Fix Asciidoc References]
 !Task[x]Remove gfmtoc]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 
@@ -74,10 +75,11 @@ AsciiDoc Version
 
 # OLD README.md LEFT OVER TEXT
 
-!AlertError
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Error :::::::::::::::::::::::::::::::
+
 __ADAPT AND REMOVE__ — The text below is left over from the original `README` file. Adapt it to new format, and/or delete what is not needed.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 AsciiDoc Format

@@ -272,8 +272,7 @@ and change template links
 </ul>
 </li>
 </ul>
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p><strong>DELETE &amp; DEPLOY</strong>: I should create two variants of the deploy command:</p>
 <ul>
 <li><code>--deploy</code> (<code>-d</code>) — builds whole project, then deploys to dest folder.</li>
@@ -287,7 +286,6 @@ and change template links
 <p>This means that I’ll have to find a way to interact with Git and get a list of ignored files, so that Butler won’t delete them.</p>
 <p>Butler can’t rely on the source folder contents for deciding which files to delete in deploy folder, because renaming/deleting source files would result in deletion misses — and the whole purpose of the <code>--delete-deploy</code> option is to ensure that deleted/renamed source files will not be kept in the deploy folder.</p>
 <p>Since Butler — as a standalone app — might be used also outside of Git projects, I’ll have to add some a “<code>use-git</code>” project setting to <code>butler.ini</code>, so that non-Git projects will not try to invoke Git for a list of gitignored files.</p>
-</div>
 </div>
 <hr />
 <h2 id="pandoc-template">Pandoc template</h2>

@@ -19,14 +19,15 @@ meta-title: Verbatim.pp
 - Code blocks with custom classes for non syntax-higlighted coloring (`<pre><code class="someclass">`)
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 It looks like I could without the `!raw{!Code}` and `!raw{!CodeSmall}` macros, and use pandoc's support for `{.class}` syntax in fenced blocks (as well as inline code).
 
 But I must check the CSS stylesheets, because pandoc will only put the class on the `<pre>` tag, and nothing on the `<code>` tag! If I can fix the CSS to cover nicely both syntax highlighting and preformatted blocks, it would be better to do without these macros.
 
 See: [Pandoc Markdown Alternative] for examples and test.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Macros List

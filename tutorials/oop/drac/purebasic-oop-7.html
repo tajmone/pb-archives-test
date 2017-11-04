@@ -93,10 +93,8 @@ EndFree</code></pre>
 <li><a href="./OOP.pbi"><code>OOP.pbi</code></a></li>
 <li><a href="./OOP-Inheritance-Ex2.pb"><code>OOP-Inheritance-Ex2.pb</code></a></li>
 </ul>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>If you have already looked at the source code of the <code>OOP.pbi</code> file, you might have noticed that the code of the final OOP implementation is slightly more complex than its presentation in this tutorial. This is because some rearrangements were made in the code in order simplify its maintainance.</p>
-</div>
 </div>
 <p>Let me guide you through the PureBasic Class declaration…</p>
 <h1 id="class-endclass">Class : EndClass</h1>
@@ -180,13 +178,10 @@ EndFree</code></pre>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl opt">*</span>Rect\Mb\var1</code></pre></li>
 <li><p>It prevents having to systematically declare an object’s <code>Get()</code> and <code>Set()</code> methods, when these are trivial. This saves time and it’s practical. At the same time, it reduces the number of objects’ methods (small optimization).</p></li>
 </ul>
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p>The price of this choice is that all members of an object are visible to the user.</p>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert alert-success">
+<div class="Success">
 <p>This structure could be slighly retouched. Since terms like “<code>Md</code>» and “<code>Mb</code>» are visually very similar, a better distinction could be arranged. Although this choice was not retained, here is an interesting possibility:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Structure</span> ClassName
   <span class="hl kwa">StructureUnion</span>
@@ -197,7 +192,6 @@ EndFree</code></pre>
 <span class="hl kwa">EndStructure</span></code></pre>
 <p>In this code, the <code>*Mb</code> pointer was replaced by two pointers: <code>*Get</code> and <code>*Set</code>. They have the same functionality but they can lead to more legible code, by clarifying if an attribute is being read or modified.</p>
 </div>
-</div>
 <h1 id="method-endmethod">Method : EndMethod</h1>
 <p>The <code>Method : EndMethod</code> block allows to achieve implementation of the various methods of an object.</p>
 <pre class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><code class="purebasic pseudocode" title="PureBASIC pseudocode for syntax illustration"><span class="hl slc">; Object methods (implementation)</span>
@@ -207,10 +201,8 @@ EndFree</code></pre>
 <span class="hl kwc">EndMethod</span>(<span class="hl opt">&lt;</span>ClassName<span class="hl opt">&gt;</span>, Method1)</code></pre>
 <p>Each keyword occurence has the Class name and the method name as parameters.</p>
 <p>Usewise, <code>Method : EndMethod</code> works like <code>Procedure : EndProcedure</code> — in fact it’s a wrapper of this block, as we shall see next.</p>
-<div class="alert-messages">
-<div class="alert">
+<div class="Alert">
 <p>Note the very special syntax of the method which requires two closing parentheses. This specificity ensues from the use of a macro combined with a different number of possible arguments for each method.</p>
-</div>
 </div>
 <h3 id="method-keyword">Method keyword</h3>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> <span class="hl kwc">Method</span>(ClassName, Mthd)
@@ -263,10 +255,8 @@ EndNew</code></pre>
 <p>Finally, <code>New</code> returns the object’s address.</p>
 <p>The trick in the <code>New</code> macro is that it ends with the <code>Init_Mbers</code> keyword. This way, what the user has to add inside the <code>New : EndNew</code> block is simply the attributes initialization. More on that in a moment though (<a href="#init_mbers-endinit_mbers-private-block">Show me now!</a>).</p>
 <p>This arrangement is made possible by declaring the <code>Init_Mbers</code> method first in the macro.</p>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>Notice how the <code>New_ClassName</code> procedure is common to all kind of Classes. It is because its variable part (and therefore object-specific) was externalized into the <code>Init_Mbers</code> method.</p>
-</div>
 </div>
 <h3 id="endnew-keyword">EndNew keyword</h3>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwa">Macro</span> EndNew
@@ -288,17 +278,13 @@ input\var2 <span class="hl opt">=</span> <span class="hl num">20</span>
 <span class="hl slc">; *Rect is a new object from Rect1 class</span>
 <span class="hl opt">*</span>Rect.Rect1 <span class="hl opt">=</span> <span class="hl kwc">New_Rect1</span>(input)</code></pre>
 <p>Note that the constructor name is <code>New</code> followed by the Class’ name separated by “<code>_</code>”.</p>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p><span id="admonition-on-object-being-a-pointer"></span> In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members (<a href="#endclass-keyword">What?! I don’t remember!</a>).</p>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert">
+<div class="Alert">
 <p><span id="admonition-about-this-instance"></span> The choice of <code>StructureUnion</code> requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here). This bivalence — which didn’t exist in the previous implementation — leads us to store information into the object itself. So, within the object’s methods you can access its members address through <code>*this</code>, and its instance’s address (method and members) through <code>*this\Instance</code>.</p>
 <p>An important feature ensues: the us of <code>*this\Instance</code> to call the object’s methods within its methods (<strong>No, I’m not drunk</strong>!). This is the best way to do it, because it hides the name of the procedure behind the method, which is an essential part of the inheritance process.</p>
 <p>For this purpose, a <code>Mtd</code> macro is present in the <a href="./OOP.pbi"><code>OOP.pbi</code></a> file.</p>
-</div>
 </div>
 <h3 id="init_mbers-endinit_mbers-private-block">Init_Mbers : EndInit_Mbers private block</h3>
 <p>The <code>Init_Mbers: EndInit_Mbers</code> is a private block of the OOP implementation, used by the <code>New : EndNew</code> block to initialize an object’s attributes. Explaining this internal block is important for understanding how initialization of an object will be carried out.</p>
@@ -325,10 +311,8 @@ EndInit_Mbers</code></pre>
   <span class="hl kwa">EndProcedure</span>
 <span class="hl kwa">EndMacro</span></code></pre>
 <p>The <code>EndInit_Mbers</code> keyword is nothing more than the <code>EndProcedure</code> keyword, which ends the definition of the object’s initialization method.</p>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>If you are the impatient sort, and have already peeked at the source code, you might have noticed that the final OOP implementation file includes extra optional parameters, named <code>arg1</code> to <code>arg5</code>. This is because in some situations it is useful to complete the standard <code>*input</code> pointer by additional information.</p>
-</div>
 </div>
 <h1 id="object-destructor">Object destructor</h1>
 <p>The <code>Free: EndFree</code> block allows to destroy an object of the Class and to restore its memory.</p>
@@ -357,11 +341,9 @@ EndFree</code></pre>
 <p>In practical use, to free an object’s intance write:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect1</span>(<span class="hl opt">*</span>Rect)</code></pre>
 <p>As for the constructor, note that the destructor’s name is “<code>Free</code>” followed by the class’ name separated by “<code>_</code>”.</p>
-<div class="alert-messages">
-<div class="alert alert-error">
+<div class="Error">
 <p>If your object consists of other objects — i.e.: that some objects are members of the current object, and they exist by (and for) this object (<strong>hic</strong>!) — it’s then important to free them too, by calling their destructors in-between the <code>Free</code> and <code>EndFree</code> keywords.</p>
 <p>Even if PureBasic does automatically free the allocated memory areas, it will occur only when the programs ends. During programs execution, it is up to the user to take care of any garbage memory, especially its bloat.</p>
-</div>
 </div>
 <h1 id="inheritance">Inheritance</h1>
 <p>In the set of commands just exposed, nothing makes reference to the process of inheritance. It is normal, because the current commands do not support it! (<strong>Damn</strong>! <strong>What an anguish</strong>!)! We need to introduce an additional set of commands to deal with the concept (<strong>Arghhh</strong>! <strong>Mega-anguish</strong>!).</p>
@@ -433,6 +415,7 @@ EndFree</code></pre>
 <h1 id="reminder-of-types">Reminder of Types</h1>
 <p>Here is a list of the types used by a Class:</p>
 <table>
+<caption>Types Used by Classes</caption>
 <thead>
 <tr class="header">
 <th>Type</th>
@@ -468,10 +451,8 @@ EndFree</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p><i class="fa fa-warning"></i> The <code>Mbrs_&lt;ClassName&gt;_</code> type wasn’t presented in this paper. It is an intermediate step used to build the <code>Mbrs_&lt;ClassName&gt;</code> structure of the members definition. This arrangement is required to achieve the <code>*this\Instance</code> feature <a href="#admonition-about-this-instance">explained here</a>.</p>
-</div>
 </div>
 				</div><!-- end document -->
 				<div id="sidebar">

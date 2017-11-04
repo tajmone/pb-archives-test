@@ -11,10 +11,11 @@ For each resource we’ll try to include the PureBASIC version with/for which it
 Outdated resources (ie: for PureBASIC 4) are kept in the list when no up-to-date alternative is available — in case someone might be willing to update them to current PB version.
 
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **HELP US**: You noticed some missing resource here? Help the PureBASIC Archives grow by adding links and reviews to this file!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 ------------------------------------------------------------------------
 

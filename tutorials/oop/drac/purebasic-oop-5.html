@@ -111,15 +111,11 @@ Rect\<span class="hl kwc">Erase</span>()</code></pre>
 <li><code>Rect</code> — declared via <code>Interface</code> — is an object of the <code>Rectangle2</code> Class, and can use the <code>Draw()</code> and the <code>Erase()</code> methods.</li>
 </ul>
 <p>Thus the <code>Interface</code> instruction and the <code>New_Rect()</code> function perform the instanciation of a <code>Rect</code> object from the <code>Rectangle2</code> Class. The <code>New_Rect()</code> function is the <em>Constructor</em> for objects of the <code>Rectangle2</code> Class.</p>
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p>All the Methods implementations (<code>Procedure : EndProcedure</code> blocks) must contain, as first argument, the <code>*this</code> pointer of the object. On the other hand, the <code>*this</code> argument mustn’t appear at the <code>Interface</code> level. In fact, as this instruction allows to write <code>Rect\Draw()</code>, it knows that the <code>Draw()</code> method involves the <code>Rect</code> object: no ambiguity! Everything happens as if the object <code>Rect</code> was «aware» of its state.</p>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p><span id="admonition-constructor-parameters"></span> The Constructor could receive, as parameters, the whole functions addresses which implement the methods. This is not the case here, because we know the implemented methods: the ones from the class. On the other hand the initial state desired by the user is unknown. Thus, the Constructor may contain parameters for attributes initialization. This case applyes here: the paramters required by <code>New_Rect()</code> are the two coordinates (<code>x1</code>, <code>y1</code>) and (<code>x2</code>, <code>y2</code>) of the diametrically opposite points of the rectangle.</p>
-</div>
 </div>
 <h1 id="object-initialization">Object Initialization</h1>
 <p>We’ve seen that after allocating the required memory area for an object, the Constructor initializes the various members of the object (methods and attributes). This operation can be isolated in a specific procedure, called by the Constructor. This precaution allows to make a distinction between an object’s memory allocation and its initialization. This approach will turn out to be very useful later on, when implementing the concept of Inheritance, because a single memory allocation is sufficient, but several initializations are required.</p>
@@ -151,13 +147,10 @@ Rect\<span class="hl kwc">Erase</span>()</code></pre>
 <span class="hl kwa">EndProcedure</span></code></pre>
 <p>and can be used by:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect</span>(Rect2)</code></pre>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>The Destructor could be seen as a method of the object. But to avoid weighing down the object, and to preserve homogeneity with the Constructor, I have chosen to see it as a function of the Class.</p>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert">
+<div class="Alert">
 <p>To delete an object by its Destructor means releasing the memory area containing its information (the methods it uses, and the state of its attributes) but not deleting the object’s infrastructure. So, in our example, after doing a:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Free_Rect</span>(Rect2)</code></pre>
 <p><code>Rect2</code> can be reused without specify its type again:</p>
@@ -167,15 +160,12 @@ Rect2\<span class="hl kwc">Draw</span>()</code></pre>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Rect2.Rectangle</code></pre>
 <p>the life cycle of object <code>Rect2</code> follows the same rules that apply to variables — because <code>Rect2</code> is first of all a variable: it is a structured variable, holding the functions pointers of the object’s methods. (See also the following reminder)</p>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>Small reminder: the life cycle of a variable is linked to the life cycle of the program part where the variable is declared:</p>
 <ul>
 <li>If the variable is declared inside a procedure, its life cycle will be linked to that of the procedure — i.e., it’s equal to the function’s time of use.</li>
 <li>If the variable is declared outside any procedure, in the program’s main body, its life cycle is linked to that of the program.</li>
 </ul>
-</div>
 </div>
 <h1 id="memory-allocations">Memory Allocations</h1>
 <p>At every new instanciation, the Constructor has to dynamically allocate a memory area the size of the information describing the object. For this purpose, the Constructor should use the <code>AllocateMemory()</code> command; and the Destructor should use its associated counterpart, the <code>FreeMemory()</code> command.</p>
@@ -248,10 +238,8 @@ Rect2\<span class="hl kwc">Draw</span>()</code></pre>
 <li>by giving them a name (task of the interface)</li>
 <li>by allocating them the adequate functions addresses (task of the constructor)</li>
 </ul>
-<div class="alert-messages">
-<div class="alert">
+<div class="Alert">
 <p>In spite of this arrangement concerning the function pointers’ names, it remains more practical to keep an explicit name when not considering to hide methods (which is the most common scenario). This allows to modify a Parent Class without having to retouch the pointers’ numbering in Children Classes.</p>
-</div>
 </div>
 <h1 id="inheritance">Inheritance</h1>
 <p>For our first implementation of the inheritance concept, let’s takes advantage of the fact that the <code>Structure</code> and <code>Interface</code> instructions can be extended thanks to the <code>Extends</code> keyword.</p>
@@ -405,14 +393,12 @@ Constructor
 <p>The <code>Methds_Rect1</code> structure describes all the functions pointers of the Class’ methods. Then follows the <code>Methds_Rect1</code> variable declaration (of the <code>Methds_Rect1</code> type) and its initialization thanks to <code>Init_Mthds_Rect1()</code>.</p>
 <p>The <code>Methds_Rect1</code> variable is the Class’ <strong>method table</strong>, because it contains the set of all the addresses of its methods. This set constitutes the complete description of the methods of the Class.</p>
 <p>The <code>Structure</code> of <code>Rectangle1</code> now contains the <code>*Methods</code> pointer, which is initialized by passing the <code>Methds_Rect1</code> variable address to the Constructor.</p>
-<div class="alert-messages">
-<div class="alert alert-success">
+<div class="Success">
 <p>The following expression:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Mthds_Rect1.Mthds_Rect1
 <span class="hl kwc">Init_Mthds_Rect1</span>(&#64;Mthds_Rect1)</code></pre>
 <p>can be condensed into:</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl kwc">Init_Mthds_Rect1</span>(&#64;Mthds_Rect1.Mthds_Rect1)</code></pre>
-</div>
 </div>
 <p>Inheritance can be now performed correctly, because by extending <code>Methd_Rect1</code>’s <code>Structure</code> into the new <code>Methd_Rect2</code>, the functions’ addresses are going to be consecutive:</p>
 <p class="caption">
@@ -461,15 +447,13 @@ Constructor
 <li>First, the <code>*Methods</code> pointer only needs to exist once, and this is in the Parent Class.</li>
 <li>Second, no supplementary attributes have been added to it.</li>
 </ul>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>There are three advantages in having the methods’ initialization function external to the Constructor, and the method table in a single variable:</p>
 <ul>
 <li>The Class’ method table needs to be initialized only once, and not at each object instanciation,</li>
 <li>Object instances will hold a single pointer toward their methods’ pointers: it is a substantial gain in memory,</li>
 <li>Since all objects referr to the same method table, this guarantees identical behavior for all objects of the same Class.</li>
 </ul>
-</div>
 </div>
 <h1 id="get-and-set-object-methods">Get() and Set() Object Methods</h1>
 <p>Through an <code>Interface</code>, it’s only possible to access an object’s methods. The interface encapsulates completely the object’s attributes. In order to allow access the object’s attributes — to examine, or to modify them — we must provide specific methods to the user. The methods allowing to examine objects’ attributes are called <code>Get()</code> methods. The methods allowing to modify objects’ attributes are called <code>Set()</code> methods.</p>
@@ -482,10 +466,8 @@ Constructor
   <span class="hl opt">*</span>this\var2 <span class="hl opt">=</span> value
 <span class="hl kwa">EndProcedure</span></code></pre>
 <p>Since <code>Get()</code> and <code>Set()</code> methods exist only to allow the user to modify all (or some) of the object’s attributes, they necessarily belong to the <code>Interface</code>.</p>
-<div class="alert-messages">
-<div class="alert">
+<div class="Alert">
 <p>See the <a href="purebasic-oop-9.html">Appendix</a> of the tutorial for possible optimizations of <code>Get()</code>’s and <code>Set()</code>’s performance during execution.</p>
-</div>
 </div>
 				</div><!-- end document -->
 				<div id="sidebar">

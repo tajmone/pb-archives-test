@@ -36,12 +36,10 @@
 <li>Preformatted blocks (<code>&lt;pre&gt;</code>)</li>
 <li>Code blocks with custom classes for non syntax-higlighted coloring (<code>&lt;pre&gt;&lt;code class=&quot;someclass&quot;&gt;</code>)</li>
 </ul>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>It looks like I could without the <code>!Code</code> and <code>!CodeSmall</code> macros, and use pandoc’s support for <code>{.class}</code> syntax in fenced blocks (as well as inline code).</p>
 <p>But I must check the CSS stylesheets, because pandoc will only put the class on the <code>&lt;pre&gt;</code> tag, and nothing on the <code>&lt;code&gt;</code> tag! If I can fix the CSS to cover nicely both syntax highlighting and preformatted blocks, it would be better to do without these macros.</p>
 <p>See: <a href="#pandoc-markdown-alternative">Pandoc Markdown Alternative</a> for examples and test.</p>
-</div>
 </div>
 <h1 id="macros-list">Macros List</h1>
 <ul>

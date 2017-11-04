@@ -152,19 +152,21 @@ Object\Procedure2(30, 40)
 
 the `Object`’s `Procedure2()` function is called — i.e., `My_Procedure2()`.
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 When declaring elements of an `Interface`, it’s essential to initialize them before using their procedures. Therefore, it is strongly advisable to initialize elements at declaration time.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 !anchor(admonition-on-structure-interface-symmetry)
 The **method table**’s `Structure` must reflect exactly the composition of its correlated `Interface`.
 It must contain the same number of fields, and preserve their order, to ensure the correct assignation of each function’s name and address.
 It is only under these conditions that the element will be properly initialized.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 To summarize, using an `Interface` involves:

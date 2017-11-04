@@ -104,13 +104,14 @@ There are two kinds of inheritances:
 Multiple inheritance is complex to implement, and it will not be covered here.
 Thus, this papers deals only with simple inheritance.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 ### Terminology:
 
 * The Class which inherits from another Class, is usually called **Child Class**.
 * The Class which gives its inheritance to a Child Class is usually called **Parent Class**.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 # Overloading
 

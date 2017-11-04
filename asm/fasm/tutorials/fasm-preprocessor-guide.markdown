@@ -22,8 +22,8 @@ keywords:
   - TAJGA Team
 ...
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,7 +37,8 @@ __WIP TODOs LIST__:
 !Task[ ][Clean-up YAML metadata]
 !Task[ ][Fix revision number]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
     Current revision: 2017-01-26
@@ -49,8 +50,8 @@ Ported to Markdown, edited and reprinted by Tristano Ajmone [**@tajmone**](https
 
 -   <http://bos.asmhackers.net/docs/FASM%20tutorial/preproc.html>
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __CHANGES__ — Some changes made to original text:
 
 - English text polished to improve readability.
@@ -60,13 +61,15 @@ __CHANGES__ — Some changes made to original text:
 - Added or corrected links to mentioned references.
 - Styled notes, tips and warnings with CSS Alert Boxes.
 - Applied highlighter style to key passages.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 __NOTE__ — The original website of the __TAJGA Team__ is now defunct (tajga.kallimagarden.com), but the team has now an [organization profile](https://github.com/tajga) and a [website](http://tajga.github.io/) on GitHub.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 
@@ -118,15 +121,17 @@ rep stosd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**NOTE**: `;` can be also understood as a preprocessor operator which deletes all text beyond it, up to the end of that line.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**NOTE**: `;` can be also understood as a preprocessor operator which deletes all text beyond it, up to the end of that line.
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE**: A line containing only a comment won’t be deleted, like in my example. It will become an empty line. I've skipped empty lines because of the text structure. This point will turn out to be important in the next chapter.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 2.2. Line Break `\`
@@ -230,10 +235,11 @@ include 'C:\%myprojectdir%\headers\something.inc'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 **TODO**: 1.52 paths system (someone could describe it for me…)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 2.4. Strings Preprocessing
@@ -1919,10 +1925,11 @@ y2.member dd +0
 
 As mentioned in 4.2, if an argument remain unspecified its value is blank inside macro/structure body. We also exploited the fact that `+` is both a binary (with two operands) and unary (with one operand) operator.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE**: You'll often encounter a defined macro or structure called `struct` (not `struc`), which declares a structure or extends structure declaration. Don’t mistake that `struct` with `struc`.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 9. Fixes
@@ -2057,10 +2064,11 @@ b
 
 Because “`%_`” and “`_%`” will be fixed before loading macro “`a`”, so loading of the macro’s body will end at “`_%`” (by then, fixed to “`}`”) and the second “`}`” will remain there.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE**: Character “`%`” isn’t a special character for FASM’s preprocessor, so you use it just like any other normal character (eg: “`a`” or “`9`”). It has special meaning AFTER preprocessing, and only when it is the only char of a whole word (eg: “`%`” but not “`anything%anything`”).
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 We also need to fix other macro-releated operators:

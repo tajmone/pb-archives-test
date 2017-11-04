@@ -1,10 +1,11 @@
 
 This folder (and all its subfolders) contain developers documentation for the PureBASIC Archives project --- only available in the source branch.
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __WIP WARNING__ --- This section is still work in progress, most pages are rough sketches, tests, and their contents might not reflect the current state of code/macros changes.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 # Documentation Subsections
 
@@ -49,17 +50,19 @@ After you get a good grip with basic markdown, you can start looking at pandoc f
 
 - [Pandoc’s markdown guide][pandoc md]
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 __NOTE__: I'm planning to add a pandoc markdown writing guide to this section. In the meanwhile, the above links will fill the void and supply the needed references.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 ## PP Macros
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 _UNDER CONSTRUCTION_!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 See:
 
@@ -68,10 +71,11 @@ See:
 
 ## Butler CMS
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 _UNDER CONSTRUCTION_!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 
