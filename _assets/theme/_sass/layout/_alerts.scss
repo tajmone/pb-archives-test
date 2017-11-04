@@ -9,15 +9,17 @@
 // ==============================================================================
 
 /* ===== ALERTS ===== */
-.alert {
-    // position: relative;
-    // padding: 16px;
-padding: ($base-line-height/2)-1; // <= 11px (ie: 1/2 line-height minus border)
-    color:            color(Alert-Text);
-    background-color: color(Alert-BG);
-    border: 1px solid color(Alert-Border);
-    border-radius: 4px;
 
+.Alert,
+.Warning,
+.Error,
+.Success,
+.Note {
+    padding: ($base-line-height/2)-1; // <= 11px (ie: 1/2 line-height minus border)
+    margin-bottom: $base-line-height;
+    border-style:  solid;
+    border-width:  1px;
+    border-radius: 4px;
     p {
         margin-top: 0;
 
@@ -26,26 +28,28 @@ padding: ($base-line-height/2)-1; // <= 11px (ie: 1/2 line-height minus border)
         }
     }
 }
-.alert-messages {
-    // margin-bottom: 24px;
-    margin-bottom: $base-line-height;
+
+.Alert {
+    color:            color(Alert-Text);
+    background-color: color(Alert-BG);
+    border-color:     color(Alert-Border);
 }
-.alert-warn {
+.Warning {
     color:            color(AlertWarn-Text);
     background-color: color(AlertWarn-BG);
     border-color:     color(AlertWarn-Border);
 }
-.alert-error {
+.Error {
     color:            color(AlertError-Text);
     background-color: color(AlertError-BG);
     border-color:     color(AlertError-Border);
 }
-.alert-success {
+.Success {
     color:            color(AlertSuccess-Text);
     background-color: color(AlertSuccess-BG);
     border-color:     color(AlertSuccess-Border);
 }
-.alert-note {
+.Note {
     color:            color(AlertNote-Text);
     background-color: color(AlertNote-BG);
     border-color:     color(AlertNote-Border);
@@ -55,90 +59,90 @@ padding: ($base-line-height/2)-1; // <= 11px (ie: 1/2 line-height minus border)
 //                           Headings 1-6 Inside Alerts                          
 // ==============================================================================
 // ALL HEADINGS: Set right Alert color, and remove margin:
-.alert h1,
-.alert h2,
-.alert h3,
-.alert h4,
-.alert h5,
-.alert h6 {
+.Alert h1,
+.Alert h2,
+.Alert h3,
+.Alert h4,
+.Alert h5,
+.Alert h6 {
     color:            color(Alert-Text);
     margin-bottom: 0;
 }
-.alert-warn h1,
-.alert-warn h2,
-.alert-warn h3,
-.alert-warn h4,
-.alert-warn h5,
-.alert-warn h6 {
+.Warning h1,
+.Warning h2,
+.Warning h3,
+.Warning h4,
+.Warning h5,
+.Warning h6 {
     color:            color(AlertWarn-Text);
     margin-bottom: 0;
 }
-.alert-error h1,
-.alert-error h2,
-.alert-error h3,
-.alert-error h4,
-.alert-error h5,
-.alert-error h6 {
+.Error h1,
+.Error h2,
+.Error h3,
+.Error h4,
+.Error h5,
+.Error h6 {
     color:            color(AlertError-Text);
     margin-bottom: 0;
 }
-.alert-succe h1,
-.alert-succe h2,
-.alert-succe h3,
-.alert-succe h4,
-.alert-succe h5,
-.alert-succe h6 {
+.Success h1,
+.Success h2,
+.Success h3,
+.Success h4,
+.Success h5,
+.Success h6 {
     color:            color(AlertSuccess-Text);
     margin-bottom: 0;
 }
-.alert-note h1,
-.alert-note h2,
-.alert-note h3,
-.alert-note h4,
-.alert-note h5,
-.alert-note h6 {
+.Note h1,
+.Note h2,
+.Note h3,
+.Note h4,
+.Note h5,
+.Note h6 {
     color:            color(AlertNote-Text);
     margin-bottom: 0;
 }
 // ------------------------------------------------------------------------------
 // 1st HEADINGS: Remove top margin in first H1-6 occuring inside Alerts:
-.alert h1:first-child,
-.alert h2:first-child,
-.alert h3:first-child,
-.alert h4:first-child,
-.alert h5:first-child,
-.alert h6:first-child {
+.Alert h1:first-child,
+.Alert h2:first-child,
+.Alert h3:first-child,
+.Alert h4:first-child,
+.Alert h5:first-child,
+.Alert h6:first-child {
     margin-top: 0;
 }
-.alert-warn h1:first-child,
-.alert-warn h2:first-child,
-.alert-warn h3:first-child,
-.alert-warn h4:first-child,
-.alert-warn h5:first-child,
-.alert-warn h6:first-child {
+.Warning h1:first-child,
+.Warning h2:first-child,
+.Warning h3:first-child,
+.Warning h4:first-child,
+.Warning h5:first-child,
+.Warning h6:first-child {
     margin-top: 0;
 }
-.alert-error h1:first-child,
-.alert-error h2:first-child,
-.alert-error h3:first-child,
-.alert-error h4:first-child,
-.alert-error h5:first-child,
-.alert-error h6:first-child {
+.Error h1:first-child,
+.Error h2:first-child,
+.Error h3:first-child,
+.Error h4:first-child,
+.Error h5:first-child,
+.Error h6:first-child {
     margin-top: 0;
 }
-.alert-succe h1:first-child,
-.alert-succe h2:first-child,
-.alert-succe h3:first-child,
-.alert-succe h4:first-child,
-.alert-succe h5:first-child,
-.alert-succe h6:first-child {
+.Success h1:first-child,
+.Success h2:first-child,
+.Success h3:first-child,
+.Success h4:first-child,
+.Success h5:first-child,
+.Success h6:first-child {
     margin-top: 0;
 }
-.alert-note h1:first-child,
-.alert-note h2:first-child,
-.alert-note h3:first-child,
-.alert-note h4:first-child,
-.alert-note h5:first-child,
-.alert-note h6:first-child {
+.Note h1:first-child,
+.Note h2:first-child,
+.Note h3:first-child,
+.Note h4:first-child,
+.Note h5:first-child,
+.Note h6:first-child {
     margin-top: 0;
 }
