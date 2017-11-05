@@ -25,6 +25,10 @@ This file logs changes to pp macros definitions during Alpha Stage.
 
 # macros.pp
 
+**`v0.3` (2017-11-05)**
+
+  - The “`macros.pp`” file now also creates the `!ListMacrosFiles` that emits a markdown unordered list of all the macros modules imported (used in the “`/dev-docs_/`” section to maintain an auto-update list of macros modules).
+
 **`v0.2` (2017-11-04)**
 
   - Removed `!import(Alerts.pp)`
