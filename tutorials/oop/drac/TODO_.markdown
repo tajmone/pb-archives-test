@@ -32,12 +32,13 @@ __LOCAL — ORIGINAL__:
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[x][Alerts: remove `!anchor` macros and use fenced-divs `#Id` instead]
 !Task[ ][Theme/Template:]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[ ][Add YAML var `title-size` for different sizes]
 !Task[ ][Add YAML var `subtitle-size` for different sizes]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-!Task[ ][Create PAGINATOR macro]
+!Task[x][Create PAGINATOR macro]
 !Task[ ][Add a `README.md` file for GH preview]
 !Task[ ][Asciidoc Files:]
 ~~~~~~~~~~~~~~~~~~~~~~~~~

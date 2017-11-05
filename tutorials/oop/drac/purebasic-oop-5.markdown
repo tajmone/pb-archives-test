@@ -180,13 +180,12 @@ All the Methods implementations (`Procedure : EndProcedure` blocks) must contain
 ::::::::::::::::::::::::::::::::::::::::::::
 
 
-:::::: Note ::::::::::::::::::::::::::::::::
+:::::: { .Note #admonition-constructor-parameters } :::::::::::::::::::::::::::
 
-!anchor(admonition-constructor-parameters)
 The Constructor could receive, as parameters, the whole functions addresses which implement the methods. This is not the case here, because we know the implemented methods: the ones from the class. On the other hand the initial state desired by the user is unknown. Thus, the Constructor may contain parameters for attributes initialization.
 This case applyes here: the paramters required by `New_Rect()` are the two coordinates (`x1`, `y1`) and (`x2`, `y2`) of the diametrically opposite points of the rectangle.
 
-::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Object Initialization
@@ -264,7 +263,6 @@ Free_Rect(Rect2)
 :::::: Note ::::::::::::::::::::::::::::::::
 
 The Destructor could be seen as a method of the object. But to avoid weighing down the object, and to preserve homogeneity with the Constructor, I have chosen to see it as a function of the Class.
-
 ::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -300,7 +298,6 @@ Rect2.Rectangle
 
 
 the life cycle of object `Rect2` follows the same rules that apply to variables — because `Rect2` is first of all a variable: it is a structured variable, holding the functions pointers of the object’s methods. (See also the following reminder)
-
 ::::::::::::::::::::::::::::::::::::::::::::
 
 

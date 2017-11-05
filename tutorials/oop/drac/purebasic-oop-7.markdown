@@ -525,25 +525,21 @@ input\var2 = 20
 
 Note that the constructor name is `New` followed by the Class’ name separated by “`_`”.
 
-:::::: Note ::::::::::::::::::::::::::::::::
+:::::: { .Note #admonition-on-object-being-a-pointer } ::::::::::::::::::::::::
 
-!anchor(admonition-on-object-being-a-pointer)
 In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members ([What?! I don’t remember!][EndClass keyword]).
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::
 
+:::::: { .Alert #admonition-about-this-instance } :::::::::::::::::::::::::::::
 
-:::::: Alert :::::::::::::::::::::::::::::::
-
-!anchor(admonition-about-this-instance)
 The choice of `StructureUnion` requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here).
 This bivalence — which didn’t exist in the previous implementation — leads us to store information into the object itself. So, within the object’s methods you can access its members address through `*this`, and its instance’s address (method and members) through `*this\Instance`.
 
 An important feature ensues: the us of `*this\Instance` to call the object’s methods within its methods (__No, I’m not drunk__!). This is the best way to do it, because it hides the name of the procedure behind the method, which is an essential part of the inheritance process.
 
 For this purpose, a `Mtd` macro is present in the [`OOP.pbi`] file.
-
-::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### Init_Mbers : EndInit_Mbers private block
