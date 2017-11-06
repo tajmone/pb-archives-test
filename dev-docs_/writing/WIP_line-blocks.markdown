@@ -2,7 +2,7 @@
 title: "Test Pandoc Line Blocks"
 ---
 
-!import(Typography-Tests.pp)
+
 
 Line blocks is a feature of pandoc markdown which allows preserving whitespaces and newlines in a block of markdown text.
 
@@ -40,7 +40,7 @@ From [pandoc documentation](http://pandoc.org/MANUAL.html#line-blocks):
 
 ## Basic Example
 
-!TripleTest
+!MDExampleHTML
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | The limerick packs laughs anatomical
 | In space that is quite economical.
@@ -55,7 +55,7 @@ From [pandoc documentation](http://pandoc.org/MANUAL.html#line-blocks):
 
 In this example normal markdown styling is applied to the text:
 
-!TripleTest
+!MDExampleHTML
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | The _limerick packs_ laughs anatomical
 | In space that is quite economical.
@@ -69,7 +69,7 @@ In this example normal markdown styling is applied to the text:
 
 When hard-wrapping, the continuation line must begin with a space:
 
-!TripleTest
+!MDExampleHTML
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | The Right Honorable Most Venerable and Righteous Samuel L.
   Constable, Jr.

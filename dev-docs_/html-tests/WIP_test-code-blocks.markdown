@@ -2,9 +2,6 @@
 title: "Code Blocks Tests"
 ---
 
-!import(Typography-Tests.pp)
-
-
 > __NOTE__: Pandoc code with line-numbers doesn't produce H-scrollbar when exceeding width --- issue is with table's CSS: must implement `overflow`!
 
 # Code Blocks Examples
@@ -82,7 +79,7 @@ Some fictional code
 
 # Test  `!raw(!HighlightSmall)` 
 
-!HighlightSmall(purebasic)()(xxx)
+!HighlightSmall(purebasic)()()()
 ~~~~~~~~
 For i=1 To 10
   Debug("Counting " + Str(i))
@@ -102,91 +99,66 @@ Some tests for code, syntax highlighting and preformatted blocks.
 
 In order to achieve a simple `<pre>` block (not followed by the `<code>` code) you have to resort to raw HTML tags inside markdown --- ie: there is no way to achived it in pure markdown.
 
+!define(example)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<pre>I'm a preformatted block, no code inside</pre> 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!MDExampleHTML(!example)
 
-__MARKDOWN SOURCE:__
-
-``` html
-<pre>I'm a preformatted block, no code inside</pre>
-```
-
-__HTML RESULT:__
-
-<pre>I'm a preformatted block, no code inside</pre>
 
 # Non-Highlighted Code Blocks
 
 To define a code block without any highlighting, just enclosed it in tildas or backticks (fenced code), or use indentation (4 spaces or one Tab).
 
-__MARKDOWN SOURCE:__
+## Fenced (backticks)
 
-fenced (backticks):
-
-~~~~~~~~ markdown
+!define(example)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 For i=1 To 10
   Debug("Counting " + Str(i))
 Next
 ```
-~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!MDExampleHTML(!example)
 
-identented (4 spaces):
+## Indented (4 spaces)
 
-``` markdown
-    For i=1 To 10
-      Debug("Counting " + Str(i))
-    Next
-```
+:::::: Note ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+__NOTE__ --- The raw html comment tag `<!---->` was added to create a context in the snippet, otherwise pandoc would convert it as a paragraph.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-__HTML OUTPUT:__
-
-``` html
-<pre><code>For i=1 To 10
-  Debug("Counting " + Str(i))
-Next</code></pre>
-```
-
-__HTML RESULT:__
-
+!define(example)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<!---->
     For i=1 To 10
       Debug("Counting " + Str(i))
     Next
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!MDExampleHTML(!example)
 
 # Pandoc Highlighting
 
 ## Line Numbers
 
-__MARKDOWN SOURCE:__
 
-``` markdown
+!define(example)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~ {#mycode .haskell .numberLines startFrom="100"}
 qsort []     = []
 qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
                qsort (filter (>= x) xs)
 ~~~~
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!MDExampleHTML(!example)
 
-__HTML OUTPUT:__
-
-``` html
-<div class="sourceCode" id="mycode" startfrom="100"><table class="sourceCode haskell numberLines"><tbody><tr class="sourceCode"><td class="lineNumbers"><pre>100
-101
-102
-</pre></td><td class="sourceCode"><pre><code class="sourceCode haskell">qsort []     <span class="fu">=</span> []
-qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span>
-               qsort (filter (<span class="fu">&gt;=</span> x) xs)</code></pre></td></tr></tbody></table></div>
-```
-
-__HTML RESULT:__
-
-~~~~ {#mycode .haskell .numberLines startFrom="100"}
-qsort []     = []
-qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
-               qsort (filter (>= x) xs)
-~~~~
 
 ### Test line numbers...
 
+
+!define(example)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~ {#mycode .python .numberLines startFrom="1"}
 from appium import webdriver
 from appium import SauceTestCase, on_platforms
@@ -204,115 +176,16 @@ platforms = [{
                 "app": app,
                 "appiumVersion": "1.3.4"
             }]
-
-
-@on_platforms(platforms)
-class AndroidGesturesSauceTests(SauceTestCase):
-
-    def test_drag_and_drop(self):
-        # first get to the right activity
-        self.driver.start_activity("io.appium.android.apis", ".view.DragAndDropDemo")
-
-        start = self.driver.find_element_by_id("io.appium.android.apis:id/drag_dot_3")
-        end = self.driver.find_element_by_id("io.appium.android.apis:id/drag_dot_2")
-
-        action = TouchAction(self.driver);
-        action.long_press(start).move_to(end).release().perform()
-
-        sleep(.5)
-
-        text = self.driver.find_element_by_id("io.appium.android.apis:id/drag_result_text").text
-        self.assertEqual(text, "Dropped!")
-
-
-    def test_smiley_face(self):
-        # just for the fun of it.
-        # this doesn't really assert anything.
-        # paint
-        eye1 = TouchAction()
-        eye1.press(x=150, y=100).release()
-
-        eye2 = TouchAction()
-        eye2.press(x=250, y=100).release()
-
-        smile = TouchAction()
-        smile.press(x=110, y=200) \
-            .move_to(x=1, y=1) \
-            .move_to(x=1, y=1) \
-            .move_to(x=1, y=1) \
-            .move_to(x=1, y=1) \
-            .move_to(x=1, y=1) \
-            .move_to(x=2, y=1) \
-            .move_to(x=2, y=1) \
-            .move_to(x=2, y=1) \
-            .move_to(x=2, y=1) \
-            .move_to(x=2, y=1) \
-            .move_to(x=3, y=1) \
-            .move_to(x=3, y=1) \
-            .move_to(x=3, y=1) \
-            .move_to(x=3, y=1) \
-            .move_to(x=3, y=1) \
-            .move_to(x=4, y=1) \
-            .move_to(x=4, y=1) \
-            .move_to(x=4, y=1) \
-            .move_to(x=4, y=1) \
-            .move_to(x=4, y=1) \
-            .move_to(x=5, y=1) \
-            .move_to(x=5, y=1) \
-            .move_to(x=5, y=1) \
-            .move_to(x=5, y=1) \
-            .move_to(x=5, y=1) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=0) \
-            .move_to(x=5, y=-1) \
-            .move_to(x=5, y=-1) \
-            .move_to(x=5, y=-1) \
-            .move_to(x=5, y=-1) \
-            .move_to(x=5, y=-1) \
-            .move_to(x=4, y=-1) \
-            .move_to(x=4, y=-1) \
-            .move_to(x=4, y=-1) \
-            .move_to(x=4, y=-1) \
-            .move_to(x=4, y=-1) \
-            .move_to(x=3, y=-1) \
-            .move_to(x=3, y=-1) \
-            .move_to(x=3, y=-1) \
-            .move_to(x=3, y=-1) \
-            .move_to(x=3, y=-1) \
-            .move_to(x=2, y=-1) \
-            .move_to(x=2, y=-1) \
-            .move_to(x=2, y=-1) \
-            .move_to(x=2, y=-1) \
-            .move_to(x=2, y=-1) \
-            .move_to(x=1, y=-1) \
-            .move_to(x=1, y=-1) \
-            .move_to(x=1, y=-1) \
-            .move_to(x=1, y=-1) \
-            .move_to(x=1, y=-1)
-        smile.release()
-
-        ma = MultiAction(self.driver)
-        ma.add(eye1, eye2, smile)
-        ma.perform()
-
-        # so you can see it
-        sleep(10)
 ~~~~
-
-----------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!MDExampleHTML(!example)
 
 
 # Highlight
 
 ## Block Simple
 
-!Highlight(purebasic)()()
+!Highlight(purebasic)()()()
 ~~~~~~~~~~
 ; PureBASIC 5.60
 For i=1 To 10
@@ -322,13 +195,11 @@ Next
 
 ## Block With Line Numbers
 
-!Highlight(purebasic)(--line-numbers --line-number-length=1)()
-~~~~~~~~~~
+!Highlight(purebasic)(--line-numbers --line-number-length=1)()()~~~~~~~~~~~
 ; PureBASIC 5.60
 For i=1 To 10
   Debug("Counting " + Str(i))
-Next
-~~~~~~~~~~
+Next~~~~~~~~~~~
 
 ------
 

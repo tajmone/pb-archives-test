@@ -1,8 +1,18 @@
 
 ## Butler
 
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][PP invocation options:]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  !Task[ ][add definition of `ROOT` symbol with path back to root (like with pandoc ROOT var) so it will be accessible from current doc/macros]
+  !Task[ ][in `macros.pp` create also `PP_MACROS` symbol based on `ROOT` (this will allow changing the path in a single place if I ever change the macros folder name or location)]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][LICENSE:]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Add `LICENSE` file]
