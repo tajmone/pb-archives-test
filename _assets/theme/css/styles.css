@@ -767,6 +767,15 @@ table {
   display: block;
   width: 100%;
   overflow: auto; }
+  table caption {
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0 0 0 0;
+    font-size: 20px;
+    line-height: 36px;
+    margin-top: 24px;
+    padding: 6px;
+    padding-top: 5px; }
   table th {
     font-weight: bold; }
   table th,
@@ -775,131 +784,145 @@ table {
     height: 48px;
     border: 1px solid #dfe2e5; }
   table tr {
-    background-color: #fff;
-    border-top: 1px solid #c6cbd1; }
+    background-color: white;
+    border-top: 1px solid #dcdfe3; }
     table tr.even {
       background-color: #f6f8fa; }
   table img {
     background-color: transparent; }
 
 /* ===== ALERTS ===== */
-.alert {
+.Alert,
+.Warning,
+.Error,
+.Success,
+.Note {
   padding: 11px;
-  color: #032f62;
-  background-color: #dbedff;
-  border: 1px solid rgba(27, 31, 35, 0.15);
+  margin-bottom: 24px;
+  border-style: solid;
+  border-width: 1px;
   border-radius: 4px; }
-  .alert p {
+  .Alert p,
+  .Warning p,
+  .Error p,
+  .Success p,
+  .Note p {
     margin-top: 0; }
-    .alert p:last-child {
+    .Alert p:last-child,
+    .Warning p:last-child,
+    .Error p:last-child,
+    .Success p:last-child,
+    .Note p:last-child {
       margin-bottom: 0; }
 
-.alert-messages {
-  margin-bottom: 24px; }
+.Alert {
+  color: #032f62;
+  background-color: #dbedff;
+  border-color: rgba(27, 31, 35, 0.15); }
 
-.alert-warn {
+.Warning {
   color: #735c0f;
   background-color: #fffbdd;
   border-color: rgba(27, 31, 35, 0.15); }
 
-.alert-error {
+.Error {
   color: #86181d;
   background-color: #ffdce0;
   border-color: rgba(27, 31, 35, 0.15); }
 
-.alert-success {
+.Success {
   color: #165c26;
   background-color: #dcffe4;
   border-color: rgba(27, 31, 35, 0.15); }
 
-.alert-note {
+.Note {
   color: #2f363d;
   background-color: #f6f8fa;
   border-color: rgba(27, 31, 35, 0.15); }
 
-.alert h1,
-.alert h2,
-.alert h3,
-.alert h4,
-.alert h5,
-.alert h6 {
+.Alert h1,
+.Alert h2,
+.Alert h3,
+.Alert h4,
+.Alert h5,
+.Alert h6 {
   color: #032f62;
   margin-bottom: 0; }
 
-.alert-warn h1,
-.alert-warn h2,
-.alert-warn h3,
-.alert-warn h4,
-.alert-warn h5,
-.alert-warn h6 {
+.Warning h1,
+.Warning h2,
+.Warning h3,
+.Warning h4,
+.Warning h5,
+.Warning h6 {
   color: #735c0f;
   margin-bottom: 0; }
 
-.alert-error h1,
-.alert-error h2,
-.alert-error h3,
-.alert-error h4,
-.alert-error h5,
-.alert-error h6 {
+.Error h1,
+.Error h2,
+.Error h3,
+.Error h4,
+.Error h5,
+.Error h6 {
   color: #86181d;
   margin-bottom: 0; }
 
-.alert-succe h1,
-.alert-succe h2,
-.alert-succe h3,
-.alert-succe h4,
-.alert-succe h5,
-.alert-succe h6 {
+.Success h1,
+.Success h2,
+.Success h3,
+.Success h4,
+.Success h5,
+.Success h6 {
   color: #165c26;
   margin-bottom: 0; }
 
-.alert-note h1,
-.alert-note h2,
-.alert-note h3,
-.alert-note h4,
-.alert-note h5,
-.alert-note h6 {
+.Note h1,
+.Note h2,
+.Note h3,
+.Note h4,
+.Note h5,
+.Note h6 {
   color: #2f363d;
   margin-bottom: 0; }
 
-.alert h1:first-child,
-.alert h2:first-child,
-.alert h3:first-child,
-.alert h4:first-child,
-.alert h5:first-child,
-.alert h6:first-child {
+.Alert h1:first-child,
+.Alert h2:first-child,
+.Alert h3:first-child,
+.Alert h4:first-child,
+.Alert h5:first-child,
+.Alert h6:first-child {
   margin-top: 0; }
 
-.alert-warn h1:first-child,
-.alert-warn h2:first-child,
-.alert-warn h3:first-child,
-.alert-warn h4:first-child,
-.alert-warn h5:first-child,
-.alert-warn h6:first-child {
+.Warning h1:first-child,
+.Warning h2:first-child,
+.Warning h3:first-child,
+.Warning h4:first-child,
+.Warning h5:first-child,
+.Warning h6:first-child {
   margin-top: 0; }
 
-.alert-error h1:first-child,
-.alert-error h2:first-child,
-.alert-error h3:first-child,
-.alert-error h4:first-child,
-.alert-error h5:first-child,
-.alert-error h6:first-child {
+.Error h1:first-child,
+.Error h2:first-child,
+.Error h3:first-child,
+.Error h4:first-child,
+.Error h5:first-child,
+.Error h6:first-child {
   margin-top: 0; }
 
-.alert-succe h1:first-child,
-.alert-succe h2:first-child,
-.alert-succe h3:first-child,
-.alert-succe h4:first-child,
-.alert-succe h5:first-child,
-.alert-succe h6:first-child {
+.Success h1:first-child,
+.Success h2:first-child,
+.Success h3:first-child,
+.Success h4:first-child,
+.Success h5:first-child,
+.Success h6:first-child {
   margin-top: 0; }
 
-.alert-note h1:first-child,
-.alert-note h2:first-child,
-.alert-note h3:first-child,
-.alert-note h4:first-child,
-.alert-note h5:first-child,
-.alert-note h6:first-child {
+.Note h1:first-child,
+.Note h2:first-child,
+.Note h3:first-child,
+.Note h4:first-child,
+.Note h5:first-child,
+.Note h6:first-child {
   margin-top: 0; }
 
 /* ============ PureBASIC ============ */

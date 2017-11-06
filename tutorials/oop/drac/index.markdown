@@ -48,8 +48,8 @@ Originally ported to AsciiDoc from Dräc's original HTML online tutorial:
 
 # About This Tutorial
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **CREDITS**: This is a reprint of «Dräc»’s multi-part tutorial _PureBasic and the Object-Oriented Programming_, also knwon as _the OOP demystified_, published in 2005 on [drac.site.chez-alice.fr][ext OOP EN].
 
 **LICENSE**: It was reprinted with explicit permission of the author, who released the tutorial text and source codes under [Creative Commons Attribution][CC BY 4.0] (CC BY 4.0) in response to the permission request to reproduce it inside the [PureBASIC Archives].
@@ -57,7 +57,8 @@ Originally ported to AsciiDoc from Dräc's original HTML online tutorial:
 **CHANGES**: The tutorial was ported from HTML to AsciiDoc and Markdown by [Tristano Ajmone], who also polished the English text — introducing slight adjustments in line with the tutorial aims (using the [original French tutorial][ext OOP FR] as a reference) — and made minor changes to code examples (either aesthetic, or minor corrections, or to ensure compatibility with latest version of PureBASIC).
 
 First republished: 2016/11/18 | Laste edited: 2017/10/31 | by [\@tajmone][Tristano Ajmone].
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 # Tutorial Source Files
 
@@ -66,10 +67,11 @@ First republished: 2016/11/18 | Laste edited: 2017/10/31 | by [\@tajmone][Trista
 -   [`OOP-Inheritance-Ex2_preprocessed.pb`] – preprocessed version of `OOP-Inheritance-Ex2.pb`.[^1]
 -   [`OOP.pbi`] – OOP-Implementation include-file.
    
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 __NOTE__: The [`OOP.pbi`] include-file (used in the [Second Implementation][OOP 5] example) contains the full implementation of the OOP paradigm explained in this tutorial, and you can use it in your own OOP-projects.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 [^1]: The preprocessed version of `OOP-Inheritance-Ex2.pb` contains all included external code, all macros are expanded (orignal macros are kept as comments next to their expanded code), and comments are preserved. Added by Tristano Ajmone to simplify analysis of how the source code is finalized by PureBASIC compiler.

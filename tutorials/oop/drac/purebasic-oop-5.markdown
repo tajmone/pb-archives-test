@@ -173,18 +173,19 @@ Therefore, we have ascertained that:
 Thus the `Interface` instruction and the `New_Rect()` function perform the instanciation of a `Rect` object from the `Rectangle2` Class.
 The `New_Rect()` function is the *Constructor* for objects of the `Rectangle2` Class.
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 All the Methods implementations (`Procedure : EndProcedure` blocks) must contain, as first argument, the `*this` pointer of the object. On the other hand, the `*this` argument mustn’t appear at the `Interface` level. In fact, as this instruction allows to write `Rect\Draw()`, it knows that the `Draw()` method involves the `Rect` object: no ambiguity! Everything happens as if the object `Rect` was «aware» of its state.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!anchor(admonition-constructor-parameters)
+:::::: { .Note #admonition-constructor-parameters } :::::::::::::::::::::::::::
+
 The Constructor could receive, as parameters, the whole functions addresses which implement the methods. This is not the case here, because we know the implemented methods: the ones from the class. On the other hand the initial state desired by the user is unknown. Thus, the Constructor may contain parameters for attributes initialization.
 This case applyes here: the paramters required by `New_Rect()` are the two coordinates (`x1`, `y1`) and (`x2`, `y2`) of the diametrically opposite points of the rectangle.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Object Initialization
@@ -259,14 +260,14 @@ Free_Rect(Rect2)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 The Destructor could be seen as a method of the object. But to avoid weighing down the object, and to preserve homogeneity with the Constructor, I have chosen to see it as a function of the Class.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 To delete an object by its Destructor means releasing the memory area containing its information (the methods it uses, and the state of its attributes) but not deleting the object’s infrastructure.
 So, in our example, after doing a:
 
@@ -297,16 +298,17 @@ Rect2.Rectangle
 
 
 the life cycle of object `Rect2` follows the same rules that apply to variables — because `Rect2` is first of all a variable: it is a structured variable, holding the functions pointers of the object’s methods. (See also the following reminder)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 Small reminder: the life cycle of a variable is linked to the life cycle of the program part where the variable is declared:
 
 * If the variable is declared inside a procedure, its life cycle will be linked to that of the procedure — i.e., it’s equal to the function’s time of use.
 * If the variable is declared outside any procedure, in the program’s main body, its life cycle is linked to that of the program.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Memory Allocations
@@ -443,10 +445,11 @@ Indeed, it’s the Interface and the Constructor which give meaning to these poi
 * by giving them a name (task of the interface)
 * by allocating them the adequate functions addresses (task of the constructor)
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 In spite of this arrangement concerning the function pointers’ names, it remains more practical to keep an explicit name when not considering to hide methods (which is the most common scenario). This allows to modify a Parent Class without having to retouch the pointers’ numbering in Children Classes.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Inheritance
@@ -688,8 +691,8 @@ The `Methds_Rect1` variable is the Class’ **method table**, because it contain
 
 The `Structure` of `Rectangle1` now contains the `*Methods` pointer, which is initialized by passing the `Methds_Rect1` variable address to the Constructor.
 
-!AlertSuccess
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Success :::::::::::::::::::::::::::::
+
 The following expression:
 
 !comment( Example N. 6.7-12 )
@@ -710,7 +713,8 @@ can be condensed into:
 Init_Mthds_Rect1(@Mthds_Rect1.Mthds_Rect1)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 Inheritance can be now performed correctly, because by extending `Methd_Rect1`’s `Structure` into the new `Methd_Rect2`, the functions’ addresses are going to be consecutive:
@@ -779,14 +783,15 @@ In this example, `Rectangle2`’s `Structure` is empty, and it isn’t a problem
 * First, the `*Methods` pointer only needs to exist once, and this is in the Parent Class.
 * Second, no supplementary attributes have been added to it.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 There are three advantages in having the methods’ initialization function external to the Constructor, and the method table in a single variable:
 
 * The Class’ method table needs to be initialized only once, and not at each object instanciation,
 * Object instances will hold a single pointer toward their methods’ pointers: it is a substantial gain in memory,
 * Since all objects referr to the same method table, this guarantees identical behavior for all objects of the same Class.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Get() and Set() Object Methods
@@ -823,10 +828,11 @@ EndProcedure
 
 Since `Get()` and `Set()` methods exist only to allow the user to modify all (or some) of the object’s attributes, they necessarily belong to the `Interface`.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 See the [Appendix] of the tutorial for possible optimizations of `Get()`’s and `Set()`’s performance during execution.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 !comment

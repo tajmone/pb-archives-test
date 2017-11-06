@@ -2,11 +2,6 @@
 title: Basic Typography Test
 ---
 
-!import(Typography-Tests.pp)
-
-# Headings
-
-!GenHeadings(Lorem Ipsum)
 
 # General Typography
 
@@ -17,6 +12,14 @@ Pellentesque <mark>mark tag</mark> habitant morbi tristique `inline code`senectu
 ------------
 
 Lorem markdownum quoniam specie adsumpserat quo ora habet retinacula miserata in essent Thybris ab concita mactatarumque, **sidera**? At aethera, petii via spuma, Aegides, teneat evolvere erat, nec et. Uni Achaidas accipe videndi, querenti cinguntur trabeati *addiderat duobus ut* loris et **Virbius manat**, Iove.
+
+-------------------------------------------------------------------------------
+
+# Headings
+
+!GenHeadings(Lorem Ipsum)
+
+-------------------------------------------------------------------------------
 
 # Lists
 
@@ -48,7 +51,40 @@ Lorem markdownum quoniam specie adsumpserat quo ora habet retinacula miserata in
 !Task[x][Prima quasi vulnus Graiosque decus lebetes facietque]
 !Task[ ][Dira et bracchia istis]
 }
+
+!comment(`````````````````````````````````````````````````````````````````````)
+
+## Definition Lists
+
+Term 1
+
+:   Definition 1
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+    First paragraph of definition 2.
+
+    Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+    Third paragraph of definition 2.
+
+!comment(`````````````````````````````````````````````````````````````````````)
+
+## Compact Defintion Lists
+
+(definition not in `<p>` tags)
+
+Term 1
+  ~ Definition 1
+
+Term 2
+  ~ Definition 2a
+  ~ Definition 2b
 --------------------
+
+# Block Elements
 
 ## Blockquotes
 
@@ -58,110 +94,33 @@ Lorem markdownum quoniam specie adsumpserat quo ora habet retinacula miserata in
 > 
 > > I'm a nested blockquote. At ligno: verba saepe illo triumphi. Sanguine dum [aerii nocuit](http://www.ferrivestes.com/hospes.html): tremulo possunt corpore talibus quod turbatum [magni](http://www.an.com/nullique.html)! Et [et fugit dixerunt](http://dum.net/viri-tua.html) sinistro rata mediamque altera, via per suo parvoque, vis fida, ne membra mactatos.
 
+# Tables
 
-## Cum terribili quantaque vulnera et suum armenta
+: Table Caption
 
-Ergo ordine tu, monte error ora saepe reverti sternitur. Quoque arma ambit
-timidissime vana Cytherea vinum. Praefert viso fata Alcides rosarum pendentibus
-criminis caducas et atque sagitta umerique: aut mandata.
-
-- Me patiemur dextra perpetuo quidem
-- Titani victus et mecum tantum irascentemque relictis
-- Motu silvas
-- Ab novis flumina facies quicumque quorum hominemque
-
-**Conatur suis** est sic violentaque feres trepidum ossibus Pallante multorumque
-maritum iuravimus sustinui curvi prunaque exprimit tamen. Pharetraque ad molles
-plerumque dapibus **noscar** reparabat deos distabat, sic: hiemem possem.
-Piasque *ablata* quam mora Iovis est nam iungunt tenues ab vox [venere
-quotiensque](http://viros.io/percutit-alias.php): unde mater Hector, posita.
-Ripis aera moras, nam quaque revincta erat satis imbres.
-
-Rediturum quasi vertere conligit abeunt illis adhuc **nubes**, quarum, fuistis
-letum demittit primasque mea? Balearica quo mansura locum intulerant nullis,
-nemus in cycnus tenent!
-
----------------
-
-# MD-Ipsum
-
-What follows was taken from:
-
-- http://md-ipsum.com/
- 
-## Standard Navigation List
-
-``` markdown
-<nav>
-  * [Lorem](#)
-  * [Aliquam](#)
-  * [Morbi](#)
-  * [Praesent](#)
-  * [Pellentesque](#)
-</nav>
-```
-
-<nav>
-  * [Lorem](#)
-  * [Aliquam](#)
-  * [Morbi](#)
-  * [Praesent](#)
-  * [Pellentesque](#)
-</nav>
-
-## Unordered List: Navigation
+|         First Header        |        Second Header         |
+|-----------------------------|------------------------------|
+| Content from cell 1         | Content from cell 2          |
+| Content in the first column | Content in the second column |
+| Inline `code` example       | !kbd(Ctrl)(SHIFT)(Z)         |
+| Content in the first column | Lorem Ipsum Lorem Ipsum.     |
 
 
-``` markdown
-<nav>
-  * [Lorem](#nowhere "Lorum ipsum dolor sit amet")
-  * [Aliquam](#nowhere "Aliquam tincidunt mauris eu risus")
-  * [Morbi](#nowhere "Morbi in sem quis dui placerat ornare")
-  * [Praesent](#nowhere "Praesent dapibus, neque id cursus faucibus")
-  * [Pellentesque](#nowhere "Pellentesque fermentum dolor")
-</nav>
-```
+# Alert Messages
 
-<nav>
-  * [Lorem](#nowhere "Lorum ipsum dolor sit amet")
-  * [Aliquam](#nowhere "Aliquam tincidunt mauris eu risus")
-  * [Morbi](#nowhere "Morbi in sem quis dui placerat ornare")
-  * [Praesent](#nowhere "Praesent dapibus, neque id cursus faucibus")
-  * [Pellentesque](#nowhere "Pellentesque fermentum dolor")
-</nav>
+!GenAlerts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### H3 Heading, Lorem Ipsum Dolor Sit Amet
 
-## Definition List
+Lorem ipsum dolor sit amet, __eu vis quot graeci eirmod__. Iuvaret dissentias ex nec, justo posse lobortis ea sed, _eu legimus tractatos sed_. Agam porro forensibus duo te, ~~impetus molestie salutandi ex quo~~. Augue contentiones delicatissimi duo ea, repudiare scribentur vim ei.
 
-``` markdown
-Definition list
- : Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Lorem ipsum dolor sit amet
- : Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-```
+Iudico vivendum ad vel, in `nec aliquip electram`. Vide habemus definitiones te nec, eu !mark(sale novum denique ius). Diceret verterem euripidis quo in, ei veniam officiis scribentur mel. !markRed(Eam ad propriae torquatos). Has id copiosae vulputate efficiendi, !markBlue(vim id iisque fabulas). Nam ex nulla senserit, !markGreen(eu iudicabit vulputate mel), vix cu harum tation phaedrum.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Definition list
- : Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Lorem ipsum dolor sit amet
- : Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+-------------------------------------------------------------------------------
 
-## Empty Table
+# Miscellanea
 
-``` markdown
-|   |   |   |
-| - | - | - |
-|   |   |   |
-|   |   |   |
-|   |   |   |
-```
+## Font-Awesome Icons
 
-|   |   |   |
-| - | - | - |
-|   |   |   |
-|   |   |   |
-|   |   |   |
-
---------
-
-``` markdown
-zzz
-```
+!FaIcons

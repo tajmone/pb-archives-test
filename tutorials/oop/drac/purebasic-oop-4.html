@@ -90,15 +90,11 @@ Methods\Procedure2 <span class="hl opt">=</span> &#64;<span class="hl kwc">My_Pr
 <p>Next, by writing</p>
 <pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code">Object\<span class="hl kwc">Procedure2</span>(<span class="hl num">30</span>, <span class="hl num">40</span>)</code></pre>
 <p>the <code>Object</code>’s <code>Procedure2()</code> function is called — i.e., <code>My_Procedure2()</code>.</p>
-<div class="alert-messages">
-<div class="alert alert-warn">
+<div class="Warning">
 <p>When declaring elements of an <code>Interface</code>, it’s essential to initialize them before using their procedures. Therefore, it is strongly advisable to initialize elements at declaration time.</p>
 </div>
-</div>
-<div class="alert-messages">
-<div class="alert alert-warn">
-<p><span id="admonition-on-structure-interface-symmetry"></span> The <strong>method table</strong>’s <code>Structure</code> must reflect exactly the composition of its correlated <code>Interface</code>. It must contain the same number of fields, and preserve their order, to ensure the correct assignation of each function’s name and address. It is only under these conditions that the element will be properly initialized.</p>
-</div>
+<div id="admonition-on-structure-interface-symmetry" class="Warning">
+<p>The <strong>method table</strong>’s <code>Structure</code> must reflect exactly the composition of its correlated <code>Interface</code>. It must contain the same number of fields, and preserve their order, to ensure the correct assignation of each function’s name and address. It is only under these conditions that the element will be properly initialized.</p>
 </div>
 <p>To summarize, using an <code>Interface</code> involves:</p>
 <ul>

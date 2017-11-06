@@ -16,8 +16,8 @@ title:    PureBASIC Tutorials
 
 A collection of tutorials to advance learning programming in PureBASIC.
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,13 +28,15 @@ __WIP TODOs LIST__:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [`/OOP-CONV/`](./OOP-CONV/index.html): Temp dir for Asciidoc 2 MD conversion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **HELP THIS PROJECT GROW**: Do you know any online tutorials not listed here? [Contribute](../CONTRIBUTING.md) by updating this list!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 In This Repo

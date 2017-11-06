@@ -123,10 +123,11 @@ Here is a header file cotaining the definition of this set of commands, along wi
 * [`OOP.pbi`]
 * [`OOP-Inheritance-Ex2.pb`]
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 If you have already looked at the source code of the `OOP.pbi` file, you might have noticed that the code of the final OOP implementation is slightly more complex than its presentation in this tutorial. This is because some rearrangements were made in the code in order simplify its maintainance.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 Let me guide you through the PureBasic Class declaration…
@@ -294,14 +295,15 @@ This design puts into practice the optimizations for `Get()` and `Set()` methods
 *   It prevents having to systematically declare an object’s `Get()` and `Set()` methods, when these are trivial. This saves time and it’s practical.
 At the same time, it reduces the number of objects’ methods (small optimization).
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 The price of this choice is that all members of an object are visible to the user.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertSuccess
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Success :::::::::::::::::::::::::::::
+
 This structure could be slighly retouched. Since terms like “`Md`» and “`Mb`» are visually very similar, a better distinction could be arranged. Although this choice was not retained, here is an interesting possibility:
 
 !comment( Example N. 8.2-8 )
@@ -319,7 +321,8 @@ EndStructure
 
 
 In this code, the `*Mb` pointer was replaced by two pointers: `*Get` and `*Set`. They have the same functionality but they can lead to more legible code, by clarifying if an attribute is being read or modified.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Method : EndMethod
@@ -342,10 +345,11 @@ Each keyword occurence has the Class name and the method name as parameters.
 
 Usewise, `Method : EndMethod` works like `Procedure : EndProcedure` — in fact it’s a wrapper of this block, as we shall see next.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 Note the very special syntax of the method which requires two closing parentheses. This specificity ensues from the use of a macro combined with a different number of possible arguments for each method.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### Method keyword
@@ -467,10 +471,11 @@ The trick in the `New` macro is that it ends with the `Init_Mbers` keyword. This
 
 This arrangement is made possible by declaring the `Init_Mbers` method first in the macro.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 Notice how the `New_ClassName` procedure is common to all kind of Classes. It is because its variable part (and therefore object-specific) was externalized into the `Init_Mbers` method.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### EndNew keyword
@@ -520,23 +525,21 @@ input\var2 = 20
 
 Note that the constructor name is `New` followed by the Class’ name separated by “`_`”.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!anchor(admonition-on-object-being-a-pointer)
+:::::: { .Note #admonition-on-object-being-a-pointer } ::::::::::::::::::::::::
+
 In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members ([What?! I don’t remember!][EndClass keyword]).
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!anchor(admonition-about-this-instance)
+:::::: { .Alert #admonition-about-this-instance } :::::::::::::::::::::::::::::
+
 The choice of `StructureUnion` requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here).
 This bivalence — which didn’t exist in the previous implementation — leads us to store information into the object itself. So, within the object’s methods you can access its members address through `*this`, and its instance’s address (method and members) through `*this\Instance`.
 
 An important feature ensues: the us of `*this\Instance` to call the object’s methods within its methods (__No, I’m not drunk__!). This is the best way to do it, because it hides the name of the procedure behind the method, which is an essential part of the inheritance process.
 
 For this purpose, a `Mtd` macro is present in the [`OOP.pbi`] file.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### Init_Mbers : EndInit_Mbers private block
@@ -604,10 +607,11 @@ EndMacro
 
 The `EndInit_Mbers` keyword is nothing more than the `EndProcedure` keyword, which ends the definition of the object’s initialization method.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 If you are the impatient sort, and have already peeked at the source code, you might have noticed that the final OOP implementation file includes extra optional parameters, named `arg1` to `arg5`. This is because in some situations it is useful to complete the standard `*input` pointer by additional information.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Object destructor
@@ -664,12 +668,13 @@ Free_Rect1(*Rect)
 
 As for the constructor, note that the destructor’s name is “`Free`” followed by the class’ name separated by “`_`”.
 
-!AlertError
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Error :::::::::::::::::::::::::::::::
+
 If your object consists of other objects — i.e.: that some objects are members of the current object, and they exist by (and for) this object (__hic__!) — it’s then important to free them too, by calling their destructors in-between the `Free` and `EndFree` keywords.
 
 Even if PureBasic does automatically free the allocated memory areas, it will occur only when the programs ends. During programs execution, it is up to the user to take care of any garbage memory, especially its bloat.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Inheritance
@@ -765,6 +770,8 @@ We can envisage to split the process in two steps: step one, the user create an 
 
 Here is a list of the types used by a Class:
 
+Table: Types Used by Classes
+
 |               Type               |     Applied to    |   Origin   |
 |----------------------------------|-------------------|------------|
 | `<ClassName>`                    | Object instance   | `EndClass` |
@@ -773,10 +780,11 @@ Here is a list of the types used by a Class:
 | `Mbrs_<ClassName>_` !fa(warning) | Members structure | `Members`  |
 | `Mbrs_<ClassName>`               | Members structure | `EndClass` |
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 !fa(warning) The `Mbrs_<ClassName>_` type wasn’t presented in this paper. It is an intermediate step used to build the `Mbrs_<ClassName>` structure of the members definition. This arrangement is required to achieve the `*this\Instance` feature [explained here].
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 !comment

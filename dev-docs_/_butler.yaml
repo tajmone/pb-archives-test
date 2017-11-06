@@ -1,6 +1,13 @@
 
-
 ---
 title: "PureBASIC Archives Developers Documentation"
----
+...
 
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         REFERENCE LINKS DEFINITIONS                          
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[writing]:    ./writing/index.html    "Jump to the guide on how to write contents."
+[pp-macros]:  ./pp-macros/index.html  "Jump to the PP macros reference."
+[html-tests]: ./html-tests/index.html "Jump to the CSS-styling test pages."

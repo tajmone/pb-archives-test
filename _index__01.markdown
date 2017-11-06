@@ -1,5 +1,5 @@
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __WIP__ — This page is being reworked.
 
 TODOs Tasks:
@@ -8,15 +8,17 @@ TODOs Tasks:
 !Task[ ][Fix section links to `index.html`]    
 !Task[ ][Fix HTML-Preview and RawGit links to local links]    
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 For a full list of the project's TODOs, see:
 
 - [PROJECT_STATUS.html](./PROJECT_STATUS.html)
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 The PureBASIC Archives
 ======================

@@ -1,25 +1,27 @@
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 ## !fa(exclamation-circle) THIS IS AN ALPHA TEST VERSION!
 
 This repository is for Alpha-stage testing of the upcoming new version of The PureBASIC Archives project. When this new version will be ready for publishing, it will overwrite the original project and this testing repo will be deleted:
 
 - https://github.com/tajmone/purebasic-archives
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 ## TODOs Tasks-Lists
 
 For a full list of the pending tasks before the project is ready for publishing, see:
 
 - [`/dev-docs_/TODO.html`](./dev-docs_/TODO.html)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __WIP__ — This page is being reworked.
 
 TODOs Tasks:
@@ -28,15 +30,17 @@ TODOs Tasks:
 !Task[ ][Fix section links to `index.html`]    
 !Task[ ][Fix HTML-Preview and RawGit links to local links]    
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 For a full list of the project's TODOs, see:
 
 - [PROJECT_STATUS.html](./PROJECT_STATUS.html)
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 The PureBASIC Archives
 ======================

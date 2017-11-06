@@ -66,10 +66,8 @@
 <p>Here <code>*Draw</code> is a function pointer used to contain the address of the desired function: <code>@Draw_Rectangle()</code>. Functions referenced in this manner can be invoked by using <code>CallFunctionFast()</code>.</p>
 <p>Thus, the proposed <code>Structure</code> is completely adapted to the notion of Class: * the structure stores the definition of the object’s attributes: here <code>x1</code>, <code>x2</code>, <code>y1</code> and <code>y2</code> are Long variables. * the structure stores the definition of the object’s method: here the <code>Draw()</code> function, through to a function pointer.</p>
 <p>When a similar Class definition is followed by the implementations of its methods (in our example, <code>Draw_Rectangle()</code>’s <code>Procedure : EndProcedure</code> block statement), it becomes a concrete Class. Otherwise, it will be an abstract Class.</p>
-<div class="alert-messages">
-<div class="alert">
+<div class="Alert">
 <p><code>*this</code> always refers to the object on which the method must be applied. This notation can be seen in the previous example, within the <code>Draw_Rectangle()</code> method.</p>
-</div>
 </div>
 <h1 id="instanciation">Instanciation</h1>
 <p>Now, to create an object called <code>Rect1</code> from the <code>Rectangle</code> Class, write:</p>
@@ -106,10 +104,8 @@ Rect2\y1 <span class="hl opt">=</span> <span class="hl num">0</span>
 Rect2\y2 <span class="hl opt">=</span> <span class="hl num">20</span></code></pre>
 <p>To use <code>Rect2</code>’s <code>Draw()</code> and <code>Erase()</code> methods, I shall proceed the same way as before: through <code>CallFunctionFast()</code>.</p>
 <p>This demonstrates that the <code>Rectangle2</code> Class inherited the properties of the <code>Rectangle</code> Class.</p>
-<div class="alert-messages">
-<div class="alert alert-note">
+<div class="Note">
 <p>Inheritance is a category of polymorphism. The object <code>Rect2</code> can be also seen as an Object from the <code>Rectangle</code> Class — just don’t use the <code>Erase()</code> method! By inheritance, the object carries several forms: those of the objects coming from the Parent Classes. It is called inheritance polymorphism.</p>
-</div>
 </div>
 <h1 id="overloading">Overloading</h1>
 <p>During initialization of an object, its function pointers are initialized by assigning to them the addresses of the methods suiting the object.</p>

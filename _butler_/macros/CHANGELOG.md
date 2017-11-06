@@ -1,99 +1,103 @@
-PP-Macros Library CHANGELOG (Alpha)
-===================================
+# PP-Macros Library CHANGELOG (Alpha)
 
 This file logs changes to pp macros definitions during Alpha Stage.
 
 > **NOTE**: Implicit changes will not be logged — eg: addition of `!import` statements (to “`macros.pp`”) for newly created macros files is given for granted and not worth mentioning. Minor changes will not be logged either, because life is to short…
 
-------------------------------------------------------------------------
+-----
 
 **Table of Contents**
 
 <!-- #toc -->
--   [macros.pp](#macrospp)
--   [Alerts.pp](#alertspp)
--   [BlockFormatting.pp](#blockformattingpp)
--   [GFM-TaskList.pp](#gfm-tasklistpp)
--   [Highlight.pp](#highlightpp)
--   [InlineFormatting.pp](#inlineformattingpp)
--   [LinkingHelpers.pp](#linkinghelperspp)
--   [Verbatim.pp](#verbatimpp)
+
+  - [macros.pp](#macrospp)
+  - [Alerts.pp (*deleted*)](#alertspp-deleted)
+  - [BlockFormatting.pp](#blockformattingpp)
+  - [GFM-TaskList.pp](#gfm-tasklistpp)
+  - [Highlight.pp](#highlightpp)
+  - [InlineFormatting.pp](#inlineformattingpp)
+  - [LinkingHelpers.pp](#linkinghelperspp)
+  - [Verbatim.pp](#verbatimpp)
 
 <!-- /toc -->
 
-------------------------------------------------------------------------
+-----
 
-macros.pp
-=========
+# macros.pp
 
-**`v0.1` (2017-10-20)**
+**`v0.3` (2017-11-05)**
 
--   First Alpha Release.
+  - The “`macros.pp`” file now also creates the `!ListMacrosFiles` that emits a markdown unordered list of all the macros modules imported (used in the “`/dev-docs_/`” section to maintain an auto-update list of macros modules).
 
-------------------------------------------------------------------------
+**`v0.2` (2017-11-04)**
 
-Alerts.pp
-=========
+  - Removed `!import(Alerts.pp)`
 
 **`v0.1` (2017-10-20)**
 
--   First Alpha Release.
+  - First Alpha Release.
 
-BlockFormatting.pp
-==================
+-----
 
-**`v0.1` (2017-10-20)**
+# Alerts.pp (*deleted*)
 
--   First Alpha Release.
-
-GFM-TaskList.pp
-===============
+**REMOVED (2017-11-04)** — Pandoc v2 introduced new [`fenced_divs` extension](http://pandoc.org/MANUAL.html#extension-fenced_divs "Read pandoc documentation on \`fenced_divs\` extension") which allows to create Alerts without using PP macros.
 
 **`v0.1` (2017-10-20)**
 
--   First Alpha Release.
+  - First Alpha Release.
 
-Highlight.pp
-============
+# BlockFormatting.pp
+
+**`v0.1` (2017-10-20)**
+
+  - First Alpha Release.
+
+# GFM-TaskList.pp
+
+**`v0.1` (2017-10-20)**
+
+  - First Alpha Release.
+
+# Highlight.pp
 
 **`v0.2` (2017-10-28)**
 
 Newly released Highlight v3.40 now supports the `--data-dir` option override for Windows (see [Issue \#24](https://github.com/andre-simon/highlight/issues/24)):
 
--   Removed hacks that used the `HL_LANGS` env var and `--config-file=<file>` option, and `!_conF` macro to override langdefs on a one-by-one basis.
--   Implement `--data-dir=$HIGHLIGHT_DATADIR` option on Highlight invocations.
+  - Removed hacks that used the `HL_LANGS` env var and `--config-file=<file>` option, and `!_conF` macro to override langdefs on a one-by-one basis.
+  - Implement `--data-dir=$HIGHLIGHT_DATADIR` option on Highlight invocations.
 
-Now langdefs are moved to `/_butler_/highlight-data/langDefs/` folder. Any langdef placed in this folder will take precedence over its counterpart in Highlight’s setup folder!
+Now langdefs are moved to `/_butler_/highlight-data/langDefs/` folder. Any langdef placed in this folder will take precedence over its counterpart in Highlight’s setup folder\!
 
 Highlight v3.40 was supposed to allow using the `HIGHLIGHT_DATADIR` env var on Windows, without the need of the (deprecated) `--data-dir` option. Somehow I haven’t managed to make it work, so for now I’ll be using both the `HIGHLIGHT_DATADIR` env var and the `--data-dir` option.
 
 **`v0.1` (2017-10-20)**
 
--   First Alpha Release.
+  - First Alpha Release.
 
-InlineFormatting.pp
-===================
-
-**`v0.1` (2017-10-20)**
-
--   First Alpha Release.
-
-LinkingHelpers.pp
-=================
+# InlineFormatting.pp
 
 **`v0.1` (2017-10-20)**
 
--   First Alpha Release.
+  - First Alpha Release.
 
-Verbatim.pp
-===========
+# LinkingHelpers.pp
+
+**`v0.1` (2017-10-20)**
+
+  - First Alpha Release.
+
+# Verbatim.pp
 
 **`v0.1.1` (2017-10-23)**
 
--   NEW MACROS:
-    -   `!Pre`
--   Removed from header description:
+  - NEW MACROS:
+    
+      - `!Pre`
 
+  - Removed from header description:
+    
         -- Inline code with custom classes for non syntax-higlighted coloring
            (<code class="someclass">)"someclass">)
 
@@ -101,5 +105,4 @@ Verbatim.pp
 
 **`v0.1` (2017-10-20)**
 
--   First Alpha Release.
-
+  - First Alpha Release.

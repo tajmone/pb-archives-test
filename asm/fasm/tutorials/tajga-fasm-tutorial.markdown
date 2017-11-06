@@ -2,7 +2,7 @@
 ---
 title:    TAJGA FASM Tutorial
 subtitle: A beginners' FASM tutorial for MS DOS --- by Vid, 2004
-# baseliner: true
+baseliner: true
 # =============================================================================
 #                                HTML METADATA                                 
 # =============================================================================
@@ -26,8 +26,8 @@ keywords:
   - TAJGA Team
 ...
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -46,7 +46,8 @@ __WIP TODOs LIST__:
 !Task[ ][Clean-up YAML metadata]
 !Task[ ][Fix revision number]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
     Current revision: 2017-01-26
@@ -57,8 +58,8 @@ Ported to Markdown, edited and reprinted by Tristano Ajmone [**@tajmone**](https
 
 -   <http://bos.asmhackers.net/docs/FASM%20tutorial/>
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __CHANGES__ — Some changes made to original text:
 
 - English text polished to improve readability.
@@ -67,12 +68,14 @@ __CHANGES__ — Some changes made to original text:
 - Added or corrected links to mentioned references.
 - Styled notes, tips and warnings with CSS Alert Boxes.
 - Applied highlighter style to key passages.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 __NOTE__ — The original website of the __TAJGA Team__ is now defunct (tajga.kallimagarden.com), but the team has now an [organization profile](https://github.com/tajga) and a [website](http://tajga.github.io/) on GitHub.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 ----
@@ -151,12 +154,13 @@ and compile it (I hope you already know how). When you look at the created file 
 
 Now let’s analyze the source: `db` is a “**directive**” (a directive is command to the compiler, remember this!) which means “**define byte**”. So this directive will put a byte into the destination file. Value of byte should follow this directive. For example, `db 0` will insert a byte with value 0 into the destination file. But if you wanted to insert a character, you would have to remember its ASCII value. In this case, you can enter the character enclosed in straight single quotes (`'`) and the compiler will “get” its value for you. This is how the above code works.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **directive**
 
 A command to the compiler.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now let’s create a file with more than one character. It will be:
 
@@ -213,24 +217,26 @@ db 'Thi','s is my first lo','ng string in',' FASM'
 
 etc.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **string**, **quoted string**
 
 Text enclosed in quotes is called a “**string**”. In general, a “string” is an array of characters. The term for denoting a string inside source code is  “**quoted string**”.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 2. First Program
 ================
 
 You may wonder why I’m fooling about creating text files when you want to learn assembly. But text files are just some “**arrays**” of bytes. You haven’t learnt just how to create a text file: you learnt how to define a file containing any data you want! And this is what a runnable program is — a special “**data**” file, an array of numeric values, called “**machine code**”. You only have to know the meaning of these values **:)**. Of course, it’s very hard to remember all the values and their’s meanings, and this is what an assembler is for: It translates programs from a human acceptable language to machine code. Therefore, you only have to learn this human acceptable language **:)**.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **machine code**
 
 An array of numeric values that represents instructions to the processor (CPU).
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now we’ll look into DOS `.COM` (**COM files**) programs (occasionaly called “**memory image**” — you will learn why later on, when you get into it). These are the simplest executable (runnable) files under DOS and Windows.
 
@@ -258,36 +264,40 @@ int 20h
 
 This is an “**instruction**”. An instruction is a command for the processor, which is stored in the created file as one or more bytes. When you run a `.COM` executable file, the processor walks through it and decodes its instructions from machine code and does what these instructions instruct it to. Instruction `int 20h` says that this is the end of execution of the file. So, the first instruction in this code tells the processor to stop execution, therefore the executable file does nothing, as you saw.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **instruction**
 
 A single command to the processor.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 __BY THE WAY__: `int 20h` is NOT the processor instruction which ends the execution of the `.COM` program. It instructs the processor to call a system procedure. The system procedure to be called is chosen by the number following `int` — in our case: number `20h` (it IS a sort of number), which means calling the procedure to end a `.COM` file.
 
 `int` could be followed by a different number, and a different system procedure would be called. But right now, we can abstract away from this, forget about it and take `int 20h` as the instruction to stop a program.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 So, “**machine code**” is a set of “**instructions**”. !mark(There is a difference between directives and instructions.) Directives are commands for the compiler — how it should define data, and what data it should define. Instructions are defined data which encodes what the processor will do when you execute the program. For example, `db 0,0` is a directive which defines two zero bytes, but it is an instruction in case it is executed, because two zero bytes have special meaning for the processor (don’t bother about their meaning right now). `org 256` is a directive, not an instruction, because it doesn’t define any data. You will get into this by practice.
 
 Instruction `int 20h` is simple, it doesn’t need any arguments (=parameters, or values which changes its effect). But what if some instruction DOES need arguments? For this reason the processor has it’s own “**variables**” (variable is a general term for a space which stores some value). These variables are called “**registers**”. The first registers we’ll learn are `al`, `ah`, `bl`, `bh`, `cl`, `ch`, `dl`, and `dh`, which are **byte-sized** (they contain a value within the range 0 to 255).
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **register**
 
 An “internal” processor’s variable.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 __BY THE WAY__:  `int 20h` takes its argument in the `AL` register, but, again, we can abstract from this. And, in fact, value `20h` is an instruction argument too, but we abstracted from this before. This is what I was talking about when I mentioned that this was “going to be funny”.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now, how do we set the value of a register? There is a instruction which does this, for example:
 
@@ -305,26 +315,29 @@ mov al,bl
 
 This copies the value in the `bl` register to the `al` register. It won’t change the value in the `bl` register. !mark(The source of `mov` always remains unchanged.)
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** You will often find people talking about the `mov` instruction. But `mov` is not instruction, and `int` is not an instruction either. `mov al,bl` and `int 20h` are instructions, for example. `mov` and `int` are called “**instruction mnemonics**”. But just accept it: everyone calls it “**instruction**”; and probably you will too, after some time  --- and I probably will too, sorry __:)__.
 
 Arguments of an instruction (the part of the instruction without instruction mnemonics, like `al` and `10` in `mov al,10`) are called “**instruction operands**” (or “**instruction arguments**”)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **instruction mnemonics** (this term is not so improtant right now)
 
 **instruction operand**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now let’s get to how registers are used. We will use the `int 21h` instruction which can do MANY things depending on the value in `ah` register. We won’t learn the meaning of every value, right now we will talk only about value 2. If value 2 is in the `ah` register when instruction `int 21h` is executed, then the character in `dl` (more precisely: the character whose ASCII code is in `dl`) is printed to screen (console).
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** if you are using a Windows file manager (like Total Commander), you'll see a window appear for a very short time and then disappear. Our character is being displayed in this window and you probably can’t notice it. You must run a shell (`cmd` on XP, `command` on older Windozes) and run your program from it. Anyway, if you can’t handle this, forget about assembly for a while and learn using your operating system first — and then, don't forget to return to assembly!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Okay, so let’s look at a program which prints character “`a`”:
 
@@ -367,10 +380,11 @@ int 20h
 
 And we musn’t forget to stop execution. Otherwise, the program will most probably crash.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** In assembly a character enclosed in quotes is the same as the ASCII code of that character.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 So, the code for printing multiple characters (“`ab`”) is:
 
@@ -405,26 +419,29 @@ will print “`aaa`”.
 
 Okay, let’s get to variables. In the previous chapter I wrote that variable is general term for a space which stores some value. Registers, for example, are variables. But there is a limited number of registers (VERY limited: around 8 + a few special ones), and their number is rarely sufficient. For this reason memory (RAM — random access memory) is used.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** When someone says “variable” he almost always means memory variable.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 3.1. Labels
 -----------
 
 The problem is that you have to know WHERE in memory some value is being stored. A position in memory (called “**address**”) is given by number. But it’s quite hard to remember this number (address) for every variable.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 term: **address**
 
 A number which gives a position in memory.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Another problem with addresses is that when you change your program, addresses might changed too, so you would have to correct their number everywhere they are used. For this reason addresses are represented by “**labels**”. A label is just some word (not a string, it is not enclosed in quotes) which, in your program, represents an address in memory. When you compile your program, the compiler will replace the label with the proper address. Labels consists of alphabet characters (“`a`” to “`z`”, “`A`” to “`Z`”), numbers (“`0`” to “`9`”), underscores (“`_`”) and dots (“`.`”). But !markRed(the first character of a label can’t be a number or a dot). Also, a label can’t have the same name as a directive or an instruction (instruction mnemonics). Labels are case sensitive in FASM (“`a`” is NOT same as “`A`”).
 
-Labels Examples:
+
+Table: Labels Examples
 
 | LABEL         | STATUS                                                  |
 |---------------|---------------------------------------------------------|
@@ -443,16 +460,16 @@ Labels Examples:
 | `mov`         | not a label, because “`mov`” is an instruction mnemonic |
 
 
+:::::: Note ::::::::::::::::::::::::::::::::
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 __NOTE__: Labels starting with dot have special meaning in
 FASM, which you will learn later.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 term:
 
 **label**
@@ -461,7 +478,8 @@ A placeholder for some address; ie: a placeholder for some number, because an ad
 
 In FASM you can use a label the same way as any other number (not really, but it doesn’t really matter for you right now).
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 You can define labels using the “`label`” directive. This directive should be followed by the label itself (the label name). For example:
 
@@ -473,17 +491,19 @@ You can define labels using the “`label`” directive. This directive should b
 
 This directive defines a label that will then represent the address of the data defined behind it.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-directive: **label**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+directive: **label**
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **label definition**
 
 The **label** directive followed by a label-name.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 A shorter way to define a label is to write just the label name followed by colon (`:`), like this:
 
@@ -625,13 +645,14 @@ dw 1000
 
 now, every time you use `[variable1]` it will have the same meaning as `byte [variable1]` (or `word [variable1]` in the second example). So `mov [variable1],10` will work — in the first case, it will store value `10` into the byte at address `variable1`; in the second case, it will store it into a word.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**size operator**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**size operator**
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Warning :::::::::::::::::::::::::::::
+
 **NOTE:** !mark(You can’t move values between variables of different size):
 
 !Fasm
@@ -648,10 +669,11 @@ mov [variable1],al
 label variable1 word
 dw 0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Warning :::::::::::::::::::::::::::::
+
 **NOTE:** <mark>You can’t access two memory locations in one instruction</mark> (except for some special instructions). This is wrong, and it won’t compile:
 
 !Fasm
@@ -668,10 +690,11 @@ mov [variable1],al
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This will cause you some problems in the beginning, but it will force you to write faster code --- which is the main reason for coding in assembly.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Warning :::::::::::::::::::::::::::::
+
 **NOTE:** The size operator assigned to a label in its definition has lower priority than a size operator within an instruction for accessing a variable; therefore:
 
 !Fasm
@@ -689,7 +712,8 @@ mov [variable],10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 will access a WORD.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 I think you noticed that having two lines to define one variable is too much. There is a shorter way to define variables:
 
@@ -758,39 +782,44 @@ here the address represented by `variable1` is `0`, whereas `variable2` stands f
 
 OK, this looks nice except that it is’nt true, at all! The problem is that usually there are multiple programs loaded in memory at the same time (operating system, mouse driver, you program, etc.). In this context the program would have to know WHERE in memory will it be loaded so it can access it’s variables. For this reason addresses are “**relative**”. It means that for each loaded program is reserved a region in memory called “**segment**”. All memory addresses accessed by this program are going to be relative to the begginning of this region. So `[0]` doesn’t mean the first byte of memory, but the first byte of the segment.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **segment**
 
 A consecutive region of memory reserved for a program.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 How does this work? The processor has a few special registers (segment registers) which hold the address of the segment (ie: the address of the first byte of the segment). Every time you access memory in your program the content of this segment register is added to the address you provided; therfore `mov al,[0]` accesses the first byte of your segment.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**NOTE:** I have told that memory addresses in `.COM` programs are words. That means they can be in the range 0 to 65535. Therefore the maximal size of a segment is 65536 bytes. This can be “tricked” by changing the content of segment registers, but don’t bother with this right now.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**NOTE:** I have told that memory addresses in `.COM` programs are words. That means they can be in the range 0 to 65535. Therefore the maximal size of a segment is 65536 bytes. This can be “tricked” by changing the content of segment registers, but don’t bother with this right now.
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **NOTE:** A segment is a region in memory. But the term “segment” is often used to indicate the beginning address of this region. Sad but true.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 So an absolute address in memory has two parts: segment (exactly: the address of the segment’s beggining) and, as second part, a word-sized value called “**offset**” which is the address relative to the segment (ie: address of segment’s beginning).
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **offset**
 
 An address relative to a segment, or address “inside” a segment.
 (the first definition is more exact, but the second is easier to comprehend)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Warning :::::::::::::::::::::::::::::
+
 **IMPORTANT:** I stated that labels represent the address of a variable. As a matter of fact, labels in FASM represent the offset of a variable. This is why FASM is called “**flat**” assembler --- you'll understand this later on (much much later __:)__).
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 I won’t get deeper into segment registers — on how a segment’s beginning address is stored in them (there IS difference). Right now, take segment registers as some kind of black box that works even if we ignore how.
 
@@ -799,10 +828,11 @@ I won’t get deeper into segment registers — on how a segment’s beginning a
 
 As your program is loaded, it often needs some external info from the program that launched it. The best example is command line arguments; or it may need know WHO launched it; etc. This value must, of course, be stored in the same segment of the program. In `.COM` files this data (passed to your program by the program that you launched it from) is stored in the first 256 bytes of the segment. Therefore, your program is loaded from offset 256 onward.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** The 256-bytes structure at the beginning of a `.COM` file is called “**PSP**”, which stands for “**program segment prefix**”
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now imagine this `.COM` program:
 
@@ -825,10 +855,11 @@ int 20h
 variable1 db 0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** `org` affects labels at defintion-time (for example at `label variable byte` or `variable db 0`), not when they are used (like at `mov ax,[variable]`). That means, that if you change addresses' “origin” via the `org` directive after defining some label, that label will still hold the same value before and beyond the `org` directive.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 I won’t tell you anything about the data contained in the PSP, you dont have to worry about it for now.
 
@@ -849,10 +880,11 @@ It is like with decimal numbers: every digit is a value 0 to 9, and the “true�
 
 It’s the same with words: One of the two bytes hold value 0 to 255, the other one holds value 256\*(0 to 255). The byte holding 0..255 is called “**low order byte**”, the other one (holding 256\*(0..255)) is called “**high order byte**”.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 terms: **low order byte**, **high order byte**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Examples (word value = high order byte : low order byte)
 
@@ -880,10 +912,11 @@ dw 0
 
 then `byte [variable]` is the low order byte, and `byte [variable + 1]` is the high order byte. (The `+ 1` addition to `variable`’s offset is carried out by the compiler, the value of `variable` is constant, so `variable + 1` is constant as well. It means the next byte beyond `variable`’s offset. I think this should be clear enough to need no further explaination).
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** When the low order byte comes first, then it's called “**little endian encoding**”; when it's the high order byte that comes first, then it's called “**big endian encoding**”. But these terms are not important, especially for a beginner ASM coder.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 4.2. Word registers
 -------------------
@@ -903,17 +936,19 @@ eh db 0
 
 `el` would be the low order byte, so it comes first.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 terms: **word register**
 
 word registers: `ax`, `bx`, `cx`, `dx`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** The letters `a`, `b`, `c` and `d` stand for “**accumulator**”, “**base**”, “**counter**” and “**data**”, it has nothing to do with alphabetical order. The real order of these registers is `ax`, `cx`, `dx`, `bx`; but it is not important until you want to generate/change machine code yourself.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now, if you want to set the value in register `ax` to 52 you use:
 
@@ -947,8 +982,8 @@ mov dl,57
 
 because 48 is equal to “12345 / 256”, and 57 is “12345 modulo 57” (modulo is the remainder after division).
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** You know that the instruction operand can be a number (numeric constant), like “`0`”, “`256`”, “`12345`” etc. But every assembler I know of allows you to place an expression as operand. During compilation, the value of the expression is evaluated and the expression is “replaced” by it’s result. So `mov dx,(1 + 5)` is same as `mov dx,6`. Therefore the previous code example could be better written as
 
 !Fasm
@@ -958,7 +993,8 @@ mov dl,12345 mod 256
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ("`/`" is the division operator, `mod` (modulo) is the operator which returns the remainder of a division. You don’t have to know these operators right now, but you should already know something about expressions).
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 The processor has also other word registers: `sp`, `bp`, `si`, `di`. But you can’t access directly the byte parts of these registers, you must access the whole word. This is a limitation of the processor, so there’s nothing you can do about it. For example, if you want set the high order byte of `si` to 17 you must do it this way:
 
@@ -971,10 +1007,11 @@ mov si,ax
 
 So first you copy the value of `si` to `ax`. The high order byte of `ax` can be accessed dirctly (it’s the `ah` register), so you set it to `17`. The low order byte of the word remains unchanged. Then you copy back the value from `ax` to `si`. Now the word’s high order byte has been changed to `17`, while its low order byte remains unchanged.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** Register `sp` always has a special function; `bp` usually has a special function (in code generated by most (all?) non-assembly compilers). Registers `si` and `di` can be used whenever you want. This means you shouldn’t change `sp` and `bp` unless you know what you are doing.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 4.3. String output using int 21h/ah=9
 -------------------------------------
@@ -1045,8 +1082,8 @@ The first part (first `int 21h`) will print “`It costed 50`”, then `int 21h/
 
 Let’s now take a closer look at `int 21h/ah=9`. As you maight have realized already, it will print every character (exactly: every character whose ASCII code is in byte form) from the address contained in `dx` until the first “`$`” character after the address in `dx`.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** ASCII codes 0 to 31 (I think) have a special meaning for `int 21h/ah=9`. These codes have characters assigned to them (smiling faces, diamonds etc.) but `int 21h/ah=9` doesn't print them, but does something else. For example, the character with ASCII code 7 will produce a short beep. Try this:
 
 !Fasm
@@ -1061,7 +1098,8 @@ db 'Beep',7,'$'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It should print “`Beep`” and then beep.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Other common values are 10 and 13: `10` causes the cursor to return to the first column of the current row; `13` causes cursor to down move one row (if them bottom of screen is reached, then the screen is scrolled). So a combination of these two causes the cursor to move to the first column of the next row. These two should (but don’t always do) work in any order, but you should always place `13` first. These two characters are often called EOL (end of line). Try this example:
 
@@ -1083,10 +1121,11 @@ Line 1
 Line 2
 ```
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** ASCII code 13 is called "CR" (carriage return) and code 10 is called "LF" (line feed).
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Another example on addresses (previous chapter), but with word registers. Check by yourself whether you understood [**Chapter 3**](#labels-addresses-and-variables):
 
@@ -1118,15 +1157,17 @@ The processor loads the first instruction (it determines the number of bytes the
     -   `ip` = `ip` + `size`
 -   Until instruction `int 20h` is found
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**NOTE:** As with others pointers, “`ip`” doesn’t hold the full address of the instruction, just the offset part. Be we shouldn't worry about this right now.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**NOTE:** As with others pointers, “`ip`” doesn’t hold the full address of the instruction, just the offset part. Be we shouldn't worry about this right now.
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** “`ip`” stands for “**instruction pointer**”.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 5.2. Jumps
 ----------
@@ -1147,10 +1188,11 @@ int 20h
 
 The first instruction sets the value of `ip` to the address of `mov ah,9` instruction (its address is held in label `Start`). Thus the processor won’t try to execute the bytes defined by “`Text to output`” string and this program will work.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** Of course, when `ip` is changed by the `jmp` instruction, then the size of this instruction is NOT added to it.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 5.3. Comparing and conditonal jumps
 -----------------------------------
@@ -1182,17 +1224,19 @@ cmp ax,al                 ; wrong, operands have different size
 
 This instructions checks whether the first operand is the same, greater or lesser compared to the second one.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 instruction: **cmp**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 OK, we can compare, but how are the results of comparison stored? The CPU (the processor) has a special register called “**flags register**” in which it stores results of comparison (and some other things too). This register (like `ip`) can’t be accessed with `mov` or similar instructions; its value is set by the `cmp` instruction. Right now you don’t have to bother HOW the result of comparison is stored in this register — you would need to understand bit arithmetics for that.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 register: **flags**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 OK, we can compare, and we know that the result is stored in `flags`. The only thing we need now is the conditional jump itself. A conditional jump is a jump which is taken only when a condition you specified is true (in the flags register). It will be best explained on example. We compare `ax` to `bx` (`cmp ax,bx`). A conditional jump can jump if `ax` &lt; `bx`, or when `ax` = `bx`, or when `ax` &gt;= `bx` etc. These jumps are (op1 is first operand of `cmp`, op2 is second):
 
@@ -1253,10 +1297,11 @@ done:
 
 here we compare `ax` to `bx`, then if `ax` is less than `bx` the jump won’t take place and we continue with `mov cx,bx`, which stores the greater value in `cx`, as desired, and then `jmp done` skips the instructions used in case `ax` is greater. Otherwise, if `ax` is greater than `bx`, then `jmp AX_bigger` takes place, so the next instruction is `mov cx,ax` which moves the greater value (ie: the one in `ax`) to `cx`. As you can see, the code was divided into two “branches”: one for `ax`&gt;`bx`, the other for `ax`&lt;=`bx`. Finally, both branches reach the instruction beyond `done:`, and at this point `cx` always holds the greater value. By the way, there could be `jae` instead of `ja`, because for the case when `ax`=`bx` both branches have the same effect.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 instructions: **je, ja, jb, jae, jbe**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 But what can we do if we want to jump when operands are NOT equal? We could do something like this:
 
@@ -1282,20 +1327,23 @@ NotSame:
 
 where the `...` part is executed only if the value in `ax` is equal to the value in `bx`.
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** `jna` is the same as as `jbe`, `jnb` is the same as as `jae`, `jb` is the same as as `jnae`, and `ja` is the same as as `jnbe`.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Alert :::::::::::::::::::::::::::::::
+
 instructions: **jne, jna, jnb, jnae, jnbe**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Warning :::::::::::::::::::::::::::::
+
 **IMPORTANT:** Many instruction change the `flags` register, not just `cmp`, so conditional jumps should come right after `cmp`, with no instructions between them.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 6. Bit Arithmetics
 ==================
@@ -1307,8 +1355,8 @@ This is what most tutorials usually start with. After reading this you will be c
 
 You know that computers use “**bits**”, which are variables that can contain one of two possible values: `0` or `1`. When a bit’s value is `0`, we say that it’s “**clear**”, when it’s `1`, we say that it’s “**set**”
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 terms:
 
 **bit** --- A variable containing `0` or `1`.
@@ -1316,7 +1364,8 @@ terms:
 **clear bit** --- A bit containing `0`.
 
 **set bit** --- A bit containing `1`.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now, how can we store a number in these bits? It’s similar to storing a word in two bytes ([**Chapter 4.2**](#word-registers), re-read it). One bit contains a `0` or `1` value, therefore a number that consists in just one bit can only contain values 0 and 1. When we add another bit, we can still store 0 and 1 in the first bit, but we have another bit which now can hold 2\*(0 or 1). A further bit holds 4\*(0 or 1), and then 8\*(0 or 1), etc.
 
@@ -1332,15 +1381,17 @@ It is similar with a word, except you have 16 bits instead of 8; check it yourse
 
 Now some terms: the bit which holds 1\*(0 or 1) is **bit\#0**; the next one, which holds 2\*(0 or 1) is **bit\#1**; and so on until **bit\#7**, which holds 128\*(0 or 1). So bits are enumerated starting from 0, not from 1 — as you would maybe exepect. Bit\#0 is called the “**low order bit**”, the highest bit (which holds the greatest value) is the “**high order bit**”. For example, the high order bit of a byte value is bit\#7, and the high order bit of a word value is bit\#15.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-terms: **low-order bit**, **high-order bit**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+terms: **low-order bit**, **high-order bit**
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Warning :::::::::::::::::::::::::::::
+
 **IMPORTANT**: Bits are enumerated starting from 0, not from 1, so the first bit is bit\#0.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 A number encoded this way (in bits) is called a “**binary number**”.
 
@@ -1409,6 +1460,8 @@ Then comes `or`. As you know, the result of `or`ing two values is true when at l
 
 Here is the Table:
 
+Table: Bit Operations
+
 |  A  |  B  | A and B | A or B | A xor B |
 |:---:|:---:|:-------:|:------:|:-------:|
 |  0  |  0  |    0    |    0   |    0    |
@@ -1416,10 +1469,11 @@ Here is the Table:
 |  1  |  0  |    0    |    1   |    1    |
 |  1  |  1  |    1    |    1   |    0    |
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** There are 16 possible operations on two bits, but we won't talk about all of them.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Now the interesting part: In late times, processors designers didn’t like having lots of instructions on their processors. But as you saw, we defined 3 operations for a single bit and 3 for two bits. So they found a way to achieve operations on single bit by using operations on two bits. Remember, the operations on a single bit were: setting it to `0`, setting it to `1` and flipping its value (`0`-&gt;`1`, and `1`-&gt;`0`). How?
 
@@ -1476,10 +1530,11 @@ xor al,00001001b
 
 … the result will be `00011000b` — bits `xor`ed with `0` will stay unchanged, bits `xor`ed with `1` will be flipped (to their complement).
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 instructions: **and, or, xor**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 These instructions take the same arguments as `mov` — ie: the first argument can be a memory variable or a register, the second one can be a memory variable, a register or a constant. <mark>Both arguments must be of the same size, and only one of the arguments can be a memory variable.</mark>
 
@@ -1488,10 +1543,11 @@ These instructions take the same arguments as `mov` — ie: the first argument c
 
 If you have programmed before, you probably already know about boolean variables (ocassionaly called “logical”). They can hold two values: `TRUE` or `FALSE`. You can see that they can be stored in a bit wuite finely — `1` for `TRUE`, and `0` for `FALSE`.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 term: **boolean variable**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 The problem here is that the smallest data directly accessible is a byte (8 bits). As you know, you can access a byte register or a byte memory variable, not a bit. It’s truely this way: there are no instruction which can access just one bit. (Of course there are, you just don’t need to know about them right now **:)**)
 
@@ -1576,10 +1632,11 @@ xor [eight_booleans],00001000b
 
 These were just a reminder, now let’s deal with how to check the value of bits. Checking the value of bit is called “**bit testing**”.
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 term: **bit testing**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 <!-- NOTE: FOLLOWING PARAGRAPH WAS REVISED -->
 You often need to test the value of some boolean variable and then do something (jump somewhere) if it is (or isn’t) TRUE. We did this with a byte-sized boolean variable using the `cmp` instruction, but it is impossible to use `cmp` for testing just a single bit of a byte. For this reason, there is a `test` instruction. It takes the same arguments as `mov`, `xor`, `and`, `cmp`, etc.
@@ -1601,15 +1658,17 @@ cmp arg1,0
 
 … but it doesn’t modify `arg1` and you use `jz` (jump if zero) and `jnz` (jump if not zero) conditional jumps. `jz` jumps if the result of virtual `and`ing (testing) is zero. Similary, `jnz` jumps, if result is not zero (eg. at least one of the tested bits is non-zero)
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**NOTE:** In fact, `jz` is the same instruction as `je`, and `jnz` is the same as `jne`; therefore, in our `and`/`cmp` example, using `jz` would be the same as using `je`.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**NOTE:** In fact, `jz` is the same instruction as `je`, and `jnz` is the same as `jne`; therefore, in our `and`/`cmp` example, using `jz` would be the same as using `je`.
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Alert :::::::::::::::::::::::::::::::
+
 instruction: **test**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 An example of using `test`:
 
@@ -1673,12 +1732,13 @@ dec ax       ;decrement (subtract 1 from) value in ax
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 <!-- FIXED: "(substracting 0)" => " (subtracting 1)" -->
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 terms: **increment** (adding 1), **decrement** (substracting 1)
 
 instructions: **inc**, **dec**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 If you wan’t to add or substract more than 1, you can use more `inc`s or `dec`s, but that is a rather ugly way to do it, requires more typing, and the code gets big and slow. So there is instruction which can add any value, this instruction is `add`. It takes two arguments, the first one is the *destination* (ie: the value being added to), and the second one is the value to be added. Argument types are the same as for `mov`: the first one can be a register or a memory variable, the second one can be a constant, a register or a memory variable (only if the first one isn’t memory variable! Always remember: <mark>a single instruction can’t access two memory locations</mark>). Example:
 
@@ -1741,15 +1801,17 @@ byte 254 - 255 = 255
 etc.
 ```
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**NOTE:** The word `oveflow` is usually used for both `overflow` and `underflow`.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**NOTE:** The word `oveflow` is usually used for both `overflow` and `underflow`.
+
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Alert :::::::::::::::::::::::::::::::
+
 Terms: **Overflow**, **Underflow**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 We also need to know how to check if an overflow has occured after performing an operation, to prevent bugs. For this purpose, flags are used. I already mentioned flags in [**Chapter 5.3**](#comparing-and-conditonal-jumps). We used flags for checking the results of comparison at conditional jumps, and I also said that there shouldn’t be any instrcutions between a comparison and its jumps because many instructions change the flags (of course, you can place an instruction there if you are sure it won’t change any needed flag). Arithmetic instructions `add` and `sub` use a flags’ bit called `CF` (carry flag). If an overflow occurs, they set it to `1`, otherwise they set it to `0`. You can test the carry flag with conditional jumps `jc` and `jnc` (see [**Chapter 5.3**](#comparing-and-conditonal-jumps) about conditional jumps). `jc` jumps if the carry flag is set, `jnc` jumps if the carry flag is not set. Here is an example of testing overflows:
 
@@ -1764,12 +1826,13 @@ jc underflow
 no_underflow:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 **carry flag (CF)** --- One bit (flag) of “flags” register.
 
 conditional jump instructions: **jc**, **jnc**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 7.3. Zero Flag
 --------------
@@ -1800,8 +1863,8 @@ here:
 aaaaa
 ```
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** You can optimize the previous code example to:
 
 !Fasm
@@ -1819,7 +1882,8 @@ here:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 since the value of `dl` and `ah` isn’t changed anywhere in the loop, we don’t need to set them each time the loop repeats. 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 Not only `add` and `sub` instructions set `ZF` if result is zero (and clear it otherwise). All basic arithmetic instructions do this. So far, you’ve learned these arithmetic instructions: `add`, `sub`, `and`, `xor` and `or`. So, after any of these instruction, `ZF` tells you if destination (first argument) of the operation holds 0. For example, You can use this behavior to check if the value of a register is 0. So far, you’ve learnt to do this with:
 
@@ -1884,10 +1948,11 @@ Usually we want to shift more than once (multiply by 4, 8, 16, …), so `shl` ta
 
 There is one limitation to `shl`: its arguments don’t follow the same rules as the other instructions you’ve learned (`mov`, `add`, etc.) <mark>The fisrt argument can be a register or a memory location, but the second one can only be a numeric constant or the `CL` register</mark> (really, no other!).
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
+
 **NOTE:** Orignially, with 8086 (that’s 086, first of 80x86 series known as x86, like 286 or 486), there was only a `shl` instruction which could shift by one, and so for example `shl ax,3` was compiled into 3 `shl`s. There also wasn’t any shifting by register, you had to make a loop for that. Fortunately 80286 had shifting by constant and by `CL,` so it is OK now.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 We’ve dealt with left shifting, but there is also another type of shifting, ie: shifting to the right. I hope you can by now imagine what it does, so I’ll drop just few notes about it. The instruction that performs this is `shr` (shift right). Its effect is division by two (or powers of two) without remainder. When shifting right by two, the remainder (`0` or `1`) is then found in `CF`; apart from this, `CF` beheaves like shifting left by a number greater than two: If the remainder isn’t `0` (ie: at least one of the discarded bits was `1`) then `CF` is set, otherwise it is clear.
 

@@ -3,15 +3,16 @@
 title: Block-Formatting Macros
 ...
 
-!import(../html-tests/Typography-Tests.pp)
+Macros definition file: `BlockFormatting.pp`
 
-Macros deinition file: `BlockFormatting.pp`
+!FakeH3(Macros list:)
 
-Macros list:
-
-- `!raw{!FakeH3}`
-- `!raw{!Caption}`
-- `!raw{!QuoteSource}`
+!raw
+~~~~~~~~~~~~~~~~~~~~~~
+- `!FakeH3`
+- `!Caption`
+- `!QuoteSource`
+~~~~~~~~~~~~~~~~~~~~~~
 
 # QuoteSource Macro
 
@@ -25,7 +26,7 @@ The `!raw{!QuoteSource}` macro is used to render the source of a blockquote.
 > !QuoteSource(the source of the text)  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!TripleTest(!BlockQuoteExample)
+!MDExampleHTML(!BlockQuoteExample)
 
 
 

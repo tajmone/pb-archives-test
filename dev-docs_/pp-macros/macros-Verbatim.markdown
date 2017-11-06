@@ -10,7 +10,7 @@ meta-title: Verbatim.pp
 # baseliner: true
 ...
 
-!import(MacrosExamples.pp)
+
 
 
 "__Verbatim__" is a set of PP-macros for handling various types of verbatim text:
@@ -19,23 +19,25 @@ meta-title: Verbatim.pp
 - Code blocks with custom classes for non syntax-higlighted coloring (`<pre><code class="someclass">`)
 
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Note ::::::::::::::::::::::::::::::::
 It looks like I could without the `!raw{!Code}` and `!raw{!CodeSmall}` macros, and use pandoc's support for `{.class}` syntax in fenced blocks (as well as inline code).
 
 But I must check the CSS stylesheets, because pandoc will only put the class on the `<pre>` tag, and nothing on the `<code>` tag! If I can fix the CSS to cover nicely both syntax highlighting and preformatted blocks, it would be better to do without these macros.
 
 See: [Pandoc Markdown Alternative] for examples and test.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 # Macros List
 
-- `!raw{!Pre}`
-- `!raw{!Code}`
-- `!raw{!CodeSmall}`
-- `!raw{!CMD}`
-- `!raw{!DOS}`
+!raw
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- `!Pre`
+- `!Code`
+- `!CodeSmall`
+- `!CMD`
+- `!DOS`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 # Preformatted Blocks
@@ -61,7 +63,7 @@ A block of text indented four spaces (or one tab) is treated as verbatim text:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!TripleTest(!identedEx)
+!MDExampleHTML(!identedEx)
 
 ... which is just like using the "[fenced code blocks](http://pandoc.org/MANUAL.html#fenced-code-blocks)" syntax without a language specification:
 
@@ -73,7 +75,7 @@ Some verbatim text.
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!TripleTest(!fencedEx)
+!MDExampleHTML(!fencedEx)
 
 ## The `!raw{!Pre}` Macro
 
@@ -88,7 +90,7 @@ Some verbatim text.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!TripleTest(!rawdef[preEx])
+!MDExampleHTML(!rawdef[preEx])
 
 # Code Blocks Macros
 
@@ -105,7 +107,7 @@ if x > 10 Then
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!TripleTest(!fencedEx)
+!MDExampleHTML(!fencedEx)
 
 Using the `small` class:
 
@@ -118,4 +120,5 @@ if x > 10 Then
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!TripleTest(!fencedSmallEx)
+!MDExampleHTML(!fencedSmallEx)
+

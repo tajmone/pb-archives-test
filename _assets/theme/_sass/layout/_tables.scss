@@ -40,21 +40,31 @@ table {
   display: block;
   width: 100%;
   overflow: auto;
+  // Table Caption
+  caption {
+    border:     1px solid color(Table-Border);
+    border-bottom: 0;
+    margin: 0 0 0 0;
+    @include type-layout(l, 1.5);
+    @include margin-top(1, l);
+    @include padding(0.25, l);
+    padding-top: ($base-line-height/4)-1; // <= 5px (ie: 1/4 line-height minus top border)
+  }
   th {
     font-weight: bold;
   }
   th,
   td {
     @include padding(0.25 0.5); 		// <= 6px 12px
-	height: $base-line-height * 2;      // <= 48px
-    border: 1px solid #dfe2e5;
+	  height: $base-line-height * 2;      // <= 48px
+    border:     1px solid color(Table-Border);
   }
   tr {
-    background-color: #fff;
-    border-top: 1px solid #c6cbd1;
+    background-color:     color(Table-Odd-Row-BG);
+    border-top: 1px solid color(Table-Row-Border);
     // &:nth-child(2n) {
     &.even {
-      background-color: #f6f8fa;
+      background-color:   color(Table-Even-Row-BG);
     }
   }
   img {

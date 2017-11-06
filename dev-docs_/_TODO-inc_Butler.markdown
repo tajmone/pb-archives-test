@@ -1,8 +1,18 @@
 
 ## Butler
 
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][PP invocation options:]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  !Task[ ][add definition of `ROOT` symbol with path back to root (like with pandoc ROOT var) so it will be accessible from current doc/macros]
+  !Task[ ][in `macros.pp` create also `PP_MACROS` symbol based on `ROOT` (this will allow changing the path in a single place if I ever change the macros folder name or location)]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][LICENSE:]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Task[x][Add `LICENSE` file]
@@ -26,8 +36,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Warning :::::::::::::::::::::::::::::
+
 __DELETE & DEPLOY__: I should create two variants of the deploy command:
 
 - `--deploy` (`-d`) --- builds whole project, then deploys to dest folder.
@@ -43,4 +53,5 @@ This means that I'll have to find a way to interact with Git and get a list of i
 Butler can't rely on the source folder contents for deciding which files to delete in deploy folder, because renaming/deleting source files would result in deletion misses --- and the whole purpose of the `--delete-deploy` option is to ensure that deleted/renamed source files will not be kept in the deploy folder.
 
 Since Butler --- as a standalone app --- might be used also outside of Git projects, I'll have to add some a "`use-git`" project setting to `butler.ini`, so that non-Git projects will not try to invoke Git for a list of gitignored files.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::

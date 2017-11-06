@@ -87,7 +87,13 @@ $chroma: add-colors('theme', (
 	AlertNote-BG: 	     color(PrimerCSS, gray-100),
 	AlertNote-Icon: 	 color(PrimerCSS, gray-400),
 	AlertNote-Border:    color(PrimerCSS, black-fade-15),
-
+	// ==============================================================================
+	//                                     TABLES                                    
+	// ==============================================================================
+	Table-Border:			color(PrimerCSS, gray-300 ) lighten 5%,
+	Table-Odd-Row-BG:		white,
+	Table-Even-Row-BG:		color(PrimerCSS, gray-100),
+	Table-Row-Border:		color(PrimerCSS, gray-300 ) lighten 4%,
 	// ------------------------------------------------------------------------------
 	//                                   <mark> tag                                  
 	// ------------------------------------------------------------------------------

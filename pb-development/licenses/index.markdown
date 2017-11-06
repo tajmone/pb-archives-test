@@ -37,28 +37,31 @@ For your commodity, you'll find here a copy of all the various licenses files (p
 -   [`PCRE_Library_License.txt`][PCRE License]
 
 
-!Alert
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:::::: Alert :::::::::::::::::::::::::::::::
+
 !fa(exclamation-circle) In the `PureBASIC_Applications_Licenses.txt` file I've fixed a mispelled author name: "Kornel Lesinski" instead of "Kornel LesiÅ„ski" ("NeuQuant" component, line 600):
 
     Rewritten by Kornel LesiÅ„ski (2009)
 
 (See [PB Forum bug report](http://www.purebasic.fr/english/viewtopic.php?f=37&t=69429))
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertWarn
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Warning :::::::::::::::::::::::::::::
+
 **WARNING**: These files contain the licenses as found on PureBASIC online documentation at the time of PureBASIC version !PBLicensesVer. The licenses therein contained are unliekly to change, but the introduction of new components in future versions of PureBASIC might introduce new licenses. If you are using a different version of PB, get the right licenses text from PureBASIC’s Help guide.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!AlertNote
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: Note ::::::::::::::::::::::::::::::::
+
 The license files for the current/latest PureBASIC release can be viewed in the [online documentation at www.purebasic.com](http://www.purebasic.com/documentation/index.html):
 
 - [Licenses for PureBASIC applications (without using 3D engine)][www PB Apps License]
 - [Licenses for the 3D engine integrated with PureBASIC][www PB Apps 3D License]
 - [License for the PCRE library][www PCRE License]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::::::::::::::::::::::::::::::::::::::::::::
 
 
 !comment

@@ -1,6 +1,5 @@
 ---
-title: "HTML Test Pages"
-# baseliner: true
+title:      "HTML Test Pages"
 ...
 
 This folder (only available in PB Archives Source branch) is for testing the template's HTML elements and their CSS styling.
@@ -9,13 +8,21 @@ A special baseline grid is provided (via [Baseliner.js](https://keyes.ie/things/
 
 # Basic Test Pages
 
-The "__basic test__" pages cover the common usage of HTML elements. They are intended to check the look and feel of CSS styling in usual contexts.
+"__Basic test__" pages cover the common usage of HTML elements. They are intended to check the look and feel of CSS styling in usual contexts.
 
-- [basic-typography.html](./basic-typography.html) --- basic typography test.
+- [Base Typography](./basic-typography.html)
 
 # Extended Test Pages
 
-The "__extended test__" pages try to cover all possible tag combinations as well as edge-cases. They are intended to prevent unexpected styling results in complex combination.
+"__Extended test__" pages try to cover all possible tag combinations as well as edge-cases. They are intended to prevent unexpected styling results in complex combination.
 
-- [extended-headings.html](./extended-headings.html) --- `<h1>` to `<h6>` headings
+- [Headings](./extended-headings.html)
+- [Alert Messages](./extended-alerts.html)
+- [Keystrokes (`<kbd>`)](./extended-kbd.html)
 
+:::::: Warning :::::::::::::::::::::::::::::
+__WIP PAGES__: Some test pages which are still under construction, or that are for experimenting only:
+
+- [WIP_test-code-blocks.html](./WIP_test-code-blocks.html)
+- 
+::::::::::::::::::::::::::::::::::::::::::::
