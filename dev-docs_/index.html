@@ -34,43 +34,25 @@
 <div class="Warning">
 <p><strong>WIP WARNING</strong> — This section is still work in progress, most pages are rough sketches, tests, and their contents might not reflect the current state of code/macros changes.</p>
 </div>
-<h1 id="documentation-subsections">Documentation Subsections</h1>
-<p>Beside this page and some other introductory pages in this folder, the documentation is divided into subsections (subfolders) addressing specific topic:</p>
-<ul>
-<li><a href="./html-tests/index.html"><code>/html-tests/</code></a> — CSS-styling test pages.</li>
-<li><a href="./pp-macros/index.html"><code>/pp-macros/</code></a> — PP macros reference.</li>
-</ul>
-<h1 id="introduction">Introduction</h1>
-<p>The PureBASIC Archives is an aggreagator of various third party resources: source code, binary libraries, scripts, documentation, tutorials, images, and other types of assets. Resources are organized into a meaningful hierarchical folders structure; furthermore, to provide a user friendly navigation experience through the resources, the project is designed like a website.</p>
-<p>Every folder (section) has an <code>index.html</code> file describing the nature and contents of the section (and its subsections, if any). Some sections might contain further HTML pages (eg: resources documentation, tutorials, etc.) that are part of the project’s website (they might also contain some detached HTML documents, which are part of the hosted resources but not of the project’s navigation tree and documentation).</p>
-<p>HTML index pages and project documents are for end users’ benefit; they are created and maintained in the <code>source</code> branch by developers and contributors, using markdown formatting which is then converted to HTML by Butler (the flat-file CMS engine/app that powers the PureBASIC Archives behind the scenes).</p>
 <h1 id="editing-the-documentation">Editing The Documentation</h1>
 <p>To edit the navigation pages and project documents, you’ll need to:</p>
 <ol type="1">
-<li>know how to write in markdown (pandoc’s flavour of markdown),</li>
-<li>learn how to use the custom PP macros created for this project, and</li>
+<li>know <a href="./writing/index.html" title="Jump to the guide on how to write contents.">how to write in markdown</a> (pandoc’s flavour of markdown),</li>
+<li>learn <a href="./pp-macros/index.html" title="Jump to the PP macros reference.">how to use the custom PP macros</a> created for this project, and</li>
 <li>gain a general understanding of how Butler operates to build the final HTML documentation.</li>
 </ol>
 <p>All these topics are covered in this section (and its subsections).</p>
-<h2 id="pandocs-markdown">Pandoc’s Markdown</h2>
-<p>If you are new to markdown, you should read some introductiory tutorials on basic markdown:</p>
+<h1 id="documentation-subsections">Documentation Subsections</h1>
+<p>Beside this page and some other introductory pages in this folder, the documentation is divided into subsections (subfolders) addressing specific topic:</p>
 <ul>
-<li><a href="https://www.markdowntutorial.com/">www.markdowntutorial.com</a> (live exercises)</li>
-<li><a href="https://www.markdownguide.org/">www.markdownguide.org</a></li>
+<li><a href="./writing/index.html" title="Jump to the guide on how to write contents."><code>/writing/</code></a> — Guide on how to write contents.</li>
+<li><a href="./pp-macros/index.html" title="Jump to the PP macros reference."><code>/pp-macros/</code></a> — PP macros reference.</li>
+<li><a href="./html-tests/index.html" title="Jump to the CSS-styling test pages."><code>/html-tests/</code></a> — CSS-styling test pages.</li>
 </ul>
-<p>Here are some useful cheatsheets links:</p>
-<ul>
-<li><a href="https://gist.github.com/jonschlinkert/5854601">Jon Schlinkert’s Markdown Cheatsheet</a></li>
-<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet">Adam Pritchard’s Markdown Cheatsheet</a></li>
-</ul>
-<p>Pandoc markdown is an extension of markdown, so you can use almost everything you learned from the basic markdown syntax when editing the project’s source files.</p>
-<p>After you get a good grip with basic markdown, you can start looking at pandoc flavoured markdown, and all the useful syntax extensions that come with it:</p>
-<ul>
-<li><a href="http://pandoc.org/MANUAL.html#pandocs-markdown" title="Pandoc’s markdown guide">Pandoc’s markdown guide</a></li>
-</ul>
-<div class="Alert">
-<p><strong>NOTE</strong>: I’m planning to add a pandoc markdown writing guide to this section. In the meanwhile, the above links will fill the void and supply the needed references.</p>
-</div>
+<h1 id="introduction">Introduction</h1>
+<p>The PureBASIC Archives is an aggregator of various third party resources: source code, binary libraries, scripts, documentation, tutorials, images, and other types of assets. Resources are organized into a meaningful hierarchical folders structure; furthermore, to provide a user friendly navigation experience through the resources, the project is designed like a website.</p>
+<p>Every folder (section) has an <code>index.html</code> file describing the nature and contents of the section (and its subsections, if any). Some sections might contain further HTML pages (eg: resources documentation, tutorials, etc.) that are part of the project’s website (they might also contain some detached HTML documents, which are part of the hosted resources but not of the project’s navigation tree and documentation).</p>
+<p>HTML index pages and project documents are for end users’ benefit; they are created and maintained in the <code>source</code> branch by developers and contributors, using markdown formatting which is then converted to HTML by Butler (the flat-file CMS engine/app that powers the PureBASIC Archives behind the scenes).</p>
 <h2 id="pp-macros">PP Macros</h2>
 <div class="Warning">
 <p><em>UNDER CONSTRUCTION</em>!</p>
@@ -90,10 +72,9 @@
 						<h2>Page Contents</h2>
 
 <ul>
+<li><a href="#editing-the-documentation">Editing The Documentation</a></li>
 <li><a href="#documentation-subsections">Documentation Subsections</a></li>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#editing-the-documentation">Editing The Documentation</a><ul>
-<li><a href="#pandocs-markdown">Pandoc’s Markdown</a></li>
+<li><a href="#introduction">Introduction</a><ul>
 <li><a href="#pp-macros">PP Macros</a></li>
 <li><a href="#butler-cms">Butler CMS</a></li>
 </ul></li>

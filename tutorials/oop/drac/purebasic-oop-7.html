@@ -278,11 +278,11 @@ input\var2 <span class="hl opt">=</span> <span class="hl num">20</span>
 <span class="hl slc">; *Rect is a new object from Rect1 class</span>
 <span class="hl opt">*</span>Rect.Rect1 <span class="hl opt">=</span> <span class="hl kwc">New_Rect1</span>(input)</code></pre>
 <p>Note that the constructor name is <code>New</code> followed by the Class’ name separated by “<code>_</code>”.</p>
-<div class="Note">
-<p><span id="admonition-on-object-being-a-pointer"></span> In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members (<a href="#endclass-keyword">What?! I don’t remember!</a>).</p>
+<div id="admonition-on-object-being-a-pointer" class="Note">
+<p>In relation to what was studied up to now, the object will always be a pointer. It isn’t an issue, rather it’s the consequence of our choice of grouping together access to methods and members (<a href="#endclass-keyword">What?! I don’t remember!</a>).</p>
 </div>
-<div class="Alert">
-<p><span id="admonition-about-this-instance"></span> The choice of <code>StructureUnion</code> requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here). This bivalence — which didn’t exist in the previous implementation — leads us to store information into the object itself. So, within the object’s methods you can access its members address through <code>*this</code>, and its instance’s address (method and members) through <code>*this\Instance</code>.</p>
+<div id="admonition-about-this-instance" class="Alert">
+<p>The choice of <code>StructureUnion</code> requires two different memory allocations: one for the members, and one to regroup methods and members (4 bytes here). This bivalence — which didn’t exist in the previous implementation — leads us to store information into the object itself. So, within the object’s methods you can access its members address through <code>*this</code>, and its instance’s address (method and members) through <code>*this\Instance</code>.</p>
 <p>An important feature ensues: the us of <code>*this\Instance</code> to call the object’s methods within its methods (<strong>No, I’m not drunk</strong>!). This is the best way to do it, because it hides the name of the procedure behind the method, which is an essential part of the inheritance process.</p>
 <p>For this purpose, a <code>Mtd</code> macro is present in the <a href="./OOP.pbi"><code>OOP.pbi</code></a> file.</p>
 </div>

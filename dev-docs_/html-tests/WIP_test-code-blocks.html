@@ -1,0 +1,337 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Code Blocks Tests</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>html-tests</a></li>
+</ol>
+
+				</nav>
+				<div id="document">
+
+					<h1 class="title">Code Blocks Tests</h1>
+
+<blockquote>
+<p><strong>NOTE</strong>: Pandoc code with line-numbers doesn’t produce H-scrollbar when exceeding width — issue is with table’s CSS: must implement <code>overflow</code>!</p>
+</blockquote>
+<h1 id="code-blocks-examples">Code Blocks Examples</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>(Using the <code>!PureBasic</code> macro)</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span></code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>(Using the <code>!PureBasicSmall</code> macro)</p>
+<pre class="purebasic small" title="PureBASIC source code"><code class="purebasic small" title="PureBASIC source code"><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span></code></pre>
+<h1 id="code-rulers-test">Code Rulers Test</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>A normal (default) code block can show up to 80 chars before displaying a horizontal scrollbar:</p>
+<pre><code>12345678901234567890123456789012345678901234567890123456789012345678901234567890
+        10        20        30        40        50        60        70        80</code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>A code block with <code>&lt;code class=&quot;small&quot;&gt;</code> can show up to 100 chars before displaying a horizontal scrollbar:</p>
+<pre><code>1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+        10        20        30        40        50        60        70        80        90       100</code></pre>
+<h1 id="test-code-and-codesmall">Test <code>!Code</code> and <code>!CodeSmall</code></h1>
+<h1 id="code-macro"><code>!Code</code> Macro</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>(Using the <code>!Code</code> macro)</p>
+<pre class=""><code class="">Some fictional code
+  If this or that
+    X = 10 * y
+  EndIf
+</code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>(Using the <code>!CodeSmall</code> macro)</p>
+<pre><code class="small">Some fictional code
+  If this or that
+    X = 10 * y
+  EndIf
+</code></pre>
+<h1 id="test-highlightsmall">Test <code>!HighlightSmall</code></h1>
+<pre class="purebasic small" title=""><code class="purebasic small" title=""><span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span></code></pre>
+<hr />
+<h1 id="code-and-verbatim">Code and Verbatim</h1>
+<p>Some tests for code, syntax highlighting and preformatted blocks.</p>
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html">Pandoc Documentation</a>:
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html#verbatim-code-blocks">Verbatim (code) blocks</a></li>
+</ul></li>
+</ul>
+<h1 id="preformatted-blocks">Preformatted Blocks</h1>
+<p>In order to achieve a simple <code>&lt;pre&gt;</code> block (not followed by the <code>&lt;code&gt;</code> code) you have to resort to raw HTML tags inside markdown — ie: there is no way to achived it in pure markdown.</p>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>&lt;pre&gt;I&#39;m a preformatted block, no code inside&lt;/pre&gt;</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<pre>I'm a preformatted block, no code inside</pre>
+<h1 id="non-highlighted-code-blocks">Non-Highlighted Code Blocks</h1>
+<p>To define a code block without any highlighting, just enclosed it in tildas or backticks (fenced code), or use indentation (4 spaces or one Tab).</p>
+<h2 id="fenced-backticks">Fenced (backticks)</h2>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>```
+For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next
+```</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">  Debug(<span class="dv">&amp;quot;</span>Counting <span class="dv">&amp;quot;</span> + Str(i))</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<pre><code>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next</code></pre>
+<h2 id="indented-4-spaces">Indented (4 spaces)</h2>
+<div class="Note">
+<p><strong>NOTE</strong> — The raw html comment tag <code>&lt;!----&gt;</code> was added to create a context in the snippet, otherwise pandoc would convert it as a paragraph.</p>
+</div>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>&lt;!----&gt;
+    For i=1 To 10
+      Debug(&quot;Counting &quot; + Str(i))
+    Next</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="co">&lt;!----&gt;</span></div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">  Debug(<span class="dv">&amp;quot;</span>Counting <span class="dv">&amp;quot;</span> + Str(i))</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<!---->
+<pre><code>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next</code></pre>
+<h1 id="pandoc-highlighting">Pandoc Highlighting</h1>
+<h2 id="line-numbers">Line Numbers</h2>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}
+qsort []     = []
+qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
+               qsort (filter (&gt;= x) xs)
+~~~~</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> class=</span><span class="st">&quot;haskell numberLines&quot;</span><span class="ot"> data-startFrom=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;code&gt;</span>qsort []     = []</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">qsort (x:xs) = qsort (filter (<span class="dv">&amp;lt;</span> x) xs) ++ [x] ++</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">               qsort (filter (<span class="dv">&amp;gt;</span>= x) xs)<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<pre class="sourceCode numberSource haskell numberLines" id="mycode" data-startFrom="100"><code class="sourceCode haskell"><div class="sourceLine" id="100" href="#100" data-line-number="100">qsort []     <span class="fu">=</span> []</div>
+<div class="sourceLine" id="101" href="#101" data-line-number="101">qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span></div>
+<div class="sourceLine" id="102" href="#102" data-line-number="102">               qsort (filter (<span class="fu">&gt;=</span> x) xs)</div></code></pre>
+<h3 id="test-line-numbers">Test line numbers…</h3>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>~~~~ {#mycode .python .numberLines startFrom=&quot;1&quot;}
+from appium import webdriver
+from appium import SauceTestCase, on_platforms
+from appium.webdriver.common.touch_action import TouchAction
+from appium.webdriver.common.multi_action import MultiAction
+
+from time import sleep
+
+app = &quot;http://appium.github.io/appium/assets/ApiDemos-debug.apk&quot;
+platforms = [{
+                &quot;platformName&quot;: &quot;Android&quot;,
+                &quot;platformVersion&quot;: &quot;4.4&quot;,
+                &quot;deviceName&quot;: &quot;Android Emulator&quot;,
+                &quot;appActivity&quot;: &quot;.graphics.TouchPaint&quot;,
+                &quot;app&quot;: app,
+                &quot;appiumVersion&quot;: &quot;1.3.4&quot;
+            }]
+~~~~</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;pre</span><span class="ot"> id=</span><span class="st">&quot;mycode&quot;</span><span class="ot"> class=</span><span class="st">&quot;python numberLines&quot;</span><span class="ot"> data-startFrom=</span><span class="st">&quot;1&quot;</span><span class="kw">&gt;&lt;code&gt;</span>from appium import webdriver</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2">from appium import SauceTestCase, on_platforms</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3">from appium.webdriver.common.touch_action import TouchAction</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4">from appium.webdriver.common.multi_action import MultiAction</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5"></div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6">from time import sleep</div>
+<div class="sourceLine" id="7" href="#7" data-line-number="7"></div>
+<div class="sourceLine" id="8" href="#8" data-line-number="8">app = <span class="dv">&amp;quot;</span>http://appium.github.io/appium/assets/ApiDemos-debug.apk<span class="dv">&amp;quot;</span></div>
+<div class="sourceLine" id="9" href="#9" data-line-number="9">platforms = [{</div>
+<div class="sourceLine" id="10" href="#10" data-line-number="10">                <span class="dv">&amp;quot;</span>platformName<span class="dv">&amp;quot;</span>: <span class="dv">&amp;quot;</span>Android<span class="dv">&amp;quot;</span>,</div>
+<div class="sourceLine" id="11" href="#11" data-line-number="11">                <span class="dv">&amp;quot;</span>platformVersion<span class="dv">&amp;quot;</span>: <span class="dv">&amp;quot;</span>4.4<span class="dv">&amp;quot;</span>,</div>
+<div class="sourceLine" id="12" href="#12" data-line-number="12">                <span class="dv">&amp;quot;</span>deviceName<span class="dv">&amp;quot;</span>: <span class="dv">&amp;quot;</span>Android Emulator<span class="dv">&amp;quot;</span>,</div>
+<div class="sourceLine" id="13" href="#13" data-line-number="13">                <span class="dv">&amp;quot;</span>appActivity<span class="dv">&amp;quot;</span>: <span class="dv">&amp;quot;</span>.graphics.TouchPaint<span class="dv">&amp;quot;</span>,</div>
+<div class="sourceLine" id="14" href="#14" data-line-number="14">                <span class="dv">&amp;quot;</span>app<span class="dv">&amp;quot;</span>: app,</div>
+<div class="sourceLine" id="15" href="#15" data-line-number="15">                <span class="dv">&amp;quot;</span>appiumVersion<span class="dv">&amp;quot;</span>: <span class="dv">&amp;quot;</span>1.3.4<span class="dv">&amp;quot;</span></div>
+<div class="sourceLine" id="16" href="#16" data-line-number="16">            }]<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<pre class="sourceCode numberSource python numberLines" id="mycode" data-startFrom="1"><code class="sourceCode python"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="im">from</span> appium <span class="im">import</span> webdriver</div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="im">from</span> appium <span class="im">import</span> SauceTestCase, on_platforms</div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="im">from</span> appium.webdriver.common.touch_action <span class="im">import</span> TouchAction</div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="im">from</span> appium.webdriver.common.multi_action <span class="im">import</span> MultiAction</div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5"></div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6"><span class="im">from</span> time <span class="im">import</span> sleep</div>
+<div class="sourceLine" id="7" href="#7" data-line-number="7"></div>
+<div class="sourceLine" id="8" href="#8" data-line-number="8">app <span class="op">=</span> <span class="st">&quot;http://appium.github.io/appium/assets/ApiDemos-debug.apk&quot;</span></div>
+<div class="sourceLine" id="9" href="#9" data-line-number="9">platforms <span class="op">=</span> [{</div>
+<div class="sourceLine" id="10" href="#10" data-line-number="10">                <span class="st">&quot;platformName&quot;</span>: <span class="st">&quot;Android&quot;</span>,</div>
+<div class="sourceLine" id="11" href="#11" data-line-number="11">                <span class="st">&quot;platformVersion&quot;</span>: <span class="st">&quot;4.4&quot;</span>,</div>
+<div class="sourceLine" id="12" href="#12" data-line-number="12">                <span class="st">&quot;deviceName&quot;</span>: <span class="st">&quot;Android Emulator&quot;</span>,</div>
+<div class="sourceLine" id="13" href="#13" data-line-number="13">                <span class="st">&quot;appActivity&quot;</span>: <span class="st">&quot;.graphics.TouchPaint&quot;</span>,</div>
+<div class="sourceLine" id="14" href="#14" data-line-number="14">                <span class="st">&quot;app&quot;</span>: app,</div>
+<div class="sourceLine" id="15" href="#15" data-line-number="15">                <span class="st">&quot;appiumVersion&quot;</span>: <span class="st">&quot;1.3.4&quot;</span></div>
+<div class="sourceLine" id="16" href="#16" data-line-number="16">            }]</div></code></pre>
+<h1 id="highlight">Highlight</h1>
+<h2 id="block-simple">Block Simple</h2>
+<pre class="purebasic" title=""><code class="purebasic" title=""><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span>
+</code></pre>
+<h2 id="block-with-line-numbers">Block With Line Numbers</h2>
+<pre class="purebasic" title=""><code class="purebasic" title=""><span class="hl lin">1 </span><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl lin">2 </span><span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+<span class="hl lin">3 </span>  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl lin">4 </span><span class="hl kwa">Next</span></code></pre>
+<hr />
+<h1 id="line-blocks">Line blocks</h1>
+<pre><code>Extension: line_blocks</code></pre>
+<p>A line block is a sequence of lines beginning with a vertical bar (“<code>|</code>”) followed by a space. The division into lines will be preserved in the output, as will any leading spaces; otherwise, the lines will be formatted as Markdown. This is useful for verse and addresses:</p>
+<pre><code>| The limerick packs laughs anatomical
+| In space that is quite economical.
+|    But the good ones I&#39;ve seen
+|    So seldom are clean
+| And the clean ones so seldom are comical
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div class="line-block">The limerick packs laughs anatomical
+In space that is quite economical.
+   But the good ones I’ve seen
+   So seldom are clean
+And the clean ones so seldom are comical</div>
+<hr />
+<p>It basicall wraps the contents in a <code>&lt;div style=&quot;white-space: pre-line;&quot;&gt;</code>.</p>
+<p>The lines can be hard-wrapped if needed, but the continuation line must begin with a space.</p>
+<pre><code>| The Right Honorable Most Venerable and Righteous Samuel L.
+  Constable, Jr.
+| 200 Main St.
+| Berkeley, CA 94718
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div class="line-block">The Right Honorable Most Venerable and Righteous Samuel L. Constable, Jr.
+200 Main St.
+Berkeley, CA 94718</div>
+<hr />
+<p>Long lines will wrap around:</p>
+<pre><code>| A very lengthy and overly-verbose line of text that will surely exceed its container&#39;s width by an abundant measure and force wrapping!
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div class="line-block">A very lengthy and overly-verbose line of text that will surely exceed its container’s width by an abundant measure and force wrapping!</div>
+<hr />
+<h1 id="snippets">SNIPPETS</h1>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"></code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<pre class="sourceCode html"><code class="sourceCode html"></code></pre>
+<p><strong>HTML RESULT:</strong></p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#code-blocks-examples">Code Blocks Examples</a></li>
+<li><a href="#code-rulers-test">Code Rulers Test</a></li>
+<li><a href="#test-code-and-codesmall">Test <code>!Code</code> and <code>!CodeSmall</code></a></li>
+<li><a href="#code-macro"><code>!Code</code> Macro</a></li>
+<li><a href="#test-highlightsmall">Test <code>!HighlightSmall</code></a></li>
+<li><a href="#code-and-verbatim">Code and Verbatim</a></li>
+<li><a href="#preformatted-blocks">Preformatted Blocks</a></li>
+<li><a href="#non-highlighted-code-blocks">Non-Highlighted Code Blocks</a><ul>
+<li><a href="#fenced-backticks">Fenced (backticks)</a></li>
+<li><a href="#indented-4-spaces">Indented (4 spaces)</a></li>
+</ul></li>
+<li><a href="#pandoc-highlighting">Pandoc Highlighting</a><ul>
+<li><a href="#line-numbers">Line Numbers</a></li>
+</ul></li>
+<li><a href="#highlight">Highlight</a><ul>
+<li><a href="#block-simple">Block Simple</a></li>
+<li><a href="#block-with-line-numbers">Block With Line Numbers</a></li>
+</ul></li>
+<li><a href="#line-blocks">Line blocks</a></li>
+<li><a href="#snippets">SNIPPETS</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+	</body>
+</html>

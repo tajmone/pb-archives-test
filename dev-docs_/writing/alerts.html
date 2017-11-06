@@ -1,0 +1,186 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Alert Messages</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>writing</a></li>
+</ol>
+
+				</nav>
+				<div id="document">
+
+					<h1 class="title">Creating Alert Messages</h1>
+					<p class="subtitle">— via pandoc fenced divs —</p>
+
+<p>Whenever you need to make a block of text stand out from the main content, as an aside text that catches the reader’s attention, Alert Messages (aka “Alerts”, of “Flash Messages”) are available as <code>&lt;div&gt;</code> classes in the project’s CSS Theme:</p>
+<ul>
+<li><code>Alert</code></li>
+<li><code>Warning</code></li>
+<li><code>Error</code></li>
+<li><code>Success</code></li>
+<li><code>Note</code></li>
+</ul>
+<div class="Warning">
+<p><strong>WARNING</strong>: The class names in the above list are case-sensitive!</p>
+</div>
+<div class="Note">
+<p><strong>NOTE</strong>: The warning box above is an example of an Alert (with <code>Warning</code> class); and this note box is an Alert too (with <code>Note</code> class).</p>
+</div>
+<h1 id="creating-an-alert-message">Creating An Alert Message</h1>
+<p>Alerts are just blocks of contentes inside <code>&lt;div&gt;</code> tags using classes predfined in the CSS Theme. Pandoc markdown has the special fenced divs syntax for creating div blocks:</p>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>:::::::::::: Warning
+### A Warning Alert
+
+This is a Warning Alert. It&#39;s just a block of Markdown content enclosed in
+colon-fences (three colons or more), where the opening fence is followed by
+the `&lt;div&gt;`&#39;s class name (mandatory), and its closing counterpart not.
+::::::::::::</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;Warning&quot;</span><span class="kw">&gt;</span></div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="kw">&lt;h3</span><span class="ot"> id=</span><span class="st">&quot;a-warning-alert&quot;</span><span class="kw">&gt;</span>A Warning Alert<span class="kw">&lt;/h3&gt;</span></div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="kw">&lt;p&gt;</span>This is a Warning Alert. It’s just a block of Markdown content enclosed in colon-fences (three colons or more), where the opening fence is followed by the <span class="kw">&lt;code&gt;</span><span class="dv">&amp;lt;</span>div<span class="dv">&amp;gt;</span><span class="kw">&lt;/code&gt;</span>’s class name (mandatory), and its closing counterpart not.<span class="kw">&lt;/p&gt;</span></div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="kw">&lt;/div&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<div class="Warning">
+<h3 id="a-warning-alert">A Warning Alert</h3>
+<p>This is a Warning Alert. It’s just a block of Markdown content enclosed in colon-fences (three colons or more), where the opening fence is followed by the <code>&lt;div&gt;</code>’s class name (mandatory), and its closing counterpart not.</p>
+</div>
+<p>You can also specify more than one class on the opening fence, as well as an identifier, by enclosing them withing curly braces and using CSS notation:</p>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>:::::::::::: {#small-text-example .Alert .small}
+
+This is an alert with smaller text via the additional `small` class from
+the CSS Theme.
+
+::::::::::::</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;small-text-example&quot;</span><span class="ot"> class=</span><span class="st">&quot;Alert small&quot;</span><span class="kw">&gt;</span></div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="kw">&lt;p&gt;</span>This is an alert with smaller text via the additional <span class="kw">&lt;code&gt;</span>small<span class="kw">&lt;/code&gt;</span> class from the CSS Theme.<span class="kw">&lt;/p&gt;</span></div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="kw">&lt;/div&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<div id="small-text-example" class="Alert small">
+<p>This is an alert with smaller text via the additional <code>small</code> class from the CSS Theme.</p>
+</div>
+<hr />
+<h1 id="extension-fenced_divs">Extension: <code>fenced_divs</code></h1>
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html#extension-fenced_divs" class="uri">http://pandoc.org/MANUAL.html#extension-fenced_divs</a></li>
+</ul>
+<p>Allow special fenced syntax for native Div blocks. A Div starts with a fence containing at least three consecutive colons plus some attributes. The attributes may optionally be followed by another string of consecutive colons. The attribute syntax is exactly as in fenced code blocks (see <a href="http://pandoc.org/MANUAL.html#extension-fenced_code_attributes">Extension: <code>fenced_code_attributes</code></a>). As with fenced code blocks, one can use either attributes in curly braces or a single unbraced word, which will be treated as a class name. The Div ends with another line containing a string of at least three consecutive colons. The fenced Div should be separated by blank lines from preceding and following blocks.</p>
+<p>Example:</p>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>::::: {#special .sidebar}
+Here is a paragraph.
+
+And another.
+:::::</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;special&quot;</span><span class="ot"> class=</span><span class="st">&quot;sidebar&quot;</span><span class="kw">&gt;</span></div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="kw">&lt;p&gt;</span>Here is a paragraph.<span class="kw">&lt;/p&gt;</span></div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="kw">&lt;p&gt;</span>And another.<span class="kw">&lt;/p&gt;</span></div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="kw">&lt;/div&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<div id="special" class="sidebar">
+<p>Here is a paragraph.</p>
+<p>And another.</p>
+</div>
+<p>Fenced divs can be nested. Opening fences are distinguished because they must have attributes:</p>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>::: Warning ::::::
+This is a warning.
+
+::: Danger
+This is a warning within a warning.
+:::
+::::::::::::::::::</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html"><code class="sourceCode html"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;Warning&quot;</span><span class="kw">&gt;</span></div>
+<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="kw">&lt;p&gt;</span>This is a warning.<span class="kw">&lt;/p&gt;</span></div>
+<div class="sourceLine" id="3" href="#3" data-line-number="3"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;Danger&quot;</span><span class="kw">&gt;</span></div>
+<div class="sourceLine" id="4" href="#4" data-line-number="4"><span class="kw">&lt;p&gt;</span>This is a warning within a warning.<span class="kw">&lt;/p&gt;</span></div>
+<div class="sourceLine" id="5" href="#5" data-line-number="5"><span class="kw">&lt;/div&gt;</span></div>
+<div class="sourceLine" id="6" href="#6" data-line-number="6"><span class="kw">&lt;/div&gt;</span></div></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<div class="Warning">
+<p>This is a warning.</p>
+<div class="Danger">
+<p>This is a warning within a warning.</p>
+</div>
+</div>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#creating-an-alert-message">Creating An Alert Message</a></li>
+<li><a href="#extension-fenced_divs">Extension: <code>fenced_divs</code></a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+		<!-- baseliner -->
+		<script src="../../_assets/theme/js/baseliner.js"></script>
+		<script>
+		window.onload = function() {
+			baseliner = new Baseliner({
+				gridHeight: 12,
+				gridOffset: 1,
+				gridColor: 'red',
+				gridOpacity: 50 
+			});
+		}
+		</script>
+		<!-- end baseliner -->
+	</body>
+</html>
