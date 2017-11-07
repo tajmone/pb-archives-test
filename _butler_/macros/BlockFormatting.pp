@@ -62,8 +62,8 @@ USAGE:
 !comment(   QuoteSource   )
 ``````````````````````````````````````````````````````````````````````````````
 DECRIPTION: Used for mentioning Blockquote source.
-			Wraps the text in a <p class="source"> and adds a trailing em dash
-			followed by a space ("— ") before the parameter's text.
+            Wraps the text in a <p class="source"> and adds a trailing em dash
+            followed by a space ("— ") before the parameter's text.
 USAGE:
 
         !QuoteSource(TEXT)

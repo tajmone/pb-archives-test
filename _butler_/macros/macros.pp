@@ -32,18 +32,18 @@ This module also creates (via "macros-init.pp") some useful macros for
 maintainers of project documentation:
 
 - !ListMacrosFiles
-		Emit a markdown list (unordered) of all the modules files that were
-		loaded here.
+        Emit a markdown list (unordered) of all the modules files that were
+        loaded here.
 
 - !ListMacrosFilesLinks
-		Like !ListMacrosFiles, but list entries have links to the files.
+        Like !ListMacrosFiles, but list entries have links to the files.
 
 - !ROOT
-		Relative path back to project's root (empty if we are already in root).
-		Always ends with "/" (unless empty).
+        Relative path back to project's root (empty if we are already in root).
+        Always ends with "/" (unless empty).
 
 - !PATH2MACROS
-		Relative path to the project's PP macros folder (ie: /_butler_/macros/)
+        Relative path to the project's PP macros folder (ie: /_butler_/macros/)
 
 ------------------------------------------------------------------------------
 NOTES:
