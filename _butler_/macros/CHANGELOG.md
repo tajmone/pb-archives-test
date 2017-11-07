@@ -49,17 +49,29 @@ This file logs changes to pp macros definitions during Alpha Stage.
 
 # BlockFormatting.pp
 
+**`v0.2` (2017-11-07)**
+
+  - Replaced all occurences of “`\`” macro symbol with “`!`” (preparing to migrate to PP v2)
+
 **`v0.1` (2017-10-20)**
 
   - First Alpha Release.
 
 # GFM-TaskList.pp
 
+**`v0.2` (2017-11-07)**
+
+  - Replaced all occurences of “`\`” macro symbol with “`!`” (preparing to migrate to PP v2)
+
 **`v0.1` (2017-10-20)**
 
   - First Alpha Release.
 
 # Highlight.pp
+
+**`v0.3` (2017-11-07)**
+
+  - Replaced all occurences of “`\`” macro symbol with “`!`” (preparing to migrate to PP v2)
 
 **`v0.2` (2017-10-28)**
 
@@ -78,17 +90,29 @@ Highlight v3.40 was supposed to allow using the `HIGHLIGHT_DATADIR` env var on W
 
 # InlineFormatting.pp
 
+**`v0.2` (2017-11-07)**
+
+  - Replaced all occurences of “`\`” macro symbol with “`!`” (preparing to migrate to PP v2)
+
 **`v0.1` (2017-10-20)**
 
   - First Alpha Release.
 
 # LinkingHelpers.pp
 
+**`v0.2` (2017-11-07)**
+
+  - Replaced all occurences of “`\`” macro symbol with “`!`” (preparing to migrate to PP v2)
+
 **`v0.1` (2017-10-20)**
 
   - First Alpha Release.
 
 # Verbatim.pp
+
+**`v0.2` (2017-11-07)**
+
+  - Replaced all occurences of “`\`” macro symbol with “`!`” (preparing to migrate to PP v2)
 
 **`v0.1.1` (2017-10-23)**
 

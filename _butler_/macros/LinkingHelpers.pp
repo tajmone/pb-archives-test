@@ -1,6 +1,6 @@
 !comment(   "Linking Helpers" pp-macros set   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"LinkingHelpers.pp" v0.1 (2017-10-20) Alpha
+"LinkingHelpers.pp" v0.2 (2017-11-07) Alpha
 
 A set of macros for cross-references and links.
 ------------------------------------------------------------------------------
@@ -33,6 +33,6 @@ USAGE:
 (c) Tristano Ajmone 2017, MIT License.
 ``````````````````````````````````````````````````````````````````````````````
 !define(   anchor   )(
-<span id="\1"></span>
+<span id="!1"></span>
 )!comment `````````````````````````````````  `````````````````````````````````
 

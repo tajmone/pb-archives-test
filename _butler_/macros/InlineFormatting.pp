@@ -1,6 +1,6 @@
 !comment(   "Inline Formatting" pp-macros set   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"InlineFormatting.pp" v0.1 (2017-10-20) Alpha
+"InlineFormatting.pp" v0.2 (2017-11-07) Alpha
 
 A set of shortcut-macros for various standard html inline elements.
 ------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ USAGE:
 (c) Tristano Ajmone 2017, MIT License.
 ``````````````````````````````````````````````````````````````````````````````
 !define(   kbd   )(
-<kbd>\1</kbd>!ifdef(2)(+<kbd>\2</kbd>)!ifdef(3)(+<kbd>\3</kbd>)!ifdef(4)(+<kbd>\4</kbd>)
+<kbd>!1</kbd>!ifdef(2)(+<kbd>!2</kbd>)!ifdef(3)(+<kbd>!3</kbd>)!ifdef(4)(+<kbd>!4</kbd>)
 )!comment `````````````````````````````````  `````````````````````````````````
 
 
@@ -50,7 +50,7 @@ USAGE:
 (c) Tristano Ajmone 2017, MIT License.
 ``````````````````````````````````````````````````````````````````````````````
 !define(   fa   )(
-<i class="fa fa-\1"></i>
+<i class="fa fa-!1"></i>
 )!comment `````````````````````````````````  `````````````````````````````````
 
 
@@ -75,7 +75,7 @@ USAGE:
 ``````````````````````````````````````````````````````````````````````````````
 !define(   mark   )(
 
-<mark>\1</mark>
+<mark>!1</mark>
 
 )!comment `````````````````````````````````  `````````````````````````````````
 
@@ -87,7 +87,7 @@ DECRIPTION: Like !mark, but fluorescent red.
 ``````````````````````````````````````````````````````````````````````````````
 !define(   markRed   )(
 
-<mark class="red">\1</mark>
+<mark class="red">!1</mark>
 
 )!comment `````````````````````````````````  `````````````````````````````````
 
@@ -99,7 +99,7 @@ DECRIPTION: Like !mark, but fluorescent blue.
 ``````````````````````````````````````````````````````````````````````````````
 !define(   markBlue   )(
 
-<mark class="blue">\1</mark>
+<mark class="blue">!1</mark>
 
 )!comment `````````````````````````````````  `````````````````````````````````
 
@@ -111,7 +111,7 @@ DECRIPTION: Like !mark, but fluorescent green.
 ``````````````````````````````````````````````````````````````````````````````
 !define(   markGreen   )(
 
-<mark class="green">\1</mark>
+<mark class="green">!1</mark>
 
 )!comment `````````````````````````````````  `````````````````````````````````
 

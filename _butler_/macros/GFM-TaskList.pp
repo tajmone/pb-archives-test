@@ -1,6 +1,6 @@
 !comment(   "GFM-TaskList" pp-macros set   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"GFM-TaskList.pp" v0.1 (2017-10-20) Alpha
+"GFM-TaskList.pp" v0.2 (2017-11-07) Alpha
 
 A set of macros for enabling GFM task lists within pandoc documents:
 
@@ -81,7 +81,7 @@ DECRIPTION: Macro to enclose all Tasks of a Task-List.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 <ul class="task-list">
-\1
+!1
 </ul>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,9 +100,9 @@ USAGE: !Task( TASK STATE )( TASK TEXT )[( A SUB-TASKS LIST )]
 ``````````````````````````````````````````````````````````````````````````````
 !define(   Task   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<li class="task-list-item"><input type="checkbox" disabled=""!ifeq[\1][x][ checked=""]>&thinsp;\2!ifndef(3)(</li>)
+<li class="task-list-item"><input type="checkbox" disabled=""!ifeq[!1][x][ checked=""]>&thinsp;!2!ifndef(3)(</li>)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!TaskList(\3)
+!TaskList(!3)
 </li>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
