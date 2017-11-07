@@ -2,6 +2,12 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.9` (2017/11/07)
+    
+      - PP is invoked with the `-D ROOT=<path to root>` option, which assignes to the `ROOT` symbol the relative path back to the project’s root — just like the `ROOT` variable is already passed to pandoc in order for the template to locate assets files.
+        
+        > **NOTE**: `!ROOT` is used by “`macros.pp`” to create a markdown list of all imported modules with links to the module files (`!ListMacrosFilesLinks` macro). The `!ROOT` macro will also be useful to project documentation maintainers.
+
   - `v0.1.8` (2017/11/03)
     
       - Default pandoc template is now “`pandoc.html5`” (before was “`custom.html5`”)

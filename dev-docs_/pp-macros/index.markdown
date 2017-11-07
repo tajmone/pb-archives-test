@@ -3,7 +3,26 @@
 __WIP WARNING__ --- This page and all the documents in this section are still work in progress, most pages are rough sketches, tests, and their contents might not reflect the current state of code/macros changes.
 ::::::::::::::::::::::::::::::::::::::::::::
 
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Test !ROOT and !PATH2MACROS
+
+    !raw[!ROOT]: !ROOT
+    !raw[!PATH2MACROS]: !PATH2MACROS
+    !raw[!rawdef{PATH2MACROS}]: !rawdef{PATH2MACROS}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 PP macros extend pandoc's markdown syntax with built in PP macros and custom macros definitions.
+
+# Section Contents
+
+- [`macros-Verbatim.html`](./macros-Verbatim.html)
+- [`block-formatting.html`](./block-formatting.html)
+- [`FASM-TEST.html`](./FASM-TEST.html)
+- [`inline-formatting.html`](./inline-formatting.html)
+- [`task-lists.html`](./task-lists.html)
+- [`test-highlight.html`](./test-highlight.html)
 
 # PP Macros Definitions Files
 
@@ -15,7 +34,7 @@ Butler only imports a single macros definition file:
 
 ... this is the main macros file which takes care of importing all the other definitions files, namely:
 
-!ListMacrosFiles
+!ListMacrosFilesLinks
 
 !comment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,14 +49,6 @@ REMOVED MACROS FILE LIST WITH LINKS:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-# Files List
-
-- [`macros-Verbatim.html`](./macros-Verbatim.html)
-- [`block-formatting.html`](./block-formatting.html)
-- [`FASM-TEST.html`](./FASM-TEST.html)
-- [`inline-formatting.html`](./inline-formatting.html)
-- [`task-lists.html`](./task-lists.html)
-- [`test-highlight.html`](./test-highlight.html)
 
 :::::: Note ::::::::::::::::::::::::::::::::
 Some of the FASM source code examples used for testing highlighting macros where taken from the FASM package:
