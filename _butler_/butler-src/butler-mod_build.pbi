@@ -43,9 +43,12 @@ DeclareModule build
   Define PP_MACROS_IMPORT$ 
   Define PANDOC_BASE_ARGS$
   ; ------------------------------------------------------------------------------
+  PP_VARS$ = ""       ; (Shared) This will hold a dynamically generated string to
+                      ; define PP Symbols via CLI options.
+                      ; ----------------------------------------------------------
   PANDOC_VARS$ = ""   ; (Shared) This will hold a dynamically generated string to
                       ; define Pandoc template variables via CLI options.
-                      ; ------------------------------------------------------------------------------
+                      ; ----------------------------------------------------------
   argsPandoc$ = ""    ; (Shared) This will hold the final string of arguments to be
                       ; passed to Pandoc.
   
@@ -95,7 +98,7 @@ Module build
   Procedure BuildFolder(dirPath$, recursive = #False)
     
     Shared UserOptions
-    Shared PANDOC_BASE_ARGS$, PANDOC_VARS$, argsPandoc$ ; Pandoc related
+    Shared PANDOC_BASE_ARGS$, PP_VARS$, PANDOC_VARS$, argsPandoc$ ; Pandoc related
     
     subPath$ = RemoveString(dirPath$, ini::Proj\Root$)
     
@@ -131,7 +134,7 @@ Module build
     EndIf  
     
     ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    ;                                  PANDOC SETUP                                 
+    ;-                               PP/PANDOC SETUP                                
     ;{//////////////////////////////////////////////////////////////////////////////
     ; These Pandoc settings are calculated on a per-folder basis.
     ;       ie: They remain the same for all markdown files in the same folder.
@@ -145,12 +148,14 @@ Module build
     For i = 1 To totSubfolders
       path2root$ + "../" ; <= Use "/" as URL path separator
     Next
-    ; ==================================
-    ;- $ROOT$ — Panodc template variable
-    ; ==================================
-    ; Required in pandoc html template to locate assets via relative paths...
+    ; ====================================
+    ;- $ROOT$ — Rel.Path Back to Proj.Root
+    ; ====================================
+    ; Required in pandoc html template to locate assets via relative paths.
+    ; Also added as a PP Symbol (ie: macro) which can be useful in many ways.
     If path2root$
-      PANDOC_VARS$ = "-V ROOT=" + path2root$
+      PP_VARS$ =     "-D ROOT=" + path2root$ ; <= PP Symbol definition via CLI
+      PANDOC_VARS$ = "-V ROOT=" + path2root$ ; <= Panodc template variable
     EndIf
     ; =========================================
     ;- $breadcrumbs$ — Panodc template variable
@@ -190,7 +195,7 @@ Module build
     If #False ; Don't show. (might keep it for verbose option)
       PrintN("argsPandoc$: "+ argsPandoc$) ; DBG Pandoc Args
     EndIf
-    ;}////// END :: PANDOC SETUP ///////////////////////////////////////////////////
+    ;}////// END :: PP/PANDOC SETUP ////////////////////////////////////////////////
     
     ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     ;                          ENLIST MARKDOWN SOURCE FILES                                                  
@@ -368,13 +373,14 @@ Module build
     ;                 settings file (to be appended to source files list).
     
     Shared path2root$
+    Shared PP_VARS$          ; CLI defined Symbols (Path to Root)
     Shared PP_MACROS_IMPORT$ ; PP Base args (still lacks source filename and "_butler.yaml")
     Shared argsPandoc$       ; Pandoc args  (good to go)
     
     ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     ;-                                   PP SETUP                                   
     ;{//////////////////////////////////////////////////////////////////////////////
-    argsPP$ = PP_MACROS_IMPORT$    
+    argsPP$ = PP_VARS$ +" "+ PP_MACROS_IMPORT$    
     ; NOTE: "_butler.pp" is passed to PP before the MD source file, because it will
     ;        contain macro definition shared by multiple docs (and macros must be
     ;        defined before their actual occurence!).
@@ -403,8 +409,8 @@ Module build
     ;{//////////////////////////////////////////////////////////////////////////////
     
     ;   argsPandoc$ + " --wzy" ; DELME: Pandoc Error test (pandoc: unrecognized option `--wzy')
-    ;     PrintN("argsPP$: "     + argsPP$)     ; DBG PP Args
-    ;     PrintN("argsPandoc$: " + argsPandoc$) ; DBG Pandoc Args
+;         PrintN("argsPP$: "     + argsPP$)     ; DBG PP Args
+;         PrintN("argsPandoc$: " + argsPandoc$) ; DBG Pandoc Args
     
     If Not PPP::Convert(argsPP$, argsPandoc$)
       ; ==============================================================================
