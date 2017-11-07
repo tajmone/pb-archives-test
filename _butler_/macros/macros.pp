@@ -1,46 +1,53 @@
-!comment( pp-macros loader module )
+!comment(   pp-macros loader module   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"macros.pp" v0.3 (2017-11-05) Alpha
+"macros.pp" v0.4 (2017-11-07) Alpha
 
-The main macro that imports all other macros modules. Also creates a macro to
-emit a markdown list of all modules files.
+The main macro that imports all other macros modules. Importing is done via
+the "!importAdd(MODULE FILE)" custom macro, which also creates a MD list of all
+the imported modules (see end comments).
 
-MACROS LIST:
+------------------------------------------------------------------------------
+(c) Tristano Ajmone 2017, MIT License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!import(   macros-init.pp   )
+
+
+
+!importAdd(  GFM-TaskList.pp      )
+!importAdd(  Verbatim.pp          )
+!importAdd(  Highlight.pp         )
+!importAdd(  InlineFormatting.pp  )
+!importAdd(  LinkingHelpers.pp    )
+!importAdd(  BlockFormatting.pp   )
+
+
+
+
+!comment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                              MAINTAINERS MACROS                              
+------------------------------------------------------------------------------
+This module also creates (via "macros-init.pp") some useful macros for 
+maintainers of project documentation:
 
 - !ListMacrosFiles
+		Emit a markdown list (unordered) of all the modules files that were
+		loaded here.
+
+- !ListMacrosFilesLinks
+		Like !ListMacrosFiles, but list entries have links to the files.
+
+- !ROOT
+		Relative path back to project's root (empty if we are already in root).
+		Always ends with "/" (unless empty).
+
+- !PATH2MACROS
+		Relative path to the project's PP macros folder (ie: /_butler_/macros/)
 
 ------------------------------------------------------------------------------
-NOTE: When adding/deleting modules to the import list, remember to also update
-	  the !ListMacrosFiles definition to match the changes!
-------------------------------------------------------------------------------
-(c) Tristano Ajmone 2017, MIT License.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NOTES:
 
-!import(  GFM-TaskList.pp      )
-!import(  Verbatim.pp          )
-!import(  Highlight.pp         )
-!import(  InlineFormatting.pp  )
-!import(  LinkingHelpers.pp    )
-!import(  BlockFormatting.pp   )
-
-
-
-
-!comment(   ListMacrosFiles   )
-``````````````````````````````````````````````````````````````````````````````
-DECRIPTION: Emits a markdown bullet list of all the macros modules imported by
-			"macros.pp". Used in the "/dev-docs_/" section
-------------------------------------------------------------------------------
-(c) Tristano Ajmone 2017, MIT License.
-``````````````````````````````````````````````````````````````````````````````
-!define(    ListMacrosFiles   )
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-- `GFM-TaskList.pp`
-- `Verbatim.pp`
-- `Highlight.pp`
-- `InlineFormatting.pp`
-- `LinkingHelpers.pp`
-- `BlockFormatting.pp`
-
+-- The ROOT symbol is dynamically created by Butler, via the CLI invocation
+   option "-D".
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

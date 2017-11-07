@@ -11,6 +11,7 @@ This file logs changes to pp macros definitions during Alpha Stage.
 <!-- #toc -->
 
   - [macros.pp](#macrospp)
+  - [macros-init.pp](#macros-initpp)
   - [Alerts.pp (*deleted*)](#alertspp-deleted)
   - [BlockFormatting.pp](#blockformattingpp)
   - [GFM-TaskList.pp](#gfm-tasklistpp)
@@ -25,6 +26,16 @@ This file logs changes to pp macros definitions during Alpha Stage.
 
 # macros.pp
 
+**`v0.4` (2017-11-07)**
+
+  - Added `!import( macros-init.pp )`, and moved all non-import stuff in the new “`macros-init.pp`” file.
+
+  - Now modules are imported via the `!importAdd` custom macro, which beside importing the modules also builds the markdown modules-lists.
+
+  - Now `!ROOT` is already available when “`macros.pp`” loads (new Butler v0.1.9 feature).
+    
+    See [macros-init.pp](#macros-initpp) for more details.
+
 **`v0.3` (2017-11-05)**
 
   - The “`macros.pp`” file now also creates the `!ListMacrosFiles` that emits a markdown unordered list of all the macros modules imported (used in the “`/dev-docs_/`” section to maintain an auto-update list of macros modules).
@@ -36,6 +47,24 @@ This file logs changes to pp macros definitions during Alpha Stage.
 **`v0.1` (2017-10-20)**
 
   - First Alpha Release.
+
+# macros-init.pp
+
+**`v0.1` (2017-11-07)**
+
+  - First Alpha Release.
+    
+    This initialization module for “`macros.pp`” adds the following macros:
+    
+      - `!PATH2MACROS`
+    
+    <!-- end list -->
+
+      - `!importAdd(FILENAME)`
+      - `!ListMacrosFiles` (emit markdown list of macros modules)
+      - `!ListMacrosFilesLinks` (emit md list of macros modules, with links)
+    
+    It exploits the new feature of Butler v0.1.9, which defines the `!ROOT` macro via CLI, which contains the relative path back to the project’s root.
 
 -----
 
