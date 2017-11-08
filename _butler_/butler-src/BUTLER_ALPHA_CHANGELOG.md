@@ -2,6 +2,10 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.10` (2017/11/08)
+    
+      - **CODE OPTIMIZATION** — `ini::` module now uses a single loop to create both options maps (long and short opts) using a common DataSection.
+
   - `v0.1.9` (2017/11/07)
     
       - PP is invoked with the `-D ROOT=<path to root>` option, which assignes to the `ROOT` symbol the relative path back to the project’s root — just like the `ROOT` variable is already passed to pandoc in order for the template to locate assets files.

@@ -303,6 +303,7 @@ Module ini
       #RE_OptsShort
     EndEnumeration
     
+    ; TODO: Create the Short Opts RegEx by chaining up the strings in OptsData DataSection!
     If Not CreateRegularExpression(#RE_OptsShort, "-([a-zA-Z]+)$") ; <= RegEx str should contain only valid short-options chars (case sensitive)
       ConsoleError("Couldn't create RegEx: #RE_OptsShort")         ; FIXME: Convert to Abort()!!!
       End 1
@@ -311,54 +312,47 @@ Module ini
     ; ==============================================================================
     ;-                                 Options Maps                                 
     ;{==============================================================================
-    ; Opts-Contants and maps for short and long opts; used to create a list of all
-    ; options found... Not
+    ; Opts-Constants and maps for short and long opts; used to create a list of all
+    ; options found...
     
     Enumeration             ; >>>>>>>>>>>>>>>>>> Valid User Opts >>>>>>>>>>>>>>>>>>>
                             ; === Info Query Options: ==============================
       #optsmap_Version      ; - Print Butler's version
       #optsmap_Help         ; - Print Help
                             ; === Proj Processing Options: =========================
-      #optsmap_BuildFolder  ; - Build current folder.
+      #optsmap_BuildFolder  ; - Build current folder
       #optsmap_BuildAll     ; - Build whole project.
-      #optsmap_Recursive    ; - Recurse into subfolders.
-      #optsmap_Verbose      ; - Verbosity ON.
+      #optsmap_Recursive    ; - Recurse into subfolders
+      #optsmap_Verbose      ; - Verbosity ON
     EndEnumeration          ; <<<<<<<<<<<<<<<<<< Valid User Opts <<<<<<<<<<<<<<<<<<<
     
     optsTot = #PB_Compiler_EnumerationValue
     
-    DataSection             ; >>>>>>>>>>>>>>>>>> Long Opts Strings >>>>>>>>>>>>>>>>>
-      LongOptsData:         ; === Info Query Options: ==============================
-      Data.s "--version"    ; Butler's version
-      Data.s "--help"       ; Print Help
-                            ; === Proj Processing Options: =========================
-      Data.s "--build"      ; build folder
-      Data.s "--build-all"  ; build all
-      Data.s "--recursive"  ; recursive
-      Data.s "--verbose"    ; verbose
-    EndDataSection          ; <<<<<<<<<<<<<<<<<< Long Opts Strings <<<<<<<<<<<<<<<<<
+    DataSection             ; >>>>>>>>>>>>>>>>>> Opts Strings: Long, Short >>>>>>>>>
+      OptsData:             ; ======= Info Query Options: ==========================
+      Data.s "--version",   "v" ; - Print Butler's version
+      Data.s "--help",      "h" ; - Print Help
+                                ; === Proj Processing Options: =====================
+      Data.s "--build",     "b" ; - Build current folder
+      Data.s "--build-all", "B" ; - Build whole project.
+      Data.s "--recursive", "r" ; - Recurse into subfolders
+      Data.s "--verbose",   "V" ; - Verbosity ON
+    EndDataSection              ; <<<<<<<<<<<<<<<<<< Opts Strings <<<<<<<<<<<<<<<<<<
     
-    ; =========================== Create Short Opts Map ============================
-    ; Create the map entry by entry, because some options don't have a short version
-    ; equivalent...
-    NewMap ShortOptsM.a()   ; >>>>>>>>>>>>>>>>>> Short Opts Chars >>>>>>>>>>>>>>>>>>
-    
-    ;                                        === Info Query Options: ===============
-    ShortOptsM("v") = #optsmap_Version     ; Butler's version
-    ShortOptsM("h") = #optsmap_Help        ; Print Help
-                                           ; === Proj Processing Options: ==========
-    ShortOptsM("b") = #optsmap_BuildFolder ; build folder
-    ShortOptsM("B") = #optsmap_BuildAll    ; build all
-    ShortOptsM("r") = #optsmap_Recursive   ; recursive
-    ShortOptsM("V") = #optsmap_Verbose     ; verbose    
-    
-    ; ============================ Build Long Opts Map =============================
-    ; Create the map via a loop, because every option has a long representation...
+    ; ============================== Build Opts Maps ===============================
+    ; Create the maps via a loop
     NewMap LongOptsM.a()
-    Restore LongOptsData
+    NewMap ShortOptsM.a()
+    Restore OptsData
     For i = 1 To optsTot
-      Read.s Key$
-      LongOptsM(Key$) = i-1
+      ; Long Options Map (every option has a long representation)
+      Read.s KeyLong$
+      LongOptsM(KeyLong$) = i-1
+      ; Short Options Map (some option don't have a short representation)
+      Read.s KeyShort$
+      If KeyShort$
+        ShortOptsM(KeyShort$) = i-1
+      EndIf
     Next i  
     
     ;}////// END :: Options Maps ///////////////////////////////////////////////////
@@ -452,31 +446,31 @@ Module ini
           ; ------------------------------------------------------------------------------
           ;                               Info Query Options                              
           ; ------------------------------------------------------------------------------
-        Case #optsmap_Version                          ; ====> Print Butler's version <==============
+        Case #optsmap_Version                       ; ====> Print Butler's version <======
           UserOpts | #opt_Version
-          ConsoleError(" -- Print Butler's Version") ; DBG Eval User Opts
-        Case #optsmap_Help                           ; ====> Print Help <==============
+          ConsoleError(" -- Print Butler's Version"); DBG Eval User Opts
+        Case #optsmap_Help                          ; ====> Print Help <==================
           UserOpts | #opt_Help
-          ConsoleError(" -- Print Help") ; DBG Eval User Opts
+          ConsoleError(" -- Print Help")            ; DBG Eval User Opts
           
           ; ------------------------------------------------------------------------------
           ;                            Proj Processing Options                            
           ; ------------------------------------------------------------------------------
-        Case #optsmap_BuildFolder             ; ====> Build current folder <==============
-          UserOpts | #opt_opStatusReq         ; This opt requires operativeStatus
+        Case #optsmap_BuildFolder                 ; ====> Build current folder <==========
+          UserOpts | #opt_opStatusReq             ; This opt requires operativeStatus
           UserOpts | #opt_BuildFolder
           ConsoleError(" -- Build current folder"); DBG Eval User Opts
-        Case #optsmap_BuildAll                    ; ====> Build whole project  <==============
+        Case #optsmap_BuildAll                    ; ====> Build whole project  <==========
           UserOpts | #opt_opStatusReq             ; This opt requires operativeStatus
           UserOpts | #opt_BuildAll
           UserOpts | #opt_Recursive
-          ConsoleError(" -- Build whole project"); DBG Eval User Opts
-        Case #optsmap_Recursive                  ; ====> Recursive Mode       <==============
+          ConsoleError(" -- Build whole project") ; DBG Eval User Opts
+        Case #optsmap_Recursive                   ; ====> Recursive Mode       <==========
           UserOpts | #opt_Recursive
-          ConsoleError(" -- Recursive Mode")  ; DBG Eval User Opts
-        Case #optsmap_Verbose                 ; ====> Verbosity Mode       <==============
+          ConsoleError(" -- Recursive Mode")      ; DBG Eval User Opts
+        Case #optsmap_Verbose                     ; ====> Verbosity Mode       <==========
           UserOpts | #opt_Verbose
-          ConsoleError(" -- Verbosity Mode")  ; DBG Eval User Opts
+          ConsoleError(" -- Verbosity Mode")      ; DBG Eval User Opts
       EndSelect
     Next
     
