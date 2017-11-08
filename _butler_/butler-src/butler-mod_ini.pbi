@@ -303,8 +303,13 @@ Module ini
       #RE_OptsShort
     EndEnumeration
     
-    ; TODO: Create the Short Opts RegEx by chaining up the strings in OptsData DataSection!
-    If Not CreateRegularExpression(#RE_OptsShort, "-([a-zA-Z]+)$") ; <= RegEx str should contain only valid short-options chars (case sensitive)
+    ;- Create OptsShort RegEx
+    ;  ======================
+    ; NOTE: The OptsShort RegEx must capture all Ascii letters range [a-zA-Z] so
+    ;       that the options parser can pinpoint the bad short opts (ie: if only
+    ;       valid option letters where put in the RegEx, the presence of a single
+    ;       invalid short opt would disqualify the entire "-" chars sequence!)
+    If Not CreateRegularExpression(#RE_OptsShort, "-([a-zA-Z]+)$")
       ConsoleError("Couldn't create RegEx: #RE_OptsShort")         ; FIXME: Convert to Abort()!!!
       End 1
     EndIf
@@ -341,17 +346,17 @@ Module ini
     
     ; ============================== Build Opts Maps ===============================
     ; Create the maps via a loop
-    NewMap LongOptsM.a()
-    NewMap ShortOptsM.a()
+    NewMap OptsLongM.a()
+    NewMap OptsShortM.a()
     Restore OptsData
     For i = 1 To optsTot
       ; Long Options Map (every option has a long representation)
-      Read.s KeyLong$
-      LongOptsM(KeyLong$) = i-1
+      Read.s OptsLongKey$
+      OptsLongM(OptsLongKey$) = i-1
       ; Short Options Map (some option don't have a short representation)
-      Read.s KeyShort$
-      If KeyShort$
-        ShortOptsM(KeyShort$) = i-1
+      Read.s OptsShortKey$
+      If OptsShortKey$
+        OptsShortM(OptsShortKey$) = i-1
       EndIf
     Next i  
     
@@ -371,9 +376,9 @@ Module ini
         ; ------------------------------------------------------------------------------
         ;                              PARAM IS LONG OPTION                             
         ; ------------------------------------------------------------------------------       
-        If FindMapElement(LongOptsM(), LCase(currParam)) ; <= Lower-Case comparison!
+        If FindMapElement(OptsLongM(), LCase(currParam)) ; <= Lower-Case comparison!
           AddElement(optsL())
-          optsL() = LongOptsM(currParam)
+          optsL() = OptsLongM(currParam)
         Else
           AddElement(optsBadL())
           optsBadL() = currParam
@@ -393,9 +398,9 @@ Module ini
               
               currOpt$ = Mid(OptsShort$, i, 1)
               ; Check if char maps to a short opt
-              If FindMapElement(ShortOptsM(), currOpt$)
+              If FindMapElement(OptsShortM(), currOpt$)
                 AddElement(optsL())
-                optsL() = ShortOptsM(currOpt$)
+                optsL() = OptsShortM(currOpt$)
               Else
                 AddElement(optsBadL())
                 optsBadL() = "-" + currOpt$
