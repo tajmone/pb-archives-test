@@ -315,12 +315,15 @@ Module ini
     EndIf
     
     ; ==============================================================================
-    ;-                                 Options Maps                                 
+    ;-                               CLI Options Maps                               
     ;{==============================================================================
-    ; Opts-Constants and maps for short and long opts; used to create a list of all
-    ; options found...
+    ; Enumerated constants and maps for command line options (long and short vers.),
+    ; used to loop dynamically through all options found.
     
-    Enumeration             ; >>>>>>>>>>>>>>>>>> Valid User Opts >>>>>>>>>>>>>>>>>>>
+    ; IMPORTANT: The order in which the various Options appear in DataSections must
+    ;            always reflect the order of the Enumeration below:
+    
+    Enumeration CLI_Options ; >>>>>>>>>>>>>>>>>> Valid User Opts >>>>>>>>>>>>>>>>>>>
                             ; === Info Query Options: ==============================
       #optsmap_Version      ; - Print Butler's version
       #optsmap_Help         ; - Print Help
@@ -344,10 +347,10 @@ Module ini
       Data.s "--verbose",   "V" ; - Verbosity ON
     EndDataSection              ; <<<<<<<<<<<<<<<<<< Opts Strings <<<<<<<<<<<<<<<<<<
     
-    ; ============================== Build Opts Maps ===============================
+    ; ============================ Build CLI Opts Maps =============================
     ; Create the maps via a loop
-    NewMap OptsLongM.a()
-    NewMap OptsShortM.a()
+    NewMap OptsLongM.a()  ; Map long  opts strs to CLI_Options Enum constants
+    NewMap OptsShortM.a() ; Map short opts chrs to CLI_Options Enum constants
     Restore OptsData
     For i = 1 To optsTot
       ; Long Options Map (every option has a long representation)
