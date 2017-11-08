@@ -20,8 +20,6 @@
 ; This module manages Butler's project settings from/to file and memory.
 
 
-; TODO: Add Check and Var for Win Bash (ie: if currently in Bash or CMD)
-
 ; TODO: Move Here checking if CurrFolder is within Butler Path!!
 
 ; TODO: IMPLEMENT Checking if "butler.ini" file exists (in Butler's Path):
@@ -317,51 +315,53 @@ Module ini
     ; ==============================================================================
     ;-                               CLI Options Maps                               
     ;{==============================================================================
-    ; Enumerated constants and maps for command line options (long and short vers.),
-    ; used to loop dynamically through all options found.
+    ; Map command line options (long and short versions) to UserOpts flags values.
+    ; The Maps are used when iterating through params.
     
-    ; IMPORTANT: The order in which the various Options appear in DataSections must
-    ;            always reflect the order of the Enumeration below:
+    ; NOTE: Flags are stored in Word type (".w", 2 bytes length on all architectures)
     
-    Enumeration CLI_Options ; >>>>>>>>>>>>>>>>>> Valid User Opts >>>>>>>>>>>>>>>>>>>
-                            ; === Info Query Options: ==============================
-      #optsmap_Version      ; - Print Butler's version
-      #optsmap_Help         ; - Print Help
-                            ; === Proj Processing Options: =========================
-      #optsmap_BuildFolder  ; - Build current folder
-      #optsmap_BuildAll     ; - Build whole project.
-      #optsmap_Recursive    ; - Recurse into subfolders
-      #optsmap_Verbose      ; - Verbosity ON
-    EndEnumeration          ; <<<<<<<<<<<<<<<<<< Valid User Opts <<<<<<<<<<<<<<<<<<<
-    
-    optsTot = #PB_Compiler_EnumerationValue
-    
-    DataSection             ; >>>>>>>>>>>>>>>>>> Opts Strings: Long, Short >>>>>>>>>
-      OptsData:             ; ======= Info Query Options: ==========================
+    DataSection      ; >>>>>>>>>>>>>>>>>> Options Maps Data >>>>>>>>>
+      
+      ; The Data of this Section has the following structure for each CLI option:
+      ; [.s] Option:  Long version, Short version
+      ; [.w] Flags:   UserOpts flags which are set by the option
+      OptsData:             
+      ; ======= Info Query Options: ==========================
       Data.s "--version",   "v" ; - Print Butler's version
+      Data.w                        #opt_Version
       Data.s "--help",      "h" ; - Print Help
-                                ; === Proj Processing Options: =====================
+      Data.w                        #opt_Help
+      ; === Proj Processing Options: =====================
       Data.s "--build",     "b" ; - Build current folder
+      Data.w                        #opt_BuildFolder | #opt_opStatusReq
       Data.s "--build-all", "B" ; - Build whole project.
+      Data.w                        #opt_BuildAll | #opt_Recursive | #opt_opStatusReq
       Data.s "--recursive", "r" ; - Recurse into subfolders
+      Data.w                        #opt_Recursive
       Data.s "--verbose",   "V" ; - Verbosity ON
-    EndDataSection              ; <<<<<<<<<<<<<<<<<< Opts Strings <<<<<<<<<<<<<<<<<<
+      Data.w                        #opt_Verbose
+      
+      Data.s #Null$ ; <= Signal End of Data!
+      
+    EndDataSection   ; <<<<<<<<<<<<<<<<<< Opts Strings <<<<<<<<<<<<<<<<<<
     
     ; ============================ Build CLI Opts Maps =============================
     ; Create the maps via a loop
-    NewMap OptsLongM.a()  ; Map long  opts strs to CLI_Options Enum constants
-    NewMap OptsShortM.a() ; Map short opts chrs to CLI_Options Enum constants
+    NewMap OptsLongM.a()  ; Map long  opts strs to UserOpts flags
+    NewMap OptsShortM.a() ; Map short opts chrs to UserOpts flags
     Restore OptsData
-    For i = 1 To optsTot
-      ; Long Options Map (every option has a long representation)
+    While #True
       Read.s OptsLongKey$
-      OptsLongM(OptsLongKey$) = i-1
-      ; Short Options Map (some option don't have a short representation)
+      If OptsLongKey$ = #Null$ : Break : EndIf
       Read.s OptsShortKey$
+      Read.w OptsFlags
+      ; Long Options Map (every option has a long representation)
+      OptsLongM(OptsLongKey$) = OptsFlags
+      ; Short Options Map (some option don't have a short representation)
       If OptsShortKey$
-        OptsShortM(OptsShortKey$) = i-1
+        OptsShortM(OptsShortKey$) = OptsFlags
       EndIf
-    Next i  
+    Wend 
     
     ;}////// END :: Options Maps ///////////////////////////////////////////////////
     
@@ -371,7 +371,6 @@ Module ini
     ; Iterate through all params and build a list of the encountered options, and a
     ; a list of the encountered unknown params...
     ; ------------------------------------------------------------------------------
-    NewList optsL()     ; <= Temp List to store all opts found.
     NewList optsBadL.s(); <= Temp List to store all unknown opts and params found.
     For param = 1 To numParams
       currParam.s = ProgramParameter()
@@ -380,8 +379,7 @@ Module ini
         ;                              PARAM IS LONG OPTION                             
         ; ------------------------------------------------------------------------------       
         If FindMapElement(OptsLongM(), LCase(currParam)) ; <= Lower-Case comparison!
-          AddElement(optsL())
-          optsL() = OptsLongM(currParam)
+          UserOpts | OptsLongM(currParam)
         Else
           AddElement(optsBadL())
           optsBadL() = currParam
@@ -402,8 +400,7 @@ Module ini
               currOpt$ = Mid(OptsShort$, i, 1)
               ; Check if char maps to a short opt
               If FindMapElement(OptsShortM(), currOpt$)
-                AddElement(optsL())
-                optsL() = OptsShortM(currOpt$)
+                UserOpts | OptsShortM(currOpt$)
               Else
                 AddElement(optsBadL())
                 optsBadL() = "-" + currOpt$
@@ -441,46 +438,6 @@ Module ini
       ; TODO: Abort() ???
       End 1
     EndIf
-    
-    ; ==============================================================================
-    ;-                            EVALUATE USER OPTIONS                             
-    ; ==============================================================================
-    ; Sift through the list of user options and set Butler Tasks accordingly...
-    ; ------------------------------------------------------------------------------
-    ConsoleError( LSet("", 80, "-") + ~"\nEvaluating Options List:" ) ; DELME
-    ForEach optsL()
-      Select optsL()
-          ; FIXME: EVALUATE USER OPTIONS  -- Remove Debug output!
-          ; ------------------------------------------------------------------------------
-          ;                               Info Query Options                              
-          ; ------------------------------------------------------------------------------
-        Case #optsmap_Version                       ; ====> Print Butler's version <======
-          UserOpts | #opt_Version
-          ConsoleError(" -- Print Butler's Version"); DBG Eval User Opts
-        Case #optsmap_Help                          ; ====> Print Help <==================
-          UserOpts | #opt_Help
-          ConsoleError(" -- Print Help")            ; DBG Eval User Opts
-          
-          ; ------------------------------------------------------------------------------
-          ;                            Proj Processing Options                            
-          ; ------------------------------------------------------------------------------
-        Case #optsmap_BuildFolder                 ; ====> Build current folder <==========
-          UserOpts | #opt_opStatusReq             ; This opt requires operativeStatus
-          UserOpts | #opt_BuildFolder
-          ConsoleError(" -- Build current folder"); DBG Eval User Opts
-        Case #optsmap_BuildAll                    ; ====> Build whole project  <==========
-          UserOpts | #opt_opStatusReq             ; This opt requires operativeStatus
-          UserOpts | #opt_BuildAll
-          UserOpts | #opt_Recursive
-          ConsoleError(" -- Build whole project") ; DBG Eval User Opts
-        Case #optsmap_Recursive                   ; ====> Recursive Mode       <==========
-          UserOpts | #opt_Recursive
-          ConsoleError(" -- Recursive Mode")      ; DBG Eval User Opts
-        Case #optsmap_Verbose                     ; ====> Verbosity Mode       <==========
-          UserOpts | #opt_Verbose
-          ConsoleError(" -- Verbosity Mode")      ; DBG Eval User Opts
-      EndSelect
-    Next
     
     ConsoleError("<<<<< ini::ParseCLIArgs() <<<<<")
   EndProcedure
