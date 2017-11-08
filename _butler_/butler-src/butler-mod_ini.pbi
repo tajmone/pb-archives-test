@@ -143,14 +143,10 @@ Module ini
   ; ******************************************************************************
   ; Initialize Butler and return its operativeStatus (true/false).
   Procedure Init()    
-    ConsoleError("******************************************************************************"); DELME Debugging
-    ConsoleError("ini::Init() >> ENTER")                                                          ; DELME Debugging
-    
     
     Shared Butler, Env
     Shared Proj
     Shared UserOpts, StatusErr
-    
     ; ------------------------------------------------------------------------------
     ;-                           Windows: Is Bash/Shell?                            
     ; ------------------------------------------------------------------------------
@@ -160,9 +156,6 @@ Module ini
     CompilerIf #PB_Compiler_OS = #PB_OS_Windows
       If GetEnvironmentVariable("SHELL") = #Null$
         StatusErr | #SERR_Win_NotShell
-        PrintN("$$$ Win Shell = FALSE $$$") ; DELME Debug Win Shell
-      Else
-        PrintN("$$$ Win Shell = TRUE $$$")  ; DELME Debug Win Shell
       EndIf
     CompilerEndIf
     ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,43 +165,31 @@ Module ini
     If numParams
       ParseCLIArgs(numParams)
     Else
-      ; ==============================================================================
-      ;                           NO PARAMETERS WERE PASSED                           
-      ; ==============================================================================
+      ; Butler invoked without any arguments...
       UserOpts | #opt_NoOpts
-      ;       ConsoleError("ini::Init() > No params found...") ; DELME Debugging NO ARGS
     EndIf
+    ; ==============================================================================
+    ;-                          Get Dependencies Versions                           
+    ; ==============================================================================
+    ;- Get PP/Pandoc Version
     ; ------------------------------------------------------------------------------
-    ;-                            Get PP/Pandoc Version                             
-    ; ------------------------------------------------------------------------------
-    ; TODO: Implement PP/Pandoc not found Error!
-    Env\PPVersion$ = PPP::GetPPVersion()
+    Env\PPVersion$ =     PPP::GetPPVersion()
     Env\PandocVersion$ = PPP::GetPandocVersion()
-    ; TODO: Implement PP/Pandoc Not Found Err Flag!
     ; ===> Check if PP was found: ==================================================
     If Env\PPVersion$ = #Null$
-      PrintN("$$$ PP NOT FOUND!! $$$") ; DELME Debug PPVersion$
       StatusErr | #SERR_PP_Not_Found
-    Else
-      PrintN("$$$ PP Version found: '"+ Env\PPVersion$ +"' $$$") ; DELME Debug PPVersion$
     EndIf
     ; ===> Check if Pandoc was found: ==============================================
     If Env\PandocVersion$ = #Null$
-      PrintN("$$$ Pandoc NOT FOUND!! $$$") ; DELME Debug PPVersion$
       StatusErr | #SERR_Pandoc_Not_Found
-    Else
-      PrintN("$$$ Pandoc Version found: '"+ Env\PandocVersion$ +"' $$$") ; DELME Debug PandocVersion$
     EndIf
     ; ------------------------------------------------------------------------------
-    ;-                             Get Highlight Version                             
+    ;- Get Highlight Version
     ; ------------------------------------------------------------------------------
     Env\HighlightVersion$ = GetHighlightVersion()
-        ; ===> Check if Highlight was found: ==================================================
+    ; ===> Check if Highlight was found: ===========================================
     If Env\HighlightVersion$ = #Null$
-      PrintN("$$$ HIGHLIGHT NOT FOUND!! $$$") ; DELME Debug HighlightVersion$
       StatusErr | #SERR_Highlight_Not_Found
-    Else
-      PrintN("$$$ HighlightVersion$ Version found: '"+ Env\HighlightVersion$ +"' $$$") ; DELME Debug HighlightVersion$
     EndIf
     ; ------------------------------------------------------------------------------
     ;                   Get Butler's Path from BUTLER_PATH Env Var                  
@@ -240,21 +221,14 @@ Module ini
       PrintN("~ HIGHLIGHT_DATADIR: " + GetEnvironmentVariable("HIGHLIGHT_DATADIR")) ; DBG
       
       ; ------------------------------------------------------------------------------
-      ;                  Check "butler.ini" (Proj. Preferences File)                  
+      ;-                 Check "butler.ini" (Proj. Preferences File)                  
       ; ------------------------------------------------------------------------------
-      ; Check if a "butler.ini" file is present in Butler's folder
-      PrintN("INI FILE > " + Butler\Path$ + "butler.ini") ; DELME
       If FileSize(Butler\Path$ + "butler.ini") > 0
-        PrintN("!!! Butler.ini found !!!") ; DELME
         ReadSettingsFile()
       Else
-        ; TODO: Implement Missing "butler.ini" Error !
         StatusErr | #SERR_Missing_Ini_File
-        PrintN("!!! Butler.ini NOT found !!!") ; DELME
       EndIf 
     EndIf 
-    
-    
     ;}------------------------------------------------------------------------------
     ;                         Establish Project's Root Path                         
     ; ------------------------------------------------------------------------------
@@ -265,14 +239,6 @@ Module ini
       ; Build path string omitting last folder (ie: "/_butler_/")
       Proj\Root$ + StringField(Butler\Path$, i, FS::#DIR_SEP$) + FS::#DIR_SEP$
     Next
-    ; ------------------------------------------------------------------------------
-    
-    
-    
-    
-    ConsoleError("ini::Init() << LEAVE")
-    ConsoleError("******************************************************************************")
-    
     ; ==============================================================================
     ;-                           Return Operative Status                            
     ; ==============================================================================
@@ -281,7 +247,7 @@ Module ini
     Else
       ProcedureReturn #True  ; operativeStatus = True
     EndIf
-  
+ 
   EndProcedure
   ; ******************************************************************************
   ; *                                                                            *
@@ -293,7 +259,6 @@ Module ini
   ; *                        Parse Command Line Arguments                        *
   ; ******************************************************************************
   Procedure ParseCLIArgs(numParams)
-    ConsoleError(">>>>> ini::ParseCLIArgs() >>>>>")
     
     Shared UserOpts
     
@@ -309,7 +274,7 @@ Module ini
     ;       invalid short opt would disqualify the entire "-" chars sequence!)
     If Not CreateRegularExpression(#RE_OptsShort, "-([a-zA-Z]+)$")
       ConsoleError("Couldn't create RegEx: #RE_OptsShort")         ; FIXME: Convert to Abort()!!!
-      End 1
+      End 1 ; FIXME: Implement some special Error Report Proc for Internal failures!
     EndIf
     
     ; ==============================================================================
@@ -416,16 +381,8 @@ Module ini
         AddElement(optsBadL())
         optsBadL() = currParam
       EndIf
-    Next
-    ;}------------------------------------------------------------------------------
-    
-    ; DELME ====== Debug Options List (int values) ======
-    ;     ConsoleError( LSet("", 80, "-") + ~"\nOptions List:" )
-    ;     ForEach optsL()
-    ;       ConsoleError(" - " + Str( optsL() ))
-    ;     Next
-    ;     
-    ; ==============================================================================
+    Next    
+    ;}==============================================================================
     ;                               PARAMS/OPTS ERRORS                              
     ; ==============================================================================
     ; If any malformed/invalid options were found, report and abort all operations..
