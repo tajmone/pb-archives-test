@@ -19,7 +19,6 @@
 
 ; This module manages Butler's project settings from/to file and memory.
 
-
 ; TODO: Move Here checking if CurrFolder is within Butler Path!!
 
 ; TODO: IMPLEMENT Checking if "butler.ini" file exists (in Butler's Path):
@@ -127,6 +126,7 @@ EndDeclareModule
 
 Module ini
   IncludeFile "butler-mod_ini.pbhgen.pbi" ; <= PBHGEN-X
+  
   ; ==============================================================================
   ;                         PRIVATE PROCEDURES DECLARATION                        
   ; ==============================================================================
@@ -152,7 +152,7 @@ Module ini
     ; ------------------------------------------------------------------------------
     ; If OS is Win, make sure Butler is invoked from Bash (Git Bash).
     ; This is done by checking for the presence of the SHELL env var.     
-    ;------------------------------------------------------------------------------
+    ; ------------------------------------------------------------------------------
     CompilerIf #PB_Compiler_OS = #PB_OS_Windows
       If GetEnvironmentVariable("SHELL") = #Null$
         StatusErr | #SERR_Win_NotShell
@@ -168,29 +168,7 @@ Module ini
       ; Butler invoked without any arguments...
       UserOpts | #opt_NoOpts
     EndIf
-    ; ==============================================================================
-    ;-                          Get Dependencies Versions                           
-    ; ==============================================================================
-    ;- Get PP/Pandoc Version
-    ; ------------------------------------------------------------------------------
-    Env\PPVersion$ =     PPP::GetPPVersion()
-    Env\PandocVersion$ = PPP::GetPandocVersion()
-    ; ===> Check if PP was found: ==================================================
-    If Env\PPVersion$ = #Null$
-      StatusErr | #SERR_PP_Not_Found
-    EndIf
-    ; ===> Check if Pandoc was found: ==============================================
-    If Env\PandocVersion$ = #Null$
-      StatusErr | #SERR_Pandoc_Not_Found
-    EndIf
-    ; ------------------------------------------------------------------------------
-    ;- Get Highlight Version
-    ; ------------------------------------------------------------------------------
-    Env\HighlightVersion$ = GetHighlightVersion()
-    ; ===> Check if Highlight was found: ===========================================
-    If Env\HighlightVersion$ = #Null$
-      StatusErr | #SERR_Highlight_Not_Found
-    EndIf
+    
     ; ------------------------------------------------------------------------------
     ;                   Get Butler's Path from BUTLER_PATH Env Var                  
     ;{------------------------------------------------------------------------------
@@ -228,7 +206,14 @@ Module ini
       Else
         StatusErr | #SERR_Missing_Ini_File
       EndIf 
+      ; ------------------------------------------------------------------------------
+      ;-                         Dependencies: Check Versions                         
+      ; ------------------------------------------------------------------------------
+      ValidateDependenciesVersion()
     EndIf 
+    
+    
+    
     ;}------------------------------------------------------------------------------
     ;                         Establish Project's Root Path                         
     ; ------------------------------------------------------------------------------
@@ -247,7 +232,7 @@ Module ini
     Else
       ProcedureReturn #True  ; operativeStatus = True
     EndIf
- 
+    
   EndProcedure
   ; ******************************************************************************
   ; *                                                                            *
@@ -274,7 +259,7 @@ Module ini
     ;       invalid short opt would disqualify the entire "-" chars sequence!)
     If Not CreateRegularExpression(#RE_OptsShort, "-([a-zA-Z]+)$")
       ConsoleError("Couldn't create RegEx: #RE_OptsShort")         ; FIXME: Convert to Abort()!!!
-      End 1 ; FIXME: Implement some special Error Report Proc for Internal failures!
+      End 1                                                        ; FIXME: Implement some special Error Report Proc for Internal failures!
     EndIf
     
     ; ==============================================================================
@@ -403,9 +388,8 @@ Module ini
   ; ******************************************************************************
   Procedure ReadSettingsFile()
     ConsoleError(">>>>>> ini::ReadSettingsFile() >> ENTER") ; DELME Debugging
-   
-    Shared Butler, Proj, Env
-    Shared StatusErr
+    
+    Shared Butler, Proj
     
     If Not OpenPreferences(Butler\Path$ + "butler.ini")
       ; FIXME: Can't open "butler.ini" Error report
@@ -417,6 +401,62 @@ Module ini
     ; ------------------------------------------------------------------------------
     Proj\ButlerVersion$ = ReadPreferenceString("ButlerVersion", #Null$)
     
+    ; ------------------------------------------------------------------------------
+    ;                              Required PP Version                              
+    ; ------------------------------------------------------------------------------
+    Proj\PPVersion$ = ReadPreferenceString("PPVersion", #Null$)
+    
+    ; ------------------------------------------------------------------------------
+    ;                            Required Pandoc Version                            
+    ; ------------------------------------------------------------------------------
+    Proj\PandocVersion$ = ReadPreferenceString("PandocVersion", #Null$)
+    
+    ; ------------------------------------------------------------------------------
+    ;-                          Required Highlight Version                          
+    ; ------------------------------------------------------------------------------
+    ; Highlight version has syntax `MAJ.MIN` (eg: v3.40)
+    Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Null$)
+    
+    ; ------------------------------------------------------------------------------    
+    ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
+    
+  EndProcedure
+  
+  ; ******************************************************************************
+  ; *                       Validate Dependencies Version                        *
+  ; ******************************************************************************
+  Procedure ValidateDependenciesVersion()
+    Shared Butler, Proj, Env
+    Shared StatusErr
+    
+    ; ==============================================================================
+    ;-                          Get Dependencies Versions                           
+    ;{==============================================================================
+    ;- Get PP/Pandoc Version
+    ; ------------------------------------------------------------------------------
+    Env\PPVersion$ =     PPP::GetPPVersion()
+    Env\PandocVersion$ = PPP::GetPandocVersion()
+    ; ===> Check if PP was found: ==================================================
+    If Env\PPVersion$ = #Null$
+      StatusErr | #SERR_PP_Not_Found
+    EndIf
+    ; ===> Check if Pandoc was found: ==============================================
+    If Env\PandocVersion$ = #Null$
+      StatusErr | #SERR_Pandoc_Not_Found
+    EndIf
+    ; ------------------------------------------------------------------------------
+    ;- Get Highlight Version
+    ; ------------------------------------------------------------------------------
+    Env\HighlightVersion$ = GetHighlightVersion()
+    ; ===> Check if Highlight was found: ===========================================
+    If Env\HighlightVersion$ = #Null$
+      StatusErr | #SERR_Highlight_Not_Found
+    EndIf
+    ;}==============================================================================
+    ;-                         Check Dependencies Versions                          
+    ; ==============================================================================
+    ; Check Butler Version (strict)
+    ; ------------------------------------------------------------------------------
     If Proj\ButlerVersion$ = #Null$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Butler_Version
@@ -431,10 +471,8 @@ Module ini
       ConsoleError("!!! ButlerVersion$ == Butler\Version$ !!!")     ; DELME Debugging
     EndIf
     ; ------------------------------------------------------------------------------
-    ;                              Required PP Version                              
+    ; Check PP Version (strict)
     ; ------------------------------------------------------------------------------
-    Proj\PPVersion$ = ReadPreferenceString("PPVersion", #Null$)
-    
     If Proj\PPVersion$ = #Null$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_PP_Version
@@ -450,10 +488,8 @@ Module ini
       EndIf
     EndIf
     ; ------------------------------------------------------------------------------
-    ;                            Required Pandoc Version                            
+    ; Check Pandoc Version (strict)
     ; ------------------------------------------------------------------------------
-    Proj\PandocVersion$ = ReadPreferenceString("PandocVersion", #Null$)
-    
     If Proj\PandocVersion$ = #Null$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Pandoc_Version
@@ -469,11 +505,8 @@ Module ini
       EndIf
     EndIf
     ; ------------------------------------------------------------------------------
-    ;-                          Required Highlight Version                          
+    ; Check Highlight Version (min ver constraint)
     ; ------------------------------------------------------------------------------
-    ; Highlight version has syntax `MAJ.MIN` (eg: v3.40)
-    Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Null$)
-    
     If Proj\HighlightVersion$ = #Null$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Highlight_Version
@@ -515,6 +548,7 @@ Module ini
       ; ------------------------------------------------------------------------------
       ConsoleError("~> Highlight Found MAJ = "+ Str(HLFound_MAJ) +" | MIN = "+ Str(HLFound_MIN)) ; DELME HL-Ver Debugging
       ConsoleError("~> Highlight Req.  MAJ = "+ Str(HLReq_MAJ)   +" | MIN = "+ Str(HLReq_MIN))   ; DELME HL-Ver Debugging
+      
       ; ------------------------------------------------------------------------------
       FreeRegularExpression(0)
       
@@ -529,10 +563,10 @@ Module ini
         EndIf
       EndIf
     EndIf   
-    ; ------------------------------------------------------------------------------    
-    ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
-        
+    
+    
   EndProcedure
+  
   ; ******************************************************************************
   ; *                           Get Highlight Version                            *
   ; ******************************************************************************

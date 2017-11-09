@@ -2,6 +2,11 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.12` (2017/11/09)
+    
+      - **CODE REORGANIZATION** `ini::` module
+          - New `ini::ValidateDependenciesVersion()` procedure: all dependencies version checks where moved from `ini::ReadSettingsFile()` to here.
+
   - `v0.1.11` (2017/11/08)
     
       - **CODE OPTIMIZATIONS** `ini::` module
