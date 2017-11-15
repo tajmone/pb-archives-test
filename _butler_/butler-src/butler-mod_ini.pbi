@@ -291,7 +291,7 @@ Module ini
       Data.s "--verbose",   "V" ; - Verbosity ON
       Data.w                        #opt_Verbose
       
-      Data.s #Null$ ; <= Signal End of Data!
+      Data.s #Empty$ ; <= Signal End of Data!
       
     EndDataSection   ; <<<<<<<<<<<<<<<<<< Opts Strings <<<<<<<<<<<<<<<<<<
     
@@ -302,7 +302,7 @@ Module ini
     Restore OptsData
     While #True
       Read.s OptsLongKey$
-      If OptsLongKey$ = #Null$ : Break : EndIf
+      If OptsLongKey$ = #Empty$ : Break : EndIf
       Read.s OptsShortKey$
       Read.w OptsFlags
       ; Long Options Map (every option has a long representation)
@@ -399,23 +399,23 @@ Module ini
     ; ------------------------------------------------------------------------------
     ;                            Required Butler Version                            
     ; ------------------------------------------------------------------------------
-    Proj\ButlerVersion$ = ReadPreferenceString("ButlerVersion", #Null$)
+    Proj\ButlerVersion$ = ReadPreferenceString("ButlerVersion", #Empty$)
     
     ; ------------------------------------------------------------------------------
     ;                              Required PP Version                              
     ; ------------------------------------------------------------------------------
-    Proj\PPVersion$ = ReadPreferenceString("PPVersion", #Null$)
+    Proj\PPVersion$ = ReadPreferenceString("PPVersion", #Empty$)
     
     ; ------------------------------------------------------------------------------
     ;                            Required Pandoc Version                            
     ; ------------------------------------------------------------------------------
-    Proj\PandocVersion$ = ReadPreferenceString("PandocVersion", #Null$)
+    Proj\PandocVersion$ = ReadPreferenceString("PandocVersion", #Empty$)
     
     ; ------------------------------------------------------------------------------
     ;-                          Required Highlight Version                          
     ; ------------------------------------------------------------------------------
     ; Highlight version has syntax `MAJ.MIN` (eg: v3.40)
-    Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Null$)
+    Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Empty$)
     
     ; ------------------------------------------------------------------------------    
     ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
@@ -428,6 +428,30 @@ Module ini
   Procedure ValidateDependenciesVersion()
     Shared Butler, Proj, Env
     Shared StatusErr
+    ; TODO: Not all deps will be mandatory in the final version of Butler.
+    ;       Some external tools will be optionally supported. The only mandatory
+    ;       tool is Pandoc. Even PP is not strictly required, but to make PP optional
+    ;       I need to change the code that invokes PP/pandoc to behave differently if
+    ;       PP were to be optional (for now I'll leave PP as mandatory).
+    ;       In the final version of Butler, all these external tools will be optional:
+    ;       -- Highlight
+    ;       -- GraphViz
+    ;       -- Asymptote (for asy images)
+    ;       -- R (for Rplot)
+    ;
+    ;       Right now, I could implment Highlight as an optional dependencies.
+    ;       But I need to change the code so that a #SERR_ is only set if the user
+    ;       specified a required version.
+    ;       Currently, if any dep is not found in the sys env, a #SERR_ is set (eg:
+    ;       #SERR_Highlight_Not_Found).
+    ;       
+    ;       NOTE: ditaa and PlantUML are embedded in PP, but require Java to be installed
+    ;       so maybe I need butler to check if the right version of Java is present?
+    ;       Should I always check for Java version, or should I add a .ini preference
+    ;       to specify that the project uses diita/PlantUML?
+    ;
+    ;       Or I could just add Java and R (and Python?) as optional dependencies.
+      
     
     ; ==============================================================================
     ;-                          Get Dependencies Versions                           
@@ -437,11 +461,11 @@ Module ini
     Env\PPVersion$ =     PPP::GetPPVersion()
     Env\PandocVersion$ = PPP::GetPandocVersion()
     ; ===> Check if PP was found: ==================================================
-    If Env\PPVersion$ = #Null$
+    If Env\PPVersion$ = #Empty$
       StatusErr | #SERR_PP_Not_Found
     EndIf
     ; ===> Check if Pandoc was found: ==============================================
-    If Env\PandocVersion$ = #Null$
+    If Env\PandocVersion$ = #Empty$
       StatusErr | #SERR_Pandoc_Not_Found
     EndIf
     ; ------------------------------------------------------------------------------
@@ -449,7 +473,7 @@ Module ini
     ; ------------------------------------------------------------------------------
     Env\HighlightVersion$ = GetHighlightVersion()
     ; ===> Check if Highlight was found: ===========================================
-    If Env\HighlightVersion$ = #Null$
+    If Env\HighlightVersion$ = #Empty$
       StatusErr | #SERR_Highlight_Not_Found
     EndIf
     ;}==============================================================================
@@ -457,7 +481,7 @@ Module ini
     ; ==============================================================================
     ; Check Butler Version (strict)
     ; ------------------------------------------------------------------------------
-    If Proj\ButlerVersion$ = #Null$
+    If Proj\ButlerVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Butler_Version
       ConsoleError("!!! ButlerVersion$ not set in butler.ini !!!") ; DELME Debugging
@@ -473,7 +497,7 @@ Module ini
     ; ------------------------------------------------------------------------------
     ; Check PP Version (strict)
     ; ------------------------------------------------------------------------------
-    If Proj\PPVersion$ = #Null$
+    If Proj\PPVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_PP_Version
       ConsoleError("!!! PPVersion$ not set in butler.ini !!!") ; DELME Debugging
@@ -490,7 +514,7 @@ Module ini
     ; ------------------------------------------------------------------------------
     ; Check Pandoc Version (strict)
     ; ------------------------------------------------------------------------------
-    If Proj\PandocVersion$ = #Null$
+    If Proj\PandocVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Pandoc_Version
       ConsoleError("!!! PandocVersion$ not set in butler.ini !!!") ; DELME Debugging
@@ -507,7 +531,7 @@ Module ini
     ; ------------------------------------------------------------------------------
     ; Check Highlight Version (min ver constraint)
     ; ------------------------------------------------------------------------------
-    If Proj\HighlightVersion$ = #Null$
+    If Proj\HighlightVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Highlight_Version
       ConsoleError("!!! HighlightVersion$ not set in butler.ini !!!") ; DELME Debugging
