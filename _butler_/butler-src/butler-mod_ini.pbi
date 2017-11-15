@@ -432,7 +432,12 @@ Module ini
     ;       Some external tools will be optionally supported. The only mandatory
     ;       tool is Pandoc. Even PP is not strictly required, but to make PP optional
     ;       I need to change the code that invokes PP/pandoc to behave differently if
-    ;       PP were to be optional (for now I'll leave PP as mandatory).
+    ;       PP were to be optional (for now I'll leave PP as mandatory). Also, if
+    ;       PP became optional, all other deps will become meaningless since they could
+    ;       not interface with Pandoc --- but I still think that some people might
+    ;       want to use Butler with pandoc only, for simpler documentation projects,
+    ;       especially if pandoc's syntax highlighter is enough for them.
+    ;
     ;       In the final version of Butler, all these external tools will be optional:
     ;       -- Highlight
     ;       -- GraphViz
@@ -456,6 +461,13 @@ Module ini
     ; ==============================================================================
     ;-                          Get Dependencies Versions                           
     ;{==============================================================================
+    ; TODO: Change this part:
+    ; -- use new deps::GetAppVersion(app$, params$)
+    ; -- create a loop that reads from a DataSection app$ and params$
+    ; -- don't set any status errors (#SERR_) at this point, but let the version
+    ;    checks part handle it.
+    
+    ; ------------------------------------------------------------------------------
     ;- Get PP/Pandoc Version
     ; ------------------------------------------------------------------------------
     Env\PPVersion$ =     PPP::GetPPVersion()
@@ -479,6 +491,35 @@ Module ini
     ;}==============================================================================
     ;-                         Check Dependencies Versions                          
     ; ==============================================================================
+    ; TODO: This must become a loop with DataSection containing:
+    ;       -- App Name Str (for Status/Error report)
+    ;       -- Req.Ver Str + Found Ver Str
+    ;       -- MANDATORY Bool indicating if dep is optional or not
+    ;       -- STRICT Bool indicating strict string comparison instead of deps::CompareVersion()
+    ;       -- #SERR_[dep]_Not_Found flags to set if Status Error is due
+    ;       -- #SERR_Unspecified_[dep]_Version flags to set if Status Error is due
+    ;       -- #SERR_Mismatched_[dep]_Version flags to set if Status Error is due
+    ;       The loops should then check:
+    ;       1) If the user specified a Req.Ver Str:
+    ;          YES -- then check Found Ver Str:
+    ;                 -- If Found Ver Str is #Empty, set a `#SERR_[dep]_Not_Found` flag
+    ;                 -- If not empty, carry out version checks:
+    ;                    -- If STRICT, just compare strings
+    ;                    -- else, call deps::CompareVersion(Found Ver$, Req.Ver$)
+    ;                    -- if version mismatches, set `#SERR_Mismatched_[dep]_Version`
+    ;          NOT -- If dep has MANDATORY:
+    ;                 -- set `#SERR_Unspecified_[dep]_Version`
+    ;                 -- If Found Ver Str is #Empty, set a `#SERR_[dep]_Not_Found` flag
+    ;       2) Add STATUS report entry (if Verobse/Status) --- right now, just
+    ;          print it on STDERR, until I implement the STATUS option (which shall
+    ;          be implicitly set by VERBOSITY)
+    ;
+    ; NOTE: In the future Status Error report entries could be added here, instead
+    ;       of of main body code
+    ;
+    ; NOTE: Mandatory deps should always raise a `#SERR_[dep]_Not_Found` when not
+    ;       present in the system
+    ; ------------------------------------------------------------------------------
     ; Check Butler Version (strict)
     ; ------------------------------------------------------------------------------
     If Proj\ButlerVersion$ = #Empty$
