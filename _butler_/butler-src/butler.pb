@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 9 ; v0.1.9 ( 2017/11/07 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 12 ; v0.1.12 ( 2017/11/09 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -137,6 +137,9 @@ If Not ( ini::UserOpts & ini::#opt_opStatusReq )
     msg::PrintHelp()
     End
   EndIf
+  
+  ConsoleError("~~~~~ opStatusReq = 0 ; But no meaningful option selected ~~~~~")
+  End
   
 Else
   ; ==============================================================================

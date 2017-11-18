@@ -40,8 +40,8 @@ USAGE:
 !comment(   fa   )
 ``````````````````````````````````````````````````````````````````````````````
 DECRIPTION: Emits a Font-Awesome inline icon. The passed icon name must be
-			a valid Font-Awesome icon name (withouth the leading "fa-"), and
-			it must be implemented in the CSS stylesheet.
+            a valid Font-Awesome icon name (withouth the leading "fa-"), and
+            it must be implemented in the CSS stylesheet.
 USAGE:
 
         !fa(ICON NAME)

@@ -25,7 +25,7 @@ NOTES:
    It uses Unix-style path separators ("/") and always ends with a "/" (unless
    it's empty because we're in root already). Eg:
 
-   		../../../
+        ../../../
 
 ------------------------------------------------------------------------------
 (c) Tristano Ajmone 2017, MIT License.
@@ -37,8 +37,8 @@ NOTES:
 !comment(   PATH2MACROS   )
 ``````````````````````````````````````````````````````````````````````````````
 DECRIPTION: Relative path to the PP macros folder. Mainly used in this module
-			for populating !ListMacrosFilesLinks; but might also be useful to
-			maintainer of project documentation.
+            for populating !ListMacrosFilesLinks; but might also be useful to
+            maintainer of project documentation.
 
 ------------------------------------------------------------------------------
 (c) Tristano Ajmone 2017, MIT License.
@@ -53,7 +53,7 @@ DECRIPTION: Relative path to the PP macros folder. Mainly used in this module
 !comment(   importAdd   )
 ``````````````````````````````````````````````````````````````````````````````
 DECRIPTION: Imports a macros-definition file and adds it to the entries of
-			!ListMacrosFiles and !ListMacrosFilesLinks (Markdown lists).
+            !ListMacrosFiles and !ListMacrosFilesLinks (Markdown lists).
 
 ------------------------------------------------------------------------------
 (c) Tristano Ajmone 2017, MIT License.

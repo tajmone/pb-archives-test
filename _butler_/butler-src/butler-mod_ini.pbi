@@ -19,9 +19,6 @@
 
 ; This module manages Butler's project settings from/to file and memory.
 
-
-; TODO: Add Check and Var for Win Bash (ie: if currently in Bash or CMD)
-
 ; TODO: Move Here checking if CurrFolder is within Butler Path!!
 
 ; TODO: IMPLEMENT Checking if "butler.ini" file exists (in Butler's Path):
@@ -129,6 +126,7 @@ EndDeclareModule
 
 Module ini
   IncludeFile "butler-mod_ini.pbhgen.pbi" ; <= PBHGEN-X
+  
   ; ==============================================================================
   ;                         PRIVATE PROCEDURES DECLARATION                        
   ; ==============================================================================
@@ -145,26 +143,19 @@ Module ini
   ; ******************************************************************************
   ; Initialize Butler and return its operativeStatus (true/false).
   Procedure Init()    
-    ConsoleError("******************************************************************************"); DELME Debugging
-    ConsoleError("ini::Init() >> ENTER")                                                          ; DELME Debugging
-    
     
     Shared Butler, Env
     Shared Proj
     Shared UserOpts, StatusErr
-    
     ; ------------------------------------------------------------------------------
     ;-                           Windows: Is Bash/Shell?                            
     ; ------------------------------------------------------------------------------
     ; If OS is Win, make sure Butler is invoked from Bash (Git Bash).
     ; This is done by checking for the presence of the SHELL env var.     
-    ;------------------------------------------------------------------------------
+    ; ------------------------------------------------------------------------------
     CompilerIf #PB_Compiler_OS = #PB_OS_Windows
       If GetEnvironmentVariable("SHELL") = #Null$
         StatusErr | #SERR_Win_NotShell
-        PrintN("$$$ Win Shell = FALSE $$$") ; DELME Debug Win Shell
-      Else
-        PrintN("$$$ Win Shell = TRUE $$$")  ; DELME Debug Win Shell
       EndIf
     CompilerEndIf
     ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -174,44 +165,10 @@ Module ini
     If numParams
       ParseCLIArgs(numParams)
     Else
-      ; ==============================================================================
-      ;                           NO PARAMETERS WERE PASSED                           
-      ; ==============================================================================
+      ; Butler invoked without any arguments...
       UserOpts | #opt_NoOpts
-      ;       ConsoleError("ini::Init() > No params found...") ; DELME Debugging NO ARGS
     EndIf
-    ; ------------------------------------------------------------------------------
-    ;-                            Get PP/Pandoc Version                             
-    ; ------------------------------------------------------------------------------
-    ; TODO: Implement PP/Pandoc not found Error!
-    Env\PPVersion$ = PPP::GetPPVersion()
-    Env\PandocVersion$ = PPP::GetPandocVersion()
-    ; TODO: Implement PP/Pandoc Not Found Err Flag!
-    ; ===> Check if PP was found: ==================================================
-    If Env\PPVersion$ = #Null$
-      PrintN("$$$ PP NOT FOUND!! $$$") ; DELME Debug PPVersion$
-      StatusErr | #SERR_PP_Not_Found
-    Else
-      PrintN("$$$ PP Version found: '"+ Env\PPVersion$ +"' $$$") ; DELME Debug PPVersion$
-    EndIf
-    ; ===> Check if Pandoc was found: ==============================================
-    If Env\PandocVersion$ = #Null$
-      PrintN("$$$ Pandoc NOT FOUND!! $$$") ; DELME Debug PPVersion$
-      StatusErr | #SERR_Pandoc_Not_Found
-    Else
-      PrintN("$$$ Pandoc Version found: '"+ Env\PandocVersion$ +"' $$$") ; DELME Debug PandocVersion$
-    EndIf
-    ; ------------------------------------------------------------------------------
-    ;-                             Get Highlight Version                             
-    ; ------------------------------------------------------------------------------
-    Env\HighlightVersion$ = GetHighlightVersion()
-        ; ===> Check if Highlight was found: ==================================================
-    If Env\HighlightVersion$ = #Null$
-      PrintN("$$$ HIGHLIGHT NOT FOUND!! $$$") ; DELME Debug HighlightVersion$
-      StatusErr | #SERR_Highlight_Not_Found
-    Else
-      PrintN("$$$ HighlightVersion$ Version found: '"+ Env\HighlightVersion$ +"' $$$") ; DELME Debug HighlightVersion$
-    EndIf
+    
     ; ------------------------------------------------------------------------------
     ;                   Get Butler's Path from BUTLER_PATH Env Var                  
     ;{------------------------------------------------------------------------------
@@ -242,19 +199,19 @@ Module ini
       PrintN("~ HIGHLIGHT_DATADIR: " + GetEnvironmentVariable("HIGHLIGHT_DATADIR")) ; DBG
       
       ; ------------------------------------------------------------------------------
-      ;                  Check "butler.ini" (Proj. Preferences File)                  
+      ;-                 Check "butler.ini" (Proj. Preferences File)                  
       ; ------------------------------------------------------------------------------
-      ; Check if a "butler.ini" file is present in Butler's folder
-      PrintN("INI FILE > " + Butler\Path$ + "butler.ini") ; DELME
       If FileSize(Butler\Path$ + "butler.ini") > 0
-        PrintN("!!! Butler.ini found !!!") ; DELME
         ReadSettingsFile()
       Else
-        ; TODO: Implement Missing "butler.ini" Error !
         StatusErr | #SERR_Missing_Ini_File
-        PrintN("!!! Butler.ini NOT found !!!") ; DELME
       EndIf 
+      ; ------------------------------------------------------------------------------
+      ;-                         Dependencies: Check Versions                         
+      ; ------------------------------------------------------------------------------
+      ValidateDependenciesVersion()
     EndIf 
+    
     
     
     ;}------------------------------------------------------------------------------
@@ -267,14 +224,6 @@ Module ini
       ; Build path string omitting last folder (ie: "/_butler_/")
       Proj\Root$ + StringField(Butler\Path$, i, FS::#DIR_SEP$) + FS::#DIR_SEP$
     Next
-    ; ------------------------------------------------------------------------------
-    
-    
-    
-    
-    ConsoleError("ini::Init() << LEAVE")
-    ConsoleError("******************************************************************************")
-    
     ; ==============================================================================
     ;-                           Return Operative Status                            
     ; ==============================================================================
@@ -283,7 +232,7 @@ Module ini
     Else
       ProcedureReturn #True  ; operativeStatus = True
     EndIf
-  
+    
   EndProcedure
   ; ******************************************************************************
   ; *                                                                            *
@@ -295,7 +244,6 @@ Module ini
   ; *                        Parse Command Line Arguments                        *
   ; ******************************************************************************
   Procedure ParseCLIArgs(numParams)
-    ConsoleError(">>>>> ini::ParseCLIArgs() >>>>>")
     
     Shared UserOpts
     
@@ -303,63 +251,67 @@ Module ini
       #RE_OptsShort
     EndEnumeration
     
-    If Not CreateRegularExpression(#RE_OptsShort, "-([a-zA-Z]+)$") ; <= RegEx str should contain only valid short-options chars (case sensitive)
+    ;- Create OptsShort RegEx
+    ;  ======================
+    ; NOTE: The OptsShort RegEx must capture all Ascii letters range [a-zA-Z] so
+    ;       that the options parser can pinpoint the bad short opts (ie: if only
+    ;       valid option letters where put in the RegEx, the presence of a single
+    ;       invalid short opt would disqualify the entire "-" chars sequence!)
+    If Not CreateRegularExpression(#RE_OptsShort, "-([a-zA-Z]+)$")
       ConsoleError("Couldn't create RegEx: #RE_OptsShort")         ; FIXME: Convert to Abort()!!!
-      End 1
+      End 1                                                        ; FIXME: Implement some special Error Report Proc for Internal failures!
     EndIf
     
     ; ==============================================================================
-    ;-                                 Options Maps                                 
+    ;-                               CLI Options Maps                               
     ;{==============================================================================
-    ; Opts-Contants and maps for short and long opts; used to create a list of all
-    ; options found... Not
+    ; Map command line options (long and short versions) to UserOpts flags values.
+    ; The Maps are used when iterating through params.
     
-    Enumeration             ; >>>>>>>>>>>>>>>>>> Valid User Opts >>>>>>>>>>>>>>>>>>>
-                            ; === Info Query Options: ==============================
-      #optsmap_Version      ; - Print Butler's version
-      #optsmap_Help         ; - Print Help
-                            ; === Proj Processing Options: =========================
-      #optsmap_BuildFolder  ; - Build current folder.
-      #optsmap_BuildAll     ; - Build whole project.
-      #optsmap_Recursive    ; - Recurse into subfolders.
-      #optsmap_Verbose      ; - Verbosity ON.
-    EndEnumeration          ; <<<<<<<<<<<<<<<<<< Valid User Opts <<<<<<<<<<<<<<<<<<<
+    ; NOTE: Flags are stored in Word type (".w", 2 bytes length on all architectures)
     
-    optsTot = #PB_Compiler_EnumerationValue
+    DataSection      ; >>>>>>>>>>>>>>>>>> Options Maps Data >>>>>>>>>
+      
+      ; The Data of this Section has the following structure for each CLI option:
+      ; [.s] Option:  Long version, Short version
+      ; [.w] Flags:   UserOpts flags which are set by the option
+      OptsData:             
+      ; ======= Info Query Options: ==========================
+      Data.s "--version",   "v" ; - Print Butler's version
+      Data.w                        #opt_Version
+      Data.s "--help",      "h" ; - Print Help
+      Data.w                        #opt_Help
+      ; === Proj Processing Options: =====================
+      Data.s "--build",     "b" ; - Build current folder
+      Data.w                        #opt_BuildFolder | #opt_opStatusReq
+      Data.s "--build-all", "B" ; - Build whole project.
+      Data.w                        #opt_BuildAll | #opt_Recursive | #opt_opStatusReq
+      Data.s "--recursive", "r" ; - Recurse into subfolders
+      Data.w                        #opt_Recursive
+      Data.s "--verbose",   "V" ; - Verbosity ON
+      Data.w                        #opt_Verbose
+      
+      Data.s #Empty$ ; <= Signal End of Data!
+      
+    EndDataSection   ; <<<<<<<<<<<<<<<<<< Opts Strings <<<<<<<<<<<<<<<<<<
     
-    DataSection             ; >>>>>>>>>>>>>>>>>> Long Opts Strings >>>>>>>>>>>>>>>>>
-      LongOptsData:         ; === Info Query Options: ==============================
-      Data.s "--version"    ; Butler's version
-      Data.s "--help"       ; Print Help
-                            ; === Proj Processing Options: =========================
-      Data.s "--build"      ; build folder
-      Data.s "--build-all"  ; build all
-      Data.s "--recursive"  ; recursive
-      Data.s "--verbose"    ; verbose
-    EndDataSection          ; <<<<<<<<<<<<<<<<<< Long Opts Strings <<<<<<<<<<<<<<<<<
-    
-    ; =========================== Create Short Opts Map ============================
-    ; Create the map entry by entry, because some options don't have a short version
-    ; equivalent...
-    NewMap ShortOptsM.a()   ; >>>>>>>>>>>>>>>>>> Short Opts Chars >>>>>>>>>>>>>>>>>>
-    
-    ;                                        === Info Query Options: ===============
-    ShortOptsM("v") = #optsmap_Version     ; Butler's version
-    ShortOptsM("h") = #optsmap_Help        ; Print Help
-                                           ; === Proj Processing Options: ==========
-    ShortOptsM("b") = #optsmap_BuildFolder ; build folder
-    ShortOptsM("B") = #optsmap_BuildAll    ; build all
-    ShortOptsM("r") = #optsmap_Recursive   ; recursive
-    ShortOptsM("V") = #optsmap_Verbose     ; verbose    
-    
-    ; ============================ Build Long Opts Map =============================
-    ; Create the map via a loop, because every option has a long representation...
-    NewMap LongOptsM.a()
-    Restore LongOptsData
-    For i = 1 To optsTot
-      Read.s Key$
-      LongOptsM(Key$) = i-1
-    Next i  
+    ; ============================ Build CLI Opts Maps =============================
+    ; Create the maps via a loop
+    NewMap OptsLongM.a()  ; Map long  opts strs to UserOpts flags
+    NewMap OptsShortM.a() ; Map short opts chrs to UserOpts flags
+    Restore OptsData
+    While #True
+      Read.s OptsLongKey$
+      If OptsLongKey$ = #Empty$ : Break : EndIf
+      Read.s OptsShortKey$
+      Read.w OptsFlags
+      ; Long Options Map (every option has a long representation)
+      OptsLongM(OptsLongKey$) = OptsFlags
+      ; Short Options Map (some option don't have a short representation)
+      If OptsShortKey$
+        OptsShortM(OptsShortKey$) = OptsFlags
+      EndIf
+    Wend 
     
     ;}////// END :: Options Maps ///////////////////////////////////////////////////
     
@@ -369,7 +321,6 @@ Module ini
     ; Iterate through all params and build a list of the encountered options, and a
     ; a list of the encountered unknown params...
     ; ------------------------------------------------------------------------------
-    NewList optsL()     ; <= Temp List to store all opts found.
     NewList optsBadL.s(); <= Temp List to store all unknown opts and params found.
     For param = 1 To numParams
       currParam.s = ProgramParameter()
@@ -377,9 +328,8 @@ Module ini
         ; ------------------------------------------------------------------------------
         ;                              PARAM IS LONG OPTION                             
         ; ------------------------------------------------------------------------------       
-        If FindMapElement(LongOptsM(), LCase(currParam)) ; <= Lower-Case comparison!
-          AddElement(optsL())
-          optsL() = LongOptsM(currParam)
+        If FindMapElement(OptsLongM(), LCase(currParam)) ; <= Lower-Case comparison!
+          UserOpts | OptsLongM(currParam)
         Else
           AddElement(optsBadL())
           optsBadL() = currParam
@@ -399,9 +349,8 @@ Module ini
               
               currOpt$ = Mid(OptsShort$, i, 1)
               ; Check if char maps to a short opt
-              If FindMapElement(ShortOptsM(), currOpt$)
-                AddElement(optsL())
-                optsL() = ShortOptsM(currOpt$)
+              If FindMapElement(OptsShortM(), currOpt$)
+                UserOpts | OptsShortM(currOpt$)
               Else
                 AddElement(optsBadL())
                 optsBadL() = "-" + currOpt$
@@ -417,16 +366,8 @@ Module ini
         AddElement(optsBadL())
         optsBadL() = currParam
       EndIf
-    Next
-    ;}------------------------------------------------------------------------------
-    
-    ; DELME ====== Debug Options List (int values) ======
-    ;     ConsoleError( LSet("", 80, "-") + ~"\nOptions List:" )
-    ;     ForEach optsL()
-    ;       ConsoleError(" - " + Str( optsL() ))
-    ;     Next
-    ;     
-    ; ==============================================================================
+    Next    
+    ;}==============================================================================
     ;                               PARAMS/OPTS ERRORS                              
     ; ==============================================================================
     ; If any malformed/invalid options were found, report and abort all operations..
@@ -440,46 +381,6 @@ Module ini
       End 1
     EndIf
     
-    ; ==============================================================================
-    ;-                            EVALUATE USER OPTIONS                             
-    ; ==============================================================================
-    ; Sift through the list of user options and set Butler Tasks accordingly...
-    ; ------------------------------------------------------------------------------
-    ConsoleError( LSet("", 80, "-") + ~"\nEvaluating Options List:" ) ; DELME
-    ForEach optsL()
-      Select optsL()
-          ; FIXME: EVALUATE USER OPTIONS  -- Remove Debug output!
-          ; ------------------------------------------------------------------------------
-          ;                               Info Query Options                              
-          ; ------------------------------------------------------------------------------
-        Case #optsmap_Version                          ; ====> Print Butler's version <==============
-          UserOpts | #opt_Version
-          ConsoleError(" -- Print Butler's Version") ; DBG Eval User Opts
-        Case #optsmap_Help                           ; ====> Print Help <==============
-          UserOpts | #opt_Help
-          ConsoleError(" -- Print Help") ; DBG Eval User Opts
-          
-          ; ------------------------------------------------------------------------------
-          ;                            Proj Processing Options                            
-          ; ------------------------------------------------------------------------------
-        Case #optsmap_BuildFolder             ; ====> Build current folder <==============
-          UserOpts | #opt_opStatusReq         ; This opt requires operativeStatus
-          UserOpts | #opt_BuildFolder
-          ConsoleError(" -- Build current folder"); DBG Eval User Opts
-        Case #optsmap_BuildAll                    ; ====> Build whole project  <==============
-          UserOpts | #opt_opStatusReq             ; This opt requires operativeStatus
-          UserOpts | #opt_BuildAll
-          UserOpts | #opt_Recursive
-          ConsoleError(" -- Build whole project"); DBG Eval User Opts
-        Case #optsmap_Recursive                  ; ====> Recursive Mode       <==============
-          UserOpts | #opt_Recursive
-          ConsoleError(" -- Recursive Mode")  ; DBG Eval User Opts
-        Case #optsmap_Verbose                 ; ====> Verbosity Mode       <==============
-          UserOpts | #opt_Verbose
-          ConsoleError(" -- Verbosity Mode")  ; DBG Eval User Opts
-      EndSelect
-    Next
-    
     ConsoleError("<<<<< ini::ParseCLIArgs() <<<<<")
   EndProcedure
   ; ******************************************************************************
@@ -487,9 +388,8 @@ Module ini
   ; ******************************************************************************
   Procedure ReadSettingsFile()
     ConsoleError(">>>>>> ini::ReadSettingsFile() >> ENTER") ; DELME Debugging
-   
-    Shared Butler, Proj, Env
-    Shared StatusErr
+    
+    Shared Butler, Proj
     
     If Not OpenPreferences(Butler\Path$ + "butler.ini")
       ; FIXME: Can't open "butler.ini" Error report
@@ -499,9 +399,130 @@ Module ini
     ; ------------------------------------------------------------------------------
     ;                            Required Butler Version                            
     ; ------------------------------------------------------------------------------
-    Proj\ButlerVersion$ = ReadPreferenceString("ButlerVersion", #Null$)
+    Proj\ButlerVersion$ = ReadPreferenceString("ButlerVersion", #Empty$)
     
-    If Proj\ButlerVersion$ = #Null$
+    ; ------------------------------------------------------------------------------
+    ;                              Required PP Version                              
+    ; ------------------------------------------------------------------------------
+    Proj\PPVersion$ = ReadPreferenceString("PPVersion", #Empty$)
+    
+    ; ------------------------------------------------------------------------------
+    ;                            Required Pandoc Version                            
+    ; ------------------------------------------------------------------------------
+    Proj\PandocVersion$ = ReadPreferenceString("PandocVersion", #Empty$)
+    
+    ; ------------------------------------------------------------------------------
+    ;-                          Required Highlight Version                          
+    ; ------------------------------------------------------------------------------
+    ; Highlight version has syntax `MAJ.MIN` (eg: v3.40)
+    Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Empty$)
+    
+    ; ------------------------------------------------------------------------------    
+    ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
+    
+  EndProcedure
+  
+  ; ******************************************************************************
+  ; *                       Validate Dependencies Version                        *
+  ; ******************************************************************************
+  Procedure ValidateDependenciesVersion()
+    Shared Butler, Proj, Env
+    Shared StatusErr
+    ; TODO: Not all deps will be mandatory in the final version of Butler.
+    ;       Some external tools will be optionally supported. The only mandatory
+    ;       tool is Pandoc. Even PP is not strictly required, but to make PP optional
+    ;       I need to change the code that invokes PP/pandoc to behave differently if
+    ;       PP were to be optional (for now I'll leave PP as mandatory). Also, if
+    ;       PP became optional, all other deps will become meaningless since they could
+    ;       not interface with Pandoc --- but I still think that some people might
+    ;       want to use Butler with pandoc only, for simpler documentation projects,
+    ;       especially if pandoc's syntax highlighter is enough for them.
+    ;
+    ;       In the final version of Butler, all these external tools will be optional:
+    ;       -- Highlight
+    ;       -- GraphViz
+    ;       -- Asymptote (for asy images)
+    ;       -- R (for Rplot)
+    ;
+    ;       Right now, I could implment Highlight as an optional dependencies.
+    ;       But I need to change the code so that a #SERR_ is only set if the user
+    ;       specified a required version.
+    ;       Currently, if any dep is not found in the sys env, a #SERR_ is set (eg:
+    ;       #SERR_Highlight_Not_Found).
+    ;       
+    ;       NOTE: ditaa and PlantUML are embedded in PP, but require Java to be installed
+    ;       so maybe I need butler to check if the right version of Java is present?
+    ;       Should I always check for Java version, or should I add a .ini preference
+    ;       to specify that the project uses diita/PlantUML?
+    ;
+    ;       Or I could just add Java and R (and Python?) as optional dependencies.
+      
+    
+    ; ==============================================================================
+    ;-                          Get Dependencies Versions                           
+    ;{==============================================================================
+    ; TODO: Change this part:
+    ; -- use new deps::GetAppVersion(app$, params$)
+    ; -- create a loop that reads from a DataSection app$ and params$
+    ; -- don't set any status errors (#SERR_) at this point, but let the version
+    ;    checks part handle it.
+    
+    ; ------------------------------------------------------------------------------
+    ;- Get PP/Pandoc Version
+    ; ------------------------------------------------------------------------------
+    Env\PPVersion$ =     PPP::GetPPVersion()
+    Env\PandocVersion$ = PPP::GetPandocVersion()
+    ; ===> Check if PP was found: ==================================================
+    If Env\PPVersion$ = #Empty$
+      StatusErr | #SERR_PP_Not_Found
+    EndIf
+    ; ===> Check if Pandoc was found: ==============================================
+    If Env\PandocVersion$ = #Empty$
+      StatusErr | #SERR_Pandoc_Not_Found
+    EndIf
+    ; ------------------------------------------------------------------------------
+    ;- Get Highlight Version
+    ; ------------------------------------------------------------------------------
+    Env\HighlightVersion$ = GetHighlightVersion()
+    ; ===> Check if Highlight was found: ===========================================
+    If Env\HighlightVersion$ = #Empty$
+      StatusErr | #SERR_Highlight_Not_Found
+    EndIf
+    ;}==============================================================================
+    ;-                         Check Dependencies Versions                          
+    ; ==============================================================================
+    ; TODO: This must become a loop with DataSection containing:
+    ;       -- App Name Str (for Status/Error report)
+    ;       -- Req.Ver Str + Found Ver Str
+    ;       -- MANDATORY Bool indicating if dep is optional or not
+    ;       -- STRICT Bool indicating strict string comparison instead of deps::CompareVersion()
+    ;       -- #SERR_[dep]_Not_Found flags to set if Status Error is due
+    ;       -- #SERR_Unspecified_[dep]_Version flags to set if Status Error is due
+    ;       -- #SERR_Mismatched_[dep]_Version flags to set if Status Error is due
+    ;       The loops should then check:
+    ;       1) If the user specified a Req.Ver Str:
+    ;          YES -- then check Found Ver Str:
+    ;                 -- If Found Ver Str is #Empty, set a `#SERR_[dep]_Not_Found` flag
+    ;                 -- If not empty, carry out version checks:
+    ;                    -- If STRICT, just compare strings
+    ;                    -- else, call deps::CompareVersion(Found Ver$, Req.Ver$)
+    ;                    -- if version mismatches, set `#SERR_Mismatched_[dep]_Version`
+    ;          NOT -- If dep has MANDATORY:
+    ;                 -- set `#SERR_Unspecified_[dep]_Version`
+    ;                 -- If Found Ver Str is #Empty, set a `#SERR_[dep]_Not_Found` flag
+    ;       2) Add STATUS report entry (if Verobse/Status) --- right now, just
+    ;          print it on STDERR, until I implement the STATUS option (which shall
+    ;          be implicitly set by VERBOSITY)
+    ;
+    ; NOTE: In the future Status Error report entries could be added here, instead
+    ;       of of main body code
+    ;
+    ; NOTE: Mandatory deps should always raise a `#SERR_[dep]_Not_Found` when not
+    ;       present in the system
+    ; ------------------------------------------------------------------------------
+    ; Check Butler Version (strict)
+    ; ------------------------------------------------------------------------------
+    If Proj\ButlerVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Butler_Version
       ConsoleError("!!! ButlerVersion$ not set in butler.ini !!!") ; DELME Debugging
@@ -515,11 +536,9 @@ Module ini
       ConsoleError("!!! ButlerVersion$ == Butler\Version$ !!!")     ; DELME Debugging
     EndIf
     ; ------------------------------------------------------------------------------
-    ;                              Required PP Version                              
+    ; Check PP Version (strict)
     ; ------------------------------------------------------------------------------
-    Proj\PPVersion$ = ReadPreferenceString("PPVersion", #Null$)
-    
-    If Proj\PPVersion$ = #Null$
+    If Proj\PPVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_PP_Version
       ConsoleError("!!! PPVersion$ not set in butler.ini !!!") ; DELME Debugging
@@ -534,11 +553,9 @@ Module ini
       EndIf
     EndIf
     ; ------------------------------------------------------------------------------
-    ;                            Required Pandoc Version                            
+    ; Check Pandoc Version (strict)
     ; ------------------------------------------------------------------------------
-    Proj\PandocVersion$ = ReadPreferenceString("PandocVersion", #Null$)
-    
-    If Proj\PandocVersion$ = #Null$
+    If Proj\PandocVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Pandoc_Version
       ConsoleError("!!! PandocVersion$ not set in butler.ini !!!") ; DELME Debugging
@@ -553,12 +570,9 @@ Module ini
       EndIf
     EndIf
     ; ------------------------------------------------------------------------------
-    ;-                          Required Highlight Version                          
+    ; Check Highlight Version (min ver constraint)
     ; ------------------------------------------------------------------------------
-    ; Highlight version has syntax `MAJ.MIN` (eg: v3.40)
-    Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Null$)
-    
-    If Proj\HighlightVersion$ = #Null$
+    If Proj\HighlightVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Highlight_Version
       ConsoleError("!!! HighlightVersion$ not set in butler.ini !!!") ; DELME Debugging
@@ -599,6 +613,7 @@ Module ini
       ; ------------------------------------------------------------------------------
       ConsoleError("~> Highlight Found MAJ = "+ Str(HLFound_MAJ) +" | MIN = "+ Str(HLFound_MIN)) ; DELME HL-Ver Debugging
       ConsoleError("~> Highlight Req.  MAJ = "+ Str(HLReq_MAJ)   +" | MIN = "+ Str(HLReq_MIN))   ; DELME HL-Ver Debugging
+      
       ; ------------------------------------------------------------------------------
       FreeRegularExpression(0)
       
@@ -613,10 +628,10 @@ Module ini
         EndIf
       EndIf
     EndIf   
-    ; ------------------------------------------------------------------------------    
-    ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
-        
+    
+    
   EndProcedure
+  
   ; ******************************************************************************
   ; *                           Get Highlight Version                            *
   ; ******************************************************************************

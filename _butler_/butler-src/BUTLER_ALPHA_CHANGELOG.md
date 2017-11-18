@@ -2,6 +2,22 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.12` (2017/11/09)
+    
+      - **CODE REORGANIZATION** `ini::` module
+          - New `ini::ValidateDependenciesVersion()` procedure: all dependencies version checks where moved from `ini::ReadSettingsFile()` to here.
+
+  - `v0.1.11` (2017/11/08)
+    
+      - **CODE OPTIMIZATIONS** `ini::` module
+          - now uses a single DataStructure to map CLI options (long and short) directly to `ini::UserOpts` flags.
+          - Parameters iteration no longer creates a list for deferred options evaluation, but sets the appropriate flags in place.
+          - The `EVALUATE USER OPTIONS` part is dropped (it used `Select`/`Case` on a per-option basis). Options evaluation is now done during params iteration.
+
+  - `v0.1.10` (2017/11/08)
+    
+      - **CODE OPTIMIZATION** — `ini::` module now uses a single loop to create both options maps (long and short opts) using a common DataSection.
+
   - `v0.1.9` (2017/11/07)
     
       - PP is invoked with the `-D ROOT=<path to root>` option, which assignes to the `ROOT` symbol the relative path back to the project’s root — just like the `ROOT` variable is already passed to pandoc in order for the template to locate assets files.
