@@ -2,6 +2,11 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.13` (2017/11/24)
+    
+      - **IGNORE “`.git`” FOLDER** `build::` module
+          - Now `build::FolderIsBuildEligible()` will ignore “`.git`” folders.
+
   - `v0.1.12` (2017/11/09)
     
       - **CODE REORGANIZATION** `ini::` module
