@@ -4,7 +4,17 @@ Notes about the current TODOs.
 
 - Check occurences of `#Null$` and see if should be changed to `#Empty$`!
 
-# Butler INI Module
+1. Fix Messages System
+2. Implement new Dependencies Module (with constraints)
+
+## Messages System
+
+Redesign Butler's messages system:
+
+- [ ] __VERBOSITY__ --- Currently, debug messages are always printed to `STDER`; implement printing them to `STDOUT` only if `--verbose` opt is true.
+- [x] __STATUS ERROR__ -- Drop the current `msg::ListStatusErrors()` procedure and subsitute it with `msg::EnlistStatusError(error$)` that will create a numbered list of status errors, to be printed via  `msg::StatusErrorReport()` after `ini::init()` has finished its job (only if `opStatuRequired` or if `--status` opt was passed).
+
+## Dependencies Version Satisfaction
 
   - `ini::ReadSettingsFile()`:
     

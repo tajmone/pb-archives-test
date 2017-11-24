@@ -14,6 +14,8 @@ Declare ParseCLIArgs(numParams)
 Declare ReadSettingsFile()
 Declare ValidateDependenciesVersion()
 Declare.s GetHighlightVersion()
+Declare EnlistStatusError(error$)
+Declare StatusErrorReport()
 CompilerEndIf
 CompilerIf #PB_Compiler_Module = ""
 CompilerEndIf
