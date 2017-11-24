@@ -28,6 +28,9 @@
 DeclareModule msg
   #EOL$ = txt::#EOL$ ; <= Set OS-appropriate #EOL$, as defined in module txt
   
+  ; DELME: cntStr(num) Macro? Any other procedure might need it?
+  ;        It was used by ListStatusErrors(), which is now deleted!
+  
   ; cntStr(number) Macro => Used to format ordered list strings:
   ; "  1. "
   ; "  2. "
@@ -36,8 +39,7 @@ DeclareModule msg
   EndMacro
   
   Declare   PrintTasksList()
-  Declare.s ButlerStatus()
-  Declare.s ListStatusErrors()
+  Declare.s ButlerStatus() ; <- Currently doesn't do anything useful!  
   Declare   PrintHelp()
   Declare   Abort(errMsg.s)
 EndDeclareModule
@@ -97,109 +99,6 @@ Module msg
     ProcedureReturn OUT$
   EndProcedure
   
-  ; ******************************************************************************
-  ; *                             List Status Errors                             *
-  ; ******************************************************************************
-  Procedure.s ListStatusErrors()
-    
-    cnt = 0
-    ; ------------------------------------------------------------------------------
-    ;                            Windows: Is Bash/Shell?                            
-    ; ------------------------------------------------------------------------------
-    CompilerIf #PB_Compiler_OS = #PB_OS_Windows
-      If ini::StatusErr & ini::#SERR_Win_NotShell
-        cnt +1
-        tmp$ + cntStr(cnt) + "Butler not invoked from Bash/Shell." + #EOL$
-      EndIf
-    CompilerEndIf
-    ; ------------------------------------------------------------------------------
-    ;                              Missing Dependencies                             
-    ; ------------------------------------------------------------------------------
-    ; ~~~~~ PP Not found ~~~~~
-    If ini::StatusErr & ini::#SERR_PP_Not_Found
-      cnt +1
-      tmp$ + cntStr(cnt) + "PP Not found on system." + #EOL$
-    EndIf  
-    ; ~~~~~ Pandoc Not found ~~~~~
-    If ini::StatusErr & ini::#SERR_Pandoc_Not_Found
-      cnt +1
-      tmp$ + cntStr(cnt) + "Pandoc Not found on system." + #EOL$
-    EndIf  
-    ; ~~~~~ Highlight Not found ~~~~~
-    If ini::StatusErr & ini::#SERR_Highlight_Not_Found
-      cnt +1
-      tmp$ + cntStr(cnt) + "Highlight Not found on system." + #EOL$
-    EndIf  
-    ; ------------------------------------------------------------------------------
-    ;                                BUTLER_PATH Set?                               
-    ; ------------------------------------------------------------------------------
-    If ini::StatusErr & ini::#SERR_Missing_BUTLER_PATH
-      cnt +1
-      tmp$ + cntStr(cnt) + "Env var BUTLER_PATH not set." + #EOL$
-    Else
-      ; These status errors should be considered only if BUTLER_PATH is set ...
-      ; ------------------------------------------------------------------------------
-      ;                           Missing "butler.ini" File?                          
-      ; ------------------------------------------------------------------------------
-      If ini::StatusErr & ini::#SERR_Missing_Ini_File
-        cnt +1
-        tmp$ + cntStr(cnt) + ~"Missing \"butler.ini\" file." + #EOL$
-      Else
-        ; These status errors should be considered only if "butler.ini" was found ...
-        ; ==============================================================================
-        ;                         Errors In "butler.ini" File...                        
-        ; ==============================================================================
-        ;                            Butler Version Error...                            
-        ; ------------------------------------------------------------------------------
-        If ini::StatusErr & ini::#SERR_Mismatched_Butler_Version
-          cnt +1
-          tmp$ + cntStr(cnt) + ~"Butler version error: Required v" + ini::Proj\ButlerVersion$ +
-                 " | Found v" + ini::Butler\Version$ + "." + #EOL$
-        EndIf
-        ; ------------------------------------------------------------------------------
-        ;                                  PP Errors...                                 
-        ; ------------------------------------------------------------------------------
-        ; Mutually-exclusive errors...
-        If ini::StatusErr & ini::#SERR_Unspecified_PP_Version
-          cnt +1
-          tmp$ + cntStr(cnt) + ~"\"butler.ini\" file: missing \"PPVersion\"." + #EOL$
-        ElseIf ini::StatusErr & ini::#SERR_Mismatched_PP_Version
-          cnt +1
-          tmp$ + cntStr(cnt) + ~"PP version error: Required v" + ini::Proj\PPVersion$ +
-                 " | Found v" + ini::Env\PPVersion$ + "." + #EOL$
-        EndIf
-        ; ------------------------------------------------------------------------------
-        ;                                Pandoc Errors...                               
-        ; ------------------------------------------------------------------------------
-        ; Mutually-exclusive errors...
-        If ini::StatusErr & ini::#SERR_Unspecified_Pandoc_Version
-          cnt +1
-          tmp$ + cntStr(cnt) + ~"\"butler.ini\" file: missing \"PandocVersion\"." + #EOL$
-        ElseIf ini::StatusErr & ini::#SERR_Mismatched_Pandoc_Version
-          cnt +1
-          tmp$ + cntStr(cnt) + ~"Pandoc version error: Required v" + ini::Proj\PandocVersion$ +
-                 " | Found v" + ini::Env\PandocVersion$ + #EOL$
-        EndIf
-        ; ------------------------------------------------------------------------------
-        ;                                Highlight Errors...                               
-        ; ------------------------------------------------------------------------------
-        ; Mutually-exclusive errors...
-        If ini::StatusErr & ini::#SERR_Unspecified_Highlight_Version
-          cnt +1
-          tmp$ + cntStr(cnt) + ~"\"butler.ini\" file: missing \"HighlightVersion\"." + #EOL$
-        ElseIf ini::StatusErr & ini::#SERR_Mismatched_Highlight_Version
-          cnt +1
-          tmp$ + cntStr(cnt) + ~"Highlight version error: Required v" + ini::Proj\HighlightVersion$ +
-                 " | Found v" + ini::Env\HighlightVersion$ + #EOL$
-        EndIf
-        ; ...........
-      EndIf
-    EndIf
-    
-    
-    ProcedureReturn tmp$
-    
-  EndProcedure
   
   ; ******************************************************************************
   ; *                                 Print Help                                 *

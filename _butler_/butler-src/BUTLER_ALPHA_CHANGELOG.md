@@ -2,6 +2,13 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.16` (2017/11/24)
+    
+      - **STATUS ERROR MESSAGE**
+          - Better handling of status error message:
+              - **DELETED** `msg::ListStatusErrors()`
+              - **ADDED** `ini::EnlistStatusError()` and `ini::StatusErrorReport()` — these 2 procs now handle status errors in place by enlisting them in `ini::StatusErrorReport$` via `msg::ListStatusErrors(error_str$)`. The list of status errors is then displayed via `ini::StatusErrorReport()`
+
   - `v0.1.15` (2017/11/24)
     
       - **BUTLER’S INFO HEADER**

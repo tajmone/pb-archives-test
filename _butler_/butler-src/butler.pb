@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 15 ; v0.1.15 ( 2017/11/24 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 16 ; v0.1.16 ( 2017/11/24 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -143,9 +143,12 @@ Else
     OUT$ = msg::ButlerStatus()
     PrintN(OUT$)
     
+    ; TODO: StatuErr Report: this message should be handled by ini::StatusErrorReport()
     ERR$ = "!!! ERROR !!! Butler can't carry out any project processing tasks for the following reasons" + txt::#EOL$
-    ERR$ + msg::ListStatusErrors()
-    ConsoleError( ERR$ ) ; FIXME: Use some msg::Error() procedure instead!
+    PrintN(ERR$)
+    
+    ;- NEW STATUS ERROR REPORT!!!!
+    ini::StatusErrorReport()
     
     End 1
   EndIf

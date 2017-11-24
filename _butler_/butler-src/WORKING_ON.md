@@ -9,9 +9,10 @@ Notes about the current TODOs.
 
 ## Messages System
 
-Redesign Butler's messages system, especially verbosity:
+Redesign Butler's messages system:
 
-- Currently, debug messages are always printed to `STDER`; implement printing them to `STDOUT` only if `--verbose` opt is true.
+- [ ] __VERBOSITY__ --- Currently, debug messages are always printed to `STDER`; implement printing them to `STDOUT` only if `--verbose` opt is true.
+- [x] __STATUS ERROR__ -- Drop the current `msg::ListStatusErrors()` procedure and subsitute it with `msg::EnlistStatusError(error$)` that will create a numbered list of status errors, to be printed via  `msg::StatusErrorReport()` after `ini::init()` has finished its job (only if `opStatuRequired` or if `--status` opt was passed).
 
 ## Dependencies Version Satisfaction
 

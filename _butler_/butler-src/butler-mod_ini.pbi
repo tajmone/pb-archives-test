@@ -122,17 +122,28 @@ DeclareModule ini
   ;                         PUBLIC PROCEDURES DECLARATION                         
   ; ==============================================================================
   Declare Init()
+  Declare   StatusErrorReport()
 EndDeclareModule
 
 Module ini
   IncludeFile "butler-mod_ini.pbhgen.pbi" ; <= PBHGEN-X
   
   ; ==============================================================================
+  ;                                     MACROS                                    
+  ; ==============================================================================
+  ; cntStr(number) Macro => Used to format ordered list strings:
+  ; "  1) "
+  ; "  2) "
+  Macro cntStr(num)
+    "  " + Str(num) + ") "
+  EndMacro
+  ; ==============================================================================
   ;                         PRIVATE PROCEDURES DECLARATION                        
   ; ==============================================================================
   Declare   ParseCLIArgs(numParams)
   Declare   ReadSettingsFile()
   Declare.s GetHighlightVersion()
+  Declare   EnlistStatusError(error$)
   ; ******************************************************************************
   ; *                                                                            *
   ; *                             PUBLIC PROCEDURES                              *
@@ -149,7 +160,10 @@ Module ini
     Shared UserOpts, StatusErr
     
     ; ** BUTLER VERSION FULL STRING *** for console output:
-    ButlerVerFull$ = "Butler v" + Butler\Version$ + " (" + #ButlerBitness$ + " bits)"  
+    ButlerVerFull$ = "Butler v" + Butler\Version$ + " (" + #ButlerBitness$ + " bits)"
+    
+    ; ** STATUS ERROR WORK STRING **
+    Define StatusErrorReport$
     ; ------------------------------------------------------------------------------
     ;-                           Windows: Is Bash/Shell?                            
     ; ------------------------------------------------------------------------------
@@ -159,6 +173,7 @@ Module ini
     CompilerIf #PB_Compiler_OS = #PB_OS_Windows
       If GetEnvironmentVariable("SHELL") = #Null$
         StatusErr | #SERR_Win_NotShell
+        EnlistStatusError("Butler not invoked from Bash/Shell.")
       EndIf
     CompilerEndIf
     ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,6 +210,7 @@ Module ini
     If Butler\Path$ = #Null$
       ;       ConsoleError("BUTLER_PATH env var not found!!!")  ; DELME -- BUTLER_PATH env var not found
       StatusErr | #SERR_Missing_BUTLER_PATH
+      EnlistStatusError("Missing $BUTLER_PATH environment variable.")
     Else
       ; If BUTLER_PATH en var was found ...
       ; ------------------------------- Sanitize Path --------------------------------
@@ -224,6 +240,7 @@ Module ini
         ReadSettingsFile()
       Else
         StatusErr | #SERR_Missing_Ini_File
+        EnlistStatusError(~"Missing \"butler.ini\" file.")
       EndIf 
       ; ------------------------------------------------------------------------------
       ;-                         Dependencies: Check Versions                         
@@ -410,7 +427,8 @@ Module ini
     Shared Butler, Proj
     
     If Not OpenPreferences(Butler\Path$ + "butler.ini")
-      ; FIXME: Can't open "butler.ini" Error report
+      ; FIXME: Can't open "butler.ini" Error report should go with Status Error
+      ;        messsages queu!
       ConsoleError(~"ERROR: Couldn't open \"butler.ini\" file!")
       ProcedureReturn #False ; <= operativeStatus = False
     EndIf
@@ -493,10 +511,12 @@ Module ini
     ; ===> Check if PP was found: ==================================================
     If Env\PPVersion$ = #Empty$
       StatusErr | #SERR_PP_Not_Found
+      EnlistStatusError("PP not found on system.")
     EndIf
     ; ===> Check if Pandoc was found: ==============================================
     If Env\PandocVersion$ = #Empty$
       StatusErr | #SERR_Pandoc_Not_Found
+      EnlistStatusError("Pandoc not found on system.")
     EndIf
     ; ------------------------------------------------------------------------------
     ;- Get Highlight Version
@@ -505,6 +525,7 @@ Module ini
     ; ===> Check if Highlight was found: ===========================================
     If Env\HighlightVersion$ = #Empty$
       StatusErr | #SERR_Highlight_Not_Found
+      EnlistStatusError("Highlight not found on system.")
     EndIf
     ;}==============================================================================
     ;-                         Check Dependencies Versions                          
@@ -543,13 +564,13 @@ Module ini
     If Proj\ButlerVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Butler_Version
-      ConsoleError("!!! ButlerVersion$ not set in butler.ini !!!") ; DELME Debugging
+      EnlistStatusError(~"\"butler.ini\" file: missing \"ButlerVersion\".")
     EndIf
     
     If Proj\ButlerVersion$ <> Butler\Version$
       StatusErr | #SERR_Mismatched_Butler_Version
-      ConsoleError("!!! ButlerVersion$ <> Butler\Version$: " + 
-                   Proj\ButlerVersion$ + " <> " + Butler\Version$ ) ; DELME Debugging
+      EnlistStatusError(~"Butler version error: Required v" + Proj\ButlerVersion$ +
+                             " | Found v" + Butler\Version$ + ".")
     Else                                                            ; DELME Debugging
       ConsoleError("!!! ButlerVersion$ == Butler\Version$ !!!")     ; DELME Debugging
     EndIf
@@ -559,13 +580,14 @@ Module ini
     If Proj\PPVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_PP_Version
-      ConsoleError("!!! PPVersion$ not set in butler.ini !!!") ; DELME Debugging
+      EnlistStatusError(~"\"butler.ini\" file: missing \"PPVersion\".")
     EndIf
     
     If Not ( StatusErr & #SERR_PP_Not_Found )
       If Proj\PPVersion$ <> Env\PPVersion$
         StatusErr | #SERR_Mismatched_PP_Version
-        ConsoleError("!!! PPVersion$ <> Env\PPVersion$: " + Proj\PPVersion$ + " <> " + Env\PPVersion$ ) ; DELME Debugging
+        EnlistStatusError(~"PP version error: Required v" + Proj\PPVersion$ +
+                               " | Found v" + Env\PPVersion$ + ".")
       Else                                                                                              ; DELME Debugging
         ConsoleError("!!! PPVersion$ == Env\PPVersion$ !!!")                                            ; DELME Debugging
       EndIf
@@ -576,13 +598,14 @@ Module ini
     If Proj\PandocVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Pandoc_Version
-      ConsoleError("!!! PandocVersion$ not set in butler.ini !!!") ; DELME Debugging
+      EnlistStatusError(~"\"butler.ini\" file: missing \"PandocVersion\".")
     EndIf
     
     If Not ( StatusErr & #SERR_Pandoc_Not_Found )
       If Proj\PandocVersion$ <> Env\PandocVersion$
         StatusErr | #SERR_Mismatched_Pandoc_Version
-        ConsoleError("!!! PandocVersion$ <> Env\PandocVersion$: " + Proj\PandocVersion$ + " <> " + Env\PandocVersion$ ) ; DELME Debugging
+        EnlistStatusError(~"Pandoc version error: Required v" + Proj\PandocVersion$ +
+                               " | Found v" + Env\PandocVersion$ + ".")
       Else                                                                                                              ; DELME Debugging
         ConsoleError("!!! PandocVersion$ == Env\PandocVersion$ !!!")                                                    ; DELME Debugging
       EndIf
@@ -593,7 +616,7 @@ Module ini
     If Proj\HighlightVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       StatusErr | #SERR_Unspecified_Highlight_Version
-      ConsoleError("!!! HighlightVersion$ not set in butler.ini !!!") ; DELME Debugging
+      EnlistStatusError(~"\"butler.ini\" file: missing \"HighlightVersion\".")
     EndIf
     
     If Not ( StatusErr & #SERR_Highlight_Not_Found )
@@ -637,7 +660,8 @@ Module ini
       
       If HLFound_MAJ <> HLReq_MAJ Or HLFound_MIN < HLReq_MIN
         StatusErr | #SERR_Mismatched_Highlight_Version
-        ConsoleError("!!! HighlightVersion$ <> Env\HighlightVersion$: " + Proj\HighlightVersion$ + " <> " + Env\HighlightVersion$ ) ; DELME Debugging
+        EnlistStatusError(~"Highlight version error: Required v" + Proj\HighlightVersion$ +
+                               " | Found v" + Env\HighlightVersion$ + ".")
       Else                                                                                                                          ; DELME Debugging
         If HLReq_MIN = HLFound_MIN 
           ConsoleError("!!! HighlightVersion$ == Env\HighlightVersion$ !!!")                                                          ; DELME Debugging
@@ -658,5 +682,39 @@ Module ini
     ProcedureReturn PPP::GetAppVersion("highlight", "--version")
   EndProcedure
   
+    ; ******************************************************************************
+    ; *                            Enlist Status Error                             *
+    ; ******************************************************************************
+    ; Add a status error string to the numbered list of status errors that will be
+    ; shown in the final StatusErrorReport()
+  Procedure EnlistStatusError(error$)
+    
+    Shared StatusErrorReport$
+    Static cnt = 0 ; Counter for numbered list
+    
+    ; cntStr(number) Macro => Used to format ordered list strings.
+    cnt +1
+    StatusErrorReport$ + cntStr(cnt) + error$ + txt::#EOL$
+    
+  EndProcedure
+  
+  ; ******************************************************************************
+  ; *                            Status Error Report                             *
+  ; ******************************************************************************
+  Procedure StatusErrorReport()
+    ; TODO StatusErrorReport():
+    ; -- Output To STDERR instead
+    ; -- Add line before list:
+    ;    -- if opStatusRequired:
+    ;       "Butler can't carry out the requested tasks because..."
+    ;    -- else if just --status opt:
+    ;       "Butler is not in operative state because..."
+    Shared StatusErrorReport$
+    
+    Print(StatusErrorReport$ + txt::#EOL$)
+    
+    StatusErrorReport$ = #Null$ ; Dispose and free mem (no longer needed)
+    
+  EndProcedure
   
 EndModule
