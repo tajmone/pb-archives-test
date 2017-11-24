@@ -2,26 +2,32 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.14` (2017/11/24)
+    
+      - **BINARY-INCLUDE TEXT FILES AS UTF-8** (`msg::` module)
+          - Now the `msg::` module embeds text files as UTF-8 (no BOM) instead of UCS2. Bomless UTF-8 txt files are a better choice (more standard); also, the previous UCS2 `*.txt` files got corrupted somewhere along the line, maybe it was due to Git checkout operations and EOL normalization? Not sure, but UTF-8 will make most users happier, and it only required changing a `PeekS` command to `PeekS( ?HelpText, -1, #PB_UTF8 )`.
+
   - `v0.1.13` (2017/11/24)
     
-      - **IGNORE “`.git`” FOLDER** `build::` module
+      - **IGNORE “`.git`” FOLDER** (`build::` module)
           - Now `build::FolderIsBuildEligible()` will ignore “`.git`” folders.
 
   - `v0.1.12` (2017/11/09)
     
-      - **CODE REORGANIZATION** `ini::` module
+      - **CODE REORGANIZATION** (`ini::` module)
           - New `ini::ValidateDependenciesVersion()` procedure: all dependencies version checks where moved from `ini::ReadSettingsFile()` to here.
 
   - `v0.1.11` (2017/11/08)
     
-      - **CODE OPTIMIZATIONS** `ini::` module
+      - **CODE OPTIMIZATIONS** (`ini::` module)
           - now uses a single DataStructure to map CLI options (long and short) directly to `ini::UserOpts` flags.
           - Parameters iteration no longer creates a list for deferred options evaluation, but sets the appropriate flags in place.
           - The `EVALUATE USER OPTIONS` part is dropped (it used `Select`/`Case` on a per-option basis). Options evaluation is now done during params iteration.
 
   - `v0.1.10` (2017/11/08)
     
-      - **CODE OPTIMIZATION** — `ini::` module now uses a single loop to create both options maps (long and short opts) using a common DataSection.
+      - **CODE OPTIMIZATION** (`ini::` module)
+          - `ini::` module now uses a single loop to create both options maps (long and short opts) using a common DataSection.
 
   - `v0.1.9` (2017/11/07)
     
