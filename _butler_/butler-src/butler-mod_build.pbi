@@ -198,7 +198,7 @@ Module build
     ;}////// END :: PP/PANDOC SETUP ////////////////////////////////////////////////
     
     ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    ;                          ENLIST MARKDOWN SOURCE FILES                                                  
+    ;-                         ENLIST MARKDOWN SOURCE FILES                                                  
     ;{//////////////////////////////////////////////////////////////////////////////
     NewList mdFilesL.s()          ; List of MD files to convert.
     NewList mdFilesReportL.s()    ; List of all MD files encountered.
@@ -222,7 +222,7 @@ Module build
     ;}////// END :: ENLIST MARKDOWN SOURCE FILES ///////////////////////////////////
     
     ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    ;                               ENLIST SUBFOLDERS                               
+    ;-                              ENLIST SUBFOLDERS                               
     ;{//////////////////////////////////////////////////////////////////////////////
     If recursive
       NewList foldersL.s()        ; List of subfolder to process.
@@ -349,7 +349,8 @@ Module build
     If folderName$ = "." Or folderName$ = ".."    ; ======={ "." or ".." }========
                                                   ; Mark as Excluded without reporting...
       ProcedureReturn #False
-    ElseIf Left(folderName$, 1) = "_"             ; ==={ name begins with "_" }===
+    ElseIf Left(folderName$, 1) = "_" Or          ; ==={ name begins with "_" }===
+           folderName$ = ".git"                   ; ====={ is ".git" folder }=====
                                                   ; Mark as Excluded and report...
       AddElement(foldersReportL())
       foldersReportL() = ~"  - IGNORE: \""+ folderName$ +~"\""

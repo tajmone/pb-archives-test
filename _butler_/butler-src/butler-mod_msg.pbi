@@ -219,7 +219,7 @@ Module msg
   ; *                                 Print Help                                 *
   ; ******************************************************************************
   Procedure PrintHelp()
-    PrintN( PeekS( ?HelpText +2 ) ) ; <= `+2` skips over BOM!
+    PrintN( PeekS( ?HelpText, -1, #PB_UTF8 ) )
   EndProcedure
   
   ; ******************************************************************************
@@ -240,7 +240,7 @@ Module msg
   ; For easier maintainance, long chuncks of text are kept in external files that
   ; are binary-included in labeled DataSections.
   ; NOTE: The binary-included text files must be:
-  ; 1) In UCS-2 Long Endian encoding with BOM.
+  ; 1) In UTF-8 encoding without BOM.
   ; 2) Use native OS's EOL (CRLF on Win, LF on Linux and Mac) and let Git handle
   ;    line endings conversion through ".gitattributes" settings -- ie:
   ;
