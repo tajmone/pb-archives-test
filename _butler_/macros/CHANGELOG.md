@@ -88,6 +88,11 @@ This file logs changes to pp macros definitions during Alpha Stage.
 
 # GFM-TaskList.pp
 
+**`v0.3` (2017-11-24)**
+
+  - `!Task` macro emits escaped non-breaking space (”`\`”) instead of “`&thinsp;`” HTML entity because HTML entities prevent pandoc v2.0.2 from parsing markdown contents in raw HTML. See Issue \#4088:
+  - – <https://github.com/jgm/pandoc/issues/4088>
+
 **`v0.2` (2017-11-07)**
 
   - Replaced all occurences of “`\`” macro symbol with “`!`” (preparing to migrate to PP v2)
