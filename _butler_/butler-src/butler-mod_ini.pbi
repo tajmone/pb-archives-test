@@ -147,6 +147,9 @@ Module ini
     Shared Butler, Env
     Shared Proj
     Shared UserOpts, StatusErr
+    
+    ; ** BUTLER VERSION FULL STRING *** for console output:
+    ButlerVerFull$ = "Butler v" + Butler\Version$ + " (" + #ButlerBitness$ + " bits)"  
     ; ------------------------------------------------------------------------------
     ;-                           Windows: Is Bash/Shell?                            
     ; ------------------------------------------------------------------------------
@@ -164,11 +167,27 @@ Module ini
     numParams = CountProgramParameters()
     If numParams
       ParseCLIArgs(numParams)
+      ; ------------------------------------------------------------------------------
+      ;                      "--version"? Print Version and Quit                      
+      ; ------------------------------------------------------------------------------
+      ; The "--version" option has precedence over all other opts: just print Butler's
+      ; version number (unframed) and quit (no other checks need to be done).
+      ; ------------------------------------------------------------------------------
+      If ( UserOpts & #opt_Version )
+        ; FIXME: When all project data & info will be moved to new data:: module, use
+        ;        msg::ButlerVersion() instead
+        Print(ButlerVerFull$)
+        End 0 ; <= Exit Code -> Success (even if invoked from CMD)
+      EndIf
     Else
       ; Butler invoked without any arguments...
       UserOpts | #opt_NoOpts
     EndIf
-    
+    ; ------------------------------------------------------------------------------
+    ;                            Print Butler Info Header                           
+    ; ------------------------------------------------------------------------------
+    Print( txt::FrameText( ButlerVerFull$ ) )
+    ButlerVerFull$ = #Null$ ; Dispose, not longer needed
     ; ------------------------------------------------------------------------------
     ;                   Get Butler's Path from BUTLER_PATH Env Var                  
     ;{------------------------------------------------------------------------------
@@ -381,7 +400,6 @@ Module ini
       End 1
     EndIf
     
-    ConsoleError("<<<<< ini::ParseCLIArgs() <<<<<")
   EndProcedure
   ; ******************************************************************************
   ; *                             Read Settings File                             *

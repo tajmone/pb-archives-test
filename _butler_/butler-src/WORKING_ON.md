@@ -4,7 +4,16 @@ Notes about the current TODOs.
 
 - Check occurences of `#Null$` and see if should be changed to `#Empty$`!
 
-# Butler INI Module
+1. Fix Messages System
+2. Implement new Dependencies Module (with constraints)
+
+## Messages System
+
+Redesign Butler's messages system, especially verbosity:
+
+- Currently, debug messages are always printed to `STDER`; implement printing them to `STDOUT` only if `--verbose` opt is true.
+
+## Dependencies Version Satisfaction
 
   - `ini::ReadSettingsFile()`:
     

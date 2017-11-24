@@ -2,6 +2,17 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.15` (2017/11/24)
+    
+      - **BUTLER’S INFO HEADER**
+          - Now handling of printing Butler version and Info Header is handled inside `ini::` module:
+              - New `ini::ButlerVerFull$` string to avoid resorting to `msg::` module (solves conflict of module loading order and interdependency).
+            <!-- end list -->
+              - Checks for `--version` option are now carried out immediately after parsing CLI args, and if this opt is present `ini::ButlerVerFull$` is printed and app quits, without any further useless checks.
+              - Butler’s Info Header is printed immediately after parsing CLI args and checking for `--version` option: prints `ini::ButlerVerFull$` string via `txt::FrameText()`, direclty, without need of `msg::` module.
+          - `msg::` module:
+              - **DELETED** `msg::ButlerVersion()` and `msg::PrintButlerVersionFramed()` procedures.
+
   - `v0.1.14` (2017/11/24)
     
       - **BINARY-INCLUDE TEXT FILES AS UTF-8** (`msg::` module)

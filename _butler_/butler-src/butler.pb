@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 14 ; v0.1.14 ( 2017/11/24 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 15 ; v0.1.15 ( 2017/11/24 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -23,8 +23,10 @@
 IncludeFile "butler.pbhgen.pbi"    ; <= PBHGEN-X
 IncludeFile "mod_fs.pbi"           ; Module "FS"    > File System helpers
 IncludeFile "mod_ppp.pbi"          ; Module "PPP"   > PP / Pandoc interfacing
-IncludeFile "butler-mod_ini.pbi"   ; Module "ini"   > Project settings
+
 IncludeFile "mod_text-funcs.pbi"   ; Module "txt"   > Text Formatting Utilities
+IncludeFile "butler-mod_ini.pbi"   ; Module "ini"   > Project settings
+
 IncludeFile "butler-mod_msg.pbi"   ; Module "msg"   > Butler messages (STDOUT/STDERR)
 IncludeFile "butler-mod_build.pbi" ; Module "build" > Butler's build engine
 
@@ -39,11 +41,6 @@ IncludeFile "butler-mod_build.pbi" ; Module "build" > Butler's build engine
 ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ;                              CURRENTLY WORKING ON                             
 ;{//////////////////////////////////////////////////////////////////////////////
-
-; Moving cli args parsing to ini:: module!
-
-; MODULES :: Moving stuff into modules so the code is more manageable...
-;  -- PPP::Convert() now handles PP/Pandoc conversion (unfinished)
 
 ; DONE: Implement the following ignore criteria:
 ;       -- BUILD:  ignore " _* " folders       (start with underscore) [ DONE! ]
@@ -99,16 +96,6 @@ ConsoleError(" --- operativeStatus: "+ Str(operativeStatus) ) ; DELME Debug oper
 TESTopStatusRequired = Bool( ini::UserOpts & ini::#opt_opStatusReq )
 ConsoleError(" --- opStatusRequire: "+ Str(TESTopStatusRequired)) ; DELME Debug opStatusRequire
 
-; ------------------------------------------------------------------------------
-;                            Print Butler Info Header                           
-; ------------------------------------------------------------------------------
-; Print Butler's Framed Header, only if task isn't "--version"
-If Not (( ini::UserOpts & ini::#opt_Version ) And 
-        Not ( ini::UserOpts & ini::#opt_opStatusReq ))
-  msg::PrintButlerVersionFramed() ; => Butler's Framed Header
-EndIf
-
-
 If ( ini::UserOpts & ini::#opt_NoOpts )
   ; ------------------------------------------------------------------------------
   ;                       Butler Invoked Without Any Options                      
@@ -124,13 +111,7 @@ If Not ( ini::UserOpts & ini::#opt_opStatusReq )
   ; User options don't involve any processing operations that require Butler's
   ; Operative Status to be true ... 
   ; ------------------------------------------------------------------------------
-  If ( ini::UserOpts & ini::#opt_Version )
-    ; ------------------------------------------------------------------------------
-    ; --version
-    ; ------------------------------------------------------------------------------
-    Print( msg::ButlerVersion() )
-    End
-  ElseIf ( ini::UserOpts & ini::#opt_Help )
+  If ( ini::UserOpts & ini::#opt_Help )
     ; ------------------------------------------------------------------------------
     ; --help
     ; ------------------------------------------------------------------------------

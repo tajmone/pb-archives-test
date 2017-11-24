@@ -35,8 +35,6 @@ DeclareModule msg
     "  " + Str(num) + ") "
   EndMacro
   
-  Declare.s ButlerVersion()
-  Declare   PrintButlerVersionFramed()
   Declare   PrintTasksList()
   Declare.s ButlerStatus()
   Declare.s ListStatusErrors()
@@ -54,19 +52,7 @@ Module msg
   ;{******************************************************************************
   ; Procedures to handle Butler-specific text messages, either returned as strings
   ; or printed to the console.
-  ; ******************************************************************************
-  ; *                               Butler Version                               *
-  ; ******************************************************************************
-  Procedure.s ButlerVersion()
-    ProcedureReturn "Butler v" + ini::Butler\Version$ + " (" + ini::#ButlerBitness$ + " bits)"
-  EndProcedure
-  ; ******************************************************************************
-  ; *                        Print Butler Version Framed                         *
-  ; ******************************************************************************
-  Procedure PrintButlerVersionFramed()
-    ; NOTE: Framed Text ends with EOL char! no need to use PrintN()
-    Print( txt::FrameText( ButlerVersion() ))
-  EndProcedure
+  
   ; ******************************************************************************
   ; *                             Print Tasks Lists                              *
   ; ******************************************************************************
