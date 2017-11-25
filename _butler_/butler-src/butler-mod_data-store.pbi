@@ -96,6 +96,7 @@ DeclareModule DS
     #SERR_Win_NotShell
     #SERR_Missing_BUTLER_PATH
     #SERR_Missing_Ini_File
+    #SERR_CantOpen_Ini_File
     #SERR_PP_Not_Found
     #SERR_Pandoc_Not_Found
     #SERR_Highlight_Not_Found

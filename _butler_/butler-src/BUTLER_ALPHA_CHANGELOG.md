@@ -2,6 +2,10 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.19` (2017/11/25)
+    
+      - if `ini::ReadSettingsFile()` can’t open existing “`butler.ini`”, the (new) `#SERR_CantOpen_Ini_File` status error is enlisted via `msg::EnlistStatusError()`, and `ValidateDependenciesVersion()` is skipped.
+
   - `v0.1.18` (2017/11/25)
     
       - `msg::` Reimplement back here `ButlerVersion()` and `PrintButlerVersionFramed()` procedure now that modules interpdendency conflicts are solved.

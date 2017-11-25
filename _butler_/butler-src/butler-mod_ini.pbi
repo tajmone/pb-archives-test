@@ -151,19 +151,26 @@ Module ini
       ; DEBUG IT:
       PrintN("~ HIGHLIGHT_DATADIR: " + GetEnvironmentVariable("HIGHLIGHT_DATADIR")) ; DBG
       
+      ; TODO HIGHLIGHT_DATADIR:
+      ; -- HIGHLIGHT_DATADIR should only be set If the folder is found!
+      ; -- Because of differences in behaviour between Win and Mac/Linux, I should consider
+      ;    using a different env-var name, and rely only on the `--data-dir` option!
+      ;    Or maybe use a CLI defined PP symbol, instead of an env-var.
       ; ------------------------------------------------------------------------------
       ;-                 Check "butler.ini" (Proj. Preferences File)                  
       ; ------------------------------------------------------------------------------
       If FileSize(DS::Butler\Path$ + "butler.ini") > 0
-        ReadSettingsFile()
+        If ReadSettingsFile()
+          ; If succesfully opened/read "butler.ini"...
+          ; --------------------------------------------------------------------------
+          ;-                      Dependencies: Check Versions                         
+          ; --------------------------------------------------------------------------
+          ValidateDependenciesVersion()
+        EndIf
       Else
         DS::StatusErr | DS::#SERR_Missing_Ini_File
         msg::EnlistStatusError(~"Missing \"butler.ini\" file.")
       EndIf 
-      ; ------------------------------------------------------------------------------
-      ;-                         Dependencies: Check Versions                         
-      ; ------------------------------------------------------------------------------
-      ValidateDependenciesVersion()
     EndIf 
     
     
@@ -339,16 +346,17 @@ Module ini
   ; ******************************************************************************
   ; *                             Read Settings File                             *
   ; ******************************************************************************
+  ; Returns #False if failed reading settings file
   Procedure ReadSettingsFile()
     ConsoleError(">>>>>> ini::ReadSettingsFile() >> ENTER") ; DELME Debugging
-    
-    Shared Butler, Proj
-    
+       
     If Not OpenPreferences(DS::Butler\Path$ + "butler.ini")
-      ; FIXME: Can't open "butler.ini" Error report should go with Status Error
-      ;        messsages queu!
-      ConsoleError(~"ERROR: Couldn't open \"butler.ini\" file!")
-      ProcedureReturn #False ; <= operativeStatus = False
+      ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      ;                !!!   FAILED TO OPEN "butler.ini" FILE   !!!
+      ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      DS::StatusErr | DS::#SERR_CantOpen_Ini_File
+      msg::EnlistStatusError(~"Unable to open \"butler.ini\" file.")
+      ProcedureReturn #False ; <= Failed opening "butler.ini"
     EndIf
     ; ------------------------------------------------------------------------------
     ;                            Required Butler Version                            
@@ -374,6 +382,7 @@ Module ini
     ; ------------------------------------------------------------------------------    
     ConsoleError("<<<<<< ini::ReadSettingsFile() >> LEAVE") ; DELME Debugging
     
+    ProcedureReturn #True ; <= Successfully opened "butler.ini"
   EndProcedure
   
   ; ******************************************************************************
