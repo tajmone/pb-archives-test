@@ -8,7 +8,8 @@
 ; "mod_fs.pbi" | PureBASIC 5.61
 
 ; Some helper procedures and constants for cross-platform handling of paths.
-
+;
+; modules dependencies: none.
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 

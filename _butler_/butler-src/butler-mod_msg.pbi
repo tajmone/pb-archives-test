@@ -8,6 +8,11 @@
 ; "butler-mod_txt.pbi" | PureBASIC 5.61
 
 ; Text formatting helper functions
+;
+; modules dependencies:
+; -- txt::
+; -- ini::
+
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
