@@ -2,17 +2,24 @@
 
 Notes about the current TODOs.
 
-- Check occurences of `#Null$` and see if should be changed to `#Empty$`!
+  - Check occurences of `#Null$` and see if should be changed to `#Empty$`\!
 
-1. Fix Messages System
-2. Implement new Dependencies Module (with constraints)
+<!-- end list -->
+
+1.  Add `data::` module
+2.  Fix Messages System
+3.  Implement new Dependencies Module (with constraints)
+
+## Data Module  \[**\*\*\**DONE\!*\*\*\***\]
+
+Create new `data::` module to hold all project and env related vars, constants and structures. This will solve conflicts of modules cross-dependence — `ini::` and `msg::` modules can’t both reference each other right now, this new module would allow cross referencing the common project data and allow more freedom for the message system.
 
 ## Messages System
 
-Redesign Butler's messages system:
+Redesign Butler’s messages system:
 
-- [ ] __VERBOSITY__ --- Currently, debug messages are always printed to `STDER`; implement printing them to `STDOUT` only if `--verbose` opt is true.
-- [x] __STATUS ERROR__ -- Drop the current `msg::ListStatusErrors()` procedure and subsitute it with `msg::EnlistStatusError(error$)` that will create a numbered list of status errors, to be printed via  `msg::StatusErrorReport()` after `ini::init()` has finished its job (only if `opStatuRequired` or if `--status` opt was passed).
+  - [ ] **VERBOSITY** — Currently, debug messages are always printed to `STDER`; implement printing them to `STDOUT` only if `--verbose` opt is true.
+  - [x] **STATUS ERROR** – Drop the current `msg::ListStatusErrors()` procedure and subsitute it with `msg::EnlistStatusError(error$)` that will create a numbered list of status errors, to be printed via `msg::StatusErrorReport()` after `ini::init()` has finished its job (only if `opStatuRequired` or if `--status` opt was passed).
 
 ## Dependencies Version Satisfaction
 

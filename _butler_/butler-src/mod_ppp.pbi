@@ -9,6 +9,8 @@
 
 ; A module to convert files via PP and pandoc external tools.
 
+; modules dependencies: none.
+
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
 ;{==============================================================================

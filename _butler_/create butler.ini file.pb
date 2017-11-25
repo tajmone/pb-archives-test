@@ -4,14 +4,14 @@
 ; *                                                                            *
 ; ******************************************************************************
 ; Create a sample "___butler.ini" file, with default settings.
-; "create butler.ini file.pb" | 2017/11/24 | PB 5.61
+; "create butler.ini file.pb" | 2017/11/25 | PB 5.61
 
 ; ==============================================================================
 ;                                DEFAULT SETTINGS                               
 ; ==============================================================================
 ; Assign to these constants the default settings that should go in the template:
 
-#ButlerVersion =    "0.1.16"    ; Strict match!
+#ButlerVersion =    "0.1.18"    ; Strict match!
 #PPVersion =        "2.1.5"     ; Strict match!
 #PandocVersion =    "2.0.3"     ; Strict match!
 #HighlightVersion = "3.40"      ; MinVer match!
