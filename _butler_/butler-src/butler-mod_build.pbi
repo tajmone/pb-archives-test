@@ -76,14 +76,14 @@ Module build
   Procedure init()
     Shared PP_MACROS_IMPORT$, PANDOC_BASE_ARGS$
     ; ------------------------------------------------------------------------------
-    SetEnvironmentVariable("PP_MACROS_PATH", ini::Butler\Path$ + "macros" + FS::#DIR_SEP$)
+    SetEnvironmentVariable("PP_MACROS_PATH", DS::Butler\Path$ + "macros" + FS::#DIR_SEP$)
     ;                       Env var holding full path of PP macros folder, used
     ;                       internally by some PP macros. ("_butler/macros/")
     ; ------------------------------------------------------------------------------
-    PP_MACROS_IMPORT$ = "-import=" + ini::Butler\Path$ + #PP_MACROS_FILE$ + " "
+    PP_MACROS_IMPORT$ = "-import=" + DS::Butler\Path$ + #PP_MACROS_FILE$ + " "
     ;                 PP CLI options for importing macros. Passed at each invocation.
     ; ------------------------------------------------------------------------------
-    PANDOC_BASE_ARGS$ = "-f markdown+smart -t html5 --template=" + ini::Butler\Path$ + #PANDOC_TEMPLATE$ + " " +
+    PANDOC_BASE_ARGS$ = "-f markdown+smart -t html5 --template=" + DS::Butler\Path$ + #PANDOC_TEMPLATE$ + " " +
                         "--toc --toc-depth=2"
     
     
@@ -105,7 +105,7 @@ Module build
     Shared UserOptions
     Shared PANDOC_BASE_ARGS$, PP_VARS$, PANDOC_VARS$, argsPandoc$ ; Pandoc related
     
-    subPath$ = RemoveString(dirPath$, ini::Proj\Root$)
+    subPath$ = RemoveString(dirPath$, DS::Proj\Root$)
     
     PrintN("==============================================================================")
     PrintN("BUILDING PROJECT FOLDER: " + FS::#DIR_SEP$ + subPath$)
@@ -254,7 +254,7 @@ Module build
     ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     ;                             PRINT OUT ENTRIES LIST                            
     ;{//////////////////////////////////////////////////////////////////////////////
-    If ( ini::UserOpts & ini::#opt_Verbose )
+    If ( DS::UserOpts & DS::#opt_Verbose )
       PrintN("\\\\\\\ PRINT OUT ENTRIES LIST \\\\\\\")
       ; ------------------------------------------------------------------------------
       ;                             PRINT MD SOURCES LIST                             

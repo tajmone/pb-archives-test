@@ -2,6 +2,19 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.17` (2017/11/25)
+    
+      - **DATA STORAGE MODULE** (`DS::`)
+          - Created new `DS::` module to hold all project and environment data (previously held by `ini::`):
+            
+              - `DS::Proj\`
+              - `DS::Butler\`
+              - `DS::Env\`
+              - User Options constants (“`#opt_`…”)
+              - Status Error constants (“`#SERR_`…”)
+            
+            This will allow `ini::` and `msg::` to cross-reference each other and solve the interdependency issue (since `msg::` can now access data from `DS::` instead of `ini::`, the `msg::` module can be included before `ini::` module).
+
   - `v0.1.16` (2017/11/24)
     
       - **STATUS ERROR MESSAGE**

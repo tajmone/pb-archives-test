@@ -10,7 +10,7 @@ Notes about the current TODOs.
 2.  Fix Messages System
 3.  Implement new Dependencies Module (with constraints)
 
-## Data Module
+## Data Module  \[**\*\*\**DONE\!*\*\*\***\]
 
 Create new `data::` module to hold all project and env related vars, constants and structures. This will solve conflicts of modules cross-dependence — `ini::` and `msg::` modules can’t both reference each other right now, this new module would allow cross referencing the common project data and allow more freedom for the message system.
 

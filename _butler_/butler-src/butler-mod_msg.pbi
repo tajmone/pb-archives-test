@@ -71,19 +71,19 @@ Module msg
     ; cntStr() Macro => "  1. ", "  2. ", etc.
     ; ===> Opening Text: ===========================================================
     tmp$ = "Requested tasks"
-    If ( ini::UserOpts & ini::#opt_Verbose )
+    If ( DS::UserOpts & DS::#opt_Verbose )
       tmp$ + " (verbosity mode)"
     EndIf
     PrintN(tmp$ + ":")
     ; ===> Build Task? =============================================================
-    If ( ini::UserOpts & ini::#opt_BuildAll ) Or ( ini::UserOpts & ini::#opt_BuildFolder )
+    If ( DS::UserOpts & DS::#opt_BuildAll ) Or ( DS::UserOpts & DS::#opt_BuildFolder )
       cnt +1
       tmp$ = cntStr(cnt)
-      If ( ini::UserOpts & ini::#opt_BuildAll )
+      If ( DS::UserOpts & DS::#opt_BuildAll )
         tmp$ + "Build whole project."
       Else
         tmp$ + "Build current folder"
-        If ( ini::UserOpts & ini::#opt_Recursive )
+        If ( DS::UserOpts & DS::#opt_Recursive )
           tmp$ + " (recursively)"
         EndIf
         tmp$ + "."

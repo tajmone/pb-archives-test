@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 16 ; v0.1.16 ( 2017/11/24 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 17 ; v0.1.17 ( 2017/11/25 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -21,14 +21,14 @@
 ;}==============================================================================
 
 IncludeFile "butler.pbhgen.pbi"    ; <= PBHGEN-X
-IncludeFile "mod_fs.pbi"           ; Module "FS"    > File System helpers
-IncludeFile "mod_ppp.pbi"          ; Module "PPP"   > PP / Pandoc interfacing
 
-IncludeFile "mod_text-funcs.pbi"   ; Module "txt"   > Text Formatting Utilities
-IncludeFile "butler-mod_ini.pbi"   ; Module "ini"   > Project settings
-
-IncludeFile "butler-mod_msg.pbi"   ; Module "msg"   > Butler messages (STDOUT/STDERR)
-IncludeFile "butler-mod_build.pbi" ; Module "build" > Butler's build engine
+IncludeFile "butler-mod_data-store.pbi" ;    DS:: > Butler's Data Storage
+IncludeFile "mod_fs.pbi"                ;    FS:: > File System helpers
+IncludeFile "mod_ppp.pbi"               ;   PPP:: > PP / Pandoc interfacing
+IncludeFile "mod_text-funcs.pbi"        ;   txt:: > Text Formatting Utilities
+IncludeFile "butler-mod_ini.pbi"        ;   ini:: > Project settings
+IncludeFile "butler-mod_msg.pbi"        ;   msg:: > Butler messages (STDOUT/STDERR)
+IncludeFile "butler-mod_build.pbi"      ; build:: > Butler's build engine
 
 
 
@@ -62,14 +62,14 @@ If Not OpenConsole("Butler")
   msg::Abort("Couldn't open console")
 EndIf
 
-ini::Butler\Version$ = Str(#MAJOR) +"."+ Str(#MINOR) +"."+ Str(#PATCH)
+DS::Butler\Version$ = Str(#MAJOR) +"."+ Str(#MINOR) +"."+ Str(#PATCH)
 
 ; Initialize Butler for current project:
 operativeStatus = ini::Init() ; <= operativeStatus indicates if Butler is all set
                               ;    to carry out project processing operations.
 
-ConsoleError("ini::Butler\Path$  = "+ ini::Butler\Path$)    ; DELME Debugging
-ConsoleError("ini::Proj\Root$    = "+ ini::Proj\Root$)      ; DELME Debugging
+ConsoleError("DS::Butler\Path$  = "+ DS::Butler\Path$)    ; DELME Debugging
+ConsoleError("DS::Proj\Root$    = "+ DS::Proj\Root$)      ; DELME Debugging
 
 
 invocationDir$ = GetCurrentDirectory()
@@ -81,8 +81,8 @@ invocationDir$ = GetCurrentDirectory()
 ; DELME: Temporary stuff, remove from final release!
 If #False ; Dont' show. (might keep the code for verbose/debug option)
   PrintN(~"invocationDir$:\n   "+ invocationDir$)     ; DBG invocationDir$
-  PrintN(~"ini::Butler\\Path$:\n   "+ ini::Butler\Path$)             ; DBG butlerDir$
-  PrintN(~"ini::Proj\\Root$:\n   "+ ini::Proj\Root$)                 ; DBG Proj\Root$
+  PrintN(~"DS::Butler\\Path$:\n   "+ DS::Butler\Path$)             ; DBG butlerDir$
+  PrintN(~"DS::Proj\\Root$:\n   "+ DS::Proj\Root$)                 ; DBG Proj\Root$
 EndIf
 
 ;} <<< END: INITIALIZE <<<
@@ -93,10 +93,10 @@ EndIf
 
 ; Some Debugging:
 ConsoleError(" --- operativeStatus: "+ Str(operativeStatus) ) ; DELME Debug operativeStatus
-TESTopStatusRequired = Bool( ini::UserOpts & ini::#opt_opStatusReq )
+TESTopStatusRequired = Bool( DS::UserOpts & DS::#opt_opStatusReq )
 ConsoleError(" --- opStatusRequire: "+ Str(TESTopStatusRequired)) ; DELME Debug opStatusRequire
 
-If ( ini::UserOpts & ini::#opt_NoOpts )
+If ( DS::UserOpts & DS::#opt_NoOpts )
   ; ------------------------------------------------------------------------------
   ;                       Butler Invoked Without Any Options                      
   ; ------------------------------------------------------------------------------
@@ -104,14 +104,14 @@ If ( ini::UserOpts & ini::#opt_NoOpts )
   End
 EndIf
 
-If Not ( ini::UserOpts & ini::#opt_opStatusReq )
+If Not ( DS::UserOpts & DS::#opt_opStatusReq )
   ; ==============================================================================
   ;                         Non-Project Processing Options                        
   ; ==============================================================================
   ; User options don't involve any processing operations that require Butler's
   ; Operative Status to be true ... 
   ; ------------------------------------------------------------------------------
-  If ( ini::UserOpts & ini::#opt_Help )
+  If ( DS::UserOpts & DS::#opt_Help )
     ; ------------------------------------------------------------------------------
     ; --help
     ; ------------------------------------------------------------------------------
@@ -152,8 +152,8 @@ Else
     
     End 1
   EndIf
-  If ( ini::UserOpts & ini::#opt_BuildFolder ) Or 
-     ( ini::UserOpts & ini::#opt_BuildAll )
+  If ( DS::UserOpts & DS::#opt_BuildFolder ) Or 
+     ( DS::UserOpts & DS::#opt_BuildAll )
     ; ------------------------------------------------------------------------------
     ;                                Build Operations                               
     ; ------------------------------------------------------------------------------
@@ -178,18 +178,18 @@ SECTION_BUILD: ; This section contains all code relating to building sources:
 ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ;                         Determine Build Operation Type                        
 ;{//////////////////////////////////////////////////////////////////////////////
-If ( ini::UserOpts & ini::#opt_BuildAll )
+If ( DS::UserOpts & DS::#opt_BuildAll )
   ; ==============================================================================
   ;                          Build Operation = Build All                          
   ; ==============================================================================
-  buildDir$ = ini::Proj\Root$
+  buildDir$ = DS::Proj\Root$
   PrintN("TASK: Build whole project.")
 Else
   ; ==============================================================================
   ;                     Build Operation = Build Current Folder                    
   ; ==============================================================================
   buildDir$ = invocationDir$
-  If ( ini::UserOpts & ini::#opt_Recursive )
+  If ( DS::UserOpts & DS::#opt_Recursive )
     PrintN("TASK: Build current folder recursively.")
   Else
     PrintN("TASK: Build current folder.")
@@ -202,7 +202,7 @@ Else
   ; anywhere. When building current folder we must ensure it was invoked within
   ; the project's tree...
   ; ------------------------------------------------------------------------------
-  If FindString(buildDir$, ini::Proj\Root$) <> 1 ; curr folder path must contain project path
+  If FindString(buildDir$, DS::Proj\Root$) <> 1 ; curr folder path must contain project path
     msg::Abort("Butler invoked outside the project directory tree.")
   EndIf
   ; ------------------------------------------------------------------------------
@@ -211,7 +211,7 @@ Else
   ; Check that neither the current folder or any of its ancestors (up to the
   ; project's root) belong to the folders' exclusion list...
   ; ------------------------------------------------------------------------------
-  subPath$ = RemoveString(buildDir$, ini::Proj\Root$)
+  subPath$ = RemoveString(buildDir$, DS::Proj\Root$)
   totSubfolders = CountString(subPath$, FS::#DIR_SEP$)         ; Get num of separators in current subpath
   For i = 1 To totSubfolders
     subFolder$ = StringField(subPath$, i, FS::#DIR_SEP$)
@@ -224,7 +224,7 @@ Else
 EndIf
 ;}////// END :: Determine Build Operation Type /////////////////////////////////
 
-If ( ini::UserOpts & ini::#opt_Verbose ) ; DBG Verbosity Option
+If ( DS::UserOpts & DS::#opt_Verbose ) ; DBG Verbosity Option
   PrintN("(verbose mode)")
 EndIf
 
@@ -241,7 +241,7 @@ build::init()
 ;       Once the code is structured I'll implement it conditionally, for now I
 ;       just need to test it...
 ; ------------------------------------------------------------------------------
-build::BuildFolder(buildDir$, ( ini::UserOpts & ini::#opt_Recursive ) )
+build::BuildFolder(buildDir$, ( DS::UserOpts & DS::#opt_Recursive ) )
 
 ; <<< BUILD CURR FOLDER : END
 
