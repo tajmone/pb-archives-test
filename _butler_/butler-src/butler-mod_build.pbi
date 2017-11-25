@@ -8,8 +8,8 @@
 ; "butler-mod_build.pbi" | PureBASIC 5.61
 ;
 ; modules dependencies:
+; -- DS::
 ; -- FS::
-; -- ini::
 ; -- PPP::
 
 ; ==============================================================================

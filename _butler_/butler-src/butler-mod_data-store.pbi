@@ -9,6 +9,8 @@
 
 ; Stores commonly shared project and environment Data.
 
+; modules dependencies: none.
+
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
 ;{==============================================================================

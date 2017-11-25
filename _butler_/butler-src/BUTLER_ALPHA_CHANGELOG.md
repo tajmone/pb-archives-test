@@ -2,6 +2,10 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.18` (2017/11/25)
+    
+      - `msg::` Reimplement back here `ButlerVersion()` and `PrintButlerVersionFramed()` procedure now that modules interpdendency conflicts are solved.
+
   - `v0.1.17` (2017/11/25)
     
       - **DATA STORAGE MODULE** (`DS::`)

@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 17 ; v0.1.17 ( 2017/11/25 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 18 ; v0.1.18 ( 2017/11/25 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -26,17 +26,9 @@ IncludeFile "butler-mod_data-store.pbi" ;    DS:: > Butler's Data Storage
 IncludeFile "mod_fs.pbi"                ;    FS:: > File System helpers
 IncludeFile "mod_ppp.pbi"               ;   PPP:: > PP / Pandoc interfacing
 IncludeFile "mod_text-funcs.pbi"        ;   txt:: > Text Formatting Utilities
-IncludeFile "butler-mod_ini.pbi"        ;   ini:: > Project settings
 IncludeFile "butler-mod_msg.pbi"        ;   msg:: > Butler messages (STDOUT/STDERR)
+IncludeFile "butler-mod_ini.pbi"        ;   ini:: > Project settings
 IncludeFile "butler-mod_build.pbi"      ; build:: > Butler's build engine
-
-
-
-
-; OPTIMIZATION NOTES: Try to keep first tasks first in order to optimize at best.
-;     If a definition or an include block is not needed, post-pone it.
-;     Allow the code to slim down and skip what is not required, the toolchain
-;     must be optimized to every line of code possibile!
 
 ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ;                              CURRENTLY WORKING ON                             
@@ -81,8 +73,8 @@ invocationDir$ = GetCurrentDirectory()
 ; DELME: Temporary stuff, remove from final release!
 If #False ; Dont' show. (might keep the code for verbose/debug option)
   PrintN(~"invocationDir$:\n   "+ invocationDir$)     ; DBG invocationDir$
-  PrintN(~"DS::Butler\\Path$:\n   "+ DS::Butler\Path$)             ; DBG butlerDir$
-  PrintN(~"DS::Proj\\Root$:\n   "+ DS::Proj\Root$)                 ; DBG Proj\Root$
+  PrintN(~"DS::Butler\\Path$:\n   "+ DS::Butler\Path$); DBG butlerDir$
+  PrintN(~"DS::Proj\\Root$:\n   "+ DS::Proj\Root$)    ; DBG Proj\Root$
 EndIf
 
 ;} <<< END: INITIALIZE <<<
@@ -148,7 +140,7 @@ Else
     PrintN(ERR$)
     
     ;- NEW STATUS ERROR REPORT!!!!
-    ini::StatusErrorReport()
+    msg::StatusErrorReport()
     
     End 1
   EndIf

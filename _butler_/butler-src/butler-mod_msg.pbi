@@ -10,8 +10,8 @@
 ; Text formatting helper functions
 ;
 ; modules dependencies:
+; -- DS::
 ; -- txt::
-; -- ini::
 
 
 ; ==============================================================================
@@ -31,7 +31,14 @@
 ; *                                                                            *
 ; ******************************************************************************
 DeclareModule msg
-  #EOL$ = txt::#EOL$ ; <= Set OS-appropriate #EOL$, as defined in module txt
+  ; ==============================================================================
+  ;                            PUBLIC VARS & CONSTANTS                            
+  ; ==============================================================================
+  ; ** STATUS ERROR WORK STRING **
+  Define StatusErrorReport$
+  ; ------------------------------------------------------------------------------
+  ; TODO: Make Private these constants and macros!
+  #EOL$ = txt::#EOL$    ; <= Set OS-appropriate #EOL$, as defined in module txt
   
   ; DELME: cntStr(num) Macro? Any other procedure might need it?
   ;        It was used by ListStatusErrors(), which is now deleted!
@@ -42,7 +49,13 @@ DeclareModule msg
   Macro cntStr(num)
     "  " + Str(num) + ") "
   EndMacro
-  
+  ; ==============================================================================
+  ;                         PUBLIC PROCEDURES DECLARATION                         
+  ; ==============================================================================
+  Declare.s ButlerVersion()
+  Declare   PrintButlerVersionFramed()
+  Declare   EnlistStatusError(error$)
+  Declare   StatusErrorReport()
   Declare   PrintTasksList()
   Declare.s ButlerStatus() ; <- Currently doesn't do anything useful!  
   Declare   PrintHelp()
@@ -59,7 +72,18 @@ Module msg
   ;{******************************************************************************
   ; Procedures to handle Butler-specific text messages, either returned as strings
   ; or printed to the console.
-  
+  ; ******************************************************************************
+  ; *                               Butler Version                               *
+  ; ******************************************************************************
+  Procedure.s ButlerVersion()
+    ProcedureReturn "Butler v" + DS::Butler\Version$ + " (" + DS::#ButlerBitness$ + " bits)"
+  EndProcedure
+  ; ******************************************************************************
+  ; *                        Print Butler Version Framed                         *
+  ; ******************************************************************************
+  Procedure PrintButlerVersionFramed()
+    Print( txt::FrameText( ButlerVersion() ))
+  EndProcedure
   ; ******************************************************************************
   ; *                             Print Tasks Lists                              *
   ; ******************************************************************************
@@ -95,6 +119,7 @@ Module msg
   ; ******************************************************************************
   ; *                               Butler Status                                *
   ; ******************************************************************************
+  ; Currently just a placeholder, doesn't do anything useful at all.
   ; TODO: ButlerStatus() --- finish implementing!
   Procedure.s ButlerStatus()
     OUT$ = LSet(">>> Butler Status: ", 80, ">") + #EOL$
@@ -104,6 +129,40 @@ Module msg
     ProcedureReturn OUT$
   EndProcedure
   
+    ; ******************************************************************************
+  ; *                            Enlist Status Error                             *
+  ; ******************************************************************************
+  ; Add a status error string to the numbered list of status errors that will be
+  ; shown in the final StatusErrorReport()
+  Procedure EnlistStatusError(error$)
+    
+    Shared StatusErrorReport$
+    Static cnt = 0 ; Counter for numbered list
+    
+    ; cntStr(number) Macro => Used to format ordered list strings.
+    cnt +1
+    StatusErrorReport$ + cntStr(cnt) + error$ + txt::#EOL$
+    
+  EndProcedure
+  
+  ; ******************************************************************************
+  ; *                            Status Error Report                             *
+  ; ******************************************************************************
+  Procedure StatusErrorReport()
+    ; TODO StatusErrorReport():
+    ; -- Output To STDERR instead
+    ; -- Add line before list:
+    ;    -- if opStatusRequired:
+    ;       "Butler can't carry out the requested tasks because..."
+    ;    -- else if just --status opt:
+    ;       "Butler is not in operative state because..."
+    Shared StatusErrorReport$
+    
+    Print(StatusErrorReport$ + txt::#EOL$)
+    
+    StatusErrorReport$ = #Null$ ; Dispose and free mem (no longer needed)
+    
+  EndProcedure
   
   ; ******************************************************************************
   ; *                                 Print Help                                 *

@@ -8,8 +8,9 @@
 ; "butler-mod_ini.pbi" | PureBASIC 5.61
 
 ; modules dependencies:
+; -- DS::
 ; -- FS::
-; -- txt::
+; -- msg::
 ; -- PPP::
 
 ; ==============================================================================
@@ -47,7 +48,6 @@ DeclareModule ini
   ;                         PUBLIC PROCEDURES DECLARATION                         
   ; ==============================================================================
   Declare Init()
-  Declare StatusErrorReport()
 EndDeclareModule
 
 Module ini
@@ -68,7 +68,6 @@ Module ini
   Declare   ParseCLIArgs(numParams)
   Declare   ReadSettingsFile()
   Declare.s GetHighlightVersion()
-  Declare   EnlistStatusError(error$)
   ; ******************************************************************************
   ; *                                                                            *
   ; *                             PUBLIC PROCEDURES                              *
@@ -78,13 +77,7 @@ Module ini
   ; *                             Initialize Butler                              *
   ; ******************************************************************************
   ; Initialize Butler and return its operativeStatus (true/false).
-  Procedure Init()    
-
-    ; ** BUTLER VERSION FULL STRING *** for console output:
-    ButlerVerFull$ = "Butler v" + DS::Butler\Version$ + " (" + DS::#ButlerBitness$ + " bits)"
-    
-    ; ** STATUS ERROR WORK STRING **
-    Define StatusErrorReport$
+  Procedure Init()
     ; ------------------------------------------------------------------------------
     ;-                           Windows: Is Bash/Shell?                            
     ; ------------------------------------------------------------------------------
@@ -94,7 +87,7 @@ Module ini
     CompilerIf #PB_Compiler_OS = #PB_OS_Windows
       If GetEnvironmentVariable("SHELL") = #Null$
         DS::StatusErr | DS::#SERR_Win_NotShell
-        EnlistStatusError("Butler not invoked from Bash/Shell.")
+        msg::EnlistStatusError("Butler not invoked from Bash/Shell.")
       EndIf
     CompilerEndIf
     ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,9 +103,11 @@ Module ini
       ; version number (unframed) and quit (no other checks need to be done).
       ; ------------------------------------------------------------------------------
       If ( DS::UserOpts & DS::#opt_Version )
-        ; FIXME: When all project data & info will be moved to new data:: module, use
-        ;        msg::ButlerVersion() instead
-        Print(ButlerVerFull$)
+        ; FIXME: Procedure should prematurely return to Main code, and let it handle
+        ;        the "--version" opt check and print version. The current solution is
+        ;        more code-efficient, but having Main control all user opts is better
+        ;        in terms of code maintainance (same operations centralized in same place)
+        Print( msg::ButlerVersion() )
         End 0 ; <= Exit Code -> Success (even if invoked from CMD)
       EndIf
     Else
@@ -122,8 +117,10 @@ Module ini
     ; ------------------------------------------------------------------------------
     ;                            Print Butler Info Header                           
     ; ------------------------------------------------------------------------------
-    Print( txt::FrameText( ButlerVerFull$ ) )
-    ButlerVerFull$ = #Null$ ; Dispose, not longer needed
+    ; Since the "--version" option has already been dealt with, we're now sure that
+    ; the Info Header should be printed to the console...
+    msg::PrintButlerVersionFramed()
+    
     ; ------------------------------------------------------------------------------
     ;                   Get Butler's Path from BUTLER_PATH Env Var                  
     ;{------------------------------------------------------------------------------
@@ -131,7 +128,7 @@ Module ini
     If DS::Butler\Path$ = #Null$
       ;       ConsoleError("BUTLER_PATH env var not found!!!")  ; DELME -- BUTLER_PATH env var not found
       DS::StatusErr | DS::#SERR_Missing_BUTLER_PATH
-      EnlistStatusError("Missing $BUTLER_PATH environment variable.")
+      msg::EnlistStatusError("Missing $BUTLER_PATH environment variable.")
     Else
       ; If BUTLER_PATH en var was found ...
       ; ------------------------------- Sanitize Path --------------------------------
@@ -161,7 +158,7 @@ Module ini
         ReadSettingsFile()
       Else
         DS::StatusErr | DS::#SERR_Missing_Ini_File
-        EnlistStatusError(~"Missing \"butler.ini\" file.")
+        msg::EnlistStatusError(~"Missing \"butler.ini\" file.")
       EndIf 
       ; ------------------------------------------------------------------------------
       ;-                         Dependencies: Check Versions                         
@@ -202,7 +199,7 @@ Module ini
   ; ******************************************************************************
   Procedure ParseCLIArgs(numParams)
     ; DELME: Shared
-;     Shared UserOpts
+    ;     Shared UserOpts
     
     Enumeration RegExs
       #RE_OptsShort
@@ -384,8 +381,8 @@ Module ini
   ; ******************************************************************************
   Procedure ValidateDependenciesVersion()
     ; DELME: Shared vars
-;     Shared Butler, Proj, Env
-;     Shared StatusErr
+    ;     Shared Butler, Proj, Env
+    ;     Shared StatusErr
     ; TODO: Not all deps will be mandatory in the final version of Butler.
     ;       Some external tools will be optionally supported. The only mandatory
     ;       tool is Pandoc. Even PP is not strictly required, but to make PP optional
@@ -414,7 +411,7 @@ Module ini
     ;       to specify that the project uses diita/PlantUML?
     ;
     ;       Or I could just add Java and R (and Python?) as optional dependencies.
-      
+    
     
     ; ==============================================================================
     ;-                          Get Dependencies Versions                           
@@ -433,12 +430,12 @@ Module ini
     ; ===> Check if PP was found: ==================================================
     If DS::Env\PPVersion$ = #Empty$
       DS::StatusErr | DS::#SERR_PP_Not_Found
-      EnlistStatusError("PP not found on system.")
+      msg::EnlistStatusError("PP not found on system.")
     EndIf
     ; ===> Check if Pandoc was found: ==============================================
     If DS::Env\PandocVersion$ = #Empty$
       DS::StatusErr | DS::#SERR_Pandoc_Not_Found
-      EnlistStatusError("Pandoc not found on system.")
+      msg::EnlistStatusError("Pandoc not found on system.")
     EndIf
     ; ------------------------------------------------------------------------------
     ;- Get Highlight Version
@@ -447,7 +444,7 @@ Module ini
     ; ===> Check if Highlight was found: ===========================================
     If DS::Env\HighlightVersion$ = #Empty$
       DS::StatusErr | DS::#SERR_Highlight_Not_Found
-      EnlistStatusError("Highlight not found on system.")
+      msg::EnlistStatusError("Highlight not found on system.")
     EndIf
     ;}==============================================================================
     ;-                         Check Dependencies Versions                          
@@ -486,15 +483,15 @@ Module ini
     If DS::Proj\ButlerVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       DS::StatusErr | DS::#SERR_Unspecified_Butler_Version
-      EnlistStatusError(~"\"butler.ini\" file: missing \"ButlerVersion\".")
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"ButlerVersion\".")
     EndIf
     
     If DS::Proj\ButlerVersion$ <> DS::Butler\Version$
       DS::StatusErr | DS::#SERR_Mismatched_Butler_Version
-      EnlistStatusError(~"Butler version error: Required v" + DS::Proj\ButlerVersion$ +
-                             " | Found v" + DS::Butler\Version$ + ".")
+      msg::EnlistStatusError(~"Butler version error: Required v" + DS::Proj\ButlerVersion$ +
+                        " | Found v" + DS::Butler\Version$ + ".")
     Else                                                            ; DELME Debugging
-      ConsoleError("!!! ButlerVersion$ == DS::Butler\Version$ !!!")     ; DELME Debugging
+      ConsoleError("!!! ButlerVersion$ == DS::Butler\Version$ !!!") ; DELME Debugging
     EndIf
     ; ------------------------------------------------------------------------------
     ; Check PP Version (strict)
@@ -502,16 +499,16 @@ Module ini
     If DS::Proj\PPVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       DS::StatusErr | DS::#SERR_Unspecified_PP_Version
-      EnlistStatusError(~"\"butler.ini\" file: missing \"PPVersion\".")
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"PPVersion\".")
     EndIf
     
     If Not ( DS::StatusErr & DS::#SERR_PP_Not_Found )
       If DS::Proj\PPVersion$ <> DS::Env\PPVersion$
         DS::StatusErr | DS::#SERR_Mismatched_PP_Version
-        EnlistStatusError(~"PP version error: Required v" + DS::Proj\PPVersion$ +
-                               " | Found v" + DS::Env\PPVersion$ + ".")
+        msg::EnlistStatusError(~"PP version error: Required v" + DS::Proj\PPVersion$ +
+                          " | Found v" + DS::Env\PPVersion$ + ".")
       Else                                                                                              ; DELME Debugging
-        ConsoleError("!!! PPVersion$ == DS::Env\PPVersion$ !!!")                                            ; DELME Debugging
+        ConsoleError("!!! PPVersion$ == DS::Env\PPVersion$ !!!")                                        ; DELME Debugging
       EndIf
     EndIf
     ; ------------------------------------------------------------------------------
@@ -520,16 +517,16 @@ Module ini
     If DS::Proj\PandocVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       DS::StatusErr | DS::#SERR_Unspecified_Pandoc_Version
-      EnlistStatusError(~"\"butler.ini\" file: missing \"PandocVersion\".")
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"PandocVersion\".")
     EndIf
     
     If Not ( DS::StatusErr & DS::#SERR_Pandoc_Not_Found )
       If DS::Proj\PandocVersion$ <> DS::Env\PandocVersion$
         DS::StatusErr | DS::#SERR_Mismatched_Pandoc_Version
-        EnlistStatusError(~"Pandoc version error: Required v" + DS::Proj\PandocVersion$ +
-                               " | Found v" + DS::Env\PandocVersion$ + ".")
+        msg::EnlistStatusError(~"Pandoc version error: Required v" + DS::Proj\PandocVersion$ +
+                          " | Found v" + DS::Env\PandocVersion$ + ".")
       Else                                                                                                              ; DELME Debugging
-        ConsoleError("!!! PandocVersion$ == DS::Env\PandocVersion$ !!!")                                                    ; DELME Debugging
+        ConsoleError("!!! PandocVersion$ == DS::Env\PandocVersion$ !!!")                                                ; DELME Debugging
       EndIf
     EndIf
     ; ------------------------------------------------------------------------------
@@ -538,7 +535,7 @@ Module ini
     If DS::Proj\HighlightVersion$ = #Empty$
       ; Either the Key is not present or it has empty value...
       DS::StatusErr | DS::#SERR_Unspecified_Highlight_Version
-      EnlistStatusError(~"\"butler.ini\" file: missing \"HighlightVersion\".")
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"HighlightVersion\".")
     EndIf
     
     If Not ( DS::StatusErr & DS::#SERR_Highlight_Not_Found )
@@ -582,8 +579,8 @@ Module ini
       
       If HLFound_MAJ <> HLReq_MAJ Or HLFound_MIN < HLReq_MIN
         DS::StatusErr | DS::#SERR_Mismatched_Highlight_Version
-        EnlistStatusError(~"Highlight version error: Required v" + DS::Proj\HighlightVersion$ +
-                               " | Found v" + DS::Env\HighlightVersion$ + ".")
+        msg::EnlistStatusError(~"Highlight version error: Required v" + DS::Proj\HighlightVersion$ +
+                          " | Found v" + DS::Env\HighlightVersion$ + ".")
       Else                                                                                                                          ; DELME Debugging
         If HLReq_MIN = HLFound_MIN 
           ConsoleError("!!! HighlightVersion$ == DS::Env\HighlightVersion$ !!!")                                                          ; DELME Debugging
@@ -604,39 +601,6 @@ Module ini
     ProcedureReturn PPP::GetAppVersion("highlight", "--version")
   EndProcedure
   
-    ; ******************************************************************************
-    ; *                            Enlist Status Error                             *
-    ; ******************************************************************************
-    ; Add a status error string to the numbered list of status errors that will be
-    ; shown in the final StatusErrorReport()
-  Procedure EnlistStatusError(error$)
-    
-    Shared StatusErrorReport$
-    Static cnt = 0 ; Counter for numbered list
-    
-    ; cntStr(number) Macro => Used to format ordered list strings.
-    cnt +1
-    StatusErrorReport$ + cntStr(cnt) + error$ + txt::#EOL$
-    
-  EndProcedure
-  
-  ; ******************************************************************************
-  ; *                            Status Error Report                             *
-  ; ******************************************************************************
-  Procedure StatusErrorReport()
-    ; TODO StatusErrorReport():
-    ; -- Output To STDERR instead
-    ; -- Add line before list:
-    ;    -- if opStatusRequired:
-    ;       "Butler can't carry out the requested tasks because..."
-    ;    -- else if just --status opt:
-    ;       "Butler is not in operative state because..."
-    Shared StatusErrorReport$
-    
-    Print(StatusErrorReport$ + txt::#EOL$)
-    
-    StatusErrorReport$ = #Null$ ; Dispose and free mem (no longer needed)
-    
-  EndProcedure
+
   
 EndModule
