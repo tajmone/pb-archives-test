@@ -13,7 +13,6 @@ Declare Init()
 Declare ParseCLIArgs(numParams)
 Declare ReadSettingsFile()
 Declare ValidateDependenciesVersion()
-Declare.s GetHighlightVersion()
 CompilerEndIf
 CompilerIf #PB_Compiler_Module = ""
 CompilerEndIf

@@ -49,9 +49,7 @@ DeclareModule PPP
   ;                               PUBLIC PROCEDURES                               
   ; ==============================================================================
   Declare   Convert(argsPP$, argsPandoc$)
-  Declare.s GetAppVersion(app$, params$)
-  Declare.s GetPPVersion()
-  Declare.s GetPandocVersion()
+  
 EndDeclareModule
 
 Module PPP
@@ -180,69 +178,6 @@ Module PPP
       ProcedureReturn #Success
     EndIf
     
-  EndProcedure
-  ; ******************************************************************************
-  ; *                      Query External App Version Info                       *
-  ; ******************************************************************************
-  Procedure.s GetAppVersion(app$, params$)
-    
-    TargetApp = RunProgram(app$, params$, "", #PB_Program_Hide | #PB_Program_Open |
-                                              #PB_Program_Read | #PB_Program_UTF8 )
-    If Not TargetApp
-      ; TODO: GetAppVersion() -- implement handling RunProgram Error!
-      ProcedureReturn
-    EndIf
-    ; ------------------------------------------------------------------------------
-    ;                              Version/SemVer RegEx                             
-    ; ------------------------------------------------------------------------------
-    ; This RegEx is flexible: it captures both SemVer 2.0 strings and the more common
-    ; digits-only version strings (eg: 1.1.1.1).
-    Rex$ = "(?is)"+                              ; (set mode: case insensitive + single line)
-           "^.*?v?("+                            ; [...anything...] "v" (optional)
-           "(?:0|[1-9]\d*)"+                     ; Num-ID (mandatory) = MAJ
-           "(?:\.(?:0|[1-9]\d*)){1,3}"+          ; .Num-ID (1 mandatory + 2 optional) = .MIN [.PATCH .BUILD]
-           "(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?"+  ; -PRERELEASE (optional)     = SemVer specific
-           "(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?"+ ; +BUILD_METADATA (optional) = SemVer specific
-           ")"
-    If Not CreateRegularExpression(0, Rex$)
-      ; FIXME: Butler Internal Error (use custom msg:: proc)
-      ConsoleError("BUTLER INTERNAL ERROR -- PPP::GetAppVersion() RegEx creation failed!") 
-      End 1
-    EndIf
-    ; ------------------------------------------------------------------------------
-    ;                         Get Raw Info from External App                        
-    ; ------------------------------------------------------------------------------
-    While ProgramRunning(TargetApp)
-      If AvailableProgramOutput(TargetApp)
-        RawInfo$ + ReadProgramString(TargetApp) + #LF$
-      EndIf
-    Wend
-    CloseProgram(TargetApp)
-    ; ------------------------------------------------------------------------------
-    ;                             Extract Version String                            
-    ; ------------------------------------------------------------------------------
-    If MatchRegularExpression(0, RawInfo$)
-      If ExamineRegularExpression(0, RawInfo$)
-        NextRegularExpressionMatch(0)
-        VerStr$ = RegularExpressionGroup(0, 1)
-      EndIf
-    EndIf
-    FreeRegularExpression(0)
-    
-    ProcedureReturn VerStr$
-    
-  EndProcedure
-  ; ******************************************************************************
-  ; *                               Get PP Version                               *
-  ; ******************************************************************************
-  Procedure.s GetPPVersion()
-    ProcedureReturn GetAppVersion("pp", "-v")
-  EndProcedure
-  ; ******************************************************************************
-  ; *                             Get Pandoc Version                             *
-  ; ******************************************************************************
-  Procedure.s GetPandocVersion()
-    ProcedureReturn GetAppVersion("pandoc", "--version")
   EndProcedure
   
 EndModule

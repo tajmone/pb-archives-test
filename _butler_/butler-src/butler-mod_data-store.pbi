@@ -29,8 +29,28 @@
 ; ******************************************************************************
 DeclareModule DS
   ; ==============================================================================
+  ;                        CROSS-MODULE REGEX ENUMERATIONS                        
+  ; ==============================================================================
+  ; (RegExs IDs are "global" and module independent)
+  ; Declare a common RegEx Enumeration Identifier to keep track of the RegExs ID
+  ; across modules, otherwise Enums will start over from 0 and overwrite existing
+  ; RegExs! Other modules' Enums will take on from here by:
+  ;
+  ;     Enumeration DS::RegExsIDs
+  ;
+  ; This Enum block it's empty because here we only need to set the Enum Id.
+  ; ------------------------------------------------------------------------------
+  ; NOTE: This Enumeration has to be public! The rest of the modules' RegEx Enums
+  ;       don't have to, they can be private to their module...
+  ; ------------------------------------------------------------------------------
+  Enumeration RegExsIDs
+  EndEnumeration
+  ; ==============================================================================
   ;                            PUBLIC VARS & CONSTANTS                            
   ; ==============================================================================
+  Verbose = #False ; Shortcut for "( DS::userOpts & DS::#opt_Verbose )"
+  
+  ; ------------------------------------------------------------------------------
   ;                              Butler's Data & Info                             
   ; ------------------------------------------------------------------------------
   Structure butlerinfo
@@ -96,6 +116,7 @@ DeclareModule DS
     #SERR_Win_NotShell
     #SERR_Missing_BUTLER_PATH
     #SERR_Missing_Ini_File
+    #SERR_CantOpen_Ini_File
     #SERR_PP_Not_Found
     #SERR_Pandoc_Not_Found
     #SERR_Highlight_Not_Found

@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 18 ; v0.1.18 ( 2017/11/25 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 20 ; v0.1.20 ( 2017/11/29 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -22,13 +22,14 @@
 
 IncludeFile "butler.pbhgen.pbi"    ; <= PBHGEN-X
 
-IncludeFile "butler-mod_data-store.pbi" ;    DS:: > Butler's Data Storage
-IncludeFile "mod_fs.pbi"                ;    FS:: > File System helpers
-IncludeFile "mod_ppp.pbi"               ;   PPP:: > PP / Pandoc interfacing
-IncludeFile "mod_text-funcs.pbi"        ;   txt:: > Text Formatting Utilities
-IncludeFile "butler-mod_msg.pbi"        ;   msg:: > Butler messages (STDOUT/STDERR)
-IncludeFile "butler-mod_ini.pbi"        ;   ini:: > Project settings
-IncludeFile "butler-mod_build.pbi"      ; build:: > Butler's build engine
+IncludeFile "butler-mod_data-store.pbi"   ;    DS:: > Butler's Data Storage
+IncludeFile "mod_fs.pbi"                  ;    FS:: > File System helpers
+IncludeFile "mod_ppp.pbi"                 ;   PPP:: > PP / Pandoc interfacing
+IncludeFile "mod_text-funcs.pbi"          ;   txt:: > Text Formatting Utilities
+IncludeFile "butler-mod_dependencies.pbi" ;  deps:: > Handle dependencies version
+IncludeFile "butler-mod_msg.pbi"          ;   msg:: > Butler messages (STDOUT/STDERR)
+IncludeFile "butler-mod_ini.pbi"          ;   ini:: > Project settings
+IncludeFile "butler-mod_build.pbi"        ; build:: > Butler's build engine
 
 ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ;                              CURRENTLY WORKING ON                             
