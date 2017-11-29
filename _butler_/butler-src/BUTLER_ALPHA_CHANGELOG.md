@@ -2,6 +2,40 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.20` (2017/11/29)
+    
+      - **NEW DEPENDENCIES MODULE** (`deps::`)
+        
+        New `deps::` module (`butler-mod_dependencies.pbi`) for handling version constraints via `deps::SatisfyVersion(Constraint$, Ver$)`.
+        
+        Supported constraint operators:
+        
+            * “`=`” — *Strict*: Lock all segements (default)
+            * “`^`” — *Caret*: Lock MAJOR version
+            * “`~`” — *Tilde*: Lock MAJOR and MINOR version
+            * “`~>`” — *Twiddle-Wakka*: Lock all segements except rightmost
+
+      - **VERSION CONTRAINED DEPENDENCIES**
+        
+        Now some dependencies allow version-constrained checks via `deps::SatisfyVersion()`:
+        
+          - pandoc
+          - Highlight
+        
+        This allows a more flexible approach to external tools: a minimum version is set by proj settings. PP and Butler remain strict (Butler will always be, and problably PP will be kept strict too).
+    
+      - **CROSS-MODULE REGEX ENUMERATIONS**
+        
+        New `RegExsIDs` Enums ID in `DS::` module — a common RegEx Enumeration Identifier to keep track of the RegExs IDs across modules, otherwise Enums will start over from 0 and overwrite existing RegExs\! Other modules’ Enums will take on enumeration by:
+        
+            Enumeration DS::RegExsIDs
+
+        (RegExs IDs are “global” and module independent)
+        
+          - Changed modules accordingly, to avoid RegExs ID-constants conflicts\!
+    
+      - Started implementing verbosity reports and delete current debug messages via `STDERR`.
+
   - `v0.1.19` (2017/11/25)
     
       - if `ini::ReadSettingsFile()` can’t open existing “`butler.ini`”, the (new) `#SERR_CantOpen_Ini_File` status error is enlisted via `msg::EnlistStatusError()`, and `ValidateDependenciesVersion()` is skipped.
