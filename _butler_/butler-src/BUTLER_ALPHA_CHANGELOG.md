@@ -2,6 +2,36 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.21` (2017/11/30)
+    
+      - `deps::SatisfyVersion()` — fixed `#RE_VerValidate` RegEx: due to missing parenthesis wasn’t validating properly constraint operators.
+    
+      - **NEW** `ini::GetDependenciesVersion()`
+        
+          - Querying apps version code has been moved into this new procedure.
+          - Status Errors for not-found dependencies are now handled here
+          - Querying also emits verbose report.
+    
+      - **DEPENDENCIES STATUS VARS** (`DS::`)
+        
+        New bool vars in `DS::` module to set/check if a dependency has passed all checks:
+        
+          - `DS::ButlerStatus`
+          - `DS::PPStatus`
+          - `DS::PandocStatus`
+          - `DS::PandocStatus`
+    
+      - `ini::ValidateDependenciesVersion()`
+        
+          - Version-satisfaction checks are now carried out only if the dependency status is `#True` (ie: both Required and Found version strings are non-empty)
+          - Improved verbosity output.
+          - Also handles malformed version strings error.
+    
+      - `ini::ReadSettingsFile()`
+        
+          - Status Errors for unspecified dependency version are now handled here
+          - verbosity improved
+
   - `v0.1.20` (2017/11/29)
     
       - **NEW DEPENDENCIES MODULE** (`deps::`)

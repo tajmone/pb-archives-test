@@ -78,6 +78,7 @@ Module ini
   ; ==============================================================================
   Declare   ParseCLIArgs(numParams)
   Declare   ReadSettingsFile()
+  Declare   GetDependenciesVersion()
   ; ******************************************************************************
   ; *                                                                            *
   ; *                             PUBLIC PROCEDURES                              *
@@ -180,6 +181,7 @@ Module ini
           ; --------------------------------------------------------------------------
           ;-                      Dependencies: Check Versions                         
           ; --------------------------------------------------------------------------
+          GetDependenciesVersion()
           ValidateDependenciesVersion()
         EndIf
       Else
@@ -359,26 +361,44 @@ Module ini
   Procedure ReadSettingsFile()
     
     If Not OpenPreferences(DS::Butler\Path$ + "butler.ini")
-      If DS::Verbose
-        PrintN(~"- Unable to open settings file \"butler.ini\"!")
-      EndIf
+
       ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       ;                !!!   FAILED TO OPEN "butler.ini" FILE   !!!
       ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      If DS::Verbose
+        PrintN(~"- Unable to open settings file \"butler.ini\"!")
+      EndIf
       DS::StatusErr | DS::#SERR_CantOpen_Ini_File
       msg::EnlistStatusError(~"Unable to open \"butler.ini\" file.")
+      ; ====> Set all dependencies status to #False:
+      DS::ButlerStatus = #False
+      DS::PPStatus = #False
+      DS::PandocStatus = #False
+      DS::HighlightStatus = #False
       ProcedureReturn #False ; <= Failed opening "butler.ini"
       
     ElseIf DS::Verbose ; ================================================> Verbosity
       PrintN(~"- Parsing settings file \"butler.ini\":")
     EndIf
     
+    ; TODO: Macro for ReadSettingsFile()
+    ;       All these checks could use a Macro to slim down code maintainence
+    
+    #unspecified_msg$ = "unspecified"
     ; ------------------------------------------------------------------------------
     ; Required Butler Version                            
     ; ------------------------------------------------------------------------------
     DS::Proj\ButlerVersion$ = ReadPreferenceString("ButlerVersion", #Empty$)
     
-    If DS::Verbose ; ====================================================> Verbosity
+    If DS::Proj\ButlerVersion$ = #Empty$
+      ; Either the Key is not present or it has empty value...
+      DS::StatusErr | DS::#SERR_Unspecified_Butler_Version
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"ButlerVersion\".")
+      DS::ButlerStatus = #False
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN("  - ButlerVersion: " + #unspecified_msg$)
+      EndIf
+    ElseIf DS::Verbose ; ====================================================> Verbosity
       PrintN(~"  - ButlerVersion: \"" + DS::Proj\ButlerVersion$ + ~"\"")
     EndIf
     ; ------------------------------------------------------------------------------
@@ -386,7 +406,15 @@ Module ini
     ; ------------------------------------------------------------------------------
     DS::Proj\PPVersion$ = ReadPreferenceString("PPVersion", #Empty$)
     
-    If DS::Verbose ; ====================================================> Verbosity
+    If DS::Proj\PPVersion$ = #Empty$
+      ; Either the Key is not present or it has empty value...
+      DS::StatusErr | DS::#SERR_Unspecified_PP_Version
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"PPVersion\".")
+      DS::PPStatus = #False
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN(~"  - PPVersion: " + #unspecified_msg$)
+      EndIf
+    ElseIf DS::Verbose ; ====================================================> Verbosity
       PrintN(~"  - PPVersion: \"" + DS::Proj\PPVersion$ + ~"\"")
     EndIf
     ; ------------------------------------------------------------------------------
@@ -394,7 +422,15 @@ Module ini
     ; ------------------------------------------------------------------------------
     DS::Proj\PandocVersion$ = ReadPreferenceString("PandocVersion", #Empty$)
     
-    If DS::Verbose ; ====================================================> Verbosity
+    If DS::Proj\PandocVersion$ = #Empty$
+      ; Either the Key is not present or it has empty value...
+      DS::StatusErr | DS::#SERR_Unspecified_Pandoc_Version
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"PandocVersion\".")
+      DS::PandocStatus = #False
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN(~"  - PandocVersion: " + #unspecified_msg$)
+      EndIf
+    ElseIf DS::Verbose ; ====================================================> Verbosity
       PrintN(~"  - PandocVersion: \"" + DS::Proj\PandocVersion$ + ~"\"")
     EndIf
     ; ------------------------------------------------------------------------------
@@ -403,12 +439,81 @@ Module ini
     ; Highlight version has syntax `MAJ.MIN` (eg: v3.40)
     DS::Proj\HighlightVersion$ = ReadPreferenceString("HighlightVersion", #Empty$)
     
-    If DS::Verbose ; ====================================================> Verbosity
+    If DS::Proj\HighlightVersion$ = #Empty$
+      ; Either the Key is not present or it has empty value...
+      DS::StatusErr | DS::#SERR_Unspecified_Highlight_Version
+      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"HighlightVersion\".")
+      DS::HighlightStatus = #False
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN(~"  - HighlightVersion: " + #unspecified_msg$)
+      EndIf
+    ElseIf DS::Verbose ; ====================================================> Verbosity
       PrintN(~"  - HighlightVersion: \"" + DS::Proj\HighlightVersion$ + ~"\"")
     EndIf
     ; ------------------------------------------------------------------------------
     
     ProcedureReturn #True ; <= Successfully opened "butler.ini"
+  EndProcedure
+  
+  ; ******************************************************************************
+  ; *                          Get Dependencies Version                          *
+  ; ******************************************************************************
+  Procedure GetDependenciesVersion()
+    
+    #not_found_msg$ = "not found on system"
+    
+    If DS::Verbose ; ====================================================> Verbosity
+      PrintN("- Querying dependencies version:")
+    EndIf
+    
+    ; ------------------------------------------------------------------------------
+    ;- Get PP Version
+    ; ------------------------------------------------------------------------------
+    DS::Env\PPVersion$ =     deps::GetAppVersion("pp", "-v")
+    
+    ; ===> Check if PP was found: ==================================================
+    If DS::Env\PPVersion$ = #Empty$
+      DS::StatusErr | DS::#SERR_PP_Not_Found
+      msg::EnlistStatusError("PP " + #not_found_msg$)
+      DS::PPStatus = #False
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN("  - PP: " + #not_found_msg$)
+      EndIf
+    ElseIf DS::Verbose ; ====================================================> Verbosity
+      PrintN("  - PP: " + DS::Env\PPVersion$)
+    EndIf
+    ; ------------------------------------------------------------------------------
+    ;- Get Pandoc Version
+    ; ------------------------------------------------------------------------------
+    DS::Env\PandocVersion$ = deps::GetAppVersion("pandoc", "--version")
+
+    ; ===> Check if Pandoc was found: ==============================================
+    If DS::Env\PandocVersion$ = #Empty$
+      DS::StatusErr | DS::#SERR_Pandoc_Not_Found
+      msg::EnlistStatusError("Pandoc " + #not_found_msg$)
+      DS::PandocStatus = #False
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN("  - Pandoc: " + #not_found_msg$)
+      EndIf
+    ElseIf DS::Verbose ; ====================================================> Verbosity
+      PrintN("  - Pandoc: " + DS::Env\PandocVersion$)
+    EndIf
+    ; ------------------------------------------------------------------------------
+    ;- Get Highlight Version
+    ; ------------------------------------------------------------------------------
+    DS::Env\HighlightVersion$ = deps::GetAppVersion("highlight", "--version")    
+    
+    ; ===> Check if Highlight was found: ===========================================
+    If DS::Env\HighlightVersion$ = #Empty$
+      DS::StatusErr | DS::#SERR_Highlight_Not_Found
+      msg::EnlistStatusError("Highlight " + #not_found_msg$)
+      DS::HighlightStatus = #False
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN("  - Highlight: " + #not_found_msg$)
+      EndIf
+    ElseIf DS::Verbose ; ====================================================> Verbosity
+      PrintN("  - Highlight: " + DS::Env\HighlightVersion$)
+    EndIf
   EndProcedure
   
   ; ******************************************************************************
@@ -420,7 +525,9 @@ Module ini
       PrintN("- Validating project dependencies:")
     EndIf
     
-    ; TODO: Not all deps will be mandatory in the final version of Butler.
+    ;{ TODO: Implement Optional Dependencies
+    ;
+    ;       Not all deps will be mandatory in the final version of Butler.
     ;       Some external tools will be optionally supported. The only mandatory
     ;       tool is Pandoc. Even PP is not strictly required, but to make PP optional
     ;       I need to change the code that invokes PP/pandoc to behave differently if
@@ -447,138 +554,101 @@ Module ini
     ;       Should I always check for Java version, or should I add a .ini preference
     ;       to specify that the project uses diita/PlantUML?
     ;
-    ;       Or I could just add Java and R (and Python?) as optional dependencies.
+    ;}       Or I could just add Java and R (and Python?) as optional dependencies.
     
+    ; TODO: Macro for ValidateDependenciesVersion()
+    ;       All these checks could use 2 Macros to slim down code maintainence:
+    ;       -- one for strict checks
+    ;       -- another for constrained checks
     
-    ; ==============================================================================
-    ;-                          Get Dependencies Versions                           
-    ;{==============================================================================
-    ; NOTE: Verbosity reports for these are handled by Dependencies Cheks.
-    ; ------------------------------------------------------------------------------
-    ;- Get PP/Pandoc Version
-    ; ------------------------------------------------------------------------------
-    DS::Env\PPVersion$ =     deps::GetAppVersion("pp", "-v")
-    ;     DS::Env\PPVersion$ =     PPP::GetPPVersion()
-    DS::Env\PandocVersion$ = deps::GetAppVersion("pandoc", "--version")
-    ;     DS::Env\PandocVersion$ = PPP::GetPandocVersion()
-    ; ===> Check if PP was found: ==================================================
-    If DS::Env\PPVersion$ = #Empty$
-      DS::StatusErr | DS::#SERR_PP_Not_Found
-      msg::EnlistStatusError("PP not found on system.")
-    EndIf
-    ; ===> Check if Pandoc was found: ==============================================
-    If DS::Env\PandocVersion$ = #Empty$
-      DS::StatusErr | DS::#SERR_Pandoc_Not_Found
-      msg::EnlistStatusError("Pandoc not found on system.")
-    EndIf
-    ; ------------------------------------------------------------------------------
-    ;- Get Highlight Version
-    ; ------------------------------------------------------------------------------
-    DS::Env\HighlightVersion$ = deps::GetAppVersion("highlight", "--version")    
-    ; ===> Check if Highlight was found: ===========================================
-    If DS::Env\HighlightVersion$ = #Empty$
-      DS::StatusErr | DS::#SERR_Highlight_Not_Found
-      msg::EnlistStatusError("Highlight not found on system.")
-    EndIf
-    ;}==============================================================================
-    ;-                         Check Dependencies Versions                          
-    ; ==============================================================================
-    ; TODO: Cleanup the verbosity reports
-    ;       -- Align fields, they look too chaotic
-    ;       -- Implement some List of sorts, and handle all reports at the end with
-    ;          a ForEach loop (easier to maintain and change text)
+    #cant_check_msg$ = "impossible to check"
     ; ------------------------------------------------------------------------------
     ; Check Butler Version (strict)
     ; ------------------------------------------------------------------------------
-    CheckRes$ = "FAILED" ; Version Check Result: Defaults to FAILED  
-    If DS::Proj\ButlerVersion$ = #Empty$
-      ; Either the Key is not present or it has empty value...
-      DS::StatusErr | DS::#SERR_Unspecified_Butler_Version
-      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"ButlerVersion\".")
-    ElseIf DS::Proj\ButlerVersion$ <> DS::Butler\Version$
-      DS::StatusErr | DS::#SERR_Mismatched_Butler_Version
-      msg::EnlistStatusError(~"Butler version error -- Required: " + DS::Proj\ButlerVersion$ +
-                             " | Found: " + DS::Butler\Version$ + ".")
-    Else
-      CheckRes$ = "PASSED"
-    EndIf
-    
-    ;- VERBOSITY TEST -- ValidateDependenciesVersion()
-    If DS::Verbose ; ====================================================> Verbosity
-      PrintN("  - Butler (strict): "+ CheckRes$ + " | Required: " + DS::Proj\ButlerVersion$ + " | Found: " + DS::Butler\Version$)
+    If DS::ButlerStatus
+      If DS::Proj\ButlerVersion$ <> DS::Butler\Version$
+        CheckRes$ = "FAILED"
+        DS::StatusErr | DS::#SERR_Mismatched_Butler_Version
+        msg::EnlistStatusError(~"Butler version error -- Required: " + DS::Proj\ButlerVersion$ +
+                               " | Found: " + DS::Butler\Version$ + ".")
+      Else
+        CheckRes$ = "PASSED"
+      EndIf
+      If DS::Verbose ; ==================================================> Verbosity
+        PrintN("  - Butler (strict): "+ CheckRes$ )
+      EndIf
+    ElseIf DS::Verbose ; =====================================> Verbosity Skip Check
+      PrintN("  - Butler (strict): "+ #cant_check_msg$ )
     EndIf
     ; ------------------------------------------------------------------------------
     ; Check PP Version (strict)
     ; ------------------------------------------------------------------------------
-    CheckRes$ = "FAILED" ; Version Check Result: Defaults to FAILED  
-    If DS::Proj\PPVersion$ = #Empty$
-      ; Either the Key is not present or it has empty value...
-      DS::StatusErr | DS::#SERR_Unspecified_PP_Version
-      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"PPVersion\".")
-    ElseIf Not ( DS::StatusErr & DS::#SERR_PP_Not_Found )
+    If DS::PPStatus
       If DS::Proj\PPVersion$ <> DS::Env\PPVersion$
+        CheckRes$ = "FAILED"
         DS::StatusErr | DS::#SERR_Mismatched_PP_Version
         msg::EnlistStatusError(~"PP version error -- Required: " + DS::Proj\PPVersion$ +
                                " | Found: " + DS::Env\PPVersion$ + ".")
       Else
         CheckRes$ = "PASSED"
       EndIf
-    EndIf
-    
-    If DS::Verbose ; ====================================================> Verbosity
-      PrintN("  - PP (strict): "+ CheckRes$ + " | Required: " + DS::Proj\PPVersion$ + " | Found: " + DS::Env\PPVersion$)
+      If DS::Verbose ; ==================================================> Verbosity
+        PrintN("  - PP (strict): "+ CheckRes$ )
+      EndIf
+    ElseIf DS::Verbose ; =====================================> Verbosity Skip Check
+      PrintN("  - PP (strict): "+ #cant_check_msg$ )
     EndIf
     ; ------------------------------------------------------------------------------
     ; Check Pandoc Version (constraints)
     ; ------------------------------------------------------------------------------
-    CheckRes$ = "FAILED" ; Version Check Result: Defaults to FAILED  
-    If DS::Proj\PandocVersion$ = #Empty$
-      ; Either the Key is not present or it has empty value...
-      DS::StatusErr | DS::#SERR_Unspecified_Pandoc_Version
-      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"PandocVersion\".")
-    ElseIf Not ( DS::StatusErr & DS::#SERR_Pandoc_Not_Found )
+    If DS::PandocStatus
       Select deps::SatisfyVersion( DS::Proj\PandocVersion$, DS::Env\PandocVersion$ )
         Case 1
           CheckRes$ = "PASSED"
         Case 0
+          CheckRes$ = "FAILED"
           DS::StatusErr | DS::#SERR_Mismatched_Pandoc_Version
           msg::EnlistStatusError(~"Pandoc version error -- Required: " + DS::Proj\PandocVersion$ +
                                  " | Found: " + DS::Env\PandocVersion$ + ".")
         Case -1
-          ; TODO: handle malformed version string!
-          MessageRequester("ERR", "SatisfyVersion() = -1")
+          CheckRes$ = "FAILED (malformed version string)"
+          ; TODO: Implement Malformed Ver Str Err
+          DS::StatusErr | DS::#SERR_Mismatched_Pandoc_Version
+          msg::EnlistStatusError(~"Pandoc malformed version string error -- Required: " + DS::Proj\PandocVersion$ +
+                                 " | Found: " + DS::Env\PandocVersion$ + ".")
       EndSelect
-    EndIf
-    
-    If DS::Verbose ; ====================================================> Verbosity
-      PrintN("  - panodc: "+ CheckRes$ + " | Required: " + DS::Proj\PandocVersion$ + " | Found: " + DS::Env\PandocVersion$)
+      If DS::Verbose ; ================================================> Verbosity
+        PrintN("  - panodc: "+ CheckRes$ )
+      EndIf
+    ElseIf DS::Verbose ; ===================================> Verbosity Skip Check
+      PrintN("  - panodc: "+ #cant_check_msg$ )
     EndIf
     ; ------------------------------------------------------------------------------
     ; Check Highlight Version (constraints)
     ; ------------------------------------------------------------------------------
     CheckRes$ = "FAILED" ; Version Check Result: Defaults to FAILED  
-    If DS::Proj\HighlightVersion$ = #Empty$
-      ; Either the Key is not present or it has empty value...
-      DS::StatusErr | DS::#SERR_Unspecified_Highlight_Version
-      msg::EnlistStatusError(~"\"butler.ini\" file: missing \"HighlightVersion\".")
-    ElseIf Not ( DS::StatusErr & DS::#SERR_Highlight_Not_Found )
+    If DS::HighlightStatus
       Select deps::SatisfyVersion( DS::Proj\HighlightVersion$, DS::Env\HighlightVersion$ )
         Case 1
           CheckRes$ = "PASSED"
         Case 0
+          CheckRes$ = "FAILED"
           DS::StatusErr | DS::#SERR_Mismatched_Highlight_Version
           msg::EnlistStatusError(~"Highlight version error -- Required: " + DS::Proj\HighlightVersion$ +
                                  " | Found: " + DS::Env\HighlightVersion$ + ".")
         Case -1
-          ; TODO: handle malformed version string!
-          MessageRequester("ERR", "SatisfyVersion() = -1")
+          CheckRes$ = "FAILED (malformed version string)"
+          ; TODO: Implement Malformed Ver Str Err
+          DS::StatusErr | DS::#SERR_Mismatched_Pandoc_Version
+          msg::EnlistStatusError(~"Highlight malformed version string error -- Required: " + DS::Proj\HighlightVersion$ +
+                                 " | Found: " + DS::Env\HighlightVersion$ + ".")
       EndSelect
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN("  - Highlight: "+ CheckRes$ )
+      EndIf
+    ElseIf DS::Verbose ; ===================================> Verbosity Skip Check
+      PrintN("  - Highlight: "+ #cant_check_msg$ )
     EndIf
-    
-    If DS::Verbose ; ====================================================> Verbosity
-      PrintN("  - Highlight: "+ CheckRes$ + " | Required: " + DS::Proj\HighlightVersion$ + " | Found: " + DS::Env\HighlightVersion$)
-    EndIf
-    
     
   EndProcedure
   

@@ -130,7 +130,7 @@ Module deps
     ; -- Constraint operator (only found in Constraint strings)
     ; -- MAJOR version
     ; -- One or more dot-separated segments (numerical only)
-    Data.s "^(?:\^|~|=|~>)? *" + #RE_NumID$ + "(?:\.(?:" + #RE_NumID$ + "))+$"
+    Data.s "^(?:\^|~>|~|=)? *(?:" + #RE_NumID$ + ")(?:\.(?:" + #RE_NumID$ + "))+$"
     ; ------------------------------------------------------------------------------
     ; RegEx: Parse Version Segments & Constraint Operator
     ; ------------------------------------------------------------------------------
