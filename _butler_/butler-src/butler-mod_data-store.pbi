@@ -51,6 +51,16 @@ DeclareModule DS
   Verbose = #False ; Shortcut for "( DS::userOpts & DS::#opt_Verbose )"
   
   ; ------------------------------------------------------------------------------
+  ;                              Dependencies Status                              
+  ; ------------------------------------------------------------------------------
+  ; Booleans holding the status of external dependencies:
+  ;    #True = ready | #False = not available, or wrong version
+  ; Start off As #True, then if any check fails it will set it to #False.
+  Define.b ButlerStatus    = #True
+  Define.b PPStatus        = #True
+  Define.b PandocStatus    = #True
+  Define.b HighlightStatus = #True 
+  ; ------------------------------------------------------------------------------
   ;                              Butler's Data & Info                             
   ; ------------------------------------------------------------------------------
   Structure butlerinfo

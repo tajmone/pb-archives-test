@@ -132,7 +132,7 @@ Module msg
     ProcedureReturn OUT$
   EndProcedure
   
-    ; ******************************************************************************
+  ; ******************************************************************************
   ; *                            Enlist Status Error                             *
   ; ******************************************************************************
   ; Add a status error string to the numbered list of status errors that will be
@@ -166,6 +166,7 @@ Module msg
     StatusErrorReport$ = #Null$ ; Dispose and free mem (no longer needed)
     
   EndProcedure
+  
   
   ; ******************************************************************************
   ; *                                 Print Help                                 *

@@ -12,6 +12,7 @@ CompilerIf #PB_Compiler_Module = "ini"
 Declare Init()
 Declare ParseCLIArgs(numParams)
 Declare ReadSettingsFile()
+Declare GetDependenciesVersion()
 Declare ValidateDependenciesVersion()
 CompilerEndIf
 CompilerIf #PB_Compiler_Module = ""
