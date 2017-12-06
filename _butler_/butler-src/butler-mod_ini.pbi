@@ -142,9 +142,11 @@ Module ini
     ;{------------------------------------------------------------------------------
     DS::Butler\Path$ = GetEnvironmentVariable("BUTLER_PATH")
     If DS::Butler\Path$ = #Null$
-      ;       ConsoleError("BUTLER_PATH env var not found!!!")  ; DELME -- BUTLER_PATH env var not found
       DS::StatusErr | DS::#SERR_Missing_BUTLER_PATH
       msg::EnlistStatusError("Missing $BUTLER_PATH environment variable.")
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN("~ $BUTLER_PATH env var not found!")
+      EndIf
     Else
       ; If BUTLER_PATH en var was found ...
       ; ------------------------------- Sanitize Path --------------------------------
@@ -152,6 +154,16 @@ Module ini
       ; with path separator (if not present) ...
       ; TODO: Also check that path doesn't contain invalid chars (spaces, etc.)
       DS::Butler\Path$ = FS::SanitizeDirPath(DS::Butler\Path$)
+      ;------------------------------------------------------------------------------
+      ;-                        Establish Project's Root Path                         
+      ; ------------------------------------------------------------------------------
+      ; The project root is one levl up from Butler's folder...
+      ; ------------------------------------------------------------------------------
+      tot = CountString(DS::Butler\Path$, FS::#DIR_SEP$)
+      For i = 1 To tot - 1
+        ; Build path string omitting last folder (ie: "/_butler_/")
+        DS::Proj\Root$ + StringField(DS::Butler\Path$, i, FS::#DIR_SEP$) + FS::#DIR_SEP$
+      Next
       ; ------------------------------------------------------------------------------
       ;-                           Define HIGHLIGHT_DATADIR                           
       ; ------------------------------------------------------------------------------
@@ -164,14 +176,16 @@ Module ini
       ;       -- https://github.com/andre-simon/highlight/issues/24
       HL_DATADIR$ = DS::Butler\Path$ + "highlight-data" + FS::#DIR_SEP$
       SetEnvironmentVariable("HIGHLIGHT_DATADIR", HL_DATADIR$)
-      ; DEBUG IT:
-      PrintN("~ HIGHLIGHT_DATADIR: " + GetEnvironmentVariable("HIGHLIGHT_DATADIR")) ; DBG
-      
       ; TODO HIGHLIGHT_DATADIR:
       ; -- HIGHLIGHT_DATADIR should only be set If the folder is found!
       ; -- Because of differences in behaviour between Win and Mac/Linux, I should consider
       ;    using a different env-var name, and rely only on the `--data-dir` option!
       ;    Or maybe use a CLI defined PP symbol, instead of an env-var.
+      If DS::Verbose ; ====================================================> Verbosity
+        PrintN("- $BUTLER_PATH: " + DS::Butler\Path$)
+        PrintN("- Project Root: " + DS::Proj\Root$)
+        PrintN("- $HIGHLIGHT_DATADIR: " + HL_DATADIR$)
+      EndIf     
       ; ------------------------------------------------------------------------------
       ;-                 Check "butler.ini" (Proj. Preferences File)                  
       ; ------------------------------------------------------------------------------
@@ -189,27 +203,28 @@ Module ini
         msg::EnlistStatusError(~"Missing \"butler.ini\" file.")
       EndIf 
     EndIf 
-    
-    
-    
-    ;}------------------------------------------------------------------------------
-    ;                         Establish Project's Root Path                         
-    ; ------------------------------------------------------------------------------
-    ; The project root is one levl up from Butler's folder...
-    ; ------------------------------------------------------------------------------
-    tot = CountString(DS::Butler\Path$, FS::#DIR_SEP$)
-    For i = 1 To tot - 1
-      ; Build path string omitting last folder (ie: "/_butler_/")
-      DS::Proj\Root$ + StringField(DS::Butler\Path$, i, FS::#DIR_SEP$) + FS::#DIR_SEP$
-    Next
-    ; ==============================================================================
+    ;}==============================================================================
     ;-                           Return Operative Status                            
     ; ==============================================================================
-    If DS::StatusErr
-      ProcedureReturn #False ; operativeStatus = False
-    Else
-      ProcedureReturn #True  ; operativeStatus = True
+    operativeStatus  = Bool(DS::StatusErr) !1
+    
+    If DS::Verbose ; ====================================================> Verbosity
+      If operativeStatus
+        operativeStatus$ = "true"
+      Else
+        operativeStatus$ = "false"
+      EndIf
+      opStatusRequired = Bool(DS::UserOpts & DS::#opt_opStatusReq)
+      If opStatusRequired
+        opStatusRequired$ = "true"
+      Else
+        opStatusRequired$ = "false"
+      EndIf
+      PrintN("- Operative Status: "+ operativeStatus$)
+      PrintN("- Operative Status Required: "+ opStatusRequired$)
     EndIf
+    
+    ProcedureReturn operativeStatus
     
   EndProcedure
   ; ******************************************************************************
