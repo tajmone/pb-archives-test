@@ -1,6 +1,6 @@
 !comment(   "Highlight" pp-macros set   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"Highlight.pp" v0.3 (2017-11-07) Alpha
+"Highlight.pp" v0.4 (2017-12-07) Alpha
 
 A set of macros for integrating André Simon's Highlight (syntax highlighter)
 in pandoc documents:
@@ -137,7 +137,7 @@ NOTE: Highlight options for line-numbering:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !Highlight(!1)(
 -l !ifdef[2][-m !2] !ifdef[3][-j !3]
-)()(!4)
+)()()(!4)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
