@@ -10,6 +10,7 @@ subtitle: Resources for Devloping in PureBASIC
 __WIP TODOs LIST__:
 !TaskList
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!Task[ ][[`/git/`](./git/index.html): cleanup `README.md`]
 !Task[x][[`/licenses/`](./licenses/index.html): Update files to 5.61 (current: 5.50!)]
 !Task[ ][[`/pb-ide/tools/pbhgen/`](./pb-ide/tools/pbhgen/index.html):]
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,6 +32,12 @@ regex!Task[ ][Fix]
 
 ::::::::::::::::::::::::::::::::::::::::::::
 
+
+# Git
+
+- [`/git/`](./git/index.html)
+
+Resources for version-controlling PB projects wiht Git.
 
 PureLibraries
 =============

@@ -1,0 +1,50 @@
+# ******************************************************************************
+# *                                                                            *
+# *                                 PureBASIC                                  *
+# *                                                                            *
+# ******************************************************************************
+# "PureBASIC.gitignore" v1.1 | 2017/12/06 | by Tristano Ajmone.
+# ------------------------------------------------------------------------------
+# A .gitignore boilerplate for PureBASIC projects.
+# Copy and rename this file as ".gitignore" into the root of your Git repository.
+# ------------------------------------------------------------------------------
+
+# ==============================================================================
+#                               EXCLUSION DEFAULTS                              
+# ==============================================================================
+# All files that should be excluded from Git tracking based on their extensions.
+
+
+# ======================= PureBASIC Configuration Files ========================
+*.pb.cfg
+*.pbi.cfg
+project.cfg
+
+# ========================== PureBASIC Project Files ===========================
+*.pbp
+
+# ========================== Shared/Static Libraries ===========================
+*.so
+*.dylib
+*.dll
+
+# ============================= Binary Executables =============================
+*.exe
+*.app
+
+# ==============================================================================
+#                               CUSTOM EXCEPTIONS                               
+# ==============================================================================
+# Specific files matching the exclusion patterns above that should be tracked by
+# Git (ie: not ignored) should be listed here, preceded by the "!" symbol.
+# The "!" prefix negates the pattern that follows, overriding rules set before.
+# NOTE: Order matters!
+
+# ============================== Shared Libraries ==============================
+# Example to include "some_file.dll" in same folder as ".gitignore" file: 
+!/some_file.dll
+
+
+# ============================= Binary Executables =============================
+# Example to include all "*.exe" files inside "some_folder" directory: 
+!/some_folder/*.exe

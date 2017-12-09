@@ -90,8 +90,7 @@ This file logs changes to pp macros definitions during Alpha Stage.
 
 **`v0.3` (2017-11-24)**
 
-  - `!Task` macro emits escaped non-breaking space (”`\`”) instead of “`&thinsp;`” HTML entity because HTML entities prevent pandoc v2.0.2 from parsing markdown contents in raw HTML. See Issue \#4088:
-  - – <https://github.com/jgm/pandoc/issues/4088>
+  - `!Task` macro emits escaped non-breaking space (”`\`”) instead of “`&thinsp;`” HTML entity because HTML entities prevent pandoc v2.0.2 from parsing markdown contents in raw HTML. (See [Issue \#4088](https://github.com/jgm/pandoc/issues/4088))
 
 **`v0.2` (2017-11-07)**
 
@@ -102,6 +101,10 @@ This file logs changes to pp macros definitions during Alpha Stage.
   - First Alpha Release.
 
 # Highlight.pp
+
+**`v0.4` (2017-12-07)**
+
+  - Fixed `!HighlightLN` macro: when invoking `!Highlight` the fourth (empty) param `([TITLE ATTR. TEXT])` was missing.
 
 **`v0.3` (2017-11-07)**
 

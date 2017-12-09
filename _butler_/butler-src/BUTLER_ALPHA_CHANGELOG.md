@@ -2,6 +2,10 @@
 
 Temporary changelog file to track Alpha stage developement of Butler app.
 
+  - `v0.1.22` (2017/12/06)
+    
+      - **VERBOSITY FIXES** — All the old debug info that was printed to `STDERR` has now been converted to properly handled verbosity messages.
+
   - `v0.1.21` (2017/11/30)
     
       - `deps::SatisfyVersion()` — fixed `#RE_VerValidate` RegEx: due to missing parenthesis wasn’t validating properly constraint operators.

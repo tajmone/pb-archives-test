@@ -1,0 +1,223 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Git Resources for PureBASIC</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>pb-development</a></li>
+	<li><a href='index.html'>git</a></li>
+</ol>
+
+				</nav>
+				<div id="document">
+
+					<h1 class="title">Git Resources for PureBASIC</h1>
+					<p class="subtitle">Resources and guidelines managing PureBASIC projects with Git</p>
+
+<p>Resources and guidelines managing PureBASIC projects with Git.</p>
+<div class="Warning">
+<p><strong>WIP TODOs LIST</strong>: this page is still a draft.</p>
+<ul class="task-list">
+<li class="task-list-item">
+<input type="checkbox" disabled=""> Finish writing text and polish
+</li>
+</ul>
+</div>
+<h1 id="resources-list">Resources List</h1>
+<p>In this folder you’ll find two Git configuration boilerplate files for your PureBASIC projects:</p>
+<ul>
+<li><a href="./PureBASIC.gitignore"><code>PureBASIC.gitignore</code></a></li>
+<li><a href="./PureBASIC.gitattributes"><code>PureBASIC.gitattributes</code></a></li>
+</ul>
+<p>To use them, just copy them to your repository root and rename “<code>PureBASIC.gitignore</code>” to “<code>.gitignore</code>”, and “<code>PureBASIC.gitattributes</code>” to “<code>.gitattributes</code>” (the “<code>PureBASIC</code>” part in the filenames was added to prevent them being used in the current project).</p>
+<p>The details of these files’ contents are explained in this document.</p>
+<h1 id="purebasic-ide-settings">PureBASIC IDE Settings</h1>
+<p>When working with PureBASIC projects and Git you should check the following settings in the PureBASIC IDE’s preferences:</p>
+<ul>
+<li><code>Preferences » Editor »  Save Settings to:</code></li>
+</ul>
+<p>Make sure it isn’t set to “<strong>The end of the Source file</strong>”; otherwise the IDE will append to the source files your custom settings and Git will see them as changed files even though no significant changes in contents have taken place. If different contributors use different settings or a different PureBAISC version (eg: a LTS or beta release), source files would end up being overwritten and changed back and forth.</p>
+<p>You should set it to either:</p>
+<ul>
+<li>“<strong>A common file project.cfg for every director</strong>”</li>
+<li>“<strong>The file &lt;filename&gt;.pb.cfg</strong>”</li>
+</ul>
+<p>Then the repository’s <code>.gitignore</code> file should be configured to make Git ignore all of PureBASIC’s <code>*.cfg</code> configuration files, as described later on in this page.</p>
+<h1 id="git-configuration">Git Configuration</h1>
+<p>To optimize your project, you should add in the repository root two special files to ensure that Git will handle correctly your project’s files, regardless of users’ custom Git configuration:</p>
+<ul>
+<li><code>.gitignore</code> — tells Git which files and folders should be ignored</li>
+<li><code>.gitattributes</code> — tells Git how to handle files extensions (ie: text or binary)</li>
+</ul>
+<p>You can use the two boilerplate files in this folder as a starting point, and we’ll be referencing them as examples in the course of our explanations.</p>
+<p>Both <code>.gitignore</code> and <code>.gitattributes</code> files share a common syntax for file patterns declarations and comments. Any line starting with the hash symbol (“<code>#</code>”) will be considered a comment. You can always disable a settings line by commenting it out with the addition of a “<code>#</code>” at the beginning of the line.</p>
+<h2 id="git-ignore">Git Ignore</h2>
+<p>Boilerplate for PureBASIC projects:</p>
+<ul>
+<li><a href="./PureBASIC.gitignore"><code>PureBASIC.gitignore</code></a></li>
+</ul>
+<p>By default, this boilerplate will ignore:</p>
+<ul>
+<li><code>*.pb.cfg</code>, <code>*.pbi.cfg</code> — per-file configurations</li>
+<li><code>project.cfg</code> — per-folder configurations</li>
+<li><code>*.pbp</code> — PB project files</li>
+</ul>
+<p>I’ve already <a href="#purebasic-ide-settings">mentioned earlier on</a> why PB source files should be ignored; now I’ll explain why I advice to also ignore PB project files by default.</p>
+<h3 id="ignoring-pb-project-files">Ignoring PB Project Files</h3>
+<p>There are two reasons for not sharing PureBASIC project files (<code>*.pbp</code>) in a Git repository:</p>
+<ol type="1">
+<li>They contain some personal information which you might not wish to share over the Internet (ie: your PC name, paths, etc.)</li>
+<li>They contain extra local files history info that changes with each IDE session, causing Git to constantly detect project files changes.</li>
+</ol>
+<p>The former is an issue of privacy — and maybe even security —, the latter is a real pain when working with Git: if you allow Git to track PB project files, they will end up being seen as uncommited changes, and this will interfere with many Git operations during a work session (like branch switiching) because Git will warn you that there are uncomitted changes that would be lost and need to be commited or stashed.</p>
+<p>In most cases, just sharing the source files with some direction on how to compile the project is more than enough. But there are cases when sharing a project file makes sense (for example, very big projects with multiple binaries output). In these cases, the best option might be to create sample project files.</p>
+<h3 id="sample-pb-project-files">Sample PB Project Files</h3>
+<p>A sample PureBASIC project file is nothing but a copy of the original project file, renamed to “<code>&lt;filename&gt;.sample.pbp</code>” and stripped all the non-essential XML fields (personal data, file history, checksums, etc.).</p>
+<p>Since the PureBASIC IDE will rebuild all the missing fields when it opens the project file, the sample file can be shared in your Git project (by exclduing it from being ignored) and endusers can copy it, strip the “<code>.sample</code>” from its name, and use it to work locally.</p>
+<p>In order for this system to work, you must edit your <code>.gitignore</code> file to:</p>
+<pre><code>*.pbp
+!*.sample.pbp</code></pre>
+<p>This tells Git to ignore all files with names ending in “<code>.pbp</code>”, except those ending in “<code>.sample.pbp</code>”.</p>
+<p>As a practical example, let’s suppose you have a project file “<code>MyProject.pbp</code>”. This file will be ignored by Git, and it’s the file you actually work with, so its contents will change during PB IDE sessions. You will create a sample project file by copying it to “<code>MyProject.sample.pbp</code>”, and editing its XML contents to remove all entries referring to local and personal data. This file will be tracked by Git because it falls under the exclusion exception pattern rule (<code>!*.sample.pbp</code>).</p>
+<p>The “<code>MyProject.sample.pbp</code>” will therefore be part of the project, and endusers can copy and rename it back to “<code>MyProject.pbp</code>” in their local copy — this file, like yours, will be ignored by Git, so the fact that the IDE will continuosly change its contents is not going to be a problem.</p>
+<h2 id="git-attributes">Git Attributes</h2>
+<p>Boilerplate for PureBASIC projects:</p>
+<ul>
+<li><a href="./PureBASIC.gitattributes"><code>PureBASIC.gitattributes</code></a></li>
+</ul>
+<p>The <code>.gitattributes</code> files is an important Git configuration file that allows to control how Git should behave for the current project, regardless on how the user configured Git on his system. This file is capable of handling many different settings, but for the sake of this topic I’ll be covering mainly the settings that deal with text and binary file extensions, and line-endings normalization of text files, and some GitHub specific settings.</p>
+<p>As far as PureBASIC source files go, you should set the gitattributes for all PB related extensions as <code>text</code>, so that Git will normalize all line-endings to the OS’ native EOL:</p>
+<pre><code>*.pb       text
+*.pbi      text
+*.pbp      text
+*.pbf      text
+*.cfg      text</code></pre>
+<p>For more information open the gitattributes boilerplate and read the comments.</p>
+<h3 id="github-linguist">GitHub Linguist</h3>
+<ul>
+<li><a href="https://github.com/github/linguist/" class="uri">https://github.com/github/linguist/</a></li>
+</ul>
+<p>GitHub Linguist entries in a <code>.gitattributes</code> file are ignroed by Git, they are intended to tell GitHub server how to handle some of its services for the current project’s files — namely: how to associate unknown file extensions to known languages in order to handle syntax highlighting and statistics for the repository.</p>
+<p>Here are the <a href="https://github.com/github/linguist/blob/master/README.md#using-gitattributes">gitattributes</a> supported by Linguist:</p>
+<ul>
+<li><code>linguist-language</code> — set syntax highlighting</li>
+<li><code>linguist-documentation</code> — include/exclude from repo’s language stats.</li>
+<li><code>linguist-vendored</code> — include/exclude from repo’s language stats.</li>
+<li><code>linguist-generated</code> — include/exclude from repo’s language stats and diffs.</li>
+</ul>
+<h4 id="syntax-extensions">Syntax Extensions</h4>
+<p>Linguist already associates the <code>*.pb</code> and <code>*.pbi</code> extension to PureBASIC:</p>
+<ul>
+<li><a href="https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L3568" class="uri">https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L3568</a></li>
+</ul>
+<pre class="sourceCode yaml" id="cb3"><code class="sourceCode yaml"><div class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">PureBasic:</span></div>
+<div class="sourceLine" id="cb3-2" data-line-number="2">  <span class="fu">type:</span><span class="at"> programming</span></div>
+<div class="sourceLine" id="cb3-3" data-line-number="3">  <span class="fu">color:</span><span class="at"> </span><span class="st">&quot;#5a6986&quot;</span></div>
+<div class="sourceLine" id="cb3-4" data-line-number="4">  <span class="fu">extensions:</span></div>
+<div class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">-</span> <span class="st">&quot;.pb&quot;</span></div>
+<div class="sourceLine" id="cb3-6" data-line-number="6">  <span class="kw">-</span> <span class="st">&quot;.pbi&quot;</span></div>
+<div class="sourceLine" id="cb3-7" data-line-number="7">  <span class="fu">tm_scope:</span><span class="at"> none</span></div>
+<div class="sourceLine" id="cb3-8" data-line-number="8">  <span class="fu">ace_mode:</span><span class="at"> text</span></div>
+<div class="sourceLine" id="cb3-9" data-line-number="9">  <span class="fu">language_id:</span><span class="at"> 301</span></div></code></pre>
+<p>But it currently doesn’t support the <code>*.pbf</code> (PB form file) and <code>*.pbp</code> (PB project) extensions. So you should manually set them in your <code>.gitattributes</code> file if you decide to include files with these extensions in your project:</p>
+<pre><code>*.pbp    linguist-language=XML
+*.pbf    linguist-language=PureBasic</code></pre>
+<div class="Note">
+<p><strong>NOTE</strong>: There is a <a href="https://github.com/github/linguist/pull/3926">pending pull-request (#3926)</a> to integrate these two PureBASIC extension into GitHub Linguist.</p>
+</div>
+<p>The <code>*.cfg</code> extension is already defined as <code>INI</code> file:</p>
+<ul>
+<li><a href="https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L1914" class="uri">https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L1914</a></li>
+</ul>
+<pre class="sourceCode yaml" id="cb5"><code class="sourceCode yaml"><div class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">INI:</span></div>
+<div class="sourceLine" id="cb5-2" data-line-number="2">  <span class="fu">type:</span><span class="at"> data</span></div>
+<div class="sourceLine" id="cb5-3" data-line-number="3">  <span class="fu">extensions:</span></div>
+<div class="sourceLine" id="cb5-4" data-line-number="4">  <span class="kw">-</span> <span class="st">&quot;.ini&quot;</span></div>
+<div class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw">-</span> <span class="st">&quot;.cfg&quot;</span></div>
+<div class="sourceLine" id="cb5-6" data-line-number="6">  <span class="kw">-</span> <span class="st">&quot;.prefs&quot;</span></div>
+<div class="sourceLine" id="cb5-7" data-line-number="7">  <span class="kw">-</span> <span class="st">&quot;.pro&quot;</span></div>
+<div class="sourceLine" id="cb5-8" data-line-number="8">  <span class="kw">-</span> <span class="st">&quot;.properties&quot;</span></div>
+<div class="sourceLine" id="cb5-9" data-line-number="9">  <span class="fu">filenames:</span></div>
+<div class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw">-</span> buildozer.spec</div>
+<div class="sourceLine" id="cb5-11" data-line-number="11">  <span class="fu">tm_scope:</span><span class="at"> source.ini</span></div>
+<div class="sourceLine" id="cb5-12" data-line-number="12">  <span class="fu">aliases:</span></div>
+<div class="sourceLine" id="cb5-13" data-line-number="13">  <span class="kw">-</span> dosini</div>
+<div class="sourceLine" id="cb5-14" data-line-number="14">  <span class="fu">ace_mode:</span><span class="at"> ini</span></div>
+<div class="sourceLine" id="cb5-15" data-line-number="15">  <span class="fu">codemirror_mode:</span><span class="at"> properties</span></div>
+<div class="sourceLine" id="cb5-16" data-line-number="16">  <span class="fu">codemirror_mime_type:</span><span class="at"> text/x-properties</span></div>
+<div class="sourceLine" id="cb5-17" data-line-number="17">  <span class="fu">language_id:</span><span class="at"> 163</span></div></code></pre>
+<p>The actual <code>INI</code> grammar file:</p>
+<ul>
+<li><a href="https://github.com/textmate/ini.tmbundle/blob/master/Syntaxes/Ini.plist" class="uri">https://github.com/textmate/ini.tmbundle/blob/master/Syntaxes/Ini.plist</a></li>
+</ul>
+<h3 id="vendored-extension">Vendored Extension</h3>
+<p>Manually define/override some vendored files extension. Vendored files and directories are excluded from language statistics.</p>
+<pre><code>*.pbp    linguist-vendored
+*.cfg    linguist-vendored</code></pre>
+<h3 id="pull-request-3926">Pull Request #3926</h3>
+<p>I’ve added the <code>.pbf</code> and <code>.pbp</code> file extensions to Linguist and created a pull request:</p>
+<ul>
+<li><a href="https://github.com/github/linguist/pull/3926" class="uri">https://github.com/github/linguist/pull/3926</a></li>
+</ul>
+<h1 id="ref-links">Ref Links</h1>
+<ul>
+<li><a href="https://github.com/github/linguist/blob/master/README.md#overrides">Overrides</a></li>
+<li><a href="https://github.com/github/linguist/blob/master/README.md#troubleshooting">Troubleshooting</a></li>
+<li><a href="https://github.com/github/linguist/blob/master/vendor/README.md">Grammar index</a></li>
+<li><a href="https://github.com/github/linguist/blob/master/lib/linguist/documentation.yml"><code>documentation.yml</code></a></li>
+<li><a href="https://github.com/github/linguist/blob/master/lib/linguist/vendor.yml">vendor.yml</a></li>
+<li><a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml"><code>languages.yml</code></a></li>
+</ul>
+<h1 id="useful-links">Useful Links</h1>
+<p class="FakeH3">
+.gitgnore
+</p>
+<ul>
+<li><a href="https://git-scm.com/docs/gitignore">Git Reference Manual: gitignore</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring">Pro Git book: Ignoring Files</a></li>
+<li><a href="https://github.com/github/gitignore">github.com/github/gitignore</a> — A collection of useful <code>.gitignore</code> templates</li>
+<li><a href="https://www.gitignore.io/">www.gitignore.io</a> — Online tool to create useful <code>.gitignore</code> files for your project</li>
+</ul>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#resources-list">Resources List</a></li>
+<li><a href="#purebasic-ide-settings">PureBASIC IDE Settings</a></li>
+<li><a href="#git-configuration">Git Configuration</a><ul>
+<li><a href="#git-ignore">Git Ignore</a></li>
+<li><a href="#git-attributes">Git Attributes</a></li>
+</ul></li>
+<li><a href="#ref-links">Ref Links</a></li>
+<li><a href="#useful-links">Useful Links</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+	</body>
+</html>

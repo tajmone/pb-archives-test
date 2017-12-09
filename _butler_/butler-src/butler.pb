@@ -8,7 +8,7 @@
 ; ··············································································
 ; ··············································································
 ; "butler.pb" | PureBASIC 5.61
-#MAJOR = 0 : #MINOR = 1 : #PATCH = 21 ; v0.1.21 ( 2017/11/30 | Alpha Preview )
+#MAJOR = 0 : #MINOR = 1 : #PATCH = 22 ; v0.1.22 ( 2017/12/06 | Alpha Preview )
 
 ; ==============================================================================
 ;                                  LICENSE INFO                                 
@@ -44,9 +44,6 @@ IncludeFile "butler-mod_build.pbi"        ; build:: > Butler's build engine
 ;                 Just define them once where needed.
 ;}
 
-
-
-
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;                                   INITIALIZE                                  
 ;{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,33 +58,14 @@ DS::Butler\Version$ = Str(#MAJOR) +"."+ Str(#MINOR) +"."+ Str(#PATCH)
 operativeStatus = ini::Init() ; <= operativeStatus indicates if Butler is all set
                               ;    to carry out project processing operations.
 
-ConsoleError("DS::Butler\Path$  = "+ DS::Butler\Path$)    ; DELME Debugging
-ConsoleError("DS::Proj\Root$    = "+ DS::Proj\Root$)      ; DELME Debugging
-
 
 invocationDir$ = GetCurrentDirectory()
-
-
-; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-;                               DEBUGGING INFO...                               
-; //////////////////////////////////////////////////////////////////////////////
-; DELME: Temporary stuff, remove from final release!
-If #False ; Dont' show. (might keep the code for verbose/debug option)
-  PrintN(~"invocationDir$:\n   "+ invocationDir$)     ; DBG invocationDir$
-  PrintN(~"DS::Butler\\Path$:\n   "+ DS::Butler\Path$); DBG butlerDir$
-  PrintN(~"DS::Proj\\Root$:\n   "+ DS::Proj\Root$)    ; DBG Proj\Root$
-EndIf
 
 ;} <<< END: INITIALIZE <<<
 
 ; ==============================================================================
 ;-                               EVALUATE OPTIONS                               
 ; ==============================================================================
-
-; Some Debugging:
-ConsoleError(" --- operativeStatus: "+ Str(operativeStatus) ) ; DELME Debug operativeStatus
-TESTopStatusRequired = Bool( DS::UserOpts & DS::#opt_opStatusReq )
-ConsoleError(" --- opStatusRequire: "+ Str(TESTopStatusRequired)) ; DELME Debug opStatusRequire
 
 If ( DS::UserOpts & DS::#opt_NoOpts )
   ; ------------------------------------------------------------------------------

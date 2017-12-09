@@ -1,68 +1,101 @@
-// taken from the "Pandoc-Goodies" project:
-// https://github.com/tajmone/pandoc-goodies
-// https://github.com/tajmone/pandoc-goodies/blob/master/skylighting-css/sass-templates/bare-bones.scss
 /*
-	==============================================================================
-	                     Bare-Bones Pandoc Highlighting Theme                     
-	==============================================================================
-	"bare-bones.scss" v1.0 (2017-07-11) by Tristano Ajmone.
+    ==============================================================================
+                         Bare-Bones Pandoc Highlighting Theme                     
+    ==============================================================================
+    "bare-bones.scss" v2.0 (2017-11-16) | pandoc v2.0.2 | by Tristano Ajmone
 
-	This Sass template emulates the definitions and structure of pandoc's built-in
-	CSS styles (skylighting themes for syntax highlighting).
-	
-	All possible syntax tokens are covered.
-	
-	Use it as a starting point for your custom themes: adjust it to your needs and
-	delete tokens that don't apply to the language/syntax you're targeting.
+    This Sass template emulates the definitions and structure of pandoc's (v2.x)
+    built-in CSS styles (skylighting themes for syntax highlighting).
+    
+    All possible syntax tokens are covered.
+    
+    Use it as a starting point for your custom themes: adjust it to your needs and
+    delete tokens that don't apply to the language/syntax you're targeting.
 
-	Released into the public domain according to the Unlicense terms:
+    Released into the public domain according to the Unlicense terms:
 
-		http://unlicense.org/
-	
-	Credits and mentioning are not mandatory -- but they'd be highly appreciated!
-	------------------------------------------------------------------------------
+        http://unlicense.org/
+    
+    Credits and mentioning are not mandatory -- but they'd be highly appreciated!
+    ------------------------------------------------------------------------------
 */
-div.sourceCode {
-	overflow-x: auto;
+div.sourceLine,
+a.sourceLine {
+	display: inline-block;
+	min-height: 1.25em;
 }
 
-table.sourceCode,
-tr.sourceCode,
-td.lineNumbers,
-td.sourceCode {
-	margin: 0;
-	padding: 0;
+a.sourceLine {
+	pointer-events: none;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+.sourceCode {
+	overflow: visible;
+}
+
+code.sourceCode {
+	white-space: pre;
+}
+
+@media print {
+	code.sourceCode {
+		white-space: pre-wrap;
+	}
+	
+	div.sourceLine, a.sourceLine {
+		text-indent: -1em;
+		padding-left: 1em;
+	}
+}
+
+pre.numberSource div.sourceLine,
+.numberSource a.sourceLine {
+	position: relative;
+}
+
+pre.numberSource div.sourceLine::before,
+.numberSource a.sourceLine::before {
+	content: attr(data-line-number);
+	position: absolute;
+	left: -5em;
+	text-align: right;
 	vertical-align: baseline;
 	border: none;
+	pointer-events: all;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	padding: 0 4px;
+	width: 4em;
 }
 
-pre,
-code,
-table.sourceCode {
-	background-color: #dddddd;
-	color: #000000;
+pre.numberSource {
+	margin-left: 3em;
+	border-left: 1px solid #bdae9d;
+	background-color: #2a211c;
+	color: #bdae9d;
+	padding-left: 4px;
 }
 
-table.sourceCode {
-	width: 100%;
-	line-height: 100%;
+pre, code {
+	color: #bdae9d;
+	background-color: #2a211c;
 }
 
-td {
-	&.lineNumbers {
-		text-align: right;
-		padding-right: 4px;
-		padding-left: 4px;
-		color: #aaaaaa;
-		border-right: 1px solid #aaaaaa;
-	}
-	&.sourceCode {
-		padding-left: 5px;
+@media screen {
+	a.sourceLine::before {
+		text-decoration: underline;
+		color: initial;
 	}
 }
 
 code {
-	& > span {
+	& span {
 		&.al { /* Alert */
 			color: #000000;
 		}
@@ -78,7 +111,7 @@ code {
 		&.bu { /* BuiltIn */
 			color: #000000;
 		}
-		&.cf { /* Control Flow */
+		&.cf { /* ControlFlow */
 			color: #000000;
 		}
 		&.ch { /* Char */
@@ -90,7 +123,7 @@ code {
 		&.co { /* Comment */
 			color: #000000;
 		}
-		&.cv { /* Comment Var */
+		&.cv { /* CommentVar */
 			color: #000000;
 		}
 		&.do { /* Documentation */
@@ -132,13 +165,13 @@ code {
 		&.pp { /* Preprocessor */
 			color: #000000;
 		}
-		&.re { /* Region Marker */
+		&.re { /* RegionMarker */
 			color: #000000;
 		}
-		&.sc { /* Special Char */
+		&.sc { /* SpecialChar */
 			color: #000000;
 		}
-		&.ss { /* Special String */
+		&.ss { /* SpecialString */
 			color: #000000;
 		}
 		&.st { /* String */
@@ -147,7 +180,7 @@ code {
 		&.va { /* Variable */
 			color: #000000;
 		}
-		&.vs { /* Verbatim String */
+		&.vs { /* VerbatimString */
 			color: #000000;
 		}
 		&.wa { /* Warning */

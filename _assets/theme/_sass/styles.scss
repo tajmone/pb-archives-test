@@ -153,8 +153,11 @@ $fa-line-height-base: 	$base-line-height;
 // Syntax highlighting color schemes for code highlighted with either pandoc's
 // internal highlighter (skylighting) or André Simon's Highlight tool.
 
-@import 'syntax-highlighting/purebasic'; // PureBASIC (Highlight)
-@import 'syntax-highlighting/fasm'; 	 // Fasm      (Highlight)
+
+@import 'syntax-highlighting/highlight-purebasic'; // PureBASIC       (Highlight)
+@import 'syntax-highlighting/highlight-fasm'; 	   // Fasm            (Highlight)
+
+@import 'syntax-highlighting/_skylighting-default'; // default      (skylighting)
 
 // ------------------------------------------------------------------------------
 //                                  Code Classes                                 
