@@ -77,6 +77,9 @@ pre code {
 
 // The "small" class is used for code with lines exceeding 80 chars/cols
 // (can show up to 100 chars without horizontal scroll bar)
+pre.small,
+pre.small code,
+pre.small code.small,
 pre code.small {
   @include type-layout(s, 0.5); // Restore font-size and line-eigth values:
   letter-spacing: 0.075px;
@@ -117,6 +120,7 @@ border-radius: 4px;
 @include padding(0.5);
 }
 
+
 pre code {
 display: inline;
 max-width: auto;
@@ -136,19 +140,5 @@ color: red;
 //                              Pandoc's Skylighting                             
 // ==============================================================================
 // Style settings specific to Pandoc's built in syntax-highlighter (skylighting)
-
-// ------------------------------------------------------------------------------
-//                             Code With Line-Numbers                            
-// ------------------------------------------------------------------------------
-// Fix Skylighting's table radius borders between the line-nums column and the
-// sourcecode column...
-td.lineNumbers pre {
-  border-top-right-radius: 0;   
-  border-bottom-right-radius: 0;
-  background-color: rgba(153, 153, 153, 0.5); // FIXME (darker color for BG)
-}
-
-td.sourceCode pre {
-  border-top-left-radius: 0;   
-  border-bottom-left-radius: 0;
-}
+// are handled in the default pandoc theme:
+//   "/syntax-highlighting/_skylighting-default.scss"

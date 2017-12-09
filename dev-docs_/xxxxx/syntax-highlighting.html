@@ -1,0 +1,751 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Syntax Highlighting Tests</title>
+		<meta name="generator" content="pandoc">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<!-- Place favicon.ico in the root directory -->
+
+		<link rel="stylesheet" href="../../_assets/theme/css/styles.css">
+	</head>
+	<body>
+
+		<div id="container">
+			<div class="gidle-row">
+
+				<header id="siteheader"></header>
+				<nav id="breadcrumbs">
+
+<ol>
+	<li><a href='../../index.html'>Home</a></li>
+	<li><a href='../index.html'>dev-docs</a></li>
+	<li><a href='index.html'>xxxxx</a></li>
+</ol>
+
+				</nav>
+				<div id="document">
+
+					<h1 class="title">Syntax Highlighting Tests</h1>
+
+<blockquote>
+<p><strong>NOTE</strong>: Pandoc code with line-numbers doesn’t produce H-scrollbar when exceeding width — issue is with table’s CSS: must implement <code>overflow</code>!</p>
+</blockquote>
+<h1 id="pandoc-highlighting">Pandoc Highlighting</h1>
+<h2 id="default-theme">Default Theme</h2>
+<p>The default theme for pandoc highlighting is <strong>Base16 Monokai</strong>.</p>
+<h3 id="yaml">YAML</h3>
+<pre class="sourceCode yaml" id="cb1"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># YAML Example based on:</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#   http://www.yaml.org/start.html</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">string:</span><span class="at"> </span><span class="st">&quot;Quoted string&quot;</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">invoice:</span><span class="at"> 34843</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="fu">date   :</span><span class="at"> 2001-01-23</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">bill-to:</span><span class="at"> </span><span class="dt">&amp;id001</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="fu">given  :</span><span class="at"> Chris</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="fu">family :</span><span class="at"> Dumars</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="fu">address:</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">        <span class="fu">lines:</span><span class="at"> |</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">            458 Walkman Dr.</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">            Suite <span class="co">#292</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">        <span class="fu">city    :</span><span class="at"> Royal Oak</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">        <span class="fu">state   :</span><span class="at"> MI</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">        <span class="fu">postal  :</span><span class="at"> 48046</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="fu">ship-to:</span><span class="at"> </span><span class="dt">*id001</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="fu">product:</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="kw">-</span> <span class="fu">sku         :</span><span class="at"> BL394D</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">      <span class="fu">quantity    :</span><span class="at"> 4</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">      <span class="fu">description :</span><span class="at"> Basketball</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">      <span class="fu">price       :</span><span class="at"> 450.00</span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">    <span class="kw">-</span> <span class="fu">sku         :</span><span class="at"> BL4438H</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">      <span class="fu">quantity    :</span><span class="at"> 1</span></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">      <span class="fu">description :</span><span class="at"> Super Hoop</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25">      <span class="fu">price       :</span><span class="at"> 2392.00</span></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="fu">tax  :</span><span class="at"> 251.42</span></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="fu">total:</span><span class="at"> 4443.52</span></a>
+<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="fu">comments:</span><span class="at"> &gt;</span></a>
+<a class="sourceLine" id="cb1-29" data-line-number="29">    Late afternoon is best.</a>
+<a class="sourceLine" id="cb1-30" data-line-number="30">    Backup contact is Nancy</a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">    Billsmer @ 338-4338.</a></code></pre>
+<h3 id="haskell-example">Haskell Example</h3>
+<p>Without line-numbers:</p>
+<pre class="sourceCode haskell" id="cb2"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">-- Long comment to test when code overflows and how the horizontal scrollbar looks like.</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">qsort []     <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">               qsort (filter (<span class="fu">&gt;=</span> x) xs)</a></code></pre>
+<p>With line-numbers:</p>
+<pre class="sourceCode numberSource haskell numberLines" id="cb3" data-startFrom="1000"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1000" data-line-number="1000"><span class="co">-- Long comment to test when code overflows and how the horizontal scrollbar looks like.</span></a>
+<a class="sourceLine" id="cb3-1001" data-line-number="1001">qsort []     <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb3-1002" data-line-number="1002">qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<span class="fu">&lt;</span> x) xs) <span class="fu">++</span> [x] <span class="fu">++</span></a>
+<a class="sourceLine" id="cb3-1003" data-line-number="1003">               qsort (filter (<span class="fu">&gt;=</span> x) xs)</a></code></pre>
+<h3 id="go-lang">Go Lang</h3>
+<p>Without line-numbers:</p>
+<pre class="sourceCode go" id="cb4"><code class="sourceCode go"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">/*  &quot;week3/day3/mail-example/main.go&quot; (CC0 1.0 Universal)</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">    This Go lang example was taken from:</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">    -- https://github.com/golang-book/bootcamp-examples         */</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">package</span> main</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">import</span> (</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="st">&quot;net/http&quot;</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    <span class="st">&quot;google.golang.org/appengine&quot;</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">    <span class="st">&quot;google.golang.org/appengine/user&quot;</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">    <span class="st">&quot;google.golang.org/appengine/log&quot;</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">    <span class="st">&quot;google.golang.org/appengine/mail&quot;</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">)</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="kw">func</span> init() {</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">    http.HandleFunc(<span class="st">&quot;/sendmail&quot;</span>, handleIndex)</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">}</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="kw">func</span> handleIndex(res http.ResponseWriter, req *http.Request) {</a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">    ctx := appengine.NewContext(req)</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">    u := user.Current(ctx)</a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">    msg := &amp;mail.Message{</a>
+<a class="sourceLine" id="cb4-25" data-line-number="25">        Sender:  u.Email,</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26">        To:      []<span class="dt">string</span>{<span class="st">&quot;Caleb Doxsey &lt;caleb@doxsey.net&gt;&quot;</span>},</a>
+<a class="sourceLine" id="cb4-27" data-line-number="27">        Subject: <span class="st">&quot;See you tonight&quot;</span>,</a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">        Body:    <span class="st">&quot;Don&#39;t forget our plans. Hark, &#39;til later.&quot;</span>,</a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">    }</a>
+<a class="sourceLine" id="cb4-30" data-line-number="30">    <span class="kw">if</span> err := mail.Send(ctx, msg); err != <span class="ot">nil</span> {</a>
+<a class="sourceLine" id="cb4-31" data-line-number="31">        log.Errorf(ctx, <span class="st">&quot;Alas, my user, the email failed to sendeth: %v&quot;</span>, err)</a>
+<a class="sourceLine" id="cb4-32" data-line-number="32">    }</a>
+<a class="sourceLine" id="cb4-33" data-line-number="33">}</a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"></a></code></pre>
+<h3 id="ruby">Ruby</h3>
+<p>Without line-numbers:</p>
+<pre class="sourceCode ruby" id="cb5"><code class="sourceCode ruby"><a class="sourceLine" id="cb5-1" data-line-number="1">require <span class="st">&quot;gem&quot;</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">string = <span class="st">&quot;base16&quot;</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">symbol = <span class="st">:base16</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">fixnum = <span class="dv">0</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">float  = <span class="fl">0.00</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">array  = <span class="dt">Array</span>.new</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">array  = [<span class="st">&#39;chris&#39;</span>, <span class="dv">85</span>]</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">hash   = {<span class="st">&quot;test&quot;</span> =&gt; <span class="st">&quot;test&quot;</span>}</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">regexp = <span class="ot">/[abc]/</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co"># This is a comment</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="kw">class</span> <span class="dt">Person</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">  </a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">  <span class="ot">attr_accessor</span> <span class="st">:name</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">  <span class="kw">def</span> initialize(attributes = {})</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">    <span class="ot">@name</span> = attributes[<span class="st">:name</span>]</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">  <span class="kw">end</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">  </a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">  <span class="kw">def</span> <span class="dv">self</span>.greet</a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">    <span class="st">&quot;hello&quot;</span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23">  <span class="kw">end</span></a>
+<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="kw">end</span></a>
+<a class="sourceLine" id="cb5-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb5-26" data-line-number="26">person1 = <span class="dt">Person</span>.new(<span class="st">:name</span> =&gt; <span class="st">&quot;Chris&quot;</span>)</a>
+<a class="sourceLine" id="cb5-27" data-line-number="27">print <span class="dt">Person</span>::greet, <span class="st">&quot; &quot;</span>, person1.name, <span class="st">&quot;\n&quot;</span></a>
+<a class="sourceLine" id="cb5-28" data-line-number="28">puts <span class="st">&quot;another </span><span class="ot">#{</span><span class="dt">Person</span>::greet<span class="ot">}</span><span class="st"> </span><span class="ot">#{</span>person1.name<span class="ot">}</span><span class="st">&quot;</span></a></code></pre>
+<p>With line-numbers:</p>
+<pre class="sourceCode numberSource ruby numberLines" id="cb6" data-startFrom="1"><code class="sourceCode ruby"><a class="sourceLine" id="cb6-1" data-line-number="1">require <span class="st">&quot;gem&quot;</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">string = <span class="st">&quot;base16&quot;</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">symbol = <span class="st">:base16</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">fixnum = <span class="dv">0</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">float  = <span class="fl">0.00</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">array  = <span class="dt">Array</span>.new</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">array  = [<span class="st">&#39;chris&#39;</span>, <span class="dv">85</span>]</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">hash   = {<span class="st">&quot;test&quot;</span> =&gt; <span class="st">&quot;test&quot;</span>}</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">regexp = <span class="ot">/[abc]/</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co"># This is a comment</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="kw">class</span> <span class="dt">Person</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">  </a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">  <span class="ot">attr_accessor</span> <span class="st">:name</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">  <span class="kw">def</span> initialize(attributes = {})</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">    <span class="ot">@name</span> = attributes[<span class="st">:name</span>]</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">  <span class="kw">end</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">  </a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">  <span class="kw">def</span> <span class="dv">self</span>.greet</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">    <span class="st">&quot;hello&quot;</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">  <span class="kw">end</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="kw">end</span></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">person1 = <span class="dt">Person</span>.new(<span class="st">:name</span> =&gt; <span class="st">&quot;Chris&quot;</span>)</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27">print <span class="dt">Person</span>::greet, <span class="st">&quot; &quot;</span>, person1.name, <span class="st">&quot;\n&quot;</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28">puts <span class="st">&quot;another </span><span class="ot">#{</span><span class="dt">Person</span>::greet<span class="ot">}</span><span class="st"> </span><span class="ot">#{</span>person1.name<span class="ot">}</span><span class="st">&quot;</span></a></code></pre>
+<h3 id="python">Python</h3>
+<p>Without line-numbers:</p>
+<pre class="sourceCode python" id="cb7"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">&quot;/3-python-intermediate/examples/solution2.py&quot; (CC0 1.0 Universal)</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">Python example by Yevgen Runts, taken from:</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">-- https://github.com/yrunts/python-for-qa</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="im">import</span> os</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="im">import</span> csv</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="im">import</span> re</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="im">from</span> tempfile <span class="im">import</span> NamedTemporaryFile</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="im">import</span> shutil</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="im">from</span> dateutil <span class="im">import</span> parser, tz</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">NGINX_LINE_REGEXP <span class="op">=</span> re.<span class="bu">compile</span>(</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">    (<span class="st">&#39;(?P&lt;ipaddress&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&#39;</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">     <span class="st">&#39; - - &#39;</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">     <span class="st">&#39;\[(?P&lt;dateandtime&gt;\d</span><span class="sc">{2}</span><span class="st">\/[a-z]</span><span class="sc">{3}</span><span class="st">\/\d</span><span class="sc">{4}</span><span class="st">:\d</span><span class="sc">{2}</span><span class="st">:\d</span><span class="sc">{2}</span><span class="st">:\d</span><span class="sc">{2}</span><span class="st"> (\+|\-)\d</span><span class="sc">{4}</span><span class="st">)\] &#39;</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">     <span class="st">&#39;((</span><span class="ch">\&quot;</span><span class="st">(?P&lt;method&gt;GET|POST|CONNECT|HEAD) )&#39;</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">     <span class="st">&#39;(?P&lt;url&gt;.+)(http\/1\.(1|0)&quot;)) &#39;</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21">     <span class="st">&#39;(?P&lt;statuscode&gt;\d</span><span class="sc">{3}</span><span class="st">) &#39;</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22">     <span class="st">&#39;(?P&lt;bytessent&gt;\d+) &#39;</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23">     <span class="st">&#39;([&quot;](?P&lt;refferer&gt;(\-)|(.+))[&quot;]) &#39;</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24">     <span class="st">&#39;([&quot;](?P&lt;useragent&gt;.+)[&quot;])&#39;</span>), re.IGNORECASE)</a>
+<a class="sourceLine" id="cb7-25" data-line-number="25">DATE_FORMAT <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%d</span><span class="st">/%m/%y&#39;</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26">TIME_FORMAT <span class="op">=</span> <span class="st">&#39;%H:%M:%S&#39;</span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27">FIELDS <span class="op">=</span> [<span class="st">&#39;ip&#39;</span>, <span class="st">&#39;date&#39;</span>, <span class="st">&#39;time&#39;</span>, <span class="st">&#39;method&#39;</span>, <span class="st">&#39;url&#39;</span>, <span class="st">&#39;status_code&#39;</span>]</a>
+<a class="sourceLine" id="cb7-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb7-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb7-30" data-line-number="30"><span class="kw">def</span> main():</a>
+<a class="sourceLine" id="cb7-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb7-32" data-line-number="32">    storage <span class="op">=</span> NamedTemporaryFile()</a>
+<a class="sourceLine" id="cb7-33" data-line-number="33">    writer <span class="op">=</span> csv.DictWriter(storage, FIELDS)</a>
+<a class="sourceLine" id="cb7-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb7-35" data-line-number="35">    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;../logs.txt&#39;</span>) <span class="im">as</span> f:</a>
+<a class="sourceLine" id="cb7-36" data-line-number="36">        <span class="cf">for</span> line <span class="kw">in</span> f.readlines():</a>
+<a class="sourceLine" id="cb7-37" data-line-number="37">            match <span class="op">=</span> re.match(NGINX_LINE_REGEXP, line)</a>
+<a class="sourceLine" id="cb7-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb7-39" data-line-number="39">            <span class="cf">if</span> <span class="kw">not</span> match:</a>
+<a class="sourceLine" id="cb7-40" data-line-number="40">                <span class="cf">continue</span></a>
+<a class="sourceLine" id="cb7-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb7-42" data-line-number="42">            log_datetime <span class="op">=</span> match.group(<span class="st">&#39;dateandtime&#39;</span>).replace(<span class="st">&#39;:&#39;</span>, <span class="st">&#39; &#39;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-43" data-line-number="43">            log_datetime <span class="op">=</span> parser.parse(log_datetime)</a>
+<a class="sourceLine" id="cb7-44" data-line-number="44">            utc_log_datetime <span class="op">=</span> log_datetime.astimezone(tz.tzutc())</a>
+<a class="sourceLine" id="cb7-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb7-46" data-line-number="46">            parsed_item <span class="op">=</span> {<span class="st">&#39;ip&#39;</span>: match.group(<span class="st">&#39;ipaddress&#39;</span>),</a>
+<a class="sourceLine" id="cb7-47" data-line-number="47">                           <span class="st">&#39;date&#39;</span>: utc_log_datetime.strftime(DATE_FORMAT),</a>
+<a class="sourceLine" id="cb7-48" data-line-number="48">                           <span class="st">&#39;time&#39;</span>: utc_log_datetime.strftime(TIME_FORMAT),</a>
+<a class="sourceLine" id="cb7-49" data-line-number="49">                           <span class="st">&#39;method&#39;</span>: match.group(<span class="st">&#39;method&#39;</span>),</a>
+<a class="sourceLine" id="cb7-50" data-line-number="50">                           <span class="st">&#39;url&#39;</span>: match.group(<span class="st">&#39;url&#39;</span>),</a>
+<a class="sourceLine" id="cb7-51" data-line-number="51">                           <span class="st">&#39;status_code&#39;</span>: match.group(<span class="st">&#39;statuscode&#39;</span>)}</a>
+<a class="sourceLine" id="cb7-52" data-line-number="52">            writer.writerow(parsed_item)</a>
+<a class="sourceLine" id="cb7-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb7-54" data-line-number="54">    shutil.copy(storage.name, os.path.join(os.getcwd(), <span class="st">&#39;logs.csv&#39;</span>))</a>
+<a class="sourceLine" id="cb7-55" data-line-number="55">    storage.close()</a>
+<a class="sourceLine" id="cb7-56" data-line-number="56"></a>
+<a class="sourceLine" id="cb7-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb7-58" data-line-number="58"><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</a>
+<a class="sourceLine" id="cb7-59" data-line-number="59">    main()</a>
+<a class="sourceLine" id="cb7-60" data-line-number="60"></a></code></pre>
+<p>With line-numbers:</p>
+<pre class="sourceCode numberSource python numberLines" id="cb8" data-startFrom="1"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">&quot;/3-python-intermediate/examples/solution2.py&quot; (CC0 1.0 Universal)</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">Python example by Yevgen Runts, taken from:</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">-- https://github.com/yrunts/python-for-qa</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="im">import</span> os</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="im">import</span> csv</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="im">import</span> re</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="im">from</span> tempfile <span class="im">import</span> NamedTemporaryFile</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="im">import</span> shutil</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="im">from</span> dateutil <span class="im">import</span> parser, tz</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15">NGINX_LINE_REGEXP <span class="op">=</span> re.<span class="bu">compile</span>(</a>
+<a class="sourceLine" id="cb8-16" data-line-number="16">    (<span class="st">&#39;(?P&lt;ipaddress&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&#39;</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17">     <span class="st">&#39; - - &#39;</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18">     <span class="st">&#39;\[(?P&lt;dateandtime&gt;\d</span><span class="sc">{2}</span><span class="st">\/[a-z]</span><span class="sc">{3}</span><span class="st">\/\d</span><span class="sc">{4}</span><span class="st">:\d</span><span class="sc">{2}</span><span class="st">:\d</span><span class="sc">{2}</span><span class="st">:\d</span><span class="sc">{2}</span><span class="st"> (\+|\-)\d</span><span class="sc">{4}</span><span class="st">)\] &#39;</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19">     <span class="st">&#39;((</span><span class="ch">\&quot;</span><span class="st">(?P&lt;method&gt;GET|POST|CONNECT|HEAD) )&#39;</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20">     <span class="st">&#39;(?P&lt;url&gt;.+)(http\/1\.(1|0)&quot;)) &#39;</span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21">     <span class="st">&#39;(?P&lt;statuscode&gt;\d</span><span class="sc">{3}</span><span class="st">) &#39;</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22">     <span class="st">&#39;(?P&lt;bytessent&gt;\d+) &#39;</span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23">     <span class="st">&#39;([&quot;](?P&lt;refferer&gt;(\-)|(.+))[&quot;]) &#39;</span></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24">     <span class="st">&#39;([&quot;](?P&lt;useragent&gt;.+)[&quot;])&#39;</span>), re.IGNORECASE)</a>
+<a class="sourceLine" id="cb8-25" data-line-number="25">DATE_FORMAT <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%d</span><span class="st">/%m/%y&#39;</span></a>
+<a class="sourceLine" id="cb8-26" data-line-number="26">TIME_FORMAT <span class="op">=</span> <span class="st">&#39;%H:%M:%S&#39;</span></a>
+<a class="sourceLine" id="cb8-27" data-line-number="27">FIELDS <span class="op">=</span> [<span class="st">&#39;ip&#39;</span>, <span class="st">&#39;date&#39;</span>, <span class="st">&#39;time&#39;</span>, <span class="st">&#39;method&#39;</span>, <span class="st">&#39;url&#39;</span>, <span class="st">&#39;status_code&#39;</span>]</a>
+<a class="sourceLine" id="cb8-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb8-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb8-30" data-line-number="30"><span class="kw">def</span> main():</a>
+<a class="sourceLine" id="cb8-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb8-32" data-line-number="32">    storage <span class="op">=</span> NamedTemporaryFile()</a>
+<a class="sourceLine" id="cb8-33" data-line-number="33">    writer <span class="op">=</span> csv.DictWriter(storage, FIELDS)</a>
+<a class="sourceLine" id="cb8-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb8-35" data-line-number="35">    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;../logs.txt&#39;</span>) <span class="im">as</span> f:</a>
+<a class="sourceLine" id="cb8-36" data-line-number="36">        <span class="cf">for</span> line <span class="kw">in</span> f.readlines():</a>
+<a class="sourceLine" id="cb8-37" data-line-number="37">            match <span class="op">=</span> re.match(NGINX_LINE_REGEXP, line)</a>
+<a class="sourceLine" id="cb8-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb8-39" data-line-number="39">            <span class="cf">if</span> <span class="kw">not</span> match:</a>
+<a class="sourceLine" id="cb8-40" data-line-number="40">                <span class="cf">continue</span></a>
+<a class="sourceLine" id="cb8-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb8-42" data-line-number="42">            log_datetime <span class="op">=</span> match.group(<span class="st">&#39;dateandtime&#39;</span>).replace(<span class="st">&#39;:&#39;</span>, <span class="st">&#39; &#39;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-43" data-line-number="43">            log_datetime <span class="op">=</span> parser.parse(log_datetime)</a>
+<a class="sourceLine" id="cb8-44" data-line-number="44">            utc_log_datetime <span class="op">=</span> log_datetime.astimezone(tz.tzutc())</a>
+<a class="sourceLine" id="cb8-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb8-46" data-line-number="46">            parsed_item <span class="op">=</span> {<span class="st">&#39;ip&#39;</span>: match.group(<span class="st">&#39;ipaddress&#39;</span>),</a>
+<a class="sourceLine" id="cb8-47" data-line-number="47">                           <span class="st">&#39;date&#39;</span>: utc_log_datetime.strftime(DATE_FORMAT),</a>
+<a class="sourceLine" id="cb8-48" data-line-number="48">                           <span class="st">&#39;time&#39;</span>: utc_log_datetime.strftime(TIME_FORMAT),</a>
+<a class="sourceLine" id="cb8-49" data-line-number="49">                           <span class="st">&#39;method&#39;</span>: match.group(<span class="st">&#39;method&#39;</span>),</a>
+<a class="sourceLine" id="cb8-50" data-line-number="50">                           <span class="st">&#39;url&#39;</span>: match.group(<span class="st">&#39;url&#39;</span>),</a>
+<a class="sourceLine" id="cb8-51" data-line-number="51">                           <span class="st">&#39;status_code&#39;</span>: match.group(<span class="st">&#39;statuscode&#39;</span>)}</a>
+<a class="sourceLine" id="cb8-52" data-line-number="52">            writer.writerow(parsed_item)</a>
+<a class="sourceLine" id="cb8-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb8-54" data-line-number="54">    shutil.copy(storage.name, os.path.join(os.getcwd(), <span class="st">&#39;logs.csv&#39;</span>))</a>
+<a class="sourceLine" id="cb8-55" data-line-number="55">    storage.close()</a>
+<a class="sourceLine" id="cb8-56" data-line-number="56"></a>
+<a class="sourceLine" id="cb8-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb8-58" data-line-number="58"><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</a>
+<a class="sourceLine" id="cb8-59" data-line-number="59">    main()</a>
+<a class="sourceLine" id="cb8-60" data-line-number="60"></a></code></pre>
+<h1 id="tests">TESTS</h1>
+<h2 id="linenumber-without-highlighting">Linenumber Without Highlighting</h2>
+<p>Here I try to line-number non-highlighted python code via:</p>
+<pre><code>~~~~ { .numberLines startFrom=&quot;1&quot; }
+~~~~</code></pre>
+<p>… since no <code>.python</code> attribute is present, it will be treated as non-highlitable code:</p>
+<pre class="sourceCode numberSource numberLines" id="cb10" data-startFrom="1"><code class="sourceCode"><a class="sourceLine" id="cb10-1" data-line-number="1">&quot;&quot;&quot;</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">&quot;/3-python-intermediate/examples/solution2.py&quot; (CC0 1.0 Universal)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">Python example by Yevgen Runts, taken from:</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">-- https://github.com/yrunts/python-for-qa</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">&quot;&quot;&quot;</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">import os</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">import csv</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">import re</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">from tempfile import NamedTemporaryFile</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">import shutil</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">from dateutil import parser, tz</a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">NGINX_LINE_REGEXP = re.compile(</a>
+<a class="sourceLine" id="cb10-16" data-line-number="16">    (&#39;(?P&lt;ipaddress&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&#39;</a>
+<a class="sourceLine" id="cb10-17" data-line-number="17">     &#39; - - &#39;</a>
+<a class="sourceLine" id="cb10-18" data-line-number="18">     &#39;\[(?P&lt;dateandtime&gt;\d{2}\/[a-z]{3}\/\d{4}:\d{2}:\d{2}:\d{2} (\+|\-)\d{4})\] &#39;</a>
+<a class="sourceLine" id="cb10-19" data-line-number="19">     &#39;((\&quot;(?P&lt;method&gt;GET|POST|CONNECT|HEAD) )&#39;</a>
+<a class="sourceLine" id="cb10-20" data-line-number="20">     &#39;(?P&lt;url&gt;.+)(http\/1\.(1|0)&quot;)) &#39;</a>
+<a class="sourceLine" id="cb10-21" data-line-number="21">     &#39;(?P&lt;statuscode&gt;\d{3}) &#39;</a>
+<a class="sourceLine" id="cb10-22" data-line-number="22">     &#39;(?P&lt;bytessent&gt;\d+) &#39;</a>
+<a class="sourceLine" id="cb10-23" data-line-number="23">     &#39;([&quot;](?P&lt;refferer&gt;(\-)|(.+))[&quot;]) &#39;</a>
+<a class="sourceLine" id="cb10-24" data-line-number="24">     &#39;([&quot;](?P&lt;useragent&gt;.+)[&quot;])&#39;), re.IGNORECASE)</a>
+<a class="sourceLine" id="cb10-25" data-line-number="25">DATE_FORMAT = &#39;%d/%m/%y&#39;</a>
+<a class="sourceLine" id="cb10-26" data-line-number="26">TIME_FORMAT = &#39;%H:%M:%S&#39;</a>
+<a class="sourceLine" id="cb10-27" data-line-number="27">FIELDS = [&#39;ip&#39;, &#39;date&#39;, &#39;time&#39;, &#39;method&#39;, &#39;url&#39;, &#39;status_code&#39;]</a>
+<a class="sourceLine" id="cb10-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb10-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb10-30" data-line-number="30">def main():</a>
+<a class="sourceLine" id="cb10-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb10-32" data-line-number="32">    storage = NamedTemporaryFile()</a>
+<a class="sourceLine" id="cb10-33" data-line-number="33">    writer = csv.DictWriter(storage, FIELDS)</a>
+<a class="sourceLine" id="cb10-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb10-35" data-line-number="35">    with open(&#39;../logs.txt&#39;) as f:</a>
+<a class="sourceLine" id="cb10-36" data-line-number="36">        for line in f.readlines():</a>
+<a class="sourceLine" id="cb10-37" data-line-number="37">            match = re.match(NGINX_LINE_REGEXP, line)</a>
+<a class="sourceLine" id="cb10-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb10-39" data-line-number="39">            if not match:</a>
+<a class="sourceLine" id="cb10-40" data-line-number="40">                continue</a>
+<a class="sourceLine" id="cb10-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb10-42" data-line-number="42">            log_datetime = match.group(&#39;dateandtime&#39;).replace(&#39;:&#39;, &#39; &#39;, 1)</a>
+<a class="sourceLine" id="cb10-43" data-line-number="43">            log_datetime = parser.parse(log_datetime)</a>
+<a class="sourceLine" id="cb10-44" data-line-number="44">            utc_log_datetime = log_datetime.astimezone(tz.tzutc())</a>
+<a class="sourceLine" id="cb10-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb10-46" data-line-number="46">            parsed_item = {&#39;ip&#39;: match.group(&#39;ipaddress&#39;),</a>
+<a class="sourceLine" id="cb10-47" data-line-number="47">                           &#39;date&#39;: utc_log_datetime.strftime(DATE_FORMAT),</a>
+<a class="sourceLine" id="cb10-48" data-line-number="48">                           &#39;time&#39;: utc_log_datetime.strftime(TIME_FORMAT),</a>
+<a class="sourceLine" id="cb10-49" data-line-number="49">                           &#39;method&#39;: match.group(&#39;method&#39;),</a>
+<a class="sourceLine" id="cb10-50" data-line-number="50">                           &#39;url&#39;: match.group(&#39;url&#39;),</a>
+<a class="sourceLine" id="cb10-51" data-line-number="51">                           &#39;status_code&#39;: match.group(&#39;statuscode&#39;)}</a>
+<a class="sourceLine" id="cb10-52" data-line-number="52">            writer.writerow(parsed_item)</a>
+<a class="sourceLine" id="cb10-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb10-54" data-line-number="54">    shutil.copy(storage.name, os.path.join(os.getcwd(), &#39;logs.csv&#39;))</a>
+<a class="sourceLine" id="cb10-55" data-line-number="55">    storage.close()</a>
+<a class="sourceLine" id="cb10-56" data-line-number="56"></a>
+<a class="sourceLine" id="cb10-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb10-58" data-line-number="58">if __name__ == &#39;__main__&#39;:</a>
+<a class="sourceLine" id="cb10-59" data-line-number="59">    main()</a>
+<a class="sourceLine" id="cb10-60" data-line-number="60"></a></code></pre>
+<h2 id="pre-emulation">Pre Emulation</h2>
+<p>Based on the previous test, I can emulate preformatted blocks by using custom classes for code blocks. This has the added benefit that I could also line number pre block.</p>
+<pre><code>~~~~ { .Pre }
+~~~~</code></pre>
+<pre class="Pre"><code>I&#39;m just a preformatted block.
+No highlighting applies to me.
+</code></pre>
+<p>with line nums:</p>
+<pre class="sourceCode numberSource Pre numberLines" id="cb13"><code class="sourceCode"><a class="sourceLine" id="cb13-1" data-line-number="1">I&#39;m just a preformatted block.</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">No highlighting applies to me.</a></code></pre>
+<blockquote>
+<p><strong>NOTE</strong>: with the former, pandoc doesn’t add highlighter tags:</p>
+<pre class="sourceCode html small" id="cb14"><code class="sourceCode html"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">&quot;Pre&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"> <span class="kw">&lt;code&gt;</span>I&#39;m just a preformatted block.</a></code></pre>
+<p>But line numbering introduces highlighter tags even though it’s not being highlighted:</p>
+<pre class="sourceCode html small" id="cb15"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">&quot;sourceCode numberSource Pre numberLines&quot;</span><span class="ot"> id=</span><span class="st">&quot;cb13&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="kw">&lt;code</span><span class="ot"> class=</span><span class="st">&quot;sourceCode&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">    <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sourceLine&quot;</span><span class="ot"> id=</span><span class="st">&quot;cb13-1&quot;</span><span class="ot"> data-line-number=</span><span class="st">&quot;1&quot;</span><span class="kw">&gt;</span>I&#39;m just a preformatted block.<span class="kw">&lt;/a&gt;</span></a></code></pre>
+</blockquote>
+<h1 id="highlight-default">Highlight Default</h1>
+<p>Some examples of how Highlight syntax highlights languages for which there is no custom theme defined.</p>
+<p>Without line-numbers:</p>
+<pre class="python" title=""><code class="python" title=""><span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl str">&quot;/3-python-intermediate/examples/solution2.py&quot; (CC0 1.0 Universal)</span>
+<span class="hl str">Python example by Yevgen Runts, taken from:</span>
+<span class="hl str">-- https://github.com/yrunts/python-for-qa</span>
+<span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl kwa">import</span> os
+<span class="hl kwa">import</span> csv
+<span class="hl kwa">import</span> re
+<span class="hl kwa">from</span> tempfile <span class="hl kwa">import</span> NamedTemporaryFile
+<span class="hl kwa">import</span> shutil
+
+<span class="hl kwa">from</span> dateutil <span class="hl kwa">import</span> parser<span class="hl opt">,</span> tz
+
+
+NGINX_LINE_REGEXP <span class="hl opt">=</span> re<span class="hl opt">.</span><span class="hl kwb">compile</span><span class="hl opt">(</span>
+    <span class="hl opt">(</span><span class="hl str">&apos;(?P&lt;ipaddress&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&apos;</span>
+     <span class="hl str">&apos; - - &apos;</span>
+     <span class="hl str">&apos;\[(?P&lt;dateandtime&gt;\d</span><span class="hl ipl">{2}</span><span class="hl str">\/[a-z]</span><span class="hl ipl">{3}</span><span class="hl str">\/\d</span><span class="hl ipl">{4}</span><span class="hl str">:\d</span><span class="hl ipl">{2}</span><span class="hl str">:\d</span><span class="hl ipl">{2}</span><span class="hl str">:\d</span><span class="hl ipl">{2}</span> <span class="hl str">(\+|\-)\d</span><span class="hl ipl">{4}</span><span class="hl str">)\] &apos;</span>
+     <span class="hl str">&apos;((</span><span class="hl esc">\&quot;</span><span class="hl str">(?P&lt;method&gt;GET|POST|CONNECT|HEAD) )&apos;</span>
+     <span class="hl str">&apos;(?P&lt;url&gt;.+)(http\/1\.(1|0)&quot;)) &apos;</span>
+     <span class="hl str">&apos;(?P&lt;statuscode&gt;\d</span><span class="hl ipl">{3}</span><span class="hl str">) &apos;</span>
+     <span class="hl str">&apos;(?P&lt;bytessent&gt;\d+) &apos;</span>
+     <span class="hl str">&apos;([&quot;](?P&lt;refferer&gt;(\-)|(.+))[&quot;]) &apos;</span>
+     <span class="hl str">&apos;([&quot;](?P&lt;useragent&gt;.+)[&quot;])&apos;</span><span class="hl opt">),</span> re<span class="hl opt">.</span>IGNORECASE<span class="hl opt">)</span>
+DATE_FORMAT <span class="hl opt">=</span> <span class="hl str">&apos;</span><span class="hl ipl">%d</span><span class="hl str">/%m/%y&apos;</span>
+TIME_FORMAT <span class="hl opt">=</span> <span class="hl str">&apos;%H:%M:%S&apos;</span>
+FIELDS <span class="hl opt">= [</span><span class="hl str">&apos;ip&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;date&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;time&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;method&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;url&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;status_code&apos;</span><span class="hl opt">]</span>
+
+
+<span class="hl kwa">def</span> <span class="hl kwd">main</span><span class="hl opt">():</span>
+
+    storage <span class="hl opt">=</span> <span class="hl kwd">NamedTemporaryFile</span><span class="hl opt">()</span>
+    writer <span class="hl opt">=</span> csv<span class="hl opt">.</span><span class="hl kwd">DictWriter</span><span class="hl opt">(</span>storage<span class="hl opt">,</span> FIELDS<span class="hl opt">)</span>
+
+    with <span class="hl kwb">open</span><span class="hl opt">(</span><span class="hl str">&apos;../logs.txt&apos;</span><span class="hl opt">)</span> <span class="hl kwa">as</span> f<span class="hl opt">:</span>
+        <span class="hl kwa">for</span> line <span class="hl kwa">in</span> f<span class="hl opt">.</span><span class="hl kwd">readlines</span><span class="hl opt">():</span>
+            match <span class="hl opt">=</span> re<span class="hl opt">.</span><span class="hl kwd">match</span><span class="hl opt">(</span>NGINX_LINE_REGEXP<span class="hl opt">,</span> line<span class="hl opt">)</span>
+
+            <span class="hl kwa">if not</span> match<span class="hl opt">:</span>
+                <span class="hl kwa">continue</span>
+
+            log_datetime <span class="hl opt">=</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;dateandtime&apos;</span><span class="hl opt">).</span><span class="hl kwd">replace</span><span class="hl opt">(</span><span class="hl str">&apos;:&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos; &apos;</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">)</span>
+            log_datetime <span class="hl opt">=</span> parser<span class="hl opt">.</span><span class="hl kwd">parse</span><span class="hl opt">(</span>log_datetime<span class="hl opt">)</span>
+            utc_log_datetime <span class="hl opt">=</span> log_datetime<span class="hl opt">.</span><span class="hl kwd">astimezone</span><span class="hl opt">(</span>tz<span class="hl opt">.</span><span class="hl kwd">tzutc</span><span class="hl opt">())</span>
+
+            parsed_item <span class="hl opt">= {</span><span class="hl str">&apos;ip&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;ipaddress&apos;</span><span class="hl opt">),</span>
+                           <span class="hl str">&apos;date&apos;</span><span class="hl opt">:</span> utc_log_datetime<span class="hl opt">.</span><span class="hl kwd">strftime</span><span class="hl opt">(</span>DATE_FORMAT<span class="hl opt">),</span>
+                           <span class="hl str">&apos;time&apos;</span><span class="hl opt">:</span> utc_log_datetime<span class="hl opt">.</span><span class="hl kwd">strftime</span><span class="hl opt">(</span>TIME_FORMAT<span class="hl opt">),</span>
+                           <span class="hl str">&apos;method&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;method&apos;</span><span class="hl opt">),</span>
+                           <span class="hl str">&apos;url&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;url&apos;</span><span class="hl opt">),</span>
+                           <span class="hl str">&apos;status_code&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;statuscode&apos;</span><span class="hl opt">)}</span>
+            writer<span class="hl opt">.</span><span class="hl kwd">writerow</span><span class="hl opt">(</span>parsed_item<span class="hl opt">)</span>
+
+    shutil<span class="hl opt">.</span><span class="hl kwd">copy</span><span class="hl opt">(</span>storage<span class="hl opt">.</span>name<span class="hl opt">,</span> os<span class="hl opt">.</span>path<span class="hl opt">.</span><span class="hl kwd">join</span><span class="hl opt">(</span>os<span class="hl opt">.</span><span class="hl kwd">getcwd</span><span class="hl opt">(),</span> <span class="hl str">&apos;logs.csv&apos;</span><span class="hl opt">))</span>
+    storage<span class="hl opt">.</span><span class="hl kwd">close</span><span class="hl opt">()</span>
+
+
+<span class="hl kwa">if</span> __name__ <span class="hl opt">==</span> <span class="hl str">&apos;__main__&apos;</span><span class="hl opt">:</span>
+    <span class="hl kwd">main</span><span class="hl opt">()</span></code></pre>
+<p>With line-numbers:</p>
+<pre class="python" title=""><code class="python" title=""><span class="hl lin">100 </span><span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl lin">101 </span><span class="hl str">&quot;/3-python-intermediate/examples/solution2.py&quot; (CC0 1.0 Universal)</span>
+<span class="hl lin">102 </span><span class="hl str">Python example by Yevgen Runts, taken from:</span>
+<span class="hl lin">103 </span><span class="hl str">-- https://github.com/yrunts/python-for-qa</span>
+<span class="hl lin">104 </span><span class="hl str">&quot;&quot;&quot;</span>
+<span class="hl lin">105 </span><span class="hl kwa">import</span> os
+<span class="hl lin">106 </span><span class="hl kwa">import</span> csv
+<span class="hl lin">107 </span><span class="hl kwa">import</span> re
+<span class="hl lin">108 </span><span class="hl kwa">from</span> tempfile <span class="hl kwa">import</span> NamedTemporaryFile
+<span class="hl lin">109 </span><span class="hl kwa">import</span> shutil
+<span class="hl lin">110 </span>
+<span class="hl lin">111 </span><span class="hl kwa">from</span> dateutil <span class="hl kwa">import</span> parser<span class="hl opt">,</span> tz
+<span class="hl lin">112 </span>
+<span class="hl lin">113 </span>
+<span class="hl lin">114 </span>NGINX_LINE_REGEXP <span class="hl opt">=</span> re<span class="hl opt">.</span><span class="hl kwb">compile</span><span class="hl opt">(</span>
+<span class="hl lin">115 </span>    <span class="hl opt">(</span><span class="hl str">&apos;(?P&lt;ipaddress&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&apos;</span>
+<span class="hl lin">116 </span>     <span class="hl str">&apos; - - &apos;</span>
+<span class="hl lin">117 </span>     <span class="hl str">&apos;\[(?P&lt;dateandtime&gt;\d</span><span class="hl ipl">{2}</span><span class="hl str">\/[a-z]</span><span class="hl ipl">{3}</span><span class="hl str">\/\d</span><span class="hl ipl">{4}</span><span class="hl str">:\d</span><span class="hl ipl">{2}</span><span class="hl str">:\d</span><span class="hl ipl">{2}</span><span class="hl str">:\d</span><span class="hl ipl">{2}</span> <span class="hl str">(\+|\-)\d</span><span class="hl ipl">{4}</span><span class="hl str">)\] &apos;</span>
+<span class="hl lin">118 </span>     <span class="hl str">&apos;((</span><span class="hl esc">\&quot;</span><span class="hl str">(?P&lt;method&gt;GET|POST|CONNECT|HEAD) )&apos;</span>
+<span class="hl lin">119 </span>     <span class="hl str">&apos;(?P&lt;url&gt;.+)(http\/1\.(1|0)&quot;)) &apos;</span>
+<span class="hl lin">120 </span>     <span class="hl str">&apos;(?P&lt;statuscode&gt;\d</span><span class="hl ipl">{3}</span><span class="hl str">) &apos;</span>
+<span class="hl lin">121 </span>     <span class="hl str">&apos;(?P&lt;bytessent&gt;\d+) &apos;</span>
+<span class="hl lin">122 </span>     <span class="hl str">&apos;([&quot;](?P&lt;refferer&gt;(\-)|(.+))[&quot;]) &apos;</span>
+<span class="hl lin">123 </span>     <span class="hl str">&apos;([&quot;](?P&lt;useragent&gt;.+)[&quot;])&apos;</span><span class="hl opt">),</span> re<span class="hl opt">.</span>IGNORECASE<span class="hl opt">)</span>
+<span class="hl lin">124 </span>DATE_FORMAT <span class="hl opt">=</span> <span class="hl str">&apos;</span><span class="hl ipl">%d</span><span class="hl str">/%m/%y&apos;</span>
+<span class="hl lin">125 </span>TIME_FORMAT <span class="hl opt">=</span> <span class="hl str">&apos;%H:%M:%S&apos;</span>
+<span class="hl lin">126 </span>FIELDS <span class="hl opt">= [</span><span class="hl str">&apos;ip&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;date&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;time&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;method&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;url&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;status_code&apos;</span><span class="hl opt">]</span>
+<span class="hl lin">127 </span>
+<span class="hl lin">128 </span>
+<span class="hl lin">129 </span><span class="hl kwa">def</span> <span class="hl kwd">main</span><span class="hl opt">():</span>
+<span class="hl lin">130 </span>
+<span class="hl lin">131 </span>    storage <span class="hl opt">=</span> <span class="hl kwd">NamedTemporaryFile</span><span class="hl opt">()</span>
+<span class="hl lin">132 </span>    writer <span class="hl opt">=</span> csv<span class="hl opt">.</span><span class="hl kwd">DictWriter</span><span class="hl opt">(</span>storage<span class="hl opt">,</span> FIELDS<span class="hl opt">)</span>
+<span class="hl lin">133 </span>
+<span class="hl lin">134 </span>    with <span class="hl kwb">open</span><span class="hl opt">(</span><span class="hl str">&apos;../logs.txt&apos;</span><span class="hl opt">)</span> <span class="hl kwa">as</span> f<span class="hl opt">:</span>
+<span class="hl lin">135 </span>        <span class="hl kwa">for</span> line <span class="hl kwa">in</span> f<span class="hl opt">.</span><span class="hl kwd">readlines</span><span class="hl opt">():</span>
+<span class="hl lin">136 </span>            match <span class="hl opt">=</span> re<span class="hl opt">.</span><span class="hl kwd">match</span><span class="hl opt">(</span>NGINX_LINE_REGEXP<span class="hl opt">,</span> line<span class="hl opt">)</span>
+<span class="hl lin">137 </span>
+<span class="hl lin">138 </span>            <span class="hl kwa">if not</span> match<span class="hl opt">:</span>
+<span class="hl lin">139 </span>                <span class="hl kwa">continue</span>
+<span class="hl lin">140 </span>
+<span class="hl lin">141 </span>            log_datetime <span class="hl opt">=</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;dateandtime&apos;</span><span class="hl opt">).</span><span class="hl kwd">replace</span><span class="hl opt">(</span><span class="hl str">&apos;:&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos; &apos;</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">)</span>
+<span class="hl lin">142 </span>            log_datetime <span class="hl opt">=</span> parser<span class="hl opt">.</span><span class="hl kwd">parse</span><span class="hl opt">(</span>log_datetime<span class="hl opt">)</span>
+<span class="hl lin">143 </span>            utc_log_datetime <span class="hl opt">=</span> log_datetime<span class="hl opt">.</span><span class="hl kwd">astimezone</span><span class="hl opt">(</span>tz<span class="hl opt">.</span><span class="hl kwd">tzutc</span><span class="hl opt">())</span>
+<span class="hl lin">144 </span>
+<span class="hl lin">145 </span>            parsed_item <span class="hl opt">= {</span><span class="hl str">&apos;ip&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;ipaddress&apos;</span><span class="hl opt">),</span>
+<span class="hl lin">146 </span>                           <span class="hl str">&apos;date&apos;</span><span class="hl opt">:</span> utc_log_datetime<span class="hl opt">.</span><span class="hl kwd">strftime</span><span class="hl opt">(</span>DATE_FORMAT<span class="hl opt">),</span>
+<span class="hl lin">147 </span>                           <span class="hl str">&apos;time&apos;</span><span class="hl opt">:</span> utc_log_datetime<span class="hl opt">.</span><span class="hl kwd">strftime</span><span class="hl opt">(</span>TIME_FORMAT<span class="hl opt">),</span>
+<span class="hl lin">148 </span>                           <span class="hl str">&apos;method&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;method&apos;</span><span class="hl opt">),</span>
+<span class="hl lin">149 </span>                           <span class="hl str">&apos;url&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;url&apos;</span><span class="hl opt">),</span>
+<span class="hl lin">150 </span>                           <span class="hl str">&apos;status_code&apos;</span><span class="hl opt">:</span> match<span class="hl opt">.</span><span class="hl kwd">group</span><span class="hl opt">(</span><span class="hl str">&apos;statuscode&apos;</span><span class="hl opt">)}</span>
+<span class="hl lin">151 </span>            writer<span class="hl opt">.</span><span class="hl kwd">writerow</span><span class="hl opt">(</span>parsed_item<span class="hl opt">)</span>
+<span class="hl lin">152 </span>
+<span class="hl lin">153 </span>    shutil<span class="hl opt">.</span><span class="hl kwd">copy</span><span class="hl opt">(</span>storage<span class="hl opt">.</span>name<span class="hl opt">,</span> os<span class="hl opt">.</span>path<span class="hl opt">.</span><span class="hl kwd">join</span><span class="hl opt">(</span>os<span class="hl opt">.</span><span class="hl kwd">getcwd</span><span class="hl opt">(),</span> <span class="hl str">&apos;logs.csv&apos;</span><span class="hl opt">))</span>
+<span class="hl lin">154 </span>    storage<span class="hl opt">.</span><span class="hl kwd">close</span><span class="hl opt">()</span>
+<span class="hl lin">155 </span>
+<span class="hl lin">156 </span>
+<span class="hl lin">157 </span><span class="hl kwa">if</span> __name__ <span class="hl opt">==</span> <span class="hl str">&apos;__main__&apos;</span><span class="hl opt">:</span>
+<span class="hl lin">158 </span>    <span class="hl kwd">main</span><span class="hl opt">()</span></code></pre>
+<h1 id="highlight">Highlight</h1>
+<h2 id="purebasic">PureBASIC</h2>
+<p>Without line-numbers:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span></code></pre>
+<p>With line-numbers:</p>
+<pre class="purebasic" title="PureBASIC source code"><code class="purebasic" title="PureBASIC source code"><span class="hl lin">100 </span><span class="hl slc">; PureBASIC 5.60</span>
+<span class="hl lin">101 </span><span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+<span class="hl lin">102 </span>  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl lin">103 </span><span class="hl kwa">Next</span></code></pre>
+<h2 id="fasm">Fasm</h2>
+<p>Without line-numbers:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl slc">; Simple text editor - fasm example program</span>
+
+<span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span>
+<span class="hl kwb">entry</span> start
+
+<span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+
+IDR_ICON <span class="hl opt">=</span> <span class="hl num">17</span>
+IDR_MENU <span class="hl opt">=</span> <span class="hl num">37</span>
+
+IDM_NEW   <span class="hl opt">=</span> <span class="hl num">101</span>
+IDM_EXIT  <span class="hl opt">=</span> <span class="hl num">102</span>
+IDM_ABOUT <span class="hl opt">=</span> <span class="hl num">901</span>
+
+<span class="hl kwb">section</span> <span class="hl str">&apos;.text&apos;</span> <span class="hl kwd">code readable executable</span>
+
+  <span class="hl kwc">start</span><span class="hl opt">:</span>
+
+    invoke  GetModuleHandle<span class="hl opt">,</span><span class="hl num">0</span>
+    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hInstance<span class="hl opt">],</span><span class="hl kwa">eax</span></code></pre>
+<p>With line-numbers:</p>
+<pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl lin">100 </span><span class="hl slc">; Simple text editor - fasm example program</span>
+<span class="hl lin">101 </span>
+<span class="hl lin">102 </span><span class="hl kwb">format</span> <span class="hl kwd">PE GUI</span> <span class="hl num">4.0</span>
+<span class="hl lin">103 </span><span class="hl kwb">entry</span> start
+<span class="hl lin">104 </span>
+<span class="hl lin">105 </span><span class="hl kwd">include</span> <span class="hl str">&apos;win32a.inc&apos;</span>
+<span class="hl lin">106 </span>
+<span class="hl lin">107 </span>IDR_ICON <span class="hl opt">=</span> <span class="hl num">17</span>
+<span class="hl lin">108 </span>IDR_MENU <span class="hl opt">=</span> <span class="hl num">37</span>
+<span class="hl lin">109 </span>
+<span class="hl lin">110 </span>IDM_NEW   <span class="hl opt">=</span> <span class="hl num">101</span>
+<span class="hl lin">111 </span>IDM_EXIT  <span class="hl opt">=</span> <span class="hl num">102</span>
+<span class="hl lin">112 </span>IDM_ABOUT <span class="hl opt">=</span> <span class="hl num">901</span>
+<span class="hl lin">113 </span>
+<span class="hl lin">114 </span><span class="hl kwb">section</span> <span class="hl str">&apos;.text&apos;</span> <span class="hl kwd">code readable executable</span>
+<span class="hl lin">115 </span>
+<span class="hl lin">116 </span>  <span class="hl kwc">start</span><span class="hl opt">:</span>
+<span class="hl lin">117 </span>
+<span class="hl lin">118 </span>    invoke  GetModuleHandle<span class="hl opt">,</span><span class="hl num">0</span>
+<span class="hl lin">119 </span>    <span class="hl kwb">mov</span> <span class="hl opt">[</span>wc<span class="hl opt">.</span>hInstance<span class="hl opt">],</span><span class="hl kwa">eax</span></code></pre>
+<h1 id="preformatted-blocks">Preformatted Blocks</h1>
+<p>There is no markdown syntax for <code>&lt;pre&gt;</code> blocks. Instead, a code block without any language declaration can be used:</p>
+<pre><code>I&#39;m a code block without any language or classes specified.</code></pre>
+<h1 id="code-rulers-test">Code Rulers Test</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>A normal (default) code block can show up to 80 chars before displaying a horizontal scrollbar:</p>
+<pre><code>12345678901234567890123456789012345678901234567890123456789012345678901234567890
+        10        20        30        40        50        60        70        80</code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>A code block with <code>&lt;code class=&quot;small&quot;&gt;</code> can show up to 100 chars before displaying a horizontal scrollbar:</p>
+<pre><code>1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+        10        20        30        40        50        60        70        80        90       100</code></pre>
+<h1 id="test-code-and-codesmall">Test <code>!Code</code> and <code>!CodeSmall</code></h1>
+<h1 id="code-macro"><code>!Code</code> Macro</h1>
+<p><strong>NORMAL</strong>:</p>
+<p>(Using the <code>!Code</code> macro)</p>
+<pre class=""><code class="">Some fictional code
+  If this or that
+    X = 10 * y
+  EndIf
+</code></pre>
+<p><strong>SMALL</strong>:</p>
+<p>(Using the <code>!CodeSmall</code> macro)</p>
+<pre><code class="small">Some fictional code
+  If this or that
+    X = 10 * y
+  EndIf
+</code></pre>
+<h1 id="test-highlightsmall">Test <code>!HighlightSmall</code></h1>
+<pre class="purebasic small" title=""><code class="purebasic small" title=""><span class="hl kwa">For</span> i<span class="hl opt">=</span><span class="hl num">1</span> <span class="hl kwa">To</span> <span class="hl num">10</span>
+  <span class="hl kwa">Debug</span>(<span class="hl str">&quot;Counting &quot;</span> <span class="hl opt">+</span> <span class="hl kwc">Str</span>(i))
+<span class="hl kwa">Next</span></code></pre>
+<hr />
+<h1 id="code-and-verbatim">Code and Verbatim</h1>
+<p>Some tests for code, syntax highlighting and preformatted blocks.</p>
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html">Pandoc Documentation</a>:
+<ul>
+<li><a href="http://pandoc.org/MANUAL.html#verbatim-code-blocks">Verbatim (code) blocks</a></li>
+</ul></li>
+</ul>
+<h1 id="preformatted-blocks-1">Preformatted Blocks</h1>
+<p>In order to achieve a simple <code>&lt;pre&gt;</code> block (not followed by the <code>&lt;code&gt;</code> code) you have to resort to raw HTML tags inside markdown — ie: there is no way to achived it in pure markdown.</p>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>&lt;pre&gt;I&#39;m a preformatted block, no code inside&lt;/pre&gt;</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html" id="cb20"><code class="sourceCode html"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">&lt;pre&gt;</span>I&#39;m a preformatted block, no code inside<span class="kw">&lt;/pre&gt;</span></a></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<pre>I'm a preformatted block, no code inside</pre>
+<h1 id="non-highlighted-code-blocks">Non-Highlighted Code Blocks</h1>
+<p>To define a code block without any highlighting, just enclosed it in tildas or backticks (fenced code), or use indentation (4 spaces or one Tab).</p>
+<h2 id="fenced-backticks">Fenced (backticks)</h2>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>```
+For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next
+```</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html" id="cb22"><code class="sourceCode html"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">  Debug(<span class="dv">&amp;quot;</span>Counting <span class="dv">&amp;quot;</span> + Str(i))</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></a></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<pre><code>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next</code></pre>
+<h2 id="indented-4-spaces">Indented (4 spaces)</h2>
+<div class="Note">
+<p><strong>NOTE</strong> — The raw html comment tag <code>&lt;!----&gt;</code> was added to create a context in the snippet, otherwise pandoc would convert it as a paragraph.</p>
+</div>
+<p class="FakeH3">
+MARKDOWN SOURCE:
+</p>
+<pre><code>&lt;!----&gt;
+    For i=1 To 10
+      Debug(&quot;Counting &quot; + Str(i))
+    Next</code></pre>
+<p class="FakeH3">
+HTML OUTPUT:
+</p>
+<pre class="sourceCode html" id="cb25"><code class="sourceCode html"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">&lt;!----&gt;</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">&lt;pre&gt;&lt;code&gt;</span>For i=1 To 10</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">  Debug(<span class="dv">&amp;quot;</span>Counting <span class="dv">&amp;quot;</span> + Str(i))</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">Next<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></a></code></pre>
+<p class="FakeH3">
+VISUAL RESULT:
+</p>
+<!---->
+<pre><code>For i=1 To 10
+  Debug(&quot;Counting &quot; + Str(i))
+Next</code></pre>
+<hr />
+<h1 id="line-blocks">Line blocks</h1>
+<pre><code>Extension: line_blocks</code></pre>
+<p>A line block is a sequence of lines beginning with a vertical bar (“<code>|</code>”) followed by a space. The division into lines will be preserved in the output, as will any leading spaces; otherwise, the lines will be formatted as Markdown. This is useful for verse and addresses:</p>
+<pre><code>| The limerick packs laughs anatomical
+| In space that is quite economical.
+|    But the good ones I&#39;ve seen
+|    So seldom are clean
+| And the clean ones so seldom are comical
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div class="line-block">The limerick packs laughs anatomical
+In space that is quite economical.
+   But the good ones I’ve seen
+   So seldom are clean
+And the clean ones so seldom are comical</div>
+<hr />
+<p>It basicall wraps the contents in a <code>&lt;div style=&quot;white-space: pre-line;&quot;&gt;</code>.</p>
+<p>The lines can be hard-wrapped if needed, but the continuation line must begin with a space.</p>
+<pre><code>| The Right Honorable Most Venerable and Righteous Samuel L.
+  Constable, Jr.
+| 200 Main St.
+| Berkeley, CA 94718
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div class="line-block">The Right Honorable Most Venerable and Righteous Samuel L. Constable, Jr.
+200 Main St.
+Berkeley, CA 94718</div>
+<hr />
+<p>Long lines will wrap around:</p>
+<pre><code>| A very lengthy and overly-verbose line of text that will surely exceed its container&#39;s width by an abundant measure and force wrapping!
+</code></pre>
+<p>… which produces (horizontal rulers added):</p>
+<hr />
+<div class="line-block">A very lengthy and overly-verbose line of text that will surely exceed its container’s width by an abundant measure and force wrapping!</div>
+<hr />
+<h1 id="snippets">SNIPPETS</h1>
+<p><strong>MARKDOWN SOURCE:</strong></p>
+<pre class="sourceCode markdown" id="cb31"><code class="sourceCode markdown"></code></pre>
+<p><strong>HTML OUTPUT:</strong></p>
+<pre class="sourceCode html" id="cb32"><code class="sourceCode html"></code></pre>
+<p><strong>HTML RESULT:</strong></p>
+				</div><!-- end document -->
+				<div id="sidebar">
+					<nav>
+					   <!--TOC-BEGIN-->
+						<h2>Page Contents</h2>
+
+<ul>
+<li><a href="#pandoc-highlighting">Pandoc Highlighting</a><ul>
+<li><a href="#default-theme">Default Theme</a></li>
+</ul></li>
+<li><a href="#tests">TESTS</a><ul>
+<li><a href="#linenumber-without-highlighting">Linenumber Without Highlighting</a></li>
+<li><a href="#pre-emulation">Pre Emulation</a></li>
+</ul></li>
+<li><a href="#highlight-default">Highlight Default</a></li>
+<li><a href="#highlight">Highlight</a><ul>
+<li><a href="#purebasic">PureBASIC</a></li>
+<li><a href="#fasm">Fasm</a></li>
+</ul></li>
+<li><a href="#preformatted-blocks">Preformatted Blocks</a></li>
+<li><a href="#code-rulers-test">Code Rulers Test</a></li>
+<li><a href="#test-code-and-codesmall">Test <code>!Code</code> and <code>!CodeSmall</code></a></li>
+<li><a href="#code-macro"><code>!Code</code> Macro</a></li>
+<li><a href="#test-highlightsmall">Test <code>!HighlightSmall</code></a></li>
+<li><a href="#code-and-verbatim">Code and Verbatim</a></li>
+<li><a href="#preformatted-blocks-1">Preformatted Blocks</a></li>
+<li><a href="#non-highlighted-code-blocks">Non-Highlighted Code Blocks</a><ul>
+<li><a href="#fenced-backticks">Fenced (backticks)</a></li>
+<li><a href="#indented-4-spaces">Indented (4 spaces)</a></li>
+</ul></li>
+<li><a href="#line-blocks">Line blocks</a></li>
+<li><a href="#snippets">SNIPPETS</a></li>
+</ul>
+					   <!--TOC-END-->
+					</nav>
+			 </div><!-- end sidebar -->
+
+			</div><!-- end row -->
+		</div><!-- end container -->
+
+	</body>
+</html>

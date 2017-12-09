@@ -728,6 +728,9 @@ pre code {
   padding: 0;
   top: 0; }
 
+pre.small,
+pre.small code,
+pre.small code.small,
 pre code.small {
   font-size: 14px;
   line-height: 12px;
@@ -753,15 +756,6 @@ pre code {
   word-wrap: normal;
   background-color: transparent;
   color: red; }
-
-td.lineNumbers pre {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: rgba(153, 153, 153, 0.5); }
-
-td.sourceCode pre {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0; }
 
 table {
   display: block;
@@ -995,6 +989,164 @@ code.fasm .hl.kwc {
 code.fasm .hl.kwd {
   color: #cc99cc;
   font-weight: bold; }
+
+/*
+******************************************************************************
+*                                                                            *
+*                         Skylighting Default Theme                          *
+*                                                                            *
+******************************************************************************
+pandoc >= v2.0.4
+
+The default theme for pandoc highlighted code. Defines all the core attributes
+and styles used by skylighting.
+
+NOTE: pandoc 2.0.4 introduced some changes in the source code highlight tags:
+	  -- source lines now use <a> tag instead of <div> tag:
+	  	 before: <div class="sourceLine">
+	  	 now:	 <a class="sourceLine">
+------------------------------------------------------------------------------
+
+==============================================================================
+                                     TODO                                     
+==============================================================================
+-- [x] Code overflows without horizontal scroll bar!
+-- [x] Line numbers: remove underline.
+*/
+a.sourceLine {
+  display: inline-block;
+  min-height: 24px; }
+
+a.sourceLine {
+  pointer-events: none;
+  color: inherit;
+  text-decoration: inherit; }
+
+/*
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                               REDUNDANT STYLES                               
+//////////////////////////////////////////////////////////////////////////////
+These are redundant because already defined in main typography styles....
+// CHANGED: Show horizontal scrollbar for overflowing code:
+// .sourceCode {
+// 	overflow: visible;
+// }
+pre.sourceCode {
+	overflow: auto;
+}
+
+code.sourceCode {
+	white-space: pre;
+}
+ */
+@media print {
+  code.sourceCode {
+    white-space: pre-wrap; }
+
+  div.sourceLine, a.sourceLine {
+    text-indent: -1em;
+    padding-left: 1em; } }
+pre.numberSource div.sourceLine,
+.numberSource a.sourceLine {
+  position: relative; }
+
+/* ORIGINAL CSS: Caused line numbers to be outside BG color
+
+pre.numberSource div.sourceLine::before,
+.numberSource a.sourceLine::before {
+	content: attr(data-line-number);
+	position: absolute;
+	left: -5em;
+	text-align: right;
+	vertical-align: baseline;
+	border: none;
+	pointer-events: all;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	padding: 0 4px;
+	width: 4em;
+	background-color: $BG-Color;
+}
+ */
+pre.numberSource a.sourceLine::before {
+  content: attr(data-line-number);
+  position: absolute;
+  left: -5em;
+  text-align: right;
+  vertical-align: baseline;
+  border: none;
+  pointer-events: all;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0 4px;
+  width: 4em;
+  color: #75715E;
+  text-decoration: none; }
+
+pre.numberSource a.sourceLine::before {
+  border-right: 1px solid #F92672; }
+
+pre.numberSource a.sourceLine::after {
+  content: "\2009"; }
+
+pre.numberSource {
+  background-color: #383830;
+  padding-left: 4px; }
+
+pre.sourceCode,
+code.sourceCode {
+  color: #F8F8F2;
+  background-color: #383830; }
+
+pre.numberSource a.sourceLine {
+  margin-left: 4em;
+  padding-left: 4px; }
+
+@media screen {
+  a.sourceLine::before {
+    text-decoration: underline;
+    color: initial; } }
+code span.al, code span.cf, code span.er, code span.kw {
+  font-weight: bold; }
+code span.co, code span.do {
+  font-style: italic; }
+code span.an, code span.cv, code span.in, code span.wa {
+  font-weight: bold;
+  font-style: italic; }
+code span.an, code span.co, code span.cv, code span.in, code span.wa {
+  color: #A59F85; }
+code span.al, code span.er, code span.op {
+  color: #F92672; }
+code span.bn, code span.dv, code span.fl {
+  color: #FD971F; }
+code span.ss {
+  color: #FD971F; }
+code span.cn {
+  color: #F4BF75; }
+code span.va {
+  color: #A6E22E; }
+code span.fu {
+  color: #A1EFE4; }
+code span.dt {
+  color: #66D9EF; }
+code span.cf, code span.kw, code span.ot {
+  color: #AE81FF; }
+code span.pp {
+  color: #CC6633; }
+code span.ch, code span.sc, code span.st, code span.vs {
+  color: #FFE792; }
+code span.do {
+  color: #1776BC; }
+code span.at {
+  color: #6298CD; }
 
 pre.dos,
 code.dos,

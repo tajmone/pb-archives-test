@@ -1,0 +1,282 @@
+/*
+******************************************************************************
+*                                                                            *
+*                         Skylighting Default Theme                          *
+*                                                                            *
+******************************************************************************
+pandoc >= v2.0.4
+
+The default theme for pandoc highlighted code. Defines all the core attributes
+and styles used by skylighting.
+
+NOTE: pandoc 2.0.4 introduced some changes in the source code highlight tags:
+	  -- source lines now use <a> tag instead of <div> tag:
+	  	 before: <div class="sourceLine">
+	  	 now:	 <a class="sourceLine">
+------------------------------------------------------------------------------
+
+==============================================================================
+                                     TODO                                     
+==============================================================================
+-- [x] Code overflows without horizontal scroll bar!
+-- [x] Line numbers: remove underline.
+*/
+
+
+// Change active Chroma scheme to "Base16 Monokai":
+$chroma-active-scheme: 'b16-Monokai';
+
+
+// ------------------------------------------------------------------------------
+$Normal-Color:		  color(base05); // base0E
+$BG-Color: 			  color(base01);
+$LineNumsColor: 	  color(base03);
+$LineNumsBorderColor: color(base08); // WAS: base08
+
+// ------------------------------------------------------------------------------
+
+
+// div.sourceLine,
+a.sourceLine {
+	display: inline-block;
+	// min-height: 1.25em;
+	min-height: $base-line-height; // <= 24px
+}
+
+a.sourceLine {
+	pointer-events: none;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+/*
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                               REDUNDANT STYLES                               
+//////////////////////////////////////////////////////////////////////////////
+These are redundant because already defined in main typography styles....
+// CHANGED: Show horizontal scrollbar for overflowing code:
+// .sourceCode {
+// 	overflow: visible;
+// }
+pre.sourceCode {
+	overflow: auto;
+}
+
+code.sourceCode {
+	white-space: pre;
+}
+ */
+
+
+@media print {
+	code.sourceCode {
+		white-space: pre-wrap;
+	}
+	
+	div.sourceLine, a.sourceLine {
+		text-indent: -1em;
+		padding-left: 1em;
+	}
+}
+
+pre.numberSource div.sourceLine,
+.numberSource a.sourceLine {
+	position: relative;
+}
+
+/* ORIGINAL CSS: Caused line numbers to be outside BG color
+
+pre.numberSource div.sourceLine::before,
+.numberSource a.sourceLine::before {
+	content: attr(data-line-number);
+	position: absolute;
+	left: -5em;
+	text-align: right;
+	vertical-align: baseline;
+	border: none;
+	pointer-events: all;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	padding: 0 4px;
+	width: 4em;
+	background-color: $BG-Color;
+}
+ */
+
+// pre.numberSource div.sourceLine::before,
+// .numberSource a.sourceLine::before {
+pre.numberSource a.sourceLine::before {
+	content: attr(data-line-number);
+	position: absolute;
+	left: -5em; // Space for Line Numbers with 4 digits maximum!
+	text-align: right;
+	vertical-align: baseline;
+	border: none;
+	pointer-events: all;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	padding: 0 4px;
+	width: 4em;
+color: $LineNumsColor; // <= my addition
+text-decoration: none;
+}
+
+// ADDED: The border separating line nums from code
+pre.numberSource a.sourceLine::before {
+	border-right: 1px solid $LineNumsBorderColor;
+}
+
+// ADDED: This hack prevents empty lines height difference.
+// 		  Without this hack, the internal border of line nummbers will show
+// 		  vertical gaps with empty lines, breaking the illusion of a continuos
+// 		  line.
+pre.numberSource a.sourceLine::after {
+	content: "\2009"; // Thin space: &thinsp;
+}
+
+pre.numberSource {
+	// margin-left: 3em;
+	// border-left: 1px solid red;
+	background-color: $BG-Color;
+	// color: #ff0000; // doesn't seem to have nay effect!
+	padding-left: 4px;
+}
+
+// Changed: added the .sourceCode class to avoid interfering with base styles!
+pre.sourceCode,
+code.sourceCode {
+	color: $Normal-Color;
+	background-color: $BG-Color;
+}
+
+// ADDED: Needed to preserve Line Numbers background-color
+pre.numberSource a.sourceLine {
+	margin-left: 4em;  // Space for Line Numbers with 4 digits maximum!
+	padding-left: 4px;
+	// color: color(base05);
+	// background-color: $BG-Color;	
+}
+
+@media screen {
+	a.sourceLine::before {
+		text-decoration: underline;
+		color: initial;
+	}
+}
+
+// ==============================================================================
+//                                SYNTAX ELEMENTS                                
+// ==============================================================================
+// Based on how pandoc's builtin "pygments" style assigns colors to elements...
+//  
+code {
+	& span {
+		// --------------------------------- BOLD ---------------------------------
+		&.al, 	//   Alert
+		&.cf,	//   ControlFlow
+		&.er,  	//   Error
+		&.kw { 	//   Keyword
+			font-weight: bold;
+		}
+		// -------------------------------- ITALIC --------------------------------
+		&.co,	//   Comment
+		&.do { 	//   Documentation
+			font-style: italic;
+		}
+		// ---------------------------- BOLD + ITALIC -----------------------------
+		&.an, 	//   Annotation
+		&.cv,   //   CommentVar
+		&.in, 	//   Information
+		&.wa { 	//   Warning
+			font-weight: bold;
+			font-style: italic;
+		}
+		// ===================================> Base 04     ( Tallow )
+		&.an, 	//   Annotation
+		&.co, 	//   Comment
+		&.cv, 	//   CommentVar
+		&.in, 	//   Information
+		&.wa { 	//   Warning
+			color: color(base04);
+		}
+		// ===================================> Base 08     ( Rose red )
+		&.al,  	//   Alert
+		&.er,  	//   Error
+		&.op { 	//   Operator
+			color: color(base08);
+		}
+		// ===================================> Base 09     ( ??? )
+		&.bn,  	//   BaseN
+		&.dv,  	//   DecVal
+		&.fl { 	//   Float
+			color: color(base09);
+		}
+		// ===================================> Base 09     ( intense orange )
+		&.ss { //   SpecialString
+			color: color(base09);
+		}
+		// ===================================> Base 0A     ( orange )
+		&.cn { //   Constant
+			color: color(base0A);
+		}
+		// ===================================> Base 0B     ( green )
+		&.va { //   Variable
+			// color: white;			// TEMPORARY VALS!!!!
+			// background-color: red;
+			color: color(base0B);
+		}
+		// ===================================> Base 0C     ( cyan/turquoise )
+		&.fu { //   Function
+			color: color(base0C);
+		}
+		// ===================================> Base 0D     ( Sky Blue )
+		&.dt { 	//   DataType
+			color: color(base0D);
+		}
+		// ===================================> Base 0E     ( purple )
+		&.cf,	//   ControlFlow
+		&.kw, 	//   Keyword
+		&.ot { 	//   Other
+			color: color(base0E);
+		}
+		// ===================================> Base 0F     ( brick red )
+		&.pp { //   Preprocessor
+			color: color(base0F);
+		}
+		// ===================================> Base 10     ( yellow )
+		&.ch,  	//   Char
+		&.sc,  	//   SpecialChar
+		&.st,  	//   String
+		&.vs { 	//   VerbatimString
+			color: color(base10);
+		}
+		// ===================================> Base 11     ( dullyellow )
+
+		// ===================================> Base 12     ( blue )
+		&.do { //   Documentation
+			color: color(base12);
+		}
+		// ===================================> Base 13     (dull blue )
+		&.at { //   Attribute
+			color: color(base13);
+		}
+		// =============================== UNSTYLED ===============================
+		// &.im { //   Import
+		// }
+		// &.bu { //   BuiltIn
+		// }
+		// &.ex { //   Extension
+		// }
+	}
+}
+
+// Restore Chroma's default active scheme:
+$chroma-active-scheme: 'theme';

@@ -11,6 +11,8 @@
 // Chris Kempson's Base16 project (MIT License):
 // 
 //  -- https://github.com/chriskempson/base16-builder/blob/master/schemes/monokai.yml
+// 
+// A few extra colors added to the scheme.
 
 $chroma: define-color-scheme('b16-Monokai', 'Base16 "Monokai" scheme.');
 
@@ -18,20 +20,26 @@ $chroma: define-color-scheme('b16-Monokai', 'Base16 "Monokai" scheme.');
 $chroma: add-colors('b16-Monokai', (
 	base00: #272822, // Rangoon Green ( almost black )
 	base01: #383830, // Armadillo ( almost black )
-	base02: #49483e, // Fuscous Gray ( blackboard-like brown )
-	base03: #75715e, // Crocodile
-	base04: #a59f85, // Tallow
-	base05: #f8f8f2, // Bianca
-	base06: #f5f4f1, // Pampas
-	base07: #f9f8f5, // Desert Storm
-	base08: #f92672, // Rose ( red )
-	base09: #fd971f, // West Side  ( intense orange )
-	base0A: #f4bf75, // Rajah  ( orange )
-	base0B: #a6e22e, // Inch Worm ( green )
-	base0C: #a1efe4, // Water Leaf ( cyan/turquoise )
-	base0D: #66d9ef, // Sky Blue
-	base0E: #ae81ff, // Lavender ( purple )
-	base0F: #cc6633, // Piper ( bick red )
+	base02: #49483E, // Fuscous Gray ( blackboard-like brown )
+	base03: #75715E, // Crocodile
+	base04: #A59F85, // Tallow
+	base05: #F8F8F2, // Bianca
+	base06: #F5F4F1, // Pampas
+	base07: #F9F8F5, // Desert Storm
+	base08: #F92672, // Rose ( red )
+	base09: #FD971F, // West Side  ( intense orange )
+	base0A: #F4BF75, // Rajah  ( orange )
+	base0B: #A6E22E, // Inch Worm ( green )
+	base0C: #A1EFE4, // Water Leaf ( cyan/turquoise )
+	base0D: #66D9EF, // Sky Blue
+	base0E: #AE81FF, // Lavender ( purple )
+	base0F: #CC6633, // Piper ( brick red )
+	// Extra colors:
+	base10: #FFE792, // Golden Glow ( yellow )
+	base11: #E6DB74, // Flax ( dull yellow )
+	base12: #1776BC, // Lochmara ( blue )
+	base13: #6298CD, // Danube ( dull blue )
+
 ));
 
 // ==============================================================================
