@@ -41,46 +41,46 @@
 <p><strong>WIP TODOs LIST</strong>:</p>
 <ul class="task-list">
 <li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Change FASM code to Highlight Macro
+<input type="checkbox" disabled=""checked=""> Change FASM code to Highlight Macro
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Change DOS code block to <code>!DOS</code> Macro
+<input type="checkbox" disabled=""checked=""> Change DOS code block to <code>!DOS</code> Macro
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Change <code>&lt;mark&gt;</code> tags to Macro
+<input type="checkbox" disabled=""checked=""> Change <code>&lt;mark&gt;</code> tags to Macro
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Fix HTML Alerts with Alert Macros (<em>done, just check again</em>!)
+<input type="checkbox" disabled=""checked=""> Fix HTML Alerts with Alert Macros (<em>done, just check again</em>!)
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix Inline FASM Code
+<input type="checkbox" disabled=""> Fix Inline FASM Code
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix C Code
+<input type="checkbox" disabled=""> Fix C Code
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Create C Stylesheet!
+<input type="checkbox" disabled=""> Create C Stylesheet!
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Convert plain instructions in Alerts to inline code
+<input type="checkbox" disabled=""> Convert plain instructions in Alerts to inline code
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Create nicer Fasm Stylesheet!
+<input type="checkbox" disabled=""checked=""> Create nicer Fasm Stylesheet!
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix <code>nohighlight</code> blocks with Pre Macro
+<input type="checkbox" disabled=""> Fix <code>nohighlight</code> blocks with Pre Macro
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Fix Tables CSS
+<input type="checkbox" disabled=""checked=""> Fix Tables CSS
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""checked=""> Add subtitle to pandoc template
+<input type="checkbox" disabled=""checked=""> Add subtitle to pandoc template
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Clean-up YAML metadata
+<input type="checkbox" disabled=""> Clean-up YAML metadata
 </li>
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Fix revision number
+<input type="checkbox" disabled=""> Fix revision number
 </li>
 </ul>
 </div>
@@ -701,12 +701,12 @@ Line 2</code></pre>
 </div>
 <h2 id="comparing-and-conditonal-jumps">5.3. Comparing and conditonal jumps</h2>
 <p>If you can write code in any language you should already know about branching, ie: conditional execution of some parts of code. For example, suppose you want a value not greater than 10 in <code>al</code>. If the value in <code>al</code> register is &gt; 10, you will set <code>al</code> to 10. This is branching — if some condition is true then something is executed, otherwise it is not executed. Assembly implementation of this mechanism is that when a condition is false you will jump over the conditional code, when the condition is true you will just continue the execution. It is as if this C code:</p>
-<pre class="sourceCode c" id="cb4"><code class="sourceCode c"><div class="sourceLine" id="cb4-1" data-line-number="1"><span class="cf">if</span> (condition)</div>
-<div class="sourceLine" id="cb4-2" data-line-number="2">  ConditionalCode(); <span class="co">// this can be any C code, not just function call</span></div></code></pre>
+<pre class="sourceCode c" id="cb4"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="cf">if</span> (condition)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  ConditionalCode(); <span class="co">// this can be any C code, not just function call</span></a></code></pre>
 <p>would be writen this way:</p>
-<pre class="sourceCode c" id="cb5"><code class="sourceCode c"><div class="sourceLine" id="cb5-1" data-line-number="1"><span class="cf">if</span> (!condition) <span class="cf">goto</span> LabelAfterConditionalCode;</div>
-<div class="sourceLine" id="cb5-2" data-line-number="2">ConditionalCode(); <span class="co">// this can be any C code, not just function call</span></div>
-<div class="sourceLine" id="cb5-3" data-line-number="3">LabelAfterConditionalCode:</div></code></pre>
+<pre class="sourceCode c" id="cb5"><code class="sourceCode c"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="cf">if</span> (!condition) <span class="cf">goto</span> LabelAfterConditionalCode;</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">ConditionalCode(); <span class="co">// this can be any C code, not just function call</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">LabelAfterConditionalCode:</a></code></pre>
 <p>The first problem is how to decide whether a condition is true. In assembly, there is an instruction which can compare two operands. It is <code>cmp</code>. Its operands follow the same rules as <code>mov</code>’s operands (almost every instruction follows these or very similar rules). Some examples of comparing:</p>
 <pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">cmp</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl kwa">bx</span>                 <span class="hl slc">; compare value of &quot;ax&quot; to value of &quot;bx&quot;</span>
 <span class="hl kwb">cmp</span> <span class="hl kwa">al</span><span class="hl opt">,</span><span class="hl kwd">byte</span> <span class="hl opt">[</span>SomeLabel<span class="hl opt">]</span>   <span class="hl slc">; comapre value of &quot;al&quot; to byte at SomeLabel</span>
@@ -734,11 +734,11 @@ Line 2</code></pre>
 <span class="hl kwb">mov</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl num">10</span>
 <span class="hl kwc">AX_lesser_than_10</span><span class="hl opt">:</span></code></pre>
 <p>this piece of code will check whether value in <code>ax</code> is less than or equal to 10, and if not (if the value in <code>ax</code> is greater than 10) it will set <code>ax</code> to 10. The corresponding C code is:</p>
-<pre class="sourceCode c" id="cb6"><code class="sourceCode c"><div class="sourceLine" id="cb6-1" data-line-number="1"><span class="cf">if</span> (ax &gt; <span class="dv">10</span>) ax=<span class="dv">10</span>;</div></code></pre>
+<pre class="sourceCode c" id="cb6"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="cf">if</span> (ax &gt; <span class="dv">10</span>) ax=<span class="dv">10</span>;</a></code></pre>
 <p>or, more similar to our assembly version:</p>
-<pre class="sourceCode c" id="cb7"><code class="sourceCode c"><div class="sourceLine" id="cb7-1" data-line-number="1"><span class="cf">if</span> (ax &lt;= <span class="dv">10</span>) <span class="cf">goto</span> AX_lesser_than_<span class="dv">10</span></div>
-<div class="sourceLine" id="cb7-2" data-line-number="2">ax=<span class="dv">10</span>;</div>
-<div class="sourceLine" id="cb7-3" data-line-number="3">AX_lesser_than_10:</div></code></pre>
+<pre class="sourceCode c" id="cb7"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="cf">if</span> (ax &lt;= <span class="dv">10</span>) <span class="cf">goto</span> AX_lesser_than_<span class="dv">10</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">ax=<span class="dv">10</span>;</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">AX_lesser_than_10:</a></code></pre>
 <p>Another example: get maximum of <code>{ax,bx}</code> and store it in <code>ax</code>:</p>
 <pre class="fasm" title="Flat Assembler (Fasm) source code"><code class="fasm" title="Flat Assembler (Fasm) source code"><span class="hl kwb">cmp</span> <span class="hl kwa">ax</span><span class="hl opt">,</span><span class="hl kwa">bx</span>
 <span class="hl kwb">jae</span> AX_already_contains_greater_value
