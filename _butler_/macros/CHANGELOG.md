@@ -4,25 +4,28 @@ This file logs changes to pp macros definitions during Alpha Stage.
 
 > **NOTE**: Implicit changes will not be logged — eg: addition of `!import` statements (to “`macros.pp`”) for newly created macros files is given for granted and not worth mentioning. Minor changes will not be logged either, because life is to short…
 
+
 -----
 
 **Table of Contents**
 
-<!-- #toc -->
+<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="true" lowercase_only_ascii="true" uri_encoding="true" depth="3" -->
 
-  - [macros.pp](#macrospp)
-  - [macros-init.pp](#macros-initpp)
-  - [Alerts.pp (*deleted*)](#alertspp-deleted)
-  - [BlockFormatting.pp](#blockformattingpp)
-  - [GFM-TaskList.pp](#gfm-tasklistpp)
-  - [Highlight.pp](#highlightpp)
-  - [InlineFormatting.pp](#inlineformattingpp)
-  - [LinkingHelpers.pp](#linkinghelperspp)
-  - [Verbatim.pp](#verbatimpp)
+- [macros.pp](#macrospp)
+- [macros-init.pp](#macros-initpp)
+- [Alerts.pp \(*deleted*\)](#alertspp-deleted)
+- [BlockFormatting.pp](#blockformattingpp)
+- [GFM-TaskList.pp](#gfm-tasklistpp)
+- [Highlight.pp](#highlightpp)
+- [InlineFormatting.pp](#inlineformattingpp)
+- [LinkingHelpers.pp](#linkinghelperspp)
+- [Verbatim.pp](#verbatimpp)
 
-<!-- /toc -->
+<!-- /MarkdownTOC -->
 
 -----
+
+
 
 # macros.pp
 
@@ -88,9 +91,17 @@ This file logs changes to pp macros definitions during Alpha Stage.
 
 # GFM-TaskList.pp
 
+**`v0.4` (2017-12-12)**
+
+  - `!Task` macro now uses again “`&thinsp;`” HTML entity. [Pandoc v2.0.4] fixed the bug that was preventing html entity in the context ([Issue #4088]).
+
+[Pandoc v2.0.4]: https://github.com/jgm/pandoc/releases/tag/2.0.4
+
 **`v0.3` (2017-11-24)**
 
-  - `!Task` macro emits escaped non-breaking space (”`\`”) instead of “`&thinsp;`” HTML entity because HTML entities prevent pandoc v2.0.2 from parsing markdown contents in raw HTML. (See [Issue \#4088](https://github.com/jgm/pandoc/issues/4088))
+  - `!Task` macro emits escaped non-breaking space (”`\`”) instead of “`&thinsp;`” HTML entity because HTML entities prevent pandoc v2.0.2 from parsing markdown contents in raw HTML. (See [Issue #4088])
+
+[Issue #4088]: https://github.com/jgm/pandoc/issues/4088
 
 **`v0.2` (2017-11-07)**
 

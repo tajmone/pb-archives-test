@@ -37,7 +37,7 @@
 <p><strong>WIP TODOs LIST</strong>: this page is still a draft.</p>
 <ul class="task-list">
 <li class="task-list-item">
-<input type="checkbox" disabled=""> Finish writing text and polish
+<input type="checkbox" disabled=""> Finish writing text and polish
 </li>
 </ul>
 </div>
@@ -128,15 +128,15 @@
 <ul>
 <li><a href="https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L3568" class="uri">https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L3568</a></li>
 </ul>
-<pre class="sourceCode yaml" id="cb3"><code class="sourceCode yaml"><div class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">PureBasic:</span></div>
-<div class="sourceLine" id="cb3-2" data-line-number="2">  <span class="fu">type:</span><span class="at"> programming</span></div>
-<div class="sourceLine" id="cb3-3" data-line-number="3">  <span class="fu">color:</span><span class="at"> </span><span class="st">&quot;#5a6986&quot;</span></div>
-<div class="sourceLine" id="cb3-4" data-line-number="4">  <span class="fu">extensions:</span></div>
-<div class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">-</span> <span class="st">&quot;.pb&quot;</span></div>
-<div class="sourceLine" id="cb3-6" data-line-number="6">  <span class="kw">-</span> <span class="st">&quot;.pbi&quot;</span></div>
-<div class="sourceLine" id="cb3-7" data-line-number="7">  <span class="fu">tm_scope:</span><span class="at"> none</span></div>
-<div class="sourceLine" id="cb3-8" data-line-number="8">  <span class="fu">ace_mode:</span><span class="at"> text</span></div>
-<div class="sourceLine" id="cb3-9" data-line-number="9">  <span class="fu">language_id:</span><span class="at"> 301</span></div></code></pre>
+<pre class="sourceCode yaml" id="cb3"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">PureBasic:</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="fu">type:</span><span class="at"> programming</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="fu">color:</span><span class="at"> </span><span class="st">&quot;#5a6986&quot;</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="fu">extensions:</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">-</span> <span class="st">&quot;.pb&quot;</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="kw">-</span> <span class="st">&quot;.pbi&quot;</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="fu">tm_scope:</span><span class="at"> none</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="fu">ace_mode:</span><span class="at"> text</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="fu">language_id:</span><span class="at"> 301</span></a></code></pre>
 <p>But it currently doesn’t support the <code>*.pbf</code> (PB form file) and <code>*.pbp</code> (PB project) extensions. So you should manually set them in your <code>.gitattributes</code> file if you decide to include files with these extensions in your project:</p>
 <pre><code>*.pbp    linguist-language=XML
 *.pbf    linguist-language=PureBasic</code></pre>
@@ -147,23 +147,23 @@
 <ul>
 <li><a href="https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L1914" class="uri">https://github.com/github/linguist/blob/c8ca488/lib/linguist/languages.yml#L1914</a></li>
 </ul>
-<pre class="sourceCode yaml" id="cb5"><code class="sourceCode yaml"><div class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">INI:</span></div>
-<div class="sourceLine" id="cb5-2" data-line-number="2">  <span class="fu">type:</span><span class="at"> data</span></div>
-<div class="sourceLine" id="cb5-3" data-line-number="3">  <span class="fu">extensions:</span></div>
-<div class="sourceLine" id="cb5-4" data-line-number="4">  <span class="kw">-</span> <span class="st">&quot;.ini&quot;</span></div>
-<div class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw">-</span> <span class="st">&quot;.cfg&quot;</span></div>
-<div class="sourceLine" id="cb5-6" data-line-number="6">  <span class="kw">-</span> <span class="st">&quot;.prefs&quot;</span></div>
-<div class="sourceLine" id="cb5-7" data-line-number="7">  <span class="kw">-</span> <span class="st">&quot;.pro&quot;</span></div>
-<div class="sourceLine" id="cb5-8" data-line-number="8">  <span class="kw">-</span> <span class="st">&quot;.properties&quot;</span></div>
-<div class="sourceLine" id="cb5-9" data-line-number="9">  <span class="fu">filenames:</span></div>
-<div class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw">-</span> buildozer.spec</div>
-<div class="sourceLine" id="cb5-11" data-line-number="11">  <span class="fu">tm_scope:</span><span class="at"> source.ini</span></div>
-<div class="sourceLine" id="cb5-12" data-line-number="12">  <span class="fu">aliases:</span></div>
-<div class="sourceLine" id="cb5-13" data-line-number="13">  <span class="kw">-</span> dosini</div>
-<div class="sourceLine" id="cb5-14" data-line-number="14">  <span class="fu">ace_mode:</span><span class="at"> ini</span></div>
-<div class="sourceLine" id="cb5-15" data-line-number="15">  <span class="fu">codemirror_mode:</span><span class="at"> properties</span></div>
-<div class="sourceLine" id="cb5-16" data-line-number="16">  <span class="fu">codemirror_mime_type:</span><span class="at"> text/x-properties</span></div>
-<div class="sourceLine" id="cb5-17" data-line-number="17">  <span class="fu">language_id:</span><span class="at"> 163</span></div></code></pre>
+<pre class="sourceCode yaml" id="cb5"><code class="sourceCode yaml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">INI:</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="fu">type:</span><span class="at"> data</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="fu">extensions:</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="kw">-</span> <span class="st">&quot;.ini&quot;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw">-</span> <span class="st">&quot;.cfg&quot;</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="kw">-</span> <span class="st">&quot;.prefs&quot;</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="kw">-</span> <span class="st">&quot;.pro&quot;</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  <span class="kw">-</span> <span class="st">&quot;.properties&quot;</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="fu">filenames:</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw">-</span> buildozer.spec</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">  <span class="fu">tm_scope:</span><span class="at"> source.ini</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">  <span class="fu">aliases:</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">  <span class="kw">-</span> dosini</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">  <span class="fu">ace_mode:</span><span class="at"> ini</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">  <span class="fu">codemirror_mode:</span><span class="at"> properties</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">  <span class="fu">codemirror_mime_type:</span><span class="at"> text/x-properties</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">  <span class="fu">language_id:</span><span class="at"> 163</span></a></code></pre>
 <p>The actual <code>INI</code> grammar file:</p>
 <ul>
 <li><a href="https://github.com/textmate/ini.tmbundle/blob/master/Syntaxes/Ini.plist" class="uri">https://github.com/textmate/ini.tmbundle/blob/master/Syntaxes/Ini.plist</a></li>

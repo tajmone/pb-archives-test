@@ -1,6 +1,6 @@
-# YAML Example based on:
-#   http://www.yaml.org/start.html
-string: "Quoted string"
+--- !<tag:clarkevans.com,2002:invoice>
+# YAML Example by Clark Evans, taken from yaml.org:
+# -- http://www.yaml.org/start.html
 invoice: 34843
 date   : 2001-01-23
 bill-to: &id001

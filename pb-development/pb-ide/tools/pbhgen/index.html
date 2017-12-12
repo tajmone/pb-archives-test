@@ -50,11 +50,11 @@
 <li>At <strong>Event to trigger the tool</strong> select “<strong>Sourcecode Saved</strong>”.</li>
 </ul>
 <p>Ensure you include your headers in the Source using:</p>
-<pre class="sourceCode purebasic" id="cb1"><code class="sourceCode purebasic"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;i&quot;</span> <span class="co">;- PBHGEN</span></div></code></pre>
+<pre class="sourceCode purebasic" id="cb1"><code class="sourceCode purebasic"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;i&quot;</span> <span class="co">;- PBHGEN</span></a></code></pre>
 <p>To use automatic header generation also in modules use:</p>
-<pre class="sourceCode purebasic" id="cb2"><code class="sourceCode purebasic"><div class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">Module</span> MyModule</div>
-<div class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;.i&quot;</span> <span class="co">;- PBHGEN</span></div>
-<div class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">EndModule</span></div></code></pre>
+<pre class="sourceCode purebasic" id="cb2"><code class="sourceCode purebasic"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">Module</span> MyModule</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">IncludeFile</span> <span class="dt">#PB_Compiler_File</span> + <span class="st">&quot;.i&quot;</span> <span class="co">;- PBHGEN</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">EndModule</span></a></code></pre>
 <h1 id="remarks">Remarks</h1>
 <p>At the moment if you wish to have a procedure with structured List/Array/Map arguments, you will have to put that procedure above the code where you call it from. This does not apply when using basic types and is a limitation of PureBasic.</p>
 <h1 id="motivation">Motivation</h1>
