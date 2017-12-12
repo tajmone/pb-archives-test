@@ -1,6 +1,6 @@
 !comment(   "GFM-TaskList" pp-macros set   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"GFM-TaskList.pp" v0.3 (2017-11-24) Alpha
+"GFM-TaskList.pp" v0.4 (2017-12-12) Alpha
 
 A set of macros for enabling GFM task lists within pandoc documents:
 
@@ -96,24 +96,10 @@ DECRIPTION: Macro to define single task-list items.
 
 USAGE: !Task( TASK STATE )( TASK TEXT )[( A SUB-TASKS LIST )]
 
-NOTE: Pandoc v2.0.2 failed to handle markdown text in the list element because
-      of the "&thinsp;" presence. Therefore I had to change:
-
-          >&thinsp;!2!ifndef(3)(</li>)
-      to
-
-          >\ !2!ifndef(3)(</li>)
-
-      using pandoc's backslash-escaped space, which is then parsed as a 
-      nonbreaking space. This is a temporary fix until pandoc will handle HTML
-      entities in raw HTMl as before. See Issue #4088:
-
-          https://github.com/jgm/pandoc/issues/4088
-
 ``````````````````````````````````````````````````````````````````````````````
 !define(   Task   )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<li class="task-list-item"><input type="checkbox" disabled=""!ifeq[!1][x][ checked=""]>\ !2!ifndef(3)(</li>)
+<li class="task-list-item"><input type="checkbox" disabled=""!ifeq[!1][x][ checked=""]>&thinsp;!2!ifndef(3)(</li>)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !TaskList(!3)
 </li>
