@@ -32,9 +32,10 @@ The default theme for pandoc highlighting is __Base16 Monokai__. This theme will
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
 !medEx(YAML)(yaml)(yaml)
+!longEx(HTML)(html)(html)
 !longEx(Python)(python)(py)
+!medEx(GO Lang)(go)(go)
 
 
 !comment
